@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -1943,6 +1943,74 @@
                   <div class="rh-meta">En progreso › Abr 2026</div>
                 </div>
                 <div class="rh-status-badge wip">·</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- --- SECTION: INTELLIGENCE REVIEW QUEUE --- -->
+      <section id="section-review" class="ws-section">
+        <div class="section-header">
+          <div class="section-eyebrow">Intelligence Review Queue › [SiQ] Engine</div>
+          <h2 class="section-title">Staged intelligence packages awaiting approval before client-visible publishing.</h2>
+          <p class="section-desc">Review synthesized intelligence and decide which signals to push to the live workspace.</p>
+        </div>
+
+        <div class="review-queue-container" style="max-width: 900px; margin: 0 auto; padding-top: 40px;">
+          <!-- Review Card Placeholder -->
+          <div class="review-card" style="background: var(--panel); border: 1px solid var(--border-strong); border-radius: var(--r-xl); padding: 32px; margin-bottom: 40px;">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 24px; border-bottom: 1px solid var(--border); padding-bottom: 20px;">
+              <div>
+                <div style="font-size: 10px; font-weight: 700; color: var(--teal); text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: 8px;">Staged Update › ISO Timestamp</div>
+                <h3 style="font-family: var(--font-display); font-size: 28px; font-weight: 300; color: var(--text-primary);">Headline Placeholder</h3>
+              </div>
+              <div style="display: flex; gap: 12px; align-items: center;">
+                <span style="font-size: 9px; font-weight: 700; color: var(--coral); background: rgba(249,111,110,0.1); padding: 4px 10px; border-radius: 4px; border: 1px solid rgba(249,111,110,0.2);">STAGED FOR REVIEW</span>
+                <span style="font-size: 9px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em;">Not client visible</span>
+              </div>
+            </div>
+
+            <div class="review-body" style="display: grid; grid-template-columns: 1fr 300px; gap: 40px;">
+              <div class="review-main">
+                <div style="margin-bottom: 32px;">
+                  <h4 style="font-size: 11px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 12px;">Synthesis Narrative</h4>
+                  <p style="font-size: 16px; line-height: 1.6; color: var(--text-mid); font-weight: 300;">Synthesis placeholder text describing the core intelligence findings and strategic shift.</p>
+                </div>
+
+                <div>
+                  <h4 style="font-size: 11px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 12px;">Decision Ledger</h4>
+                  <div style="background: rgba(255,255,255,0.02); border-radius: 8px; padding: 20px; border: 1px solid var(--border);">
+                    <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 12px;">
+                      <li style="display: flex; align-items: flex-start; gap: 10px; font-size: 14px; color: var(--text-mid);">
+                        <span style="color: var(--teal); font-weight: 700;">→</span>
+                        <span>Decision Placeholder 01</span>
+                      </li>
+                      <li style="display: flex; align-items: flex-start; gap: 10px; font-size: 14px; color: var(--text-mid);">
+                        <span style="color: var(--teal); font-weight: 700;">→</span>
+                        <span>Decision Placeholder 02</span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <div class="review-sidebar">
+                <div style="margin-bottom: 24px; background: rgba(249,111,110,0.05); border: 1px solid rgba(249,111,110,0.15); border-radius: 12px; padding: 20px;">
+                  <h4 style="font-size: 10px; font-weight: 700; color: var(--coral); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 8px;">Priority Signal</h4>
+                  <p style="font-size: 14px; font-weight: 500; color: var(--text-primary);">Priority signal placeholder description.</p>
+                </div>
+
+                <div style="background: rgba(75,173,168,0.05); border: 1px solid rgba(75,173,168,0.15); border-radius: 12px; padding: 20px;">
+                  <h4 style="font-size: 10px; font-weight: 700; color: var(--teal); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 8px;">Recommended Action</h4>
+                  <p style="font-size: 14px; font-weight: 500; color: var(--text-primary);">Recommended action placeholder description.</p>
+                </div>
+                
+                <div style="margin-top: 40px; display: flex; flex-direction: column; gap: 12px;">
+                  <button class="btn-primary" style="width: 100%;" disabled>Approve & Publish</button>
+                  <button class="btn-ghost" style="width: 100%;" disabled>Dismiss Update</button>
+                  <p style="font-size: 10px; color: var(--text-muted); text-align: center; font-style: italic;">Requires manual data integration in workspace.js (v1.0)</p>
+                </div>
               </div>
             </div>
           </div>
