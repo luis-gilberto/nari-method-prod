@@ -1087,6 +1087,7 @@ document.addEventListener('DOMContentLoaded', function() {
   initKeyboardNav();
   initAmbientBg();
   initGateParticles();
+  initHashRoute();
 
   const workspaceObserver = new MutationObserver((mutations) => {
     mutations.forEach(mutation => {
@@ -1121,6 +1122,125 @@ document.addEventListener('DOMContentLoaded', function() {
   // Vault info tooltips
   initVaultTooltips();
 });
+
+/* ── HASH ROUTING ────────────────────────────────────────── */
+function initHashRoute() {
+  const checkHash = () => {
+    const hash = window.location.hash.replace('#', '');
+    if (hash === 'review') {
+      goToSection('review');
+      renderReviewQueue();
+    }
+  };
+
+  window.addEventListener('hashchange', checkHash);
+  // Also check on initial load
+  if (window.location.hash === '#review') {
+    setTimeout(checkHash, 500); // Small delay to ensure workspace is ready
+  }
+}
+
+/* ── INTELLIGENCE REVIEW QUEUE ────────────────────────────── */
+async function renderReviewQueue() {
+  const container = document.querySelector('.review-queue-container');
+  if (!container) return;
+
+  try {
+    const response = await fetch('data/intelligence/staged/manifest.json');
+    if (!response.ok) throw new Error('Manifest not found');
+    
+    const manifest = await response.json();
+    const updates = manifest.staged_updates || [];
+
+    if (updates.length === 0) {
+      container.innerHTML = `
+        <div style="text-align:center; padding:60px 20px; color:var(--text-muted);">
+          <div style="font-size:32px; margin-bottom:16px; opacity:0.3;">Empty</div>
+          <p style="font-size:14px; font-weight:300;">No staged intelligence packages yet.</p>
+        </div>`;
+      return;
+    }
+
+    container.innerHTML = ''; // Clear placeholders
+
+    for (const filename of updates) {
+      try {
+        const res = await fetch(`data/intelligence/staged/${filename}`);
+        if (!res.ok) continue;
+        const data = await res.json();
+        
+        const card = document.createElement('div');
+        card.className = 'review-card';
+        card.style.cssText = 'background: var(--panel); border: 1px solid var(--border-strong); border-radius: var(--r-xl); padding: 32px; margin-bottom: 40px;';
+        
+        const timestamp = data.source?.generatedAt ? new Date(data.source.generatedAt).toLocaleString() : 'Unknown Time';
+        
+        card.innerHTML = `
+          <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 24px; border-bottom: 1px solid var(--border); padding-bottom: 20px;">
+            <div>
+              <div style="font-size: 10px; font-weight: 700; color: var(--teal); text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: 8px;">Staged Update › ${timestamp}</div>
+              <h3 style="font-family: var(--font-display); font-size: 28px; font-weight: 300; color: var(--text-primary);">${data.summary?.headline || 'Untitled Update'}</h3>
+            </div>
+            <div style="display: flex; gap: 12px; align-items: center;">
+              <span style="font-size: 9px; font-weight: 700; color: var(--coral); background: rgba(249,111,110,0.1); padding: 4px 10px; border-radius: 4px; border: 1px solid rgba(249,111,110,0.2);">STAGED FOR REVIEW</span>
+              <span style="font-size: 9px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em;">Not client visible</span>
+            </div>
+          </div>
+
+          <div class="review-body" style="display: grid; grid-template-columns: 1fr 300px; gap: 40px;">
+            <div class="review-main">
+              <div style="margin-bottom: 32px;">
+                <h4 style="font-size: 11px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 12px;">Synthesis Narrative</h4>
+                <p style="font-size: 16px; line-height: 1.6; color: var(--text-mid); font-weight: 300;">${data.summary?.synthesis || 'No synthesis available.'}</p>
+              </div>
+
+              <div>
+                <h4 style="font-size: 11px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 12px;">Decision Ledger</h4>
+                <div style="background: rgba(255,255,255,0.02); border-radius: 8px; padding: 20px; border: 1px solid var(--border);">
+                  <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 12px;">
+                    ${(data.decisions || []).map(d => `
+                      <li style="display: flex; align-items: flex-start; gap: 10px; font-size: 14px; color: var(--text-mid);">
+                        <span style="color: var(--teal); font-weight: 700;">→</span>
+                        <span>${d.observation || d.title || 'Decision detail missing'}</span>
+                      </li>
+                    `).join('') || '<li style="color:var(--text-muted); font-size:12px; font-style:italic;">No specific decisions identified.</li>'}
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div class="review-sidebar">
+              <div style="margin-bottom: 24px; background: rgba(249,111,110,0.05); border: 1px solid rgba(249,111,110,0.15); border-radius: 12px; padding: 20px;">
+                <h4 style="font-size: 10px; font-weight: 700; color: var(--coral); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 8px;">Priority Signal</h4>
+                <p style="font-size: 14px; font-weight: 500; color: var(--text-primary);">${data.summary?.prioritySignal || 'None'}</p>
+              </div>
+
+              <div style="background: rgba(75,173,168,0.05); border: 1px solid rgba(75,173,168,0.15); border-radius: 12px; padding: 20px;">
+                <h4 style="font-size: 10px; font-weight: 700; color: var(--teal); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 8px;">Recommended Action</h4>
+                <p style="font-size: 14px; font-weight: 500; color: var(--text-primary);">${data.summary?.recommendedAction || 'None'}</p>
+              </div>
+              
+              <div style="margin-top: 40px; display: flex; flex-direction: column; gap: 12px;">
+                <button class="btn-primary" style="width: 100%;" onclick="alert('Manual integration required in workspace.js (v1.0)')">Approve & Publish</button>
+                <button class="btn-ghost" style="width: 100%;" onclick="this.closest('.review-card').style.opacity='0.5'; this.disabled=true;">Dismiss Update</button>
+                <p style="font-size: 10px; color: var(--text-muted); text-align: center; font-style: italic;">Requires manual data integration in workspace.js (v1.0)</p>
+              </div>
+            </div>
+          </div>
+        `;
+        container.appendChild(card);
+      } catch (err) {
+        console.error(`Error loading update ${filename}:`, err);
+      }
+    }
+  } catch (err) {
+    console.error('Review Queue Error:', err);
+    container.innerHTML = `
+      <div style="text-align:center; padding:60px 20px; color:var(--coral);">
+        <p style="font-size:14px; font-weight:600;">Review Queue could not load staged intelligence.</p>
+      </div>`;
+  }
+}
 
 /* ══════════════════════════════════════════════════════════
    VAULT TOOLTIP ENGINE
