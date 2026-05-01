@@ -216,7 +216,7 @@ Only return the artifact. No explanation.`;
                     'anthropic-version': '2023-06-01'
                 },
                 body: JSON.stringify({
-                    model: 'claude-3-5-sonnet-20241022',
+                    model: 'claude-sonnet-4-5',
                     max_tokens: 1000,
                     system: systemPrompt,
                     messages: [{ role: 'user', content: userMessage }]
@@ -281,13 +281,13 @@ Only return the artifact. No explanation.`;
 
         if (isDebug) {
             response.debug = {
-                deploymentCommit: "d0e536c",
+                deploymentCommit: "d4b8a95",
                 provider: "anthropic",
                 hasAnthropicKey: !!apiKey,
                 anthropicKeyPrefix: apiKey ? apiKey.substring(0, 12) : "none",
                 anthropicKeyLength: apiKey ? apiKey.length : 0,
-                model: 'claude-3-5-sonnet-20241022',
-                functionFileVersion: "process-js-d0e536c-debug"
+                model: 'claude-sonnet-4-5',
+                functionFileVersion: "process-js-d4b8a95-v4.5"
             };
         }
 
