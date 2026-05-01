@@ -18,6 +18,8 @@ export async function onRequestPost(context) {
             });
         }
 
+        console.log(`Debug: API Key starts with ${apiKey.substring(0, 5)}`);
+
         const body = await request.json();
         const rawInput = body.text || "";
 
@@ -208,13 +210,13 @@ Only return the artifact. No explanation.`;
             const response = await fetch('https://api.anthropic.com/v1/messages', {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json',
+                    'content-type': 'application/json',
                     'x-api-key': apiKey,
                     'anthropic-version': '2023-06-01'
                 },
                 body: JSON.stringify({
-                    model: 'claude-3-5-sonnet-20240620',
-                    max_tokens: 4000,
+                    model: 'claude-3-5-sonnet-20241022',
+                    max_tokens: 1000,
                     system: systemPrompt,
                     messages: [{ role: 'user', content: userMessage }]
                 })
