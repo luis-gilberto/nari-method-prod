@@ -280,6 +280,17 @@ textarea::placeholder{color:var(--text-4);font-size:11.5px}
           Clear
         </button>
       </div>
+      <div id="workspace-status" style="display:none; margin-top:8px;">
+        <div style="font-size:9px; color:#4BADA8; font-weight:700; letter-spacing:0.05em; display:flex; align-items:center; gap:6px;">
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+          Workspace intelligence package staged for review.
+        </div>
+        <div style="font-size:8px; color:var(--text-4); margin-top:2px; letter-spacing:0.03em;">Review required before publishing to client workspace.</div>
+      </div>
+      <button class="ledger-btn teal" id="send-to-workspace-btn" onclick="sendToWorkspace()" disabled style="margin-top:6px; width:100%; height:38px; border-style:dashed; background:rgba(75,173,168,0.03)">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+        Send to Workspace
+      </button>
     </div>
   </div>
 
@@ -334,6 +345,8 @@ let currentMode = 'upload';
 let fileContent = '', fileType = '', fileName = '';
 let currentTab = 'current';
 let signalLedger = [];
+let latestSynthesis = null;
+let lastExtractedData = null;
 
 // ── INIT ───────────────────────────────────────────────────────
 function init() {
@@ -467,6 +480,7 @@ async function runExtraction() {
     try{parsed=JSON.parse(raw.replace(/```json|```/g,'').trim())}
     catch(e){throw new Error('Parse error. Response: '+(raw||JSON.stringify(data)).substring(0,600))}
 
+    lastExtractedData = parsed;
     renderOutput(parsed, layers);
 
     signalLedger.push({
@@ -602,6 +616,10 @@ async function runSynthesis(){
     let parsed;
     try{parsed=JSON.parse(raw.replace(/```json|```/g,'').trim())}
     catch(e){throw new Error('Parse error: '+raw.substring(0,400))}
+    
+    latestSynthesis = parsed;
+    document.getElementById('send-to-workspace-btn').disabled = false;
+    
     renderSynthesis(parsed);
     document.getElementById('synthesis-badge').textContent='✓';
   } catch(err){
@@ -680,6 +698,60 @@ function copyOutput(){
 
 function clearCurrent(){
   if(currentTab==='current') document.getElementById('panel-current').innerHTML=`<div class="empty-state"><div class="empty-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div><div class="empty-title">No signals extracted yet.</div><div class="empty-sub">Upload a file or paste text, select your signal layers, and click Extract Signals.</div></div>`;
+}
+
+function sendToWorkspace() {
+  if (!latestSynthesis || !lastExtractedData) return;
+
+  const payload = {
+    "type": "workspace_intelligence_update",
+    "client": "Criar Sin Culpas",
+    "source": {
+      "tool": "Signal Extractor",
+      "inputType": currentMode === 'upload' ? 'uploaded_file' : 'pasted_text',
+      "generatedAt": new Date().toISOString()
+    },
+    "summary": {
+      "headline": latestSynthesis.synthesis_statement || "",
+      "synthesis": latestSynthesis.synthesis_statement || "",
+      "prioritySignal": (lastExtractedData.priority && lastExtractedData.priority[0]) ? lastExtractedData.priority[0].signal_title : "",
+      "recommendedAction": (latestSynthesis.actions && latestSynthesis.actions[0]) ? latestSynthesis.actions[0].action : ""
+    },
+    "signals": lastExtractedData.strategic || [],
+    "decisions": lastExtractedData.decision || [],
+    "workspaceTargets": {
+      "signalRoom": true,
+      "activityTimeline": true,
+      "pendingDecisions": true,
+      "artifactDraft": true
+    },
+    "status": "staged_for_review"
+  };
+
+  const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  
+  const now = new Date();
+  const timestamp = now.getFullYear() + 
+    String(now.getMonth() + 1).padStart(2, '0') + 
+    String(now.getDate()).padStart(2, '0') + '-' + 
+    String(now.getHours()).padStart(2, '0') + 
+    String(now.getMinutes()).padStart(2, '0');
+  
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `workspace-intelligence-update-${timestamp}.json`;
+  a.click();
+  URL.revokeObjectURL(url);
+
+  // Show success state
+  const statusDiv = document.getElementById('workspace-status');
+  statusDiv.style.display = 'block';
+  
+  const btn = document.getElementById('send-to-workspace-btn');
+  btn.innerHTML = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> Staged for Review';
+  btn.style.borderColor = '#4BADA8';
+  btn.style.color = '#4BADA8';
 }
 
 function esc(s){if(!s)return'';return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
