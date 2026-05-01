@@ -1,0 +1,2367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Criar Sin Culpas Workspace – LG Ecosystem</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/workspace.css" />
+</head>
+<body>
+
+  <!-- ===========================================================
+       ENTRY GATE / THRESHOLD
+       Handles language selection and initial entry.
+  =========================================================== -->
+  <div id="gate" class="gate-screen"> 
+     <div class="gate-inner"> 
+       <div class="gate-logo"> 
+         <video autoplay loop muted playsinline class="gate-logo-animation" poster="images/CSC_logo.png"> 
+           <source src="assets/videos/CSC-animation.mp4" type="video/mp4"> 
+         </video> 
+         <div class="gate-lg-tag">built inside the LG Ecosystem</div> 
+       </div> 
+      <div class="gate-heading">
+        <span class="lb-es active">Espacio de Trabajo Privado</span>
+        <span class="lb-en">Private Workspace</span>
+      </div>
+      <p class="gate-desc">
+        <span class="lb-es active">Antes de entrar, conoce el sistema que lo sostiene todo.</span>
+        <span class="lb-en">Before entering, explore the system behind everything.</span>
+      </p>
+      <div class="gate-actions">
+        <a href="method.html" class="btn-primary" style="text-decoration:none;">
+          <span class="lb-es active">Conocer El Método Nari</span>
+          <span class="lb-en">Discover The Nari Method</span>
+        </a>
+        <button class="btn-ghost" onclick="enterWorkspace()">
+          <span class="lb-es active">Entrar directo al proyecto</span>
+          <span class="lb-en">Go straight to the workspace</span>
+        </button>
+      </div>
+      <div class="gate-langs">
+        <button class="lang-btn active" data-lang="es">ES</button>
+        <button class="lang-btn" data-lang="en">EN</button>
+      </div>
+    </div>
+    <div class="gate-overlay"></div>
+  </div>
+
+  <!-- ===========================================================
+       MAIN WORKSPACE SHELL
+       The primary container for the workspace experience.
+  =========================================================== -->
+  <div id="workspace" class="workspace hidden">
+
+    <!-- TOP SYSTEM BAR -->
+    <header class="sys-bar">
+      <div class="sys-bar-left">
+        <img src="assets/images/CSC_logomark.png" alt="CSC" class="sys-monogram sys-logomark" onclick="returnToGate()" style="cursor:pointer;" title="Volver al inicio">
+        <div class="sys-workspace-name" onclick="returnToGate()" style="cursor:pointer;" title="Volver al inicio">
+          Criar Sin Culpas<span class="sys-workspace-sub"><span class="lb-en">Workspace</span><span class="lb-es active">Proyecto</span></span>
+        </div>
+      </div>
+      <nav class="sys-nav" id="sysNav">
+        <!-- MEGA TRIGGER 1: Workspace -->
+        <button class="nav-item mega-trigger" data-trigger="workspace">
+          <span class="lb-en">Workspace</span><span class="lb-es active">Proyecto</span>
+          <svg width="10" height="10" viewBox="0 0 10 10" fill="none" style="opacity:0.4;flex-shrink:0;"><path d="M2 4l3 3 3-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <!-- MEGA TRIGGER 2: Brand -->
+        <button class="nav-item mega-trigger" data-trigger="brand">
+          <span class="lb-en">Brand</span><span class="lb-es active">Marca</span>
+          <svg width="10" height="10" viewBox="0 0 10 10" fill="none" style="opacity:0.4;flex-shrink:0;"><path d="M2 4l3 3 3-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <!-- MEGA TRIGGER 3: Channel -->
+        <button class="nav-item mega-trigger" data-trigger="channel">
+          <span class="lb-en">Channel</span><span class="lb-es active">Canal</span>
+          <svg width="10" height="10" viewBox="0 0 10 10" fill="none" style="opacity:0.4;flex-shrink:0;"><path d="M2 4l3 3 3-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+
+        <!-- MEGA VIEWPORT PANEL -->
+        <div class="csc-nav-viewport" id="cscNavViewport">
+          <div class="csc-nav-viewport-inner">
+
+            <!-- VIEW: Workspace -->
+            <div id="view-workspace" class="csc-view-content">
+              <div class="csc-mega-header">
+                <span class="csc-mega-label">Workspace</span>
+                <p class="csc-mega-tagline"><span class="lb-en">System overview &amp; intelligence timeline</span><span class="lb-es active">Resumen del sistema y registro de actividad</span></p>
+              </div>
+              <div class="csc-grid-3">
+                <button class="csc-mega-link" onclick="cscNavGo('home')">
+                  <div class="csc-mega-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1H4a1 1 0 01-1-1V9.5z"/><path d="M9 21V12h6v9"/></svg></div>
+                  <div class="csc-mega-text"><b><span class="lb-en">Home</span><span class="lb-es active">Inicio</span></b><em><span class="lb-en">Profile, snapshot &amp; quick actions</span><span class="lb-es active">Perfil, resumen y acciones rápidas</span></em></div>
+                </button>
+                <button class="csc-mega-link" onclick="cscNavGo('artifacts')">
+                  <div class="csc-mega-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 20L20 2M2 20h7M2 20v-7"/><path d="M20 2l-5 13-8-5"/></svg></div>
+                  <div class="csc-mega-text"><b><span class="lb-en">Artifacts</span><span class="lb-es active">Arquitectura</span></b><em><span class="lb-en">Strategic deliverables &amp; documents</span><span class="lb-es active">Entregables estratégicos y documentos</span></em></div>
+                </button>
+                <button class="csc-mega-link" onclick="cscNavGo('journey')">
+                  <div class="csc-mega-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div>
+                  <div class="csc-mega-text"><b><span class="lb-en">Project Journey</span><span class="lb-es active">Recorrido del Proyecto</span></b><em><span class="lb-en">From chaos to growth timeline</span><span class="lb-es active">Línea de tiempo de transformación</span></em></div>
+                </button>
+                <button class="csc-mega-link" onclick="cscNavGo('activity')">
+                  <div class="csc-mega-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></div>
+                  <div class="csc-mega-text"><b><span class="lb-en">Activity</span><span class="lb-es active">Actividad</span></b><em><span class="lb-en">Intelligence timeline &amp; session notes</span><span class="lb-es active">Línea de tiempo e insights clave</span></em></div>
+                </button>
+                <button class="csc-mega-link" onclick="cscNavGo('record')">
+                  <div class="csc-mega-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12h6M9 16h4M7 4H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2V8l-5-4H7z"/><path d="M15 4v4h4"/></svg></div>
+                  <div class="csc-mega-text"><b><span class="lb-en">Strategic Record</span><span class="lb-es active">Registro Estratégico</span></b><em><span class="lb-en">Signals, readiness &amp; core insights</span><span class="lb-es active">Señales, disposición e ideas clave</span></em></div>
+                </button>
+              </div>
+            </div>
+
+            <!-- VIEW: Brand -->
+            <div id="view-brand" class="csc-view-content" style="display:none;">
+              <div class="csc-mega-header">
+                <span class="csc-mega-label">Brand</span>
+                <p class="csc-mega-tagline"><span class="lb-en">Presence, growth &amp; identity</span><span class="lb-es active">Presencia, Growth &amp; Monetización e identidad</span></p>
+              </div>
+              <div class="csc-grid-3">
+                <button class="csc-mega-link" onclick="cscNavGo('speaking')">
+                  <div class="csc-mega-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 10a7 7 0 0014 0M12 19v3M8 22h8"/></svg></div>
+                  <div class="csc-mega-text"><b><span class="lb-en">Speaking</span><span class="lb-es active">Conferencias</span></b><em><span class="lb-en">Keynotes, media &amp; speaker kit</span><span class="lb-es active">Conferencias, medios y materiales de prensa</span></em></div>
+                </button>
+                <button class="csc-mega-link" onclick="cscNavGo('growth')">
+                  <div class="csc-mega-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 17 9 11 13 15 21 7"/><polyline points="14 7 21 7 21 14"/></svg></div>
+                  <div class="csc-mega-text"><b><span class="lb-en">Growth</span><span class="lb-es active">Growth &amp; Monetización</span></b><em><span class="lb-en">Revenue model &amp; monetization</span><span class="lb-es active">Modelo de ingresos y monetización</span></em></div>
+                </button>
+                <button class="csc-mega-link" onclick="cscNavGo('vault')">
+                  <div class="csc-mega-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a10 10 0 000 20c1.1 0 2-.9 2-2v-1c0-.55.45-1 1-1h2a3 3 0 000-6h-1c-1.66 0-3-1.34-3-3V5"/></svg></div>
+                  <div class="csc-mega-text"><b><span class="lb-en">Brand Vault › Identidad</span><span class="lb-es active">Bóveda de Marca</span></b><em><span class="lb-en">Colors, type, voice &amp; identity</span><span class="lb-es active">Colores, tipografía, voz e identidad</span></em></div>
+                </button>
+              </div>
+              <div class="csc-mega-divider"></div>
+              <div class="csc-mega-orientation">
+                <a href="method.html" class="csc-orientation-link"><span class="lb-en">El Método Nari →</span><span class="lb-es active">El Método Nari →</span></a>
+              </div>
+            </div>
+
+            <!-- VIEW: Channel -->
+            <div id="view-channel" class="csc-view-content" style="display:none;">
+              <div class="csc-mega-header">
+                <span class="csc-mega-label">Canal</span>
+                <p class="csc-mega-tagline"><span class="lb-en">Intelligence feed &amp; collaboration</span><span class="lb-es active">Feed de señales y colaboración</span></p>
+              </div>
+              <div class="csc-grid-2">
+                <button class="csc-mega-link" onclick="cscNavGo('signal')">
+                  <div class="csc-mega-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5.07 12.37A7 7 0 0112 5a7 7 0 016.93 7.37M1.5 8.5a12.5 12.5 0 0121 0M12 19v2M12 14a2 2 0 100-4 2 2 0 000 4z"/></svg></div>
+                  <div class="csc-mega-text"><b><span class="lb-en">Signal Room</span><span class="lb-es active">Sala de Señales</span></b><em><span class="lb-en">Live feed, decisions &amp; resonance ledger</span><span class="lb-es active">Feed en vivo, decisiones y registro</span></em></div>
+                </button>
+                <button class="csc-mega-link" onclick="cscNavGo('requests')">
+                  <div class="csc-mega-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 7l10 7 10-7"/></svg></div>
+                  <div class="csc-mega-text"><b><span class="lb-en">Requests</span><span class="lb-es active">Solicitudes</span></b><em><span class="lb-en">Send a brief, idea or priority flag</span><span class="lb-es active">Envía un brief, idea o prioridad</span></em></div>
+                </button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </nav>
+      <div class="sys-bar-right">
+        <div class="sys-lang-toggle">
+          <button class="sys-lang active" data-lang="es">ES</button>
+          <button class="sys-lang" data-lang="en">EN</button>
+        </div>
+        <div class="sys-notif" onclick="goToSection('signal')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M15 17H20L18.595 15.595A1 1 0 0118 14.872V11C18 8.038 16.462 5.495 14 4.341V4A2 2 0 0010 4V4.341C7.538 5.495 6 8.038 6 11V14.872A1 1 0 015.405 15.595L4 17H9M15 17V18A3 3 0 019 18V17M15 17H9"/></svg>
+          <span class="notif-dot"></span>
+        </div>
+        <div class="sys-avatar" onclick="toggleMenu()">NF</div>
+      </div>
+      <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+    </header>
+
+    <!-- MOBILE DRAWER OVERLAY -->
+    <div class="csc-drawer-overlay" id="cscDrawerOverlay" onclick="toggleMobileMenu()"></div>
+
+    <!-- MOBILE DRAWER -->
+    <div class="csc-drawer" id="cscDrawer">
+      <div class="csc-drawer-head">
+        <div>
+          <div class="csc-drawer-eyebrow">Criar Sin Culpas</div>
+          <div class="csc-drawer-title"><span class="lb-en">Workspace</span><span class="lb-es active">Proyecto CSC</span></div>
+        </div>
+        <button class="csc-drawer-close" onclick="toggleMobileMenu()">×</button>
+      </div>
+
+      <div class="csc-drawer-section">
+        <div class="csc-drawer-label"><span class="lb-en">Workspace</span><span class="lb-es active">Proyecto</span></div>
+        <button class="csc-drawer-link" onclick="cscNavGo('home')"><span><span class="lb-en">Home</span><span class="lb-es active">Inicio</span></span><span class="csc-dnl-arrow">›</span></button>
+        <button class="csc-drawer-link" onclick="cscNavGo('artifacts')"><span><span class="lb-en">Artifacts</span><span class="lb-es active">Arquitectura</span></span><span class="csc-dnl-arrow">›</span></button>
+        <button class="csc-drawer-link" onclick="cscNavGo('activity')"><span><span class="lb-en">Activity</span><span class="lb-es active">Actividad</span></span><span class="csc-dnl-arrow">›</span></button>
+        <button class="csc-drawer-link" onclick="cscNavGo('journey')"><span><span class="lb-en">Project Journey</span><span class="lb-es active">Trayectoria del Proyecto</span></span><span class="csc-dnl-arrow">›</span></button>
+        <button class="csc-drawer-link" onclick="cscNavGo('record')"><span><span class="lb-en">Strategic Record</span><span class="lb-es active">Registro Estratégico</span></span><span class="csc-dnl-arrow">›</span></button>
+      </div>
+
+      <div class="csc-drawer-section">
+        <div class="csc-drawer-label teal"><span class="lb-en">Brand</span><span class="lb-es active">Marca</span></div>
+        <button class="csc-drawer-link" onclick="cscNavGo('speaking')"><span><span class="lb-en">Speaking</span><span class="lb-es active">Conferencias</span></span><span class="csc-dnl-arrow">›</span></button>
+        <button class="csc-drawer-link" onclick="cscNavGo('growth')"><span><span class="lb-en">Growth</span><span class="lb-es active">Growth &amp; Monetización</span></span><span class="csc-dnl-arrow">›</span></button>
+        <button class="csc-drawer-link" onclick="cscNavGo('vault')"><span><span class="lb-en">Brand Vault › Identidad</span><span class="lb-es active">Bóveda de Marca</span></span><span class="csc-dnl-arrow">›</span></button>
+        <a href="method.html" class="csc-drawer-link" style="text-decoration:none;"><span>El Método Nari</span><span class="csc-dnl-arrow" style="color:var(--teal)">→</span></a>
+      </div>
+
+      <div class="csc-drawer-section" style="border-bottom:none;">
+        <div class="csc-drawer-label coral"><span class="lb-en">Canal</span><span class="lb-es active">Canal</span></div>
+        <button class="csc-drawer-link" onclick="cscNavGo('signal')"><span><span class="lb-en">Signal Room</span><span class="lb-es active">Sala de Señales</span></span><span class="csc-dnl-arrow">›</span></button>
+        <button class="csc-drawer-link" onclick="cscNavGo('requests')"><span><span class="lb-en">Requests</span><span class="lb-es active">Solicitudes</span></span><span class="csc-dnl-arrow">›</span></button>
+      </div>
+
+      <div class="csc-drawer-foot">
+        <div class="sys-lang-toggle">
+          <button class="sys-lang active" data-lang="es">ES</button>
+          <button class="sys-lang" data-lang="en">EN</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- legacy mobile-nav shell kept for JS compat -->
+    <div class="mobile-nav hidden" id="mobileNav" style="display:none!important">
+    </div>
+
+    <!-- MAIN CONTENT AREA -->
+    <main class="workspace-main">
+
+      <!-- --- SECTION: HOME --- 
+           Dashboard snapshot, featured artifacts, and quick actions.
+      -->
+      <section id="section-home" class="ws-section active">
+
+        <!-- HERO ZONE -->
+        <div class="hero-zone">
+          <div class="hero-portrait-col">
+            <div class="hero-portrait-wrap">
+              <img src="assets/images/nari-portrait.jpg" alt="Nari Fateha" class="hero-portrait" />
+              <div class="hero-portrait-ring"></div>
+            </div>
+          </div>
+          <div class="hero-content-col">
+            <div class="hero-eyebrow"><span class="lb-en">Private Workspace › Criar Sin Culpas</span><span class="lb-es active">ESPACIO PRIVADO › CRIAR SIN CULPAS</span></div>
+            <h1 class="hero-title">Nari Fateha</h1>
+            <p class="hero-role"><span class="lb-en">Parenting Educator › Founder of Criar Sin Culpas</span><span class="lb-es active">Educadora en crianza › Fundadora de Criar Sin Culpas</span></p>
+            <p class="hero-desc"><span class="lb-en">This is where we organize your work so you can use it with clarity, present it with confidence, and grow it.</span><span class="lb-es active">Aquí es donde organizamos tu trabajo para que puedas usarlo con claridad, presentarlo con confianza y hacerlo crecer.</span></p>
+            <p class="hero-reassurance"><span class="lb-en">You don't need to understand all of this right now. This space is built to help you see clearly what you've already created.</span><span class="lb-es active">No necesitas entender todo esto ahora. Este espacio está hecho para ayudarte a ver con claridad lo que ya has construido.</span></p>
+            <div class="hero-ctas">
+              <button class="btn-primary" onclick="goToSection('artifacts')"><span class="lb-en">View Artifacts</span><span class="lb-es active">Ver artefactos</span></button>
+              <button class="btn-ghost" onclick="goToSection('speaking')"><span class="lb-en">Speaker Dossier</span><span class="lb-es active">Dossier de Conferencias</span></button>
+            </div>
+            <!-- PHASE STRIP -->
+            <div class="phase-strip">
+              <div class="phase-cell done">
+                <div class="phase-num"><span class="lb-en">PHASE 01</span><span class="lb-es active">FASE 01</span></div>
+                <div class="phase-title"><span class="lb-en">Diagnosis ✔</span><span class="lb-es active">Diagnóstico ✔</span></div>
+              </div>
+              <div class="phase-cell done">
+                <div class="phase-num"><span class="lb-en">PHASE 02</span><span class="lb-es active">FASE 02</span></div>
+                <div class="phase-title"><span class="lb-en">System Architecture ✔</span><span class="lb-es active">Arquitectura del Sistema ✔</span></div>
+              </div>
+              <div class="phase-cell active">
+                <div class="phase-num" style="color:var(--coral);"><span class="lb-en">PHASE 03</span><span class="lb-es active">FASE 03</span></div>
+                <div class="phase-title"><span class="lb-en">Program Roadmap › In Progress</span><span class="lb-es active">Programa › En Progreso</span></div>
+              </div>
+              <div class="phase-cell locked">
+                <div class="phase-num"><span class="lb-en">PHASE 04</span><span class="lb-es active">FASE 04</span></div>
+                <div class="phase-title"><span class="lb-en">Launch Narrative</span><span class="lb-es active">Narrativa de lanzamiento › Próximo</span></div>
+              </div>
+            </div>
+
+            <div class="hero-meta-strip">
+              <div class="hero-meta-item">
+                <span class="meta-label"><span class="lb-en">Current focus</span><span class="lb-es active">Enfoque actual</span></span>
+                <span class="meta-value"><span class="lb-en">Commercial activation</span><span class="lb-es active">Activación comercial</span></span>
+              </div>
+              <div class="hero-meta-item">
+                <span class="meta-label"><span class="lb-en">Last artifact</span><span class="lb-es active">Último artefacto</span></span>
+                <span class="meta-value">CSC Viz ID</span>
+              </div>
+              <div class="hero-meta-item">
+                <span class="meta-label">Idiomas</span>
+                <span class="meta-value">ES / EN</span>
+              </div>
+              <div class="hero-meta-item">
+                <span class="meta-label">Estado</span>
+                <span class="meta-value status-live"><svg width="7" height="7" viewBox="0 0 7 7" style="display:inline-block;vertical-align:middle;margin-right:5px;margin-top:-1px;"><circle cx="3.5" cy="3.5" r="3.5" fill="#2ED3C6"/></svg>Activo</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- TICKER -->
+        <div class="ticker-wrap">
+          <div class="ticker-track">
+            <div class="ticker-item">Ya tenemos todo tu material | Lo estamos organizando para que sea claro y fácil de usar | La estructura del programa está tomando forma | El sistema está activo y funcionando | </div>
+            <div class="ticker-item">Ya tenemos todo tu material | Lo estamos organizando para que sea claro y fácil de usar | La estructura del programa está tomando forma | El sistema está activo y funcionando | </div>
+          </div>
+        </div>
+
+        <!-- FOUNDER SNAPSHOT -->
+        <div class="snapshot-band">
+          <div class="snapshot-text">
+            <div class="section-eyebrow"><span class="lb-en">Workspace Profile</span><span class="lb-es active">Tu espacio de trabajo</span></div>
+            <h2 class="snapshot-name">Criar Sin Culpas</h2>
+            <p class="snapshot-desc"><span class="lb-en">This workspace centralizes all of Nari's speaking assets, strategic reports, brand systems and growth tools. Designed for quick access, agile editing and premium presentation to any audience.</span><span class="lb-es active">Este espacio de trabajo centraliza los reportes estratégicos, los sistemas de marca, los activos de conferencias y las herramientas de Growth &amp; Monetización de Nari. Diseñado para acceso rápido, edición ágil y presentación de alto nivel ante cualquier audiencia.</span></p>
+          </div>
+          <div class="snapshot-stats">
+            <div class="stat-card">
+              <div class="stat-num coral">30K+ seguidores</div>
+              <div class="stat-label"><span class="lb-en">Instagram followers</span><span class="lb-es active">Seguidores en Instagram</span></div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-num teal">50%+</div>
+              <div class="stat-label">Engagement</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-num coral">Proyección anual</div>
+              <div class="stat-label"><span class="lb-en">$72K</span><span class="lb-es active">Proyección Año 1</span></div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-num teal">6</div>
+              <div class="stat-label"><span class="lb-en">Artefactos activos</span><span class="lb-es active">Artefactos activos</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- FEATURED ARTIFACTS (MINI) -->
+        <div class="home-artifacts">
+          <div class="home-section-header">
+            <h2 class="home-section-title"><span class="lb-en">Featured Artifacts</span><span class="lb-es active">Documentos clave</span></h2>
+            <button class="see-all" onclick="goToSection('artifacts')"><span class="lb-en">View all →</span><span class="lb-es active">Ver todos →</span></button>
+          </div>
+          <div class="artifacts-grid-mini">
+            <div class="artifact-card-mini" onclick="goToSection('artifacts')">
+              <div class="acard-dot coral"></div>
+              <div class="acard-content">
+                <div class="acard-eyebrow"><span class="lb-en">Speaking</span><span class="lb-es active">Speaking</span></div>
+                <div class="acard-title"><span class="lb-en">Speaker Dossier</span><span class="lb-es active">Dossier de Conferencias</span></div>
+                <div class="acard-meta">ES / EN › Aprobado › Abr 2026</div>
+              </div>
+              <div class="acard-arrow">→</div>
+            </div>
+            <div class="artifact-card-mini" onclick="goToSection('growth')">
+              <div class="acard-dot teal"></div>
+              <div class="acard-content">
+                <div class="acard-eyebrow"><span class="lb-en">Strategy</span><span class="lb-es active">Estrategia</span></div>
+                <div class="acard-title"><span class="lb-en">Monetization Report</span><span class="lb-es active">Reporte de Monetización</span></div>
+                <div class="acard-meta">ES / EN › Aprobado › Abr 2026</div>
+              </div>
+              <div class="acard-arrow">→</div>
+            </div>
+            <div class="artifact-card-mini" onclick="goToSection('growth')">
+              <div class="acard-dot coral"></div>
+              <div class="acard-content">
+                <div class="acard-eyebrow"><span class="lb-en">Business</span><span class="lb-es active">Negocio</span></div>
+                <div class="acard-title"><span class="lb-en">Commercial Activation Brief</span><span class="lb-es active">Brief de Activación Comercial</span></div>
+                <div class="acard-meta">ES / EN › Aprobado › Abr 2026</div>
+              </div>
+              <div class="acard-arrow">→</div>
+            </div>
+            <div class="artifact-card-mini" onclick="goToSection('vault')">
+              <div class="acard-dot teal"></div>
+              <div class="acard-content">
+                <div class="acard-eyebrow"><span class="lb-en">Brand</span><span class="lb-es active">Marca</span></div>
+                <div class="acard-title"><span class="lb-en">CSC Viz ID</span><span class="lb-es active">CSC Viz ID</span></div>
+                <div class="acard-meta">ES › Aprobado › Abr 2026</div>
+              </div>
+              <div class="acard-arrow">→</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- JOURNEY TEASER --> 
+         <div class="journey-teaser" onclick="goToSection('journey')"> 
+           <div class="jt-left"> 
+             <div class="jt-eyebrow"><span class="lb-en">StrategyIQ › Criar Sin Culpas</span><span class="lb-es active">StrategyIQ › Criar Sin Culpas</span></div> 
+             <div class="jt-title"><span class="lb-en">From chaos to <em>growth</em></span><span class="lb-es active">De la <em>claridad</em> al crecimiento</span></div> 
+             <div class="jt-desc"><span class="lb-en">Three phases. One transformation story. See the full arc of work behind Criar Sin Culpas.</span><span class="lb-es active">Tres fases. Una historia de transformación. El recorrido completo detrás de Criar Sin Culpas.</span></div> 
+           </div> 
+           <div class="jt-phases"> 
+             <div class="jt-phase jt-done"> 
+               <div class="jt-node">·</div> 
+               <div class="jt-phase-label"><span class="lb-en">Diagnosis</span><span class="lb-es active">Diagnóstico</span></div> 
+             </div> 
+             <div class="jt-divider"></div> 
+             <div class="jt-phase jt-active"> 
+               <div class="jt-node jt-node-active">·</div> 
+               <div class="jt-phase-label" style="color:var(--coral);"><span class="lb-en">Architecture</span><span class="lb-es active">Arquitectura</span></div> 
+             </div> 
+             <div class="jt-divider"></div> 
+             <div class="jt-phase jt-locked"> 
+               <div class="jt-node jt-node-locked">·</div> 
+               <div class="jt-phase-label jt-muted"><span class="lb-en">Activation</span><span class="lb-es active">Activación</span></div> 
+             </div> 
+           </div> 
+           <div class="jt-cta"><span class="lb-en">Ver trayectoria</span><span class="lb-es active">Ver trayectoria</span> →</div> 
+         </div> 
+ 
+        <!-- QUICK ACTIONS BAND -->
+        <div class="quick-actions-band">
+          <div class="qa-item" onclick="goToSection('activity')">
+            <div class="qa-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+            <div class="qa-label"><span class="lb-en">Activity</span><span class="lb-es active">Actividad</span></div>
+            <div class="qa-sub"><span class="lb-en">Timeline & sessions</span><span class="lb-es active">Línea de tiempo</span></div>
+          </div>
+          <div class="qa-item" onclick="goToSection('speaking')">
+            <div class="qa-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 10a7 7 0 0014 0"/><line x1="12" y1="19" x2="12" y2="22"/><line x1="8" y1="22" x2="16" y2="22"/></svg></div>
+            <div class="qa-label">Speaking &amp; Media</div>
+            <div class="qa-sub">Media kit, bio, imágenes</div>
+          </div>
+          <div class="qa-item" onclick="goToSection('growth')">
+            <div class="qa-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg></div>
+            <div class="qa-label">Crecimiento e ingresos</div>
+            <div class="qa-sub">Estrategia e ingresos</div>
+          </div>
+          <div class="qa-item" onclick="goToSection('vault')">
+            <div class="qa-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="5" rx="1"/><rect x="3" y="10" width="18" height="5" rx="1"/><rect x="3" y="17" width="18" height="4" rx="1"/><circle cx="7" cy="5.5" r="0.8" fill="currentColor"/><circle cx="7" cy="12.5" r="0.8" fill="currentColor"/></svg></div>
+            <div class="qa-label">Brand Vault › Identidad</div>
+            <div class="qa-sub">Colores, tipografías y activos visuales</div>
+          </div>
+          <div class="qa-item" onclick="goToSection('signal')">
+            <div class="qa-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
+            <div class="qa-label">Signal Room</div>
+            <div class="qa-sub">Actualizaciones y decisiones del proyecto</div>
+          </div>
+          <div class="qa-item" onclick="goToSection('requests')">
+            <div class="qa-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><polyline points="2 5 12 13 22 5"/></svg></div>
+            <div class="qa-label">Solicitudes</div>
+            <div class="qa-sub">Envía cambios y archivos</div>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- --- SECTION: ARTIFACTS --- 
+           The central registry for all project deliverables and documents.
+      -->
+      <section id="section-artifacts" class="ws-section">
+        <div class="section-header">
+          <div class="section-eyebrow"><span class="lb-en">Artifact Registry</span><span class="lb-es active">Registro de Artefactos</span></div>
+          <h2 class="section-title"><span class="lb-en">Workspace Artifacts</span><span class="lb-es active">Artefactos del Proyecto</span></h2>
+          <p class="section-desc"><span class="lb-en">All premium deliverables produced for Criar Sin Culpas. Structured inside the LG Ecosystem.</span><span class="lb-es active">Todos los entregables premium producidos para Criar Sin Culpas. Estructurados en el LG Ecosystem.</span></p>
+        </div>
+
+        <div class="artifacts-filter-bar">
+          <button class="filter-btn active" data-filter="all"><span class="lb-en">All</span><span class="lb-es active">Todos</span></button>
+          <button class="filter-btn" data-filter="speaking">Speaking</button>
+          <button class="filter-btn" data-filter="strategy"><span class="lb-en">Strategy</span><span class="lb-es active">Estrategia</span></button>
+          <button class="filter-btn" data-filter="brand"><span class="lb-en">Brand</span><span class="lb-es active">Marca</span></button>
+        </div>
+
+        <!-- PHASE 01 -->
+        <div class="phase-container">
+          <div class="artifact-section-heading teal"><span class="lb-en">PHASE 01 › DIAGNOSIS</span><span class="lb-es active">FASE 01 › DIAGNÓSTICO</span></div>
+          <p class="phase-desc"><span class="lb-en">Market analysis, brand positioning and audience signal validation.</span><span class="lb-es active">Identificación de la oportunidad, posicionamiento y validación de señales de audiencia.</span></p>
+          <div id="phase-1-artifacts"></div>
+        </div>
+
+        <!-- PHASE 02 -->
+        <div class="phase-container">
+          <div class="artifact-section-heading amber"><span class="lb-en">PHASE 02 › ARCHITECTURE</span><span class="lb-es active">FASE 02 › ARQUITECTURA</span></div>
+          <p class="phase-desc"><span class="lb-en">Method construction, financial viability and execution roadmap.</span><span class="lb-es active">Construcción del método, viabilidad financiera y hoja de ruta de ejecución.</span></p>
+          <div id="phase-2-artifacts"></div>
+        </div>
+
+        <!-- PHASE 03 -->
+        <div class="phase-container">
+          <div class="artifact-section-heading coral"><span class="lb-en">PHASE 03 › ACTIVATION</span><span class="lb-es active">FASE 03 › ACTIVACI›N</span></div>
+          <p class="phase-desc"><span class="lb-en">Revenue engine activation, brand partnerships and growth systems.</span><span class="lb-es active">Activación de motores de ingresos, alianzas comerciales y sistema de Growth &amp; Monetización.</span></p>
+          <div id="phase-3-artifacts"></div>          
+
+          </div>
+
+        </div>
+
+        <div class="artifacts-grid" style="display:none">
+
+          <div class="artifact-card featured" data-type="speaking">
+            <div class="featured-col-left">
+              <div class="ac-status-row">
+                <span class="ac-type speaking">Speaking</span>
+                <span class="ac-status approved"><svg width="6" height="6" viewBox="0 0 6 6" style="display:inline-block;vertical-align:middle;margin-right:4px;margin-top:-1px;"><circle cx="3" cy="3" r="3" fill="#2ED3C6"/></svg>Aprobado</span>
+              </div>
+              <h3 class="ac-title">Dossier de Conferencias</h3>
+              <p class="ac-code">SIQ_A01_SpeakerMediaKit_CSC</p>
+            </div>
+            <div class="featured-col-right">
+              <p class="ac-desc">Media kit completo de speaking › conferencias magistrales, talleres, colaboraciones editoriales, y prueba de autoridad. Versión final en espa›ol e ingl›s.</p>
+              <div class="ac-meta-row">
+                <span class="ac-meta-item"><svg class="meta-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 3c-2.5 3-4 5.5-4 9s1.5 6 4 9M12 3c2.5 3 4 5.5 4 9s-1.5 6-4 9M3 12h18"/></svg> ES / EN</span>
+                <span class="ac-meta-item"><svg class="meta-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="3" y="4" width="18" height="17" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="16" y1="2" x2="16" y2="6"/></svg> Abr 2026</span>
+                <span class="ac-meta-item"><svg class="meta-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="13" y2="17"/></svg> 2 páginas</span>
+              </div>
+              <div class="ac-actions">
+                <a href="files/SIQ_A01_SpeakerMediaKit_CSC.html" target="_blank" class="btn-primary small">Abrir</a>
+                <button class="btn-ghost small">Compartir</button>
+              </div>
+              <div class="ac-lg-note">Estructurado en el LG Ecosystem</div>
+            </div>
+          </div>
+
+          <div class="artifact-card" data-type="strategy">
+            <div class="ac-status-row">
+              <span class="ac-type strategy">Estrategia</span>
+              <span class="ac-status approved"><svg width="6" height="6" viewBox="0 0 6 6" style="display:inline-block;vertical-align:middle;margin-right:4px;margin-top:-1px;"><circle cx="3" cy="3" r="3" fill="#2ED3C6"/></svg>Aprobado</span>
+            </div>
+            <h3 class="ac-title">Reporte de Monetización</h3>
+            <p class="ac-code">SIQ_A02_MonetizationReport_CSC</p>
+            <p class="ac-desc">Inteligencia de mercado y arquitectura de ingresos para Criar Sin Culpas. Proyecciones, mix de monetización, precios de cursos y alianzas de marca.</p>
+            <div class="ac-meta-row">
+              <span class="ac-meta-item"><svg class="meta-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 3c-2.5 3-4 5.5-4 9s1.5 6 4 9M12 3c2.5 3 4 5.5 4 9s-1.5 6-4 9M3 12h18"/></svg> ES / EN</span>
+              <span class="ac-meta-item"><svg class="meta-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="3" y="4" width="18" height="17" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="16" y1="2" x2="16" y2="6"/></svg> Abr 2026</span>
+              <span class="ac-meta-item"><svg class="meta-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="13" y2="17"/></svg> 3 páginas</span>
+            </div>
+            <div class="ac-actions">
+              <a href="https://www.luis-gilberto.com/TheHub/clients/nari/files/SIQ_A02_MonetizationReport_CSC_ES.html" target="_blank" class="btn-primary small">Abrir documento</a>
+              <a href="https://www.luis-gilberto.com/TheHub/clients/nari/files/SIQ_A02_MonetizationReport_CSC_ES.html" target="_blank" class="btn-ghost small">Ver en espa›ol</a>
+            </div>
+            <div class="ac-lg-note">Estructurado en el LG Ecosystem</div>
+          </div>
+
+          <div class="artifact-card" data-type="strategy">
+            <div class="ac-status-row">
+              <span class="ac-type strategy">Negocio</span>
+              <span class="ac-status approved"><svg width="6" height="6" viewBox="0 0 6 6" style="display:inline-block;vertical-align:middle;margin-right:4px;margin-top:-1px;"><circle cx="3" cy="3" r="3" fill="#2ED3C6"/></svg>Aprobado</span>
+            </div>
+            <h3 class="ac-title">Brief de Activación Comercial</h3>
+            <p class="ac-code">SIQ_A02_CommercialActivationBrief_CSC</p>
+            <p class="ac-desc">Dos motores de ingresos, tres escenarios de Growth &amp; Monetización, señales estratégicas y acciones inmediatas para activar el potencial comercial de Crear Sin Culpas.</p>
+            <div class="ac-meta-row">
+              <span class="ac-meta-item"><svg class="meta-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 3c-2.5 3-4 5.5-4 9s1.5 6 4 9M12 3c2.5 3 4 5.5 4 9s-1.5 6-4 9M3 12h18"/></svg> ES / EN</span>
+              <span class="ac-meta-item"><svg class="meta-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="3" y="4" width="18" height="17" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="16" y1="2" x2="16" y2="6"/></svg> Abr 2026</span>
+              <span class="ac-meta-item"><svg class="meta-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="13" y2="17"/></svg> 2 páginas</span>
+            </div>
+            <div class="ac-actions">
+              <a href="https://www.luis-gilberto.com/TheHub/clients/nari/files/SIQ_A02_CommercialActivationBrief_CSC.html" target="_blank" class="btn-primary small">Abrir (EN)</a>
+              <a href="https://www.luis-gilberto.com/TheHub/clients/nari/files/SIQ_A02_CommercialActivationBrief_CSC.html" target="_blank" class="btn-ghost small">Abrir (ES)</a>
+            </div>
+            <div class="ac-lg-note">Estructurado en el LG Ecosystem</div>
+          </div>
+
+          <div class="artifact-card" data-type="brand">
+            <div class="ac-status-row">
+              <span class="ac-type brand">Marca</span>
+              <span class="ac-status approved"><svg width="6" height="6" viewBox="0 0 6 6" style="display:inline-block;vertical-align:middle;margin-right:4px;margin-top:-1px;"><circle cx="3" cy="3" r="3" fill="#2ED3C6"/></svg>Aprobado</span>
+            </div>
+            <h3 class="ac-title">CSC Viz ID</h3>
+            <p class="ac-code">SIQ_BrandAsset_VizID_CSC</p>
+            <p class="ac-desc">Guía visual completa de Brand Vault › Identidad. Colores, tipografía, dirección de imagen, voz, componentes de firma y checklist de activos. La referencia de marca en una sola página.</p>
+            <div class="ac-meta-row">
+              <span class="ac-meta-item"><svg class="meta-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 3c-2.5 3-4 5.5-4 9s1.5 6 4 9M12 3c2.5 3 4 5.5 4 9s-1.5 6-4 9M3 12h18"/></svg> ES</span>
+              <span class="ac-meta-item"><svg class="meta-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="3" y="4" width="18" height="17" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="16" y1="2" x2="16" y2="6"/></svg> Abr 2026</span>
+              <span class="ac-meta-item"><svg class="meta-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="13" y2="17"/></svg> 1 página</span>
+            </div>
+            <div class="ac-actions">
+              <a href="files/SIQ_BrandAsset_VizIDReference_CSC.html" target="_blank" class="btn-primary small">Abrir</a>
+              <button class="btn-ghost small">Compartir</button>
+            </div>
+            <div class="ac-lg-note">Estructurado en el LG Ecosystem</div>
+          </div>
+
+        </div>
+
+        <div class="artifact-add-cta">
+          <div class="add-cta-content">
+            <div class="add-cta-label"><span class="lb-en">Need a new artifact?</span><span class="lb-es active">¿Necesitas un nuevo artefacto?</span></div>
+            <p class="add-cta-desc"><span class="lb-en">Submit a request and the LG team will produce it at premium dossier level.</span><span class="lb-es active">Envía una solicitud y el equipo LG lo producirá a nivel de dossier premium.</span></p>
+            <button class="btn-primary" onclick="goToSection('requests')"><span class="lb-en">New Request →</span><span class="lb-es active">Nueva Solicitud →</span></button>
+          </div>
+        </div>
+      </section>
+
+      <!-- --- SECTION: ACTIVITY --- 
+           Intelligence timeline and key ideas emerging from workshops.
+      -->
+      <section id="section-activity" class="ws-section">
+        <div class="section-header">
+          <div class="section-eyebrow"><span class="lb-en">Activity</span><span class="lb-es active">Actividad</span></div>
+          <h2 class="section-title"><span class="lb-en">What the system has learned</span><span class="lb-es active">Lo que el sistema ha aprendido</span></h2>
+          <p class="section-desc"><span class="lb-en">Intelligence timeline, session agenda and key ideas emerging from Nari's workshops and recordings.</span><span class="lb-es active">Línea de tiempo de inteligencia, agenda de sesión e ideas clave que emergen de los talleres y grabaciones de Nari.</span></p>
+        </div>
+
+        <!-- PHASE PROGRESS -->
+        <div class="activation-card" style="margin-bottom:var(--space-xl);">
+          <div class="activation-left">
+            <div class="eyebrow eyebrow-coral"><span class="lb-en">PHASE 03 › IN PROGRESS</span><span class="lb-es active">FASE 03 › EN PROGRESO</span></div>
+            <div class="activation-title"><span class="lb-en">Strategic Architecture Phase</span><span class="lb-es active">Fase de Arquitectura Estratégica</span></div>
+            <div class="activation-sub"><span class="lb-en">Criar Sin Culpas › System Development</span><span class="lb-es active">Criar Sin Culpas › Desarrollo del Sistema</span></div>
+          </div>
+          <div class="chip chip-teal"><span class="lb-en">Engine Running</span><span class="lb-es active">Sistema en Marcha</span></div>
+        </div>
+
+        <div class="production-zone">
+          <!-- Intelligence Timeline -->
+          <div class="production-card">
+            <div class="production-card-label">
+              <span class="eyebrow eyebrow-teal"><span class="lb-en">Intelligence Timeline</span><span class="lb-es active">Línea de Tiempo</span></span>
+              <button class="btn-ghost" onclick="goToSection('artifacts')"><span class="lb-en">View All →</span><span class="lb-es active">Ver Todo →</span></button>
+            </div>
+            <div class="siq-timeline">
+
+              <div class="siq-node completed">
+                <div class="siq-date"><span class="lb-en">April 10 › Signal Captured</span><span class="lb-es active">10 de Abril › Señal Capturada</span></div>
+                <div class="siq-title"><span class="lb-en">Strategic Diagnosis</span><span class="lb-es active">Diagnóstico Estratégico</span></div>
+                <div class="siq-summary"><span class="lb-en">Discovery of the emotional core of the method. Parents find Criar Sin Culpas in crisis › the system identified this as the entry point for a structured transformation journey.</span><span class="lb-es active">Descubrimiento del núcleo emocional del método. Los padres llegan a Criar Sin Culpas en crisis › el sistema identificó ese momento como el punto de entrada para un recorrido de transformación estructurado.</span></div>
+                <div class="siq-actions">
+                  <a href="https://www.luis-gilberto.com/TheHub/clients/nari/files/SIQ-01_StrategicDiagnosis_CriarSinCulpas.pdf" target="_blank" class="siq-btn coral"><span class="lb-en">Open Document →</span><span class="lb-es active">Abrir Documento →</span></a>
+                </div>
+              </div>
+
+              <div class="siq-node completed">
+                <div class="siq-date"><span class="lb-en">April 15 › Curriculum Mapped</span><span class="lb-es active">15 de Abril › Currículo Mapeado</span></div>
+                <div class="siq-title"><span class="lb-en">Program Architecture</span><span class="lb-es active">Arquitectura del Programa</span></div>
+                <div class="siq-summary"><span class="lb-en">Transformation of 50+ workshops into a structured learning journey. Curriculum mapped to the emotional readiness of the parent: Accept → Stabilize → Connect → Guide.</span><span class="lb-es active">Transformación de 50+ talleres en un recorrido de aprendizaje estructurado. Currículo mapeado a la preparación emocional del padre: Aceptar → Estabilizar → Conectar → Guiar.</span></div>
+                <div class="siq-actions">
+                  <a href="https://www.luis-gilberto.com/TheHub/clients/nari/files/SIQ-02_ProgramArchitecture_CriarSinCulpas.pdf" target="_blank" class="siq-btn coral"><span class="lb-en">Open Document →</span><span class="lb-es active">Abrir Documento →</span></a>
+                </div>
+              </div>
+
+              <div class="siq-node current">
+                <div class="siq-date eyebrow-coral"><span class="lb-en">Now › Engine Active</span><span class="lb-es active">Ahora › Motor Activo</span></div>
+                <div class="siq-title"><span class="lb-en">Product Architecture</span><span class="lb-es active">Arquitectura de Productos</span></div>
+                <div class="siq-summary"><span class="lb-en">Conversion of the method into scalable offerings. Workshops being organized into Entry, Core and Premium tracks › structured around the commercial intelligence layer now active.</span><span class="lb-es active">Conversión del método en ofertas escalables. Los talleres se están organizando en rutas de Entrada, Principal y Premium › estructuradas sobre la capa de inteligencia comercial ahora activa.</span></div>
+                <div class="siq-actions">
+                  <a href="https://www.luis-gilberto.com/TheHub/clients/nari/files/SIQ-03_ProductArchitecture_CriarSinCulpas.pdf" target="_blank" class="siq-btn coral"><span class="lb-en">Open Document →</span><span class="lb-es active">Abrir Documento →</span></a>
+                </div>
+              </div>
+
+              <div class="siq-node">
+                <div class="siq-date"><span class="lb-en">Next › Pending</span><span class="lb-es active">Siguiente › Pendiente</span> <span class="chip chip-ghost" style="font-size:8px;padding:2px 8px;margin-left:8px;vertical-align:middle;"><span class="lb-en">Pending</span><span class="lb-es active">Pendiente</span></span></div>
+                <div class="siq-title" style="color:var(--text-muted);"><span class="lb-en">Launch Architecture</span><span class="lb-es active">Arquitectura de Lanzamiento</span></div>
+                <div class="siq-summary" style="color:var(--text-muted);"><span class="lb-en">Defining the offer structure, entry points and bilingual go-to-market strategy.</span><span class="lb-es active">Definición de la estructura de ofertas, puntos de entrada y estrategia de lanzamiento bilingüe.</span></div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Session Card -->
+          <div class="production-card" style="border-color:rgba(249,111,110,0.14);background:linear-gradient(135deg,rgba(249,111,110,0.025) 0%,var(--panel) 100%);">
+            <div class="production-card-label">
+              <span class="eyebrow eyebrow-coral"><span class="lb-en">What happens next</span><span class="lb-es active">Lo que sucede después</span></span>
+            </div>
+            <div class="session-card">
+              <div class="eyebrow eyebrow-coral session-card-label"><span class="lb-en">This session</span><span class="lb-es active">Esta sesión</span></div>
+              <div class="session-item">
+                <span class="eyebrow eyebrow-coral session-num">01</span>
+                <span class="session-text"><span class="lb-en">Validate the method architecture</span><span class="lb-es active">Validar la arquitectura del método</span></span>
+              </div>
+              <div class="session-item">
+                <span class="eyebrow eyebrow-coral session-num">02</span>
+                <span class="session-text"><span class="lb-en">Define the flagship program path</span><span class="lb-es active">Definir el camino principal del programa insignia</span></span>
+              </div>
+              <div class="session-item">
+                <span class="eyebrow eyebrow-coral session-num">03</span>
+                <span class="session-text"><span class="lb-en">Convert structure into a real offer</span><span class="lb-es active">Convertir la estructura en una oferta real</span></span>
+              </div>
+            </div>
+            <div class="date-strip">
+              <div class="date-strip-left">
+                <span class="date-dot"></span>
+                <span class="eyebrow date-label"><span class="lb-en">Next Session</span><span class="lb-es active">Próxima Sesión</span></span>
+              </div>
+              <span class="date-value"><span class="lb-en">Thursday, April 30</span><span class="lb-es active">Jueves, 30 de Abril</span></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- KEY IDEAS -->
+        <div class="key-ideas-section">
+          <div class="key-ideas-header">
+            <div>
+              <div class="eyebrow eyebrow-teal" style="display:block;margin-bottom:8px;"><span class="lb-en">From your workshops</span><span class="lb-es active">De tus talleres</span></div>
+              <h2 class="key-ideas-title"><span class="lb-en">Key ideas emerging from your workshops</span><span class="lb-es active">Ideas clave que están saliendo de tus talleres</span></h2>
+            </div>
+          </div>
+          <div class="key-ideas-intro">
+            <p class="key-ideas-intro-line"><span class="lb-en">These are the first key ideas identified after reviewing your workshops and recordings.</span><span class="lb-es active">Estas son las primeras ideas clave que aparecen después de revisar tus talleres y grabaciones.</span></p>
+          </div>
+          <div class="key-ideas-grid">
+            <div class="signal-card">
+              <div class="signal-num">Signal 01 ›</div>
+              <p class="signal-title"><span class="lb-en">The emotional crisis is not the problem. It is the signal.</span><span class="lb-es active">La crisis emocional no es el problema. Es la señal.</span></p>
+              <p class="signal-subtitle"><span class="lb-en">Identifying the underlying triggers when a child loses emotional control.</span><span class="lb-es active">Identificación de los detonantes reales durante una crisis emocional infantil.</span></p>
+              <div class="signal-card-footer">
+                <span class="signal-badge">Core Insight</span>
+                <a href="https://www.luis-gilberto.com/TheHub/clients/nari/files/vault/SIQ_Signal_003_AcceptanceGateway.pdf" class="signal-read-link lb-en" target="_blank">Read →</a>
+                <a href="https://www.luis-gilberto.com/TheHub/clients/nari/files/ES/SIQ_Signal_003_AcceptanceGateway_ES.pdf" class="signal-read-link lb-es active" target="_blank">Leer →</a>
+              </div>
+            </div>
+            <div class="signal-card">
+              <div class="signal-num">Signal 02 ›</div>
+              <p class="signal-title"><span class="lb-en">Connection does not calm. It regulates.</span><span class="lb-es active">La conexión no calma. Regula.</span></p>
+              <p class="signal-subtitle"><span class="lb-en">Using play and emotional safety to guide children back to regulation.</span><span class="lb-es active">El uso del juego y la seguridad emocional para recuperar la regulación.</span></p>
+              <div class="signal-card-footer">
+                <span class="signal-badge">Core Insight</span>
+                <a href="https://www.luis-gilberto.com/TheHub/clients/nari/files/vault/SIQ_Signal_002_PlayOS.pdf" class="signal-read-link lb-en" target="_blank">Read →</a>
+                <a href="https://www.luis-gilberto.com/TheHub/clients/nari/files/ES/SIQ_Signal_002_PlayOS_ES.pdf" class="signal-read-link lb-es active" target="_blank">Leer →</a>
+              </div>
+            </div>
+            <div class="signal-card">
+              <div class="signal-num">Signal 03 ›</div>
+              <p class="signal-title"><span class="lb-en">Guilt does not correct. It disconnects.</span><span class="lb-es active">La culpa no corrige. Desconecta.</span></p>
+              <p class="signal-subtitle"><span class="lb-en">Leading with clarity and calm by releasing the burden of parental guilt.</span><span class="lb-es active">Liderar con claridad y calma al liberar la carga de la culpa parental.</span></p>
+              <div class="signal-card-footer">
+                <span class="signal-badge">Core Insight</span>
+                <a href="https://www.luis-gilberto.com/TheHub/clients/nari/files/vault/SIQ_Signal_001_NeutralParenting.pdf" class="signal-read-link lb-en" target="_blank">Read →</a>
+                <a href="https://www.luis-gilberto.com/TheHub/clients/nari/files/ES/SIQ_Signal_001_NeutralParenting_ES.pdf" class="signal-read-link lb-es active" target="_blank">Leer →</a>
+              </div>
+            </div>
+          </div>
+          <div class="key-ideas-footer">
+            <button class="key-ideas-btn lb-en" onclick="openSignalsLedger()">See audience signals analysis →</button>
+            <button class="key-ideas-btn lb-es active" onclick="openSignalsLedger()">Ver análisis de señales de audiencia →</button>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- --- SECTION: PROJECT JOURNEY --- 
+           Visual roadmap of the project's evolution and phases.
+      -->
+      <section id="section-journey" class="ws-section">
+
+        <!-- SECTION HEADER -->
+        <div class="section-header">
+          <div class="section-eyebrow"><span class="lb-en">StrategyIQ › Criar Sin Culpas</span><span class="lb-es active">StrategyIQ › Criar Sin Culpas</span></div>
+          <h2 class="section-title"><span class="lb-en">From chaos to <em>growth</em></span><span class="lb-es active">De la <em>claridad</em> al crecimiento</span></h2>
+          <p class="section-desc"><span class="lb-en">This is not a document archive. It is the record of a transformation › from understanding the business, to building the system, to activating it and making it grow.</span><span class="lb-es active">Este no es un archivo de documentos. Es el registro de una transformación › de entender el negocio, a construir el sistema, a activarlo y hacerlo crecer.</span></p>
+        </div>
+
+        <!-- PROGRESS BAR -->
+        <div class="journey-progress" style="max-width:860px;margin:0 auto 48px;padding-left:80px;">
+          <div style="height:3px;background:rgba(255,255,255,0.07);border-radius:999px;overflow:hidden;margin-bottom:10px;">
+            <div style="height:100%;width:60%;background:linear-gradient(90deg,#4ecdc4,#f96f6e);border-radius:999px;"></div>
+          </div>
+          <div style="display:flex;justify-content:space-between;">
+            <span style="font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#4ecdc4;"><span class="lb-en">Diagnosis ✔</span><span class="lb-es active">Diagnóstico ✔</span></span>
+            <span style="font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#f96f6e;"><span class="lb-en">Architecture →</span><span class="lb-es active">Arquitectura →</span></span>
+            <span style="font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:rgba(240,236,229,0.35);"><span class="lb-en">Activation</span><span class="lb-es active">Activación</span></span>
+          </div>
+        </div>
+
+        <!-- JOURNEY SPINE -->
+        <div class="pj-journey">
+
+          <!-- -- PHASE 01 › DIAGNÓSTICO -- -->
+          <div class="pj-phase">
+            <div class="pj-node pj-done">01</div>
+            <div class="pj-connector"></div>
+            <div class="pj-card pj-card-done">
+              <div class="pj-head">
+                <div class="pj-head-left">
+                  <div class="pj-label pj-label-done"><span class="lb-en">Phase 01 › Diagnosis</span><span class="lb-es active">Fase 01 › Diagnóstico</span></div>
+                  <div class="pj-title"><span class="lb-en">Understand the business</span><span class="lb-es active">Entender el negocio</span></div>
+                  <div class="pj-subtitle"><span class="lb-en">"What is actually happening here?"</span><span class="lb-es active">"¿Qué está pasando realmente aquí?"</span></div>
+                </div>
+                <div class="pj-status pj-status-done"><span class="lb-en">Certified ✔</span><span class="lb-es active">Certificado ✔</span></div>
+              </div>
+              <div class="pj-body">
+                <p class="pj-narrative">
+                  <span class="lb-en">This phase converts chaos into clarity. <strong>We analyzed the creator, the audience, and the market</strong> until we could define the opportunity and positioning with precision. The result: a certified strategic diagnosis that serves as the foundation for everything that follows.</span>
+                  <span class="lb-es active">Esta fase convierte el caos en claridad. <strong>Analizamos a la creadora, la audiencia y el mercado</strong> hasta poder definir con precisión la oportunidad y el posicionamiento. El resultado: un diagnóstico estratégico certificado que sirve como base para todo lo que viene después.</span>
+                </p>
+
+                <div class="pj-core-output">
+                  <div class="pj-sublabel"><span class="lb-en">Core output</span><span class="lb-es active">Output principal</span></div>
+                  <div class="pj-output-card">
+                    <div class="pj-output-info">
+                      <div class="pj-output-tag pj-tag-teal"><span class="lb-en">Certified Diagnosis</span><span class="lb-es active">Diagnóstico Certificado</span></div>
+                      <div class="pj-output-name"><span class="lb-en">Strategic Diagnosis › SIQ-01</span><span class="lb-es active">Diagnóstico Estratégico › SIQ-01</span></div>
+                      <div class="pj-output-desc"><span class="lb-en">The moment everything makes sense. We understand the game being played.</span><span class="lb-es active">El momento en que todo toma sentido. Entendemos el juego que se está jugando.</span></div>
+                    </div>
+                    <a href="https://www.luis-gilberto.com/TheHub/clients/nari/files/SIQ-01_StrategicDiagnosis_CriarSinCulpas.pdf" target="_blank" class="pj-output-link pj-link-teal">
+                      <span class="lb-en">Open →</span><span class="lb-es active">Abrir →</span>
+                    </a>
+                  </div>
+                </div>
+
+                <div class="pj-sublabel"><span class="lb-en">Supporting artifacts</span><span class="lb-es active">Artefactos de soporte</span></div>
+                <div class="pj-artifacts">
+                  <a href="files/SIQ_A01_SpeakerMediaKit_CSC.html" target="_blank" class="pj-tile">
+                    <div class="pj-tile-code">A01</div>
+                    <div class="pj-tile-name"><span class="lb-en">Speaker Positioning Kit</span><span class="lb-es active">Kit de Posicionamiento para Ponentes</span></div>
+                    <div class="pj-tile-desc"><span class="lb-en">External expression of positioning. This is how the world should see you.</span><span class="lb-es active">Expresión externa del posicionamiento. Así es como el mundo debería verte.</span></div>
+                    <div class="pj-tile-foot"><span class="pj-tile-lang">ES / EN</span><span class="pj-tile-arrow">→</span></div>
+                  </a>
+                  <a href="https://www.luis-gilberto.com/TheHub/clients/nari/files/SIQ_A02_MonetizationReport_CSC_ES.html" target="_blank" class="pj-tile">
+                    <div class="pj-tile-code">A02 › Reporte</div>
+                    <div class="pj-tile-name"><span class="lb-en">Monetization Research</span><span class="lb-es active">Investigación de Monetización</span></div>
+                    <div class="pj-tile-desc"><span class="lb-en">Market reality. This is how people like you generate income.</span><span class="lb-es active">Realidad del mercado. Así es como personas como tú generan ingresos.</span></div>
+                    <div class="pj-tile-foot"><span class="pj-tile-lang">ES / EN</span><span class="pj-tile-arrow">→</span></div>
+                  </a>
+                </div>
+
+                <div class="pj-decision">
+                  <div class="pj-decision-icon">→</div>
+                  <div>
+                    <div class="pj-decision-label"><span class="lb-en">Strategic Decision › SR-001 + SR-002</span><span class="lb-es active">Decisión estratégica › SR-001 + SR-002</span></div>
+                    <div class="pj-decision-text"><span class="lb-en">Strategy will focus on translating existing parenting frameworks into a structured learning architecture › not on increasing content production or audience size.</span><span class="lb-es active">La estrategia se enfocará en traducir los marcos de crianza existentes en una arquitectura de aprendizaje estructurada › no en aumentar la producción de contenido ni el tamaño de la audiencia.</span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- -- PHASE 02 › ARQUITECTURA -- -->
+          <div class="pj-phase">
+            <div class="pj-node pj-active">02</div>
+            <div class="pj-connector"></div>
+            <div class="pj-card pj-card-active">
+              <div class="pj-head">
+                <div class="pj-head-left">
+                  <div class="pj-label pj-label-active"><span class="lb-en">Phase 02 › Architecture › In Progress</span><span class="lb-es active">Fase 02 › Arquitectura › En Progreso</span></div>
+                  <div class="pj-title"><span class="lb-en">Build the system</span><span class="lb-es active">Construir el sistema</span></div>
+                  <div class="pj-subtitle"><span class="lb-en">"Now we build the machine."</span><span class="lb-es active">"Ahora construimos la máquina."</span></div>
+                </div>
+                <div class="pj-status pj-status-active"><span class="lb-en">· In Progress</span><span class="lb-es active">· En Progreso</span></div>
+              </div>
+              <div class="pj-body">
+                <p class="pj-narrative">
+                  <span class="lb-en">This is where strategy becomes system. <strong>We transform insights into a structured methodology</strong>, validate it against real content, and build the financial and execution logic. This is where the business becomes repeatable and scalable.</span>
+                  <span class="lb-es active">Aquí la estrategia se convierte en sistema. <strong>Transformamos los insights en una metodología estructurada</strong>, la validamos contra contenido real y construimos la lógica financiera y de ejecución. Es donde el negocio se vuelve repetible y escalable.</span>
+                </p>
+
+                <!-- METHOD BLOCK -->
+                <div class="pj-method">
+                  <div class="pj-method-label"><span class="lb-en">The heart of it all › The Nari Method</span><span class="lb-es active">El corazón de todo › El Método Nari</span></div>
+                  <div class="pj-method-title"><span class="lb-en">The transformation engine of Criar Sin Culpas</span><span class="lb-es active">El motor de transformación de Criar Sin Culpas</span></div>
+                  <div class="pj-method-steps">
+                    <div class="pj-step"><div class="pj-step-num">01</div><div class="pj-step-name"><span class="lb-en">Accept</span><span class="lb-es active">Aceptar</span></div></div>
+                    <div class="pj-step"><div class="pj-step-num">02</div><div class="pj-step-name"><span class="lb-en">Stabilize</span><span class="lb-es active">Estabilizar</span></div></div>
+                    <div class="pj-step"><div class="pj-step-num">03</div><div class="pj-step-name"><span class="lb-en">Connect</span><span class="lb-es active">Conectar</span></div></div>
+                    <div class="pj-step"><div class="pj-step-num">04</div><div class="pj-step-name"><span class="lb-en">Guide</span><span class="lb-es active">Guiar</span></div></div>
+                  </div>
+                </div>
+
+                <div class="pj-core-output">
+                  <div class="pj-sublabel"><span class="lb-en">Core output</span><span class="lb-es active">Output principal</span></div>
+                  <div class="pj-output-card pj-output-coral">
+                    <div class="pj-output-info">
+                      <div class="pj-output-tag pj-tag-coral"><span class="lb-en">Certified Architecture</span><span class="lb-es active">Arquitectura Certificada</span></div>
+                      <div class="pj-output-name"><span class="lb-en">Program Architecture › SIQ-02</span><span class="lb-es active">Arquitectura del Programa › SIQ-02</span></div>
+                      <div class="pj-output-desc"><span class="lb-en">50+ workshops converted into a structured learning journey.</span><span class="lb-es active">50+ talleres convertidos en un recorrido de aprendizaje estructurado.</span></div>
+                    </div>
+                    <a href="https://www.luis-gilberto.com/TheHub/clients/nari/files/SIQ-02_ProgramArchitecture_CriarSinCulpas.pdf" target="_blank" class="pj-output-link pj-link-coral">
+                      <span class="lb-en">Open →</span><span class="lb-es active">Abrir →</span>
+                    </a>
+                  </div>
+                </div>
+
+                <div class="pj-sublabel"><span class="lb-en">Supporting artifacts</span><span class="lb-es active">Artefactos de soporte</span></div>
+                <div class="pj-artifacts">
+                  <a href="https://www.luis-gilberto.com/TheHub/clients/nari/files/SIQ-03_ProductArchitecture_CriarSinCulpas.pdf" target="_blank" class="pj-tile">
+                    <div class="pj-tile-code"><span class="lb-en">SIQ-03 › In Progress</span><span class="lb-es active">SIQ-03 › En Progreso</span></div>
+                    <div class="pj-tile-name"><span class="lb-en">Product Architecture</span><span class="lb-es active">Arquitectura de Productos</span></div>
+                    <div class="pj-tile-desc"><span class="lb-en">Converting the method into scalable offers › Entry, Core and Premium.</span><span class="lb-es active">Conversión del método en ofertas escalables › Entry, Core y Premium.</span></div>
+                    <div class="pj-tile-foot"><span class="pj-tile-lang">ES / EN</span><span class="pj-tile-arrow">→</span></div>
+                  </a>
+                  <a href="https://www.luis-gilberto.com/TheHub/clients/nari/files/SIQ_A02_CommercialActivationBrief_CSC.html" target="_blank" class="pj-tile">
+                    <div class="pj-tile-code">A04 › Brief</div>
+                    <div class="pj-tile-name"><span class="lb-en">Commercial Activation Brief</span><span class="lb-es active">Dossier de Activación Comercial</span></div>
+                    <div class="pj-tile-desc"><span class="lb-en">Two revenue engines, three scenarios, first steps to activate the business model.</span><span class="lb-es active">Dos motores de ingreso, tres escenarios, primeros pasos para activar el modelo de negocio.</span></div>
+                    <div class="pj-tile-foot"><span class="pj-tile-lang">ES / EN</span><span class="pj-tile-arrow">→</span></div>
+                  </a>
+                </div>
+
+                <div class="pj-decision">
+                  <div class="pj-decision-icon">→</div>
+                  <div>
+                    <div class="pj-decision-label"><span class="lb-en">Strategic Decision › SR-003</span><span class="lb-es active">Decisión estratégica › SR-003</span></div>
+                    <div class="pj-decision-text"><span class="lb-en">Three audience segments defined: Ashamed & Overwhelmed (highest volume) › Suspecting Neurodivergence (fastest growth) › Under-Equipped & Aware (highest purchase intent).</span><span class="lb-es active">Tres segmentos de audiencia definidos: Avergonzados y abrumados (mayor volumen) › Sospechan Neurodivergencia (Growth &amp; Monetización rápido) › Conscientes pero sin herramientas (mayor intención de compra).</span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- -- PHASE 03 › ACTIVACI›N -- -->
+          <div class="pj-phase">
+            <div class="pj-node pj-pending">03</div>
+            <div class="pj-connector"></div>
+            <div class="pj-card pj-card-pending">
+              <div class="pj-head">
+                <div class="pj-head-left">
+                  <div class="pj-label pj-label-pending"><span class="lb-en">Phase 03 › Activation</span><span class="lb-es active">Fase 03 › Activación</span></div>
+                  <div class="pj-title"><span class="lb-en">Activate and grow</span><span class="lb-es active">Activar y crecer</span></div>
+                  <div class="pj-subtitle"><span class="lb-en">"Now we turn it into revenue."</span><span class="lb-es active">"Ahora lo convertimos en ingresos."</span></div>
+                </div>
+                <div class="pj-status pj-status-pending"><span class="lb-en">Upcoming</span><span class="lb-es active">Próximo</span></div>
+              </div>
+              <div class="pj-pending-body">
+                <div class="pj-pending-icon">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v4l3 3"/></svg>
+                </div>
+                <div class="pj-pending-text"><span class="lb-en">This phase activates upon completing Architecture. Will include: Commercial Activation Dossier › Brand Partnership Kit › StrategyIQ Campaign System.</span><span class="lb-es active">Esta fase se activa al completar la Arquitectura. Incluirá: Dossier de Activación Comercial › Kit de Alianzas con Marcas › Sistema de Campañas StrategyIQ.</span></div>
+              </div>
+            </div>
+          </div>
+
+        </div><!-- /pj-journey -->
+
+      </section>
+      <!-- --- END SECTION: PROJECT JOURNEY --- -->
+
+      <!-- --- SECTION: STRATEGIC RECORD --- 
+           Inventory of all materials and assets received/reviewed.
+      -->
+      <section id="section-record" class="ws-section">
+        <div class="section-header">
+          <div class="section-eyebrow"><span class="lb-en">Strategic Record</span><span class="lb-es active">Registro Estratégico</span></div>
+          <h2 class="section-title"><span class="lb-en">Readiness & what's in place</span><span class="lb-es active">Lo que ya está listo</span></h2>
+          <p class="section-desc"><span class="lb-en">Everything we've received, reviewed and organized inside the system. The full inventory of what powers Criar Sin Culpas.</span><span class="lb-es active">Todo lo que hemos recibido, revisado y organizado dentro del sistema. El inventario completo de lo que impulsa Criar Sin Culpas.</span></p>
+        </div>
+
+        <div class="readiness-panel" style="margin-bottom:var(--space-2xl);">
+          <div class="eyebrow eyebrow-teal readiness-eyebrow"><span class="lb-en">What's already in place</span><span class="lb-es active">Lo que ya está listo</span></div>
+          <div class="readiness-title"><span class="lb-en">We've received everything needed. Now we're organizing it inside the system.</span><span class="lb-es active">Ya recibimos todo lo necesario. Ahora lo estamos organizando dentro del sistema.</span></div>
+          <div class="readiness-item">
+            <span class="readiness-label"><span class="lb-en">Common parent difficulties</span><span class="lb-es active">Dificultades más comunes de los padres</span></span>
+            <span class="readiness-state"><span class="lb-en">Identified</span><span class="lb-es active">Mapa de Problemas Validado</span> &nbsp;<button class="js-open-ledger" onclick="openSignalsLedger()" style="background:none;border:none;color:var(--text-muted);font-size:9px;letter-spacing:0.06em;cursor:pointer;padding:0;transition:color 0.2s;" onmouseover="this.style.color='var(--teal)'" onmouseout="this.style.color='var(--text-muted)'">[ <span class="lb-en">View Source →</span><span class="lb-es active">Ver Origen →</span> ]</button></span>
+          </div>
+          <div class="readiness-item">
+            <span class="readiness-label"><span class="lb-en">50+ Workshop Inventory</span><span class="lb-es active">Inventario de 50+ Talleres</span></span>
+            <span class="readiness-state"><span class="lb-en">Collected</span><span class="lb-es active">Biblioteca Central Consolidada</span></span>
+          </div>
+          <div class="readiness-item">
+            <span class="readiness-label"><span class="lb-en">16 Vimeo Recordings</span><span class="lb-es active">16 Grabaciones Vimeo</span></span>
+            <span class="readiness-state"><span class="lb-en">Reviewed</span><span class="lb-es active">Contenido Estratégico Ingerido</span></span>
+          </div>
+          <div class="readiness-item">
+            <span class="readiness-label"><span class="lb-en">Core Methodology Signals</span><span class="lb-es active">Señales de Metodología</span></span>
+            <span class="readiness-state"><span class="lb-en">Identified</span><span class="lb-es active">N›cleo del Método Identificado</span></span>
+          </div>
+        </div>
+
+        <!-- Strategic decisions -->
+        <h3 class="talks-grid-title" style="margin-bottom:var(--space-lg);"><span class="lb-en">Key strategic decisions</span><span class="lb-es active">Decisiones estratégicas clave</span></h3>
+        <div class="artifacts-grid">
+          <div class="artifact-card">
+            <div class="ac-status-row">
+              <span class="ac-type strategy">SR-001</span>
+              <span class="ac-status approved"><svg width="6" height="6" viewBox="0 0 6 6" style="display:inline-block;vertical-align:middle;margin-right:4px;"><circle cx="3" cy="3" r="3" fill="#2ED3C6"/></svg><span class="lb-en">Active</span><span class="lb-es active">Activo</span></span>
+            </div>
+            <h3 class="ac-title"><span class="lb-en">Core Constraint Identified</span><span class="lb-es active">Restricción Central Identificada</span></h3>
+            <p class="ac-desc"><span class="lb-en">Strategy will focus on translating existing parenting frameworks into a structured learning architecture › not on increasing content output or audience size.</span><span class="lb-es active">La estrategia se enfocará en traducir los marcos de crianza existentes en una arquitectura de aprendizaje estructurada › no en aumentar la producción de contenido ni el tamaño de la audiencia.</span></p>
+            <div class="ac-lg-note"><span class="lb-en">Structured inside the LG Ecosystem</span><span class="lb-es active">Estructurado en el LG Ecosystem</span></div>
+          </div>
+          <div class="artifact-card">
+            <div class="ac-status-row">
+              <span class="ac-type strategy">SR-002</span>
+              <span class="ac-status approved"><svg width="6" height="6" viewBox="0 0 6 6" style="display:inline-block;vertical-align:middle;margin-right:4px;"><circle cx="3" cy="3" r="3" fill="#2ED3C6"/></svg><span class="lb-en">Active</span><span class="lb-es active">Activo</span></span>
+            </div>
+            <h3 class="ac-title"><span class="lb-en">Strategic Framing › Translation, Not Expansion</span><span class="lb-es active">Marco Estratégico › Traducción, No Expansión</span></h3>
+            <p class="ac-desc"><span class="lb-en">The platform's strategic direction is architectural translation. The 50+ existing workshops are the raw material. Structure is the product.</span><span class="lb-es active">La dirección estratégica de la plataforma es la traducción arquitectónica. Los más de 50 talleres existentes son la materia prima. La estructura es el producto.</span></p>
+            <div class="ac-lg-note"><span class="lb-en">Structured inside the LG Ecosystem</span><span class="lb-es active">Estructurado en el LG Ecosystem</span></div>
+          </div>
+          <div class="artifact-card">
+            <div class="ac-status-row">
+              <span class="ac-type strategy">SR-003</span>
+              <span class="ac-status" style="color:var(--coral);"><span class="lb-en">In Progress</span><span class="lb-es active">En Progreso</span></span>
+            </div>
+            <h3 class="ac-title"><span class="lb-en">Three Audience Segments Defined</span><span class="lb-es active">Tres Segmentos de Audiencia Definidos</span></h3>
+            <p class="ac-desc"><span class="lb-en">Segment A: Ashamed & Overwhelmed (highest volume) › Segment B: Suspecting Neurodivergence (growing fast) › Segment C: Under-Equipped & Aware (highest intent, most likely to pay).</span><span class="lb-es active">Segmento A: Avergonzados y abrumados (mayor volumen) › Segmento B: Sospechan Neurodivergencia (Growth &amp; Monetización rápido) › Segmento C: Conscientes pero sin herramientas (mayor intención de compra).</span></p>
+            <div class="ac-lg-note"><span class="lb-en">Structured inside the LG Ecosystem</span><span class="lb-es active">Estructurado en el LG Ecosystem</span></div>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- --- SECTION: SPEAKING --- 
+           Media kits, talking points, and conference assets.
+      -->
+      <section id="section-speaking" class="ws-section">
+        <div class="section-header">
+          <div class="section-eyebrow">Speaking &amp; Media</div>
+          <h2 class="section-title"><span class="lb-es active">Presencia y activos de conferencias</span><span class="lb-en">Speaking presence &amp; media assets</span></h2>
+          <p class="section-desc"><span class="lb-es active">Todo lo que un organizador de eventos, productor de medios o colaborador necesita para trabajar con Nari.</span><span class="lb-en">Everything an event organizer, media producer, or collaborator needs to work with Nari.</span></p>
+        </div>
+
+        <div class="speaking-hero-band">
+          <div class="speaking-img-col">
+            <div class="speaking-img-frame speaking-img-main">
+              <img src="assets/images/nari-podcast.jpg" alt="Nari Fateha › Podcast &amp; Speaking" class="speaking-main-img" />
+              <div class="speaking-img-label"><span class="lb-es active">Podcast › Medios › Speaking</span><span class="lb-en">Podcast › Media › Speaking</span></div>
+            </div>
+            <div class="speaking-img-frame speaking-img-secondary">
+              <img src="assets/images/nari-conference.jpg" alt="Nari Fateha en conferencia" class="speaking-secondary-img" />
+              <div class="speaking-img-label"><span class="lb-es active">Conferencias › Imagen editorial</span><span class="lb-en">Conferences › Editorial image</span></div>
+            </div>
+          </div>
+          <div class="speaking-content-col">
+            <div class="section-eyebrow"><span class="lb-es active">Keynote Principal</span><span class="lb-en">Keynote Talk</span></div>
+            <h3 class="speaking-keynote-title"><span class="lb-es active">Conexión antes que control</span><span class="lb-en">Connection before control</span></h3>
+            <p class="speaking-keynote-desc"><span class="lb-es active">Una conferencia sobre crianza digital que invita a dejar atrás el miedo para construir intervenciones humanas e inteligentes. Dirigida a escuelas, congresos educativos, marcas con propósito y programas institucionales de familia.</span><span class="lb-en">A talk on digital parenting that invites audiences to move past fear and build human, intelligent interventions. Designed for schools, education conferences, purpose-driven brands, and family institutional programs.</span></p>
+
+            <div class="speaking-topics-list">
+              <div class="topic-chip"><span class="lb-es active">Crianza digital</span><span class="lb-en">Digital parenting</span></div>
+              <div class="topic-chip"><span class="lb-es active">Protección en línea</span><span class="lb-en">Online safety</span></div>
+              <div class="topic-chip"><span class="lb-es active">Regulación emocional</span><span class="lb-en">Emotional regulation</span></div>
+              <div class="topic-chip"><span class="lb-es active">Confianza familiar</span><span class="lb-en">Family trust</span></div>
+              <div class="topic-chip"><span class="lb-es active">Familias neurodivergentes</span><span class="lb-en">Neurodivergent families</span></div>
+              <div class="topic-chip"><span class="lb-es active">Comunicación familiar</span><span class="lb-en">Family communication</span></div>
+            </div>
+
+            <div class="speaking-formats">
+              <div class="format-item">
+                <span class="format-dot coral"><svg width="8" height="8" viewBox="0 0 8 8"><circle cx="4" cy="4" r="4" fill="#F96F6E"/></svg></span>
+                <div>
+                  <div class="format-name"><span class="lb-es active">Conferencia magistral</span><span class="lb-en">Keynote lecture</span></div>
+                  <div class="format-sub"><span class="lb-es active">45›60 min › presencial o virtual</span><span class="lb-en">45›60 min › in-person or virtual</span></div>
+                </div>
+              </div>
+              <div class="format-item">
+                <span class="format-dot teal"><svg width="8" height="8" viewBox="0 0 8 8"><circle cx="4" cy="4" r="4" fill="#2ED3C6"/></svg></span>
+                <div>
+                  <div class="format-name"><span class="lb-es active">Taller participativo</span><span class="lb-en">Participatory workshop</span></div>
+                  <div class="format-sub"><span class="lb-es active">90 min › 3 horas › grupos de trabajo</span><span class="lb-en">90 min › 3 hours › working groups</span></div>
+                </div>
+              </div>
+              <div class="format-item">
+                <span class="format-dot coral"><svg width="8" height="8" viewBox="0 0 8 8"><circle cx="4" cy="4" r="4" fill="#F96F6E"/></svg></span>
+                <div>
+                  <div class="format-name"><span class="lb-es active">Programas institucionales</span><span class="lb-en">Institutional programs</span></div>
+                  <div class="format-sub"><span class="lb-es active">Series multi-sesión para escuelas o marcas</span><span class="lb-en">Multi-session series for schools or brands</span></div>
+                </div>
+              </div>
+            </div>
+
+            <a href="files/SIQ_A01_SpeakerMediaKit_CSC.html" target="_blank" class="btn-primary"><span class="lb-es active">Descargar Media Kit →</span><span class="lb-en">Download Media Kit →</span></a>
+          </div>
+        </div>
+
+        <div class="talks-grid-section">
+          <h3 class="talks-grid-title"><span class="lb-es active">Conferencias disponibles</span><span class="lb-en">Available talks</span></h3>
+          <div class="talks-grid">
+            <div class="talk-card">
+              <div class="talk-number coral">01</div>
+              <h4 class="talk-title"><span class="lb-es active">Conexión antes que control</span><span class="lb-en">Connection before control</span></h4>
+              <p class="talk-desc"><span class="lb-es active">Cómo construir seguridad digital desde la confianza, no desde el miedo. El enfoque que convierte a los padres en aliados.</span><span class="lb-en">How to build digital safety from trust, not fear. The approach that turns parents into allies.</span></p>
+              <div class="talk-tag"><span class="lb-es active">Keynote principal</span><span class="lb-en">Keynote talk</span></div>
+            </div>
+            <div class="talk-card">
+              <div class="talk-number teal">02</div>
+              <h4 class="talk-title"><span class="lb-es active">Crianza digital sin culpa</span><span class="lb-en">Digital parenting without guilt</span></h4>
+              <p class="talk-desc"><span class="lb-es active">Una conversación práctica sobre pantallas, límites y regulación emocional que no deja a ningún padre sintiéndose mal.</span><span class="lb-en">A practical conversation about screens, limits, and emotional regulation that leaves no parent feeling bad.</span></p>
+              <div class="talk-tag"><span class="lb-es active">Taller / Conferencia</span><span class="lb-en">Workshop / Talk</span></div>
+            </div>
+            <div class="talk-card">
+              <div class="talk-number coral">03</div>
+              <h4 class="talk-title"><span class="lb-es active">Conversaciones difáciles en casa</span><span class="lb-en">Difficult conversations at home</span></h4>
+              <p class="talk-desc"><span class="lb-es active">Cómo hablar de seguridad, privacidad y consentimiento digital con niños y adolescentes de manera efectiva y sin drama.</span><span class="lb-en">How to talk about digital safety, privacy, and consent with children and teens effectively and without drama.</span></p>
+              <div class="talk-tag"><span class="lb-es active">Taller participativo</span><span class="lb-en">Participatory workshop</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="media-assets-section">
+          <h3 class="talks-grid-title"><span class="lb-es active">Activos aprobados</span><span class="lb-en">Approved assets</span></h3>
+          <div class="media-assets-grid media-assets-grid-5">
+            <div class="media-asset-item" onclick="goToSection('artifacts')">
+              <div class="mai-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="13" y2="17"/></svg></div>
+              <div class="mai-label"><span class="lb-es active">Dossier de Conferencias</span><span class="lb-en">Speaker Dossier</span></div>
+              <div class="mai-sub">PDF › ES / EN</div>
+            </div>
+            <div class="media-asset-item">
+              <div class="mai-thumb-wrap" style="min-height:80px;border-radius:var(--r-md);overflow:hidden;">
+                <img src="assets/images/nari-portrait.jpg" alt="Retrato editorial Nari" class="mai-thumb" style="width:100%;height:100%;object-fit:cover;object-position:center top;" />
+              </div>
+              <div class="mai-label" style="padding:8px 12px 2px;"><span class="lb-es active">Retrato editorial</span><span class="lb-en">Editorial portrait</span></div>
+              <div class="mai-sub" style="padding:0 12px 10px;">PNG › Nari_Portrait.png</div>
+            </div>
+            <div class="media-asset-item media-asset-item--podcast">
+              <div class="mai-thumb-wrap">
+                <img src="assets/images/nari-podcast.jpg" alt="Nari podcast" class="mai-thumb" />
+              </div>
+              <div class="mai-label"><span class="lb-es active">Imagen podcast / medios</span><span class="lb-en">Podcast / media image</span></div>
+              <div class="mai-sub">PNG › Nari_podcast.png</div>
+            </div>
+            <div class="media-asset-item">
+              <div class="mai-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 10a7 7 0 0014 0"/><line x1="12" y1="19" x2="12" y2="22"/><line x1="8" y1="22" x2="16" y2="22"/></svg></div>
+              <div class="mai-label"><span class="lb-es active">Imagen en conferencia</span><span class="lb-en">Conference image</span></div>
+              <div class="mai-sub">PNG › NariEnConferencia.png</div>
+            </div>
+            <div class="media-asset-item" onclick="goToSection('vault')">
+              <div class="mai-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></div>
+              <div class="mai-label"><span class="lb-es active">Bio aprobada (corta/larga)</span><span class="lb-en">Approved bio (short/long)</span></div>
+              <div class="mai-sub"><span class="lb-es active">Texto</span><span class="lb-en">Text</span> › ES / EN</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="speaking-contact-band">
+          <div class="scb-content">
+            <div class="scb-label"><span class="lb-es active">Booking y colaboraciones</span><span class="lb-en">Booking &amp; collaborations</span></div>
+            <h3 class="scb-title"><span class="lb-es active">¿Quieres trabajar con Nari?</span><span class="lb-en">Want to work with Nari?</span></h3>
+            <p class="scb-desc"><span class="lb-es active">Para consultas de conferencias, alianzas de marca y colaboraciones editoriales.</span><span class="lb-en">For speaking inquiries, brand partnerships, and editorial collaborations.</span></p>
+            <div class="scb-contacts">
+              <div class="scb-contact-item">
+                <span class="scb-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><rect x="2" y="5" width="20" height="14" rx="2"/><polyline points="2 5 12 13 22 5"/></svg></span>
+                <span>nari@criarsinculpas.com</span>
+              </div>
+              <div class="scb-contact-item">
+                <span class="scb-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><circle cx="12" cy="12" r="4"/><path d="M16 8v5a3 3 0 006 0v-1a10 10 0 10-3.92 7.94"/></svg></span>
+                <span>@criarsinculpas</span>
+              </div>
+              <div class="scb-contact-item">
+                <span class="scb-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><circle cx="12" cy="12" r="9"/><path d="M12 3c-2.5 3-4 5.5-4 9s1.5 6 4 9M12 3c2.5 3 4 5.5 4 9s-1.5 6-4 9M3 12h18"/></svg></span>
+                <span>criarsinculpas.com</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- --- SECTION: GROWTH --- 
+           Scaling strategies and activation plans.
+      -->
+      <section id="section-growth" class="ws-section">
+        <div class="section-header">
+          <div class="section-eyebrow">Growth &amp; Monetización</div>
+          <h2 class="section-title"><span class="lb-es active">Estrategia y arquitectura de ingresos</span><span class="lb-en">Revenue strategy &amp; architecture</span></h2>
+          <p class="section-desc"><span class="lb-es active">Los documentos estratégicos que definen cómo Criar Sin Culpas se convierte en un negocio de impacto premium.</span><span class="lb-en">The strategic documents that define how Criar Sin Culpas becomes a premium-impact business.</span></p>
+        </div>
+
+        <div class="growth-hero-strip">
+          <div class="revenue-scenario-card conservative">
+            <div class="rs-label"><span class="lb-es active">Conservador</span><span class="lb-en">Conservative</span></div>
+            <div class="rs-amount">$48K</div>
+            <div class="rs-sub"><span class="lb-es active">Año 1 › $4K/mes</span><span class="lb-en">Year 1 › $4K/mo</span></div>
+            <div class="rs-growth"><span class="lb-es active">+3% mensual</span><span class="lb-en">+3% monthly</span></div>
+          </div>
+          <div class="revenue-scenario-card moderate featured-scenario">
+            <div class="rs-recommended"><span class="lb-es active">Recomendado</span><span class="lb-en">Recommended</span></div>
+            <div class="rs-label"><span class="lb-es active">Moderado</span><span class="lb-en">Moderate</span></div>
+            <div class="rs-amount">Proyección anual</div>
+            <div class="rs-sub"><span class="lb-es active">Año 1 › $6K/mes</span><span class="lb-en">Year 1 › $6K/mo</span></div>
+            <div class="rs-growth"><span class="lb-es active">+5% mensual</span><span class="lb-en">+5% monthly</span></div>
+          </div>
+          <div class="revenue-scenario-card optimistic">
+            <div class="rs-label"><span class="lb-es active">Optimista</span><span class="lb-en">Optimistic</span></div>
+            <div class="rs-amount">$96K</div>
+            <div class="rs-sub"><span class="lb-es active">Año 1 › $8K/mes</span><span class="lb-en">Year 1 › $8K/mo</span></div>
+            <div class="rs-growth"><span class="lb-es active">+8% mensual</span><span class="lb-en">+8% monthly</span></div>
+          </div>
+        </div>
+
+        <div class="growth-mix-section">
+          <h3 class="growth-section-title"><span class="lb-es active">Mix de monetización recomendado</span><span class="lb-en">Recommended monetization mix</span></h3>
+          <div class="mix-grid">
+            <div class="mix-card">
+              <div class="mix-pct coral">40%</div>
+              <div class="mix-label"><span class="lb-es active">Productos digitales y cursos</span><span class="lb-en">Digital products &amp; courses</span></div>
+              <div class="mix-desc"><span class="lb-es active">Curso insignia $197›$297, mini-cursos $47›$97, downloads $9›$27</span><span class="lb-en">Flagship course $197›$297, mini-courses $47›$97, downloads $9›$27</span></div>
+            </div>
+            <div class="mix-card">
+              <div class="mix-pct teal">30%</div>
+              <div class="mix-label"><span class="lb-es active">Alianzas de marca</span><span class="lb-en">Brand partnerships</span></div>
+              <div class="mix-desc"><span class="lb-es active">Posts $300›$750, Reels $500›$1,250, Paquetes $800›$2,000, Ambassador $1K›$5K/mes</span><span class="lb-en">Posts $300›$750, Reels $500›$1,250, Packages $800›$2,000, Ambassador $1K›$5K/mo</span></div>
+            </div>
+            <div class="mix-card">
+              <div class="mix-pct coral">20%</div>
+              <div class="mix-label"><span class="lb-es active">Membresía / comunidad</span><span class="lb-en">Membership / community</span></div>
+              <div class="mix-desc"><span class="lb-es active">Modelo de comunidad de alto valor con acceso escalonado</span><span class="lb-en">High-value community model with tiered access</span></div>
+            </div>
+            <div class="mix-card">
+              <div class="mix-pct teal">10%</div>
+              <div class="mix-label"><span class="lb-es active">Afiliados y otros</span><span class="lb-en">Affiliates &amp; other</span></div>
+              <div class="mix-desc"><span class="lb-es active">Ingresos complementarios de referencia y asociaciones secundarias</span><span class="lb-en">Supplementary referral income and secondary partnerships</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="growth-docs-section">
+          <h3 class="growth-section-title"><span class="lb-es active">Documentos estratégicos</span><span class="lb-en">Strategic documents</span></h3>
+          <div class="growth-docs-grid">
+            <div class="growth-doc-card" onclick="window.open('https://www.luis-gilberto.com/TheHub/clients/nari/files/SIQ_A02_MonetizationReport_CSC','_blank')">
+              <div class="gdc-eyebrow"><span class="lb-es active">Reporte</span><span class="lb-en">Report</span></div>
+              <h4 class="gdc-title">Market Intelligence &amp; <span class="lb-es active">Monetización</span><span class="lb-en">Monetization</span></h4>
+              <p class="gdc-desc"><span class="lb-es active">An›lisis de mercado, proyecciones, precios y mix de ingresos recomendado para Criar Sin Culpas.</span><span class="lb-en">Market analysis, projections, pricing, and recommended revenue mix for Criar Sin Culpas.</span></p>
+              <div class="gdc-meta">ES / EN › <span class="lb-es active">Abr</span><span class="lb-en">Apr</span> 2026 › <span class="lb-es active">3 páginas</span><span class="lb-en">3 pages</span></div>
+              <div class="gdc-cta"><span class="lb-es active">Abrir documento →</span><span class="lb-en">Open document →</span></div>
+            </div>
+            <div class="growth-doc-card" onclick="window.open('https://www.luis-gilberto.com/TheHub/clients/nari/files/SIQ_A02_CommercialActivationBrief_CSC','_blank')">
+              <div class="gdc-eyebrow">Brief</div>
+              <h4 class="gdc-title"><span class="lb-es active">Activación Comercial</span><span class="lb-en">Commercial Activation</span></h4>
+              <p class="gdc-desc"><span class="lb-es active">Dos motores de ingresos, tres escenarios, señales estratégicas y los primeros pasos para activar el modelo de negocio.</span><span class="lb-en">Two revenue engines, three scenarios, strategic signals and first steps to activate the business model.</span></p>
+              <div class="gdc-meta">ES / EN › <span class="lb-es active">Abr</span><span class="lb-en">Apr</span> 2026 › <span class="lb-es active">2 páginas</span><span class="lb-en">2 pages</span></div>
+              <div class="gdc-cta"><span class="lb-es active">Abrir documento →</span><span class="lb-en">Open document →</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="growth-priorities-band">
+          <div class="gp-header"><span class="lb-es active">Prioridades inmediatas</span><span class="lb-en">Immediate priorities</span></div>
+          <div class="gp-list">
+            <div class="gp-item">
+              <span class="gp-num coral">01</span>
+              <div class="gp-text"><span class="lb-es active">Enviar deck de alianzas a 3›5 marcas alineadas esta semana</span><span class="lb-en">Send partnerships deck to 3›5 aligned brands this week</span></div>
+            </div>
+            <div class="gp-item">
+              <span class="gp-num teal">02</span>
+              <div class="gp-text"><span class="lb-es active">Establecer precios de referencia: workshop $197, membresía $27/mes, Reels $750</span><span class="lb-en">Set reference pricing: workshop $197, membership $27/mo, Reels $750</span></div>
+            </div>
+            <div class="gp-item">
+              <span class="gp-num coral">03</span>
+              <div class="gp-text"><span class="lb-es active">Comenzar a rastrear KPIs de mes 1 en el modelo financiero</span><span class="lb-en">Start tracking Month 1 KPIs in the financial model</span></div>
+            </div>
+            <div class="gp-item">
+              <span class="gp-num teal">04</span>
+              <div class="gp-text"><span class="lb-es active">Definir estructura del programa insignia en la pr›xima sesión estratégica</span><span class="lb-en">Define flagship program structure in next strategic session</span></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- --- SECTION: Brand Vault › Identidad --- -->
+      <section id="section-vault" class="ws-section">
+        <div class="section-header">
+          <div class="section-eyebrow"><span class="lb-es active">Bóveda de Marca › CSC</span><span class="lb-en">Brand Vault › Identidad › CSC</span></div>
+          <h2 class="section-title"><span class="lb-es active">Sistema visual y de marca</span><span class="lb-en">Visual &amp; brand system</span></h2>
+          <p class="section-desc"><span class="lb-es active">La identidad de Criar Sin Culpas: colores, tipografía, voz y componentes editoriales. Esta es la paleta de Nari › no la del entorno de trabajo.</span><span class="lb-en">The Criar Sin Culpas identity: colors, typography, voice, and editorial components. This is Nari's palette › not the workspace environment's.</span></p>
+        </div>
+
+        <!-- -- Brand Book entry card (PUBLIC › no password) -- -->
+        <div class="brand-book-entry-card" style="
+          display:flex; align-items:center; justify-content:space-between; gap:24px;
+          background: linear-gradient(135deg, #3e2a6b 0%, #2a1c4a 100%);
+          border-radius: 20px; padding: 32px 36px; margin-bottom: 32px;
+          position:relative; overflow:hidden;
+        ">
+          <div style="position:absolute;top:-40px;right:-40px;width:240px;height:240px;background:radial-gradient(circle,rgba(249,111,110,0.22) 0%,transparent 70%);pointer-events:none;"></div>
+          <div style="position:absolute;bottom:-40px;left:-20px;width:200px;height:200px;background:radial-gradient(circle,rgba(75,173,168,0.18) 0%,transparent 70%);pointer-events:none;"></div>
+          <div style="position:relative;z-index:1;">
+            <div style="font-size:0.68rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:rgba(249,111,110,0.85);margin-bottom:8px;font-family:var(--font-sans);">
+              <span class="lb-es active">Recurso p›blico › Sin contraseña</span>
+              <span class="lb-en">Public resource › No password needed</span>
+            </div>
+            <h3 style="font-family:var(--font-serif);font-size:1.9rem;font-weight:400;color:#fff;margin:0 0 10px;line-height:1.15;display:flex;align-items:center;gap:10px;">
+              <span>
+                <span class="lb-es active">Libro de Marca Visual</span>
+                <span class="lb-en">Visual Brand Book</span>
+              </span>
+              <span class="vault-info-icon" data-tooltip="The Visual Brand Book is your complete external brand toolkit. Use it for Instagram posts, website design, speaker kits, merch, and sharing with collaborators who need the full CSC visual system + asset library." aria-label="More info">ⓘ</span>
+            </h3>
+            <p style="font-size:0.88rem;color:rgba(255,255,255,0.68);margin:0 0 12px;max-width:460px;line-height:1.6;">
+              <span class="lb-es active">El sistema visual completo de Criar Sin Culpas › colores, tipografía, logo, plantillas sociales, DNA de marca y activos descargables. Diseñado para compartir.</span>
+              <span class="lb-en">The complete visual system for Criar Sin Culpas › colors, type, logo, social templates, brand DNA, and downloadable assets. Designed to share.</span>
+            </p>
+            <p class="vault-helper-text">›› <span class="lb-es active">Úsalo para: activos de marketing, redes sociales, alianzas, entrega al diseñador</span><span class="lb-en">Use for: Marketing assets, social media, partnerships, designer handoff</span></p>
+            <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;">
+              <a href="https://nari.luis-gilberto.com/brand" target="_blank" style="display:inline-flex;align-items:center;gap:7px;padding:11px 22px;border-radius:999px;background:#f96f6e;color:#fff;text-decoration:none;font-size:0.84rem;font-weight:600;letter-spacing:0.02em;box-shadow:0 6px 18px rgba(249,111,110,0.35);transition:all 0.25s;">
+                <span class="lb-es active">Abrir Brand Book →</span>
+                <span class="lb-en">Open Brand Book →</span>
+              </a>
+              <a href="brand.html" target="_blank" style="display:inline-flex;align-items:center;gap:6px;padding:11px 18px;border-radius:999px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.18);color:rgba(255,255,255,0.75);text-decoration:none;font-size:0.82rem;font-weight:500;transition:all 0.25s;">
+                <span class="lb-es active">Vista interactiva</span>
+                <span class="lb-en">Interactive preview</span>
+              </a>
+              <span style="font-size:0.74rem;color:rgba(255,255,255,0.4);display:flex;align-items:center;gap:5px;">
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                <span class="lb-es active">Acceso libre › no requiere contraseña</span>
+                <span class="lb-en">Open access › no login required</span>
+              </span>
+            </div>
+          </div>
+          <div style="flex-shrink:0;display:grid;grid-template-columns:1fr 1fr;gap:8px;opacity:0.85;" class="brand-book-swatches">
+            <div style="width:56px;height:56px;border-radius:12px;background:#3E2A6B;"></div>
+            <div style="width:56px;height:56px;border-radius:12px;background:#F96F6E;"></div>
+            <div style="width:56px;height:56px;border-radius:12px;background:#4BADA8;"></div>
+            <div style="width:56px;height:56px;border-radius:12px;background:#FBF7F1;border:1px solid rgba(255,255,255,0.15);"></div>
+          </div>
+        </div>
+        <style>
+          @media (max-width:640px) {
+            .brand-book-entry-card { flex-direction:column; }
+            .brand-book-swatches { display:none !important; }
+          }
+            /* -------------------------------------------
+       PROJECT JOURNEY SECTION  (pj-*)
+       ------------------------------------------- */
+    .pj-journey {
+      max-width: 860px;
+      margin: 0 auto;
+      position: relative;
+    }
+    .pj-journey::before {
+      content: '';
+      position: absolute;
+      left: 32px;
+      top: 24px;
+      bottom: 24px;
+      width: 1px;
+      background: linear-gradient(180deg,
+        rgba(78,205,196,0.4) 0%,
+        rgba(78,205,196,0.2) 40%,
+        rgba(249,111,110,0.2) 60%,
+        rgba(249,111,110,0.05) 100%);
+    }
+    .pj-phase {
+      position: relative;
+      padding-left: 80px;
+      margin-bottom: 56px;
+    }
+    .pj-phase:last-child { margin-bottom: 0; }
+    .pj-node {
+      position: absolute;
+      left: 20px;
+      top: 20px;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      z-index: 2;
+    }
+    .pj-done  { background: #4ecdc4; color: #0e0e0f; box-shadow: 0 0 0 4px rgba(78,205,196,0.12); }
+    .pj-active { background: #f96f6e; color: #fff; box-shadow: 0 0 0 4px rgba(249,111,110,0.15), 0 0 16px rgba(249,111,110,0.3); }
+    .pj-pending { background: #1c1c1f; border: 1px solid rgba(255,255,255,0.07); color: rgba(240,236,229,0.35); }
+    .pj-connector {
+      position: absolute;
+      left: 32px;
+      top: 46px;
+      bottom: -56px;
+      width: 1px;
+      background: rgba(255,255,255,0.04);
+    }
+    .pj-phase:last-child .pj-connector { display: none; }
+    .pj-card {
+      background: #161618;
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 14px;
+      overflow: hidden;
+    }
+    .pj-card-done   { border-color: rgba(78,205,196,0.15); }
+    .pj-card-active { border-color: rgba(249,111,110,0.2); }
+    .pj-card-pending { opacity: 0.5; }
+    .pj-head {
+      padding: 24px 28px 20px;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .pj-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .pj-label-done    { color: #4ecdc4; }
+    .pj-label-active  { color: #f96f6e; }
+    .pj-label-pending { color: rgba(240,236,229,0.35); }
+    .pj-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 26px;
+      font-weight: 600;
+      color: #f0ece5;
+      letter-spacing: -0.01em;
+      margin-bottom: 6px;
+      line-height: 1.15;
+    }
+    .pj-subtitle { font-size: 13px; color: rgba(240,236,229,0.65); font-weight: 300; font-style: italic; }
+    .pj-status {
+      flex-shrink: 0;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 5px 12px;
+      border-radius: 999px;
+    }
+    .pj-status-done    { background: rgba(78,205,196,0.12); color: #4ecdc4; border: 1px solid rgba(78,205,196,0.2); }
+    .pj-status-active  { background: rgba(249,111,110,0.1); color: #f96f6e; border: 1px solid rgba(249,111,110,0.2); }
+    .pj-status-pending { background: rgba(255,255,255,0.04); color: rgba(240,236,229,0.35); border: 1px solid rgba(255,255,255,0.07); }
+    .pj-body { padding: 24px 28px; }
+    .pj-narrative {
+      font-size: 14px;
+      line-height: 1.75;
+      color: rgba(240,236,229,0.65);
+      font-weight: 300;
+      margin-bottom: 24px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+    .pj-narrative strong { color: #f0ece5; font-weight: 500; }
+    .pj-sublabel {
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(240,236,229,0.35);
+      margin-bottom: 12px;
+    }
+    .pj-core-output { margin-bottom: 24px; }
+    .pj-output-card {
+      background: linear-gradient(135deg,rgba(78,205,196,0.06) 0%,rgba(78,205,196,0.02) 100%);
+      border: 1px solid rgba(78,205,196,0.2);
+      border-radius: 8px;
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .pj-output-coral {
+      background: linear-gradient(135deg,rgba(249,111,110,0.06) 0%,rgba(249,111,110,0.02) 100%);
+      border-color: rgba(249,111,110,0.2);
+    }
+    .pj-output-tag { font-size: 9px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 4px; }
+    .pj-tag-teal  { color: #4ecdc4; }
+    .pj-tag-coral { color: #f96f6e; }
+    .pj-output-name { font-size: 14px; font-weight: 500; color: #f0ece5; margin-bottom: 3px; }
+    .pj-output-desc { font-size: 12px; color: rgba(240,236,229,0.35); font-weight: 300; }
+    .pj-output-link {
+      flex-shrink: 0;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
+      padding: 8px 14px;
+      border-radius: 999px;
+      transition: opacity 0.2s;
+    }
+    .pj-output-link:hover { opacity: 0.75; }
+    .pj-link-teal  { color: #4ecdc4; background: rgba(78,205,196,0.12); border: 1px solid rgba(78,205,196,0.2); }
+    .pj-link-coral { color: #f96f6e; background: rgba(249,111,110,0.1); border: 1px solid rgba(249,111,110,0.2); }
+    .pj-artifacts {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    .pj-tile {
+      background: #1c1c1f;
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 8px;
+      padding: 14px 16px;
+      text-decoration: none;
+      display: block;
+      transition: border-color 0.2s;
+    }
+    .pj-tile:hover { border-color: rgba(255,255,255,0.15); }
+    .pj-tile-code { font-size: 9px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(240,236,229,0.35); margin-bottom: 6px; }
+    .pj-tile-name { font-size: 13px; font-weight: 500; color: #f0ece5; margin-bottom: 4px; line-height: 1.3; }
+    .pj-tile-desc { font-size: 11px; color: rgba(240,236,229,0.35); font-weight: 300; line-height: 1.5; }
+    .pj-tile-foot { display: flex; align-items: center; justify-content: space-between; margin-top: 10px; }
+    .pj-tile-lang { font-size: 9px; font-weight: 600; letter-spacing: 0.1em; color: rgba(240,236,229,0.35); }
+    .pj-tile-arrow { font-size: 12px; color: rgba(240,236,229,0.35); }
+    .pj-decision {
+      background: rgba(232,200,122,0.08);
+      border: 1px solid rgba(232,200,122,0.2);
+      border-radius: 8px;
+      padding: 14px 18px;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+    .pj-decision-icon { font-size: 14px; flex-shrink: 0; margin-top: 1px; }
+    .pj-decision-label { font-size: 9px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: #e8c87a; margin-bottom: 4px; }
+    .pj-decision-text { font-size: 12px; color: rgba(232,200,122,0.75); font-weight: 300; line-height: 1.55; }
+    .pj-method {
+      background: linear-gradient(135deg,rgba(78,205,196,0.05) 0%,rgba(249,111,110,0.03) 100%);
+      border: 1px solid rgba(78,205,196,0.15);
+      border-radius: 14px;
+      padding: 20px 22px;
+      margin-bottom: 20px;
+    }
+    .pj-method-label { font-size: 9px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: #4ecdc4; margin-bottom: 10px; }
+    .pj-method-title { font-family: 'Cormorant Garamond', serif; font-size: 18px; font-weight: 600; color: #f0ece5; margin-bottom: 14px; }
+    .pj-method-steps { display: grid; grid-template-columns: repeat(4,1fr); gap: 8px; }
+    .pj-step { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07); border-radius: 8px; padding: 10px 12px; text-align: center; }
+    .pj-step-num { font-size: 9px; font-weight: 700; letter-spacing: 0.1em; color: #4ecdc4; margin-bottom: 4px; }
+    .pj-step-name { font-size: 12px; font-weight: 500; color: #f0ece5; }
+    .pj-pending-body { padding: 20px 28px; display: flex; align-items: center; gap: 12px; }
+    .pj-pending-icon { width: 32px; height: 32px; border-radius: 50%; background: #1c1c1f; border: 1px solid rgba(255,255,255,0.07); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .pj-pending-text { font-size: 13px; color: rgba(240,236,229,0.35); font-weight: 300; }
+    @media (max-width: 600px) {
+      .pj-journey::before { left: 16px; }
+      .pj-phase { padding-left: 48px; }
+      .pj-node { left: 4px; width: 22px; height: 22px; }
+      .pj-connector { left: 15px; }
+      .pj-head { flex-direction: column; }
+      .pj-title { font-size: 22px; }
+      .pj-method-steps { grid-template-columns: repeat(2,1fr); }
+      .pj-output-card { flex-direction: column; align-items: flex-start; }
+      .pj-artifacts { grid-template-columns: 1fr; }
+    }
+    /* --- END PROJECT JOURNEY --- */ 
+ 
+ 
+     /* JOURNEY TEASER (home section) */ 
+     .journey-teaser { 
+       background: linear-gradient(135deg, rgba(78,205,196,0.06) 0%, rgba(249,111,110,0.04) 100%); 
+       border: 1px solid rgba(78,205,196,0.18); 
+       border-radius: 14px; 
+       padding: 24px 28px; 
+       margin-bottom: var(--space-xl); 
+       display: flex; 
+       align-items: center; 
+       gap: 28px; 
+       cursor: pointer; 
+       transition: border-color 0.2s, background 0.2s; 
+     } 
+     .journey-teaser:hover { 
+       border-color: rgba(78,205,196,0.35); 
+       background: linear-gradient(135deg, rgba(78,205,196,0.09) 0%, rgba(249,111,110,0.06) 100%); 
+     } 
+     .jt-left { flex: 1; min-width: 0; } 
+     .jt-eyebrow { font-size: 9px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: var(--teal); margin-bottom: 8px; } 
+     .jt-title { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 600; color: var(--text); margin-bottom: 6px; line-height: 1.2; } 
+     .jt-title em { font-style: italic; color: #e8a598; } 
+     .jt-desc { font-size: 13px; color: var(--text-mid); font-weight: 300; line-height: 1.6; } 
+     .jt-phases { display: flex; align-items: center; gap: 8px; flex-shrink: 0; } 
+     .jt-phase { display: flex; flex-direction: column; align-items: center; gap: 6px; } 
+     .jt-node { width: 28px; height: 28px; border-radius: 50%; background: var(--teal); color: #0e0e0f; font-size: 11px; font-weight: 700; display: flex; align-items: center; justify-content: center; } 
+     .jt-node-active { background: var(--coral); color: #fff; box-shadow: 0 0 12px rgba(249,111,110,0.3); } 
+     .jt-node-locked { background: transparent; border: 1px solid rgba(255,255,255,0.12); color: rgba(240,236,229,0.3); } 
+     .jt-phase-label { font-size: 9px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--teal); white-space: nowrap; } 
+     .jt-muted { color: rgba(240,236,229,0.3); } 
+     .jt-divider { width: 24px; height: 1px; background: rgba(255,255,255,0.1); margin-bottom: 20px; flex-shrink: 0; } 
+     .jt-cta { flex-shrink: 0; font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--teal); white-space: nowrap; } 
+     @media (max-width: 640px) { 
+       .journey-teaser { flex-direction: column; align-items: flex-start; gap: 20px; } 
+       .jt-phases { width: 100%; justify-content: flex-start; } 
+       .jt-cta { align-self: flex-end; } 
+     } 
+     /* END JOURNEY TEASER */
+</style>
+
+        <div class="vault-csc-vizid-banner">
+          <div class="vcvb-content">
+            <div class="vcvb-eyebrow"><span class="lb-es active">Documento de referencia</span><span class="lb-en">Reference document</span></div>
+            <h3 class="vcvb-title" style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+              CSC Viz ID
+              <span class="vault-info-icon vault-info-icon--dark" data-tooltip="The Viz ID is your compact brand DNA sheet. Use it when creating documents inside the workspace or feeding brand guidelines to AI tools. Think: workshop handouts, internal reports, AI-generated content." aria-label="More info">ⓘ</span>
+            </h3>
+            <p class="vcvb-desc"><span class="lb-es active">La guía visual completa de Criar Sin Culpas en una sola página. Colores, tipografía, imagen, voz, componentes y checklist de activos.</span><span class="lb-en">The complete visual guide for Criar Sin Culpas on one page. Colors, typography, imagery, voice, components, and asset checklist.</span></p>
+            <p class="vault-helper-text vault-helper-text--dark">›› <span class="lb-es active">Úsalo para: documentos del workspace, prompts de IA, entrega al equipo</span><span class="lb-en">Use for: Workspace documents, AI prompts, team handoff</span></p>
+            <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;">
+              <a href="files/SIQ_BrandAsset_VizIDReference_CSC.html" target="_blank" class="btn-primary"><span class="lb-es active">Abrir CSC Viz ID →</span><span class="lb-en">Open CSC Viz ID →</span></a>
+              
+            </div>
+          </div>
+          <div class="vcvb-preview">
+            <div class="token-mini-grid">
+              <div class="tmg-color" style="background:#F96F6E;"></div>
+              <div class="tmg-color" style="background:#4BADA8;"></div>
+              <div class="tmg-color" style="background:#151515;"></div>
+              <div class="tmg-color" style="background:#FBF7F1; border:1px solid #EDE3D7;"></div>
+            </div>
+            <div class="tmg-fonts">
+              <div class="tmg-font-serif">Cormorant Garamond</div>
+              <div class="tmg-font-sans">Inter</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="vault-tokens-section">
+          <h3 class="vault-section-title"><span class="lb-es active">Paleta de color › CSC Viz ID</span><span class="lb-en">Color palette › CSC Viz ID</span></h3>
+          <div class="tokens-grid">
+            <div class="token-group">
+              <div class="tg-label"><span class="lb-es active">Color › Acento principal</span><span class="lb-en">Color › Primary accent</span></div>
+              <div class="tg-swatch" style="background:#F96F6E;"></div>
+              <div class="tg-name">Coral</div>
+              <div class="tg-value">#F96F6E</div>
+            </div>
+            <div class="token-group">
+              <div class="tg-label"><span class="lb-es active">Color › Acento secundario</span><span class="lb-en">Color › Secondary accent</span></div>
+              <div class="tg-swatch" style="background:#4BADA8;"></div>
+              <div class="tg-name">Teal</div>
+              <div class="tg-value">#4BADA8</div>
+            </div>
+            <div class="token-group">
+              <div class="tg-label"><span class="lb-es active">Tipografía › Tinta principal</span><span class="lb-en">Typography › Primary ink</span></div>
+              <div class="tg-swatch" style="background:#151515;"></div>
+              <div class="tg-name">Ink</div>
+              <div class="tg-value">#151515</div>
+            </div>
+            <div class="token-group">
+              <div class="tg-label"><span class="lb-es active">Surface › Fondo editorial</span><span class="lb-en">Surface › Editorial background</span></div>
+              <div class="tg-swatch" style="background:#FBF7F1; border:1px solid #EDE3D7;"></div>
+              <div class="tg-name">Warm Paper</div>
+              <div class="tg-value">#FBF7F1</div>
+            </div>
+            <div class="token-group">
+              <div class="tg-label"><span class="lb-es active">Surface › Separador suave</span><span class="lb-en">Surface › Soft divider</span></div>
+              <div class="tg-swatch" style="background:#EDE3D7;"></div>
+              <div class="tg-name">Soft Sand</div>
+              <div class="tg-value">#EDE3D7</div>
+            </div>
+            <div class="token-group">
+              <div class="tg-label"><span class="lb-es active">Surface › Acento profundo</span><span class="lb-en">Surface › Deep accent</span></div>
+              <div class="tg-swatch" style="background:#274B49;"></div>
+              <div class="tg-name">Deep Moss</div>
+              <div class="tg-value">#274B49</div>
+            </div>
+          </div>
+          <div class="vault-token-note">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;opacity:0.5;"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            <span class="lb-es active">El teal de la marca CSC es <code>#4BADA8</code> › c›lido y editorial. El entorno de trabajo usa <code>#2ED3C6</code> como token de sistema digital. No son intercambiables en materiales de marca externos.</span>
+            <span class="lb-en">CSC's brand teal is <code>#4BADA8</code> › warm and editorial. The workspace uses <code>#2ED3C6</code> as a digital system token. They are not interchangeable in external brand materials.</span>
+          </div>
+        </div>
+
+        <div class="vault-type-section">
+          <h3 class="vault-section-title"><span class="lb-es active">Tipografía</span><span class="lb-en">Typography</span></h3>
+          <div class="type-demo-grid">
+            <div class="type-demo-card">
+              <div class="td-sample serif">Cormorant Garamond</div>
+              <div class="td-label"><span class="lb-es active">Headlines › Display › Citas</span><span class="lb-en">Headlines › Display › Pull quotes</span></div>
+              <div class="td-desc"><span class="lb-es active">Serif de alta moda. Pesos 300›700. Usa para t›tulos, nombres, secciones heroicas y pull quotes.</span><span class="lb-en">High-fashion serif. Weights 300›700. Use for headings, names, hero sections and pull quotes.</span></div>
+            </div>
+            <div class="type-demo-card">
+              <div class="td-sample sans">Inter</div>
+              <div class="td-label"><span class="lb-es active">Cuerpo › Metadata › Utilities</span><span class="lb-en">Body › Metadata › Utilities</span></div>
+              <div class="td-desc"><span class="lb-es active">Sans-serif premium. Pesos 300›700. Usa para todo el cuerpo de texto, labels, botones y UI.</span><span class="lb-en">Premium sans-serif. Weights 300›700. Use for all body text, labels, buttons, and UI.</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="vault-voice-section">
+          <h3 class="vault-section-title"><span class="lb-es active">Voz y tono</span><span class="lb-en">Voice &amp; tone</span></h3>
+          <div class="voice-rules-grid">
+            <div class="voice-rule do">
+              <div class="vr-icon">→</div>
+              <div class="vr-label"><span class="lb-es active">S› usamos</span><span class="lb-en">We do use</span></div>
+              <ul class="vr-list">
+                <li><span class="lb-es active">C›lido, directo y editorial</span><span class="lb-en">Warm, direct, and editorial</span></li>
+                <li><span class="lb-es active">Autoridad sin arrogancia</span><span class="lb-en">Authority without arrogance</span></li>
+                <li><span class="lb-es active">P›rrafos cortos, ideas claras</span><span class="lb-en">Short paragraphs, clear ideas</span></li>
+                <li><span class="lb-es active">Espa›ol humano, no corporativo</span><span class="lb-en">Human Spanish, not corporate</span></li>
+                <li><span class="lb-es active">Emoción primero, estructura después</span><span class="lb-en">Emotion first, structure after</span></li>
+                <li><em><span class="lb-es active">Protección en línea › Ponencias › Dossier de conferencias</span><span class="lb-en">Online safety › Talks › Speaker dossier</span></em></li>
+              </ul>
+            </div>
+            <div class="voice-rule dont">
+              <div class="vr-icon">→</div>
+              <div class="vr-label"><span class="lb-es active">No usamos</span><span class="lb-en">We don't use</span></div>
+              <ul class="vr-list">
+                <li><span class="lb-es active">Anglicismos innecesarios en materiales ES</span><span class="lb-en">Unnecessary anglicisms in ES materials</span></li>
+                <li><span class="lb-es active">"Speaker Media Kit" (en espa›ol)</span><span class="lb-en">"Speaker Media Kit" (in Spanish assets)</span></li>
+                <li><span class="lb-es active">"Workshops" / "Keynotes" (en espa›ol)</span><span class="lb-en">"Workshops" / "Keynotes" (in Spanish)</span></li>
+                <li><span class="lb-es active">"Premium" o "Luxury" dirigido al cliente</span><span class="lb-en">"Premium" or "Luxury" toward the client</span></li>
+                <li><span class="lb-es active">Jerga de consultoría o autoayuda gen›rica</span><span class="lb-en">Consulting jargon or generic self-help phrasing</span></li>
+                <li><span class="lb-es active">Mezcla de idiomas en etiquetas de sección</span><span class="lb-en">Language mixing in section labels</span></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="vault-bios-section">
+          <h3 class="vault-section-title"><span class="lb-es active">Bios aprobadas</span><span class="lb-en">Approved bios</span></h3>
+          <div class="bio-accordion">
+            <div class="bio-item" onclick="toggleBio(this)">
+              <div class="bio-header">
+                <span class="bio-title"><span class="lb-es active">Bio corta (2 líneas)</span><span class="lb-en">Short bio (2 lines)</span></span>
+                <span class="bio-toggle">+</span>
+              </div>
+              <div class="bio-content">
+                <p>Nari Fateha <span class="lb-es active">es educadora en crianza y fundadora de Criar Sin Culpas. Acompaía a familias, escuelas e instituciones en crianza digital, regulación emocional y construcción de confianza familiar.</span><span class="lb-en">is a parenting educator and founder of Criar Sin Culpas. She supports families, schools, and institutions in digital parenting, emotional regulation, and building family trust.</span></p>
+                <button class="btn-ghost small" onclick="copyText(this, 'Nari Fateha es educadora en crianza y fundadora de Criar Sin Culpas. Acompaía a familias, escuelas e instituciones en crianza digital, regulación emocional y construcción de confianza familiar.')"><span class="lb-es active">Copiar texto</span><span class="lb-en">Copy text</span></button>
+              </div>
+            </div>
+            <div class="bio-item" onclick="toggleBio(this)">
+              <div class="bio-header">
+                <span class="bio-title"><span class="lb-es active">Bio larga (p›rrafo completo)</span><span class="lb-en">Long bio (full paragraph)</span></span>
+                <span class="bio-toggle">+</span>
+              </div>
+              <div class="bio-content">
+                <p class="lb-es active">Nari Fateha es educadora en crianza y fundadora de Criar Sin Culpas, espacio de referencia para familias que navegan la crianza digital sin miedo y sin culpa. Desde su mezcla ›nica de experiencia vivida, regulación emocional y lenguaje pr›ctico, acompaía a padres, escuelas y marcas con propósito a construir v›nculos más fuertes en un mundo cada vez más conectado. Su trabajo abraza familias neurodivergentes, hogares bajo estr›s y cualquier padre que quiera proteger a sus hijos desde la conexión, no desde el control.</p>
+                <p class="lb-en">Nari Fateha is a parenting educator and founder of Criar Sin Culpas, a reference space for families navigating digital parenting without fear or guilt. Drawing from her unique blend of lived experience, emotional regulation, and practical language, she supports parents, schools, and purpose-driven brands in building stronger connections in an increasingly connected world. Her work embraces neurodivergent families, stressed households, and any parent who wants to protect their children through connection, not control.</p>
+                <button class="btn-ghost small" onclick="copyText(this, 'Nari Fateha es educadora en crianza...')"><span class="lb-es active">Copiar texto</span><span class="lb-en">Copy text</span></button>
+              </div>
+            </div>
+            <div class="bio-item" onclick="toggleBio(this)">
+              <div class="bio-header">
+                <span class="bio-title"><span class="lb-es active">Bio en ingl›s (short)</span><span class="lb-en">English bio (short)</span></span>
+                <span class="bio-toggle">+</span>
+              </div>
+              <div class="bio-content">
+                <p>Nari Fateha is a parenting educator and founder of Criar Sin Culpas. She works with families, schools, and purpose-driven brands on digital safety, emotional regulation, and building family trust.</p>
+                <button class="btn-ghost small" onclick="copyText(this, 'Nari Fateha is a parenting educator and founder of Criar Sin Culpas...')"><span class="lb-es active">Copiar texto</span><span class="lb-en">Copy text</span></button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- -- BRAND BOOK CARD -- -->
+        <div class="brand-book-entry-card">
+          <div class="bbec-gradient-bar"></div>
+          <div class="bbec-content">
+            <div class="bbec-left">
+              <div class="bbec-eyebrow"><span class="lb-es active">Identidad visual completa</span><span class="lb-en">Complete visual identity</span></div>
+              <h3 class="bbec-title"><span class="lb-es active">Brand Book Interactivo</span><span class="lb-en">Interactive Brand Book</span></h3>
+              <p class="bbec-desc"><span class="lb-es active">La guía visual completa de Criar Sin Culpas en una experiencia interactiva: colores, tipografía, aplicaciones reales, ADN de marca y portal de descarga de activos. P›gina p›blica › no requiere acceso al workspace.</span><span class="lb-en">The complete visual guide for Criar Sin Culpas as an interactive experience: colors, typography, real-world applications, brand DNA, and a full asset download portal. Public page › no workspace access required.</span></p>
+              <div class="bbec-chips">
+                <span class="bbec-chip">Identity</span>
+                <span class="bbec-chip">Logo System</span>
+                <span class="bbec-chip">Color Palette</span>
+                <span class="bbec-chip">Typography</span>
+                <span class="bbec-chip">Social Templates</span>
+                <span class="bbec-chip">Downloads</span>
+              </div>
+              <div class="bbec-actions">
+                <a href="brand.html" target="_blank" class="bbec-btn-primary"><span class="lb-es active">Abrir Brand Book →</span><span class="lb-en">Open Brand Book →</span></a>
+                <button class="bbec-btn-ghost" onclick="if(typeof openShareModal==='function'){openShareModal({id:'brand-book',title:{es:'Brand Book › Criar Sin Culpas',en:'Brand Book › Criar Sin Culpas'},url:'brand.html',code:'CSC-BB-2026'})}"><span class="lb-es active">Compartir</span><span class="lb-en">Share</span></button>
+              </div>
+            </div>
+            <div class="bbec-preview">
+              <div class="bbec-preview-inner">
+                <div class="bbec-swatch-row">
+                  <div class="bbec-swatch" style="background:#F96F6E;" title="Coral"></div>
+                  <div class="bbec-swatch" style="background:#4BADA8;" title="Teal"></div>
+                  <div class="bbec-swatch" style="background:#3E2A6B;" title="Deep Purple"></div>
+                  <div class="bbec-swatch" style="background:#B8A5D6;" title="Lavender"></div>
+                  <div class="bbec-swatch" style="background:#FBF7F1;border:1px solid #EDE3D7;" title="Warm Paper"></div>
+                </div>
+                <div class="bbec-type-preview">
+                  <div class="bbec-type-serif">Criar Sin Culpas</div>
+                  <div class="bbec-type-sans">Brand Identity System</div>
+                </div>
+                <div class="bbec-public-badge">
+                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                  <span class="lb-es active">P›gina p›blica</span><span class="lb-en">Public page</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- --- SECTION: SIGNAL ROOM --- -->
+      <section id="section-signal" class="ws-section">
+        <div class="section-header">
+          <div class="section-eyebrow">Signal Room › powered by the LG Ecosystem</div>
+          <h2 class="section-title">Centro de Actualizaciones y decisiones del proyecto</h2>
+          <p class="section-desc">El espacio donde el workspace vive y evoluciona. Revisions, decisiones pendientes, actividad reciente.</p>
+        </div>
+
+        <div class="signal-grid">
+          <div class="signal-main">
+            <div class="signal-feed-header">
+              <span class="sf-title">Actividad reciente</span>
+              <span class="sf-tag live"><svg width="7" height="7" viewBox="0 0 7 7" style="display:inline-block;vertical-align:middle;margin-right:5px;margin-top:-1px;"><circle cx="3.5" cy="3.5" r="3.5" fill="#2ED3C6"/></svg>En vivo</span>
+            </div>
+            <div class="signal-feed">
+
+              <div class="signal-item new">
+                <div class="si-dot coral"></div>
+                <div class="si-content">
+                  <div class="si-title">Workspace lanzado →</div>
+                  <div class="si-desc">El entorno privado de Criar Sin Culpas está activo. Homepage, navegación y secciones principales configuradas.</div>
+                  <div class="si-meta">Hoy › LG Ecosystem</div>
+                </div>
+              </div>
+
+              <div class="signal-item">
+                <div class="si-dot teal"></div>
+                <div class="si-content">
+                  <div class="si-title">CSC Viz ID › Aprobado</div>
+                  <div class="si-desc">La guía visual de identidad está finalizada y disponible en el Brand Vault › Identidad.</div>
+                  <div class="si-meta">Abr 2026 › Luis Gilberto</div>
+                </div>
+              </div>
+
+              <div class="signal-item">
+                <div class="si-dot coral"></div>
+                <div class="si-content">
+                  <div class="si-title">Brief de Activación › ES + EN completados</div>
+                  <div class="si-desc">Ambas versiones del Commercial Activation Brief están listas y accesibles desde Artifacts.</div>
+                  <div class="si-meta">Abr 2026 › Luis Gilberto</div>
+                </div>
+              </div>
+
+              <div class="signal-item">
+                <div class="si-dot teal"></div>
+                <div class="si-content">
+                  <div class="si-title">Reporte de Monetización › EN aprobado</div>
+                  <div class="si-desc">La versión ingl›s del Market Intelligence Report está publicada con diseño dark luxury.</div>
+                  <div class="si-meta">Abr 2026 › Luis Gilberto</div>
+                </div>
+              </div>
+
+              <div class="signal-item">
+                <div class="si-dot coral"></div>
+                <div class="si-content">
+                  <div class="si-title">Im›genes editoriales › seleccionadas</div>
+                  <div class="si-desc">Retrato circular (Nari_Portrait.png) e imagen de conferencia (NariEnConferencia.png) aprobadas y asignadas en el kit.</div>
+                  <div class="si-meta">Abr 2026 › Luis Gilberto</div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <div class="signal-sidebar">
+            <div class="signal-decisions-panel">
+              <div class="sdp-header">Decisiones pendientes</div>
+              <div class="sdp-list">
+                <div class="sdp-item">
+                  <div class="sdp-dot coral"></div>
+                  <div class="sdp-content">
+                    <div class="sdp-title">Selección de proveedor de email</div>
+                    <div class="sdp-sub">Dominio criarsinculpas.com listo › conectar a proveedor</div>
+                  </div>
+                </div>
+                <div class="sdp-item">
+                  <div class="sdp-dot teal"></div>
+                  <div class="sdp-content">
+                    <div class="sdp-title">Programa insignia › estructura</div>
+                    <div class="sdp-sub">Definir formato y precio del flagship course</div>
+                  </div>
+                </div>
+                <div class="sdp-item">
+                  <div class="sdp-dot coral"></div>
+                  <div class="sdp-content">
+                    <div class="sdp-title">Deck de alianzas de marca</div>
+                    <div class="sdp-sub">Enviar a 3-5 marcas alineadas esta semana</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="signal-quick-actions">
+              <div class="sqa-header">Acciones rápidas</div>
+              <button class="sqa-btn" onclick="goToSection('requests')">+ Nueva solicitud</button>
+              <button class="sqa-btn" onclick="goToSection('artifacts')">Ver todos los artefactos</button>
+              <button class="sqa-btn" onclick="goToSection('vault')">Abrir Brand Vault › Identidad</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- --- SECTION: REQUESTS --- -->
+      <section id="section-requests" class="ws-section">
+        <div class="section-header">
+          <div class="section-eyebrow">Requests › LG Ecosystem</div>
+          <h2 class="section-title">Solicitudes y colaboración</h2>
+          <p class="section-desc">¿Necesitas un nuevo artefacto, una revisión o subir un archivo? Este es el canal directo con el equipo LG.</p>
+        </div>
+
+        <div class="requests-grid">
+          <div class="request-main-panel">
+            <div class="request-form-header">
+              <h3 class="rfh-title">Nueva solicitud</h3>
+              <p class="rfh-sub">El equipo LG lo gestiona con nivel de dossier premium.</p>
+            </div>
+            <div class="request-form">
+              <div class="form-group">
+                <label class="form-label">Tipo de solicitud</label>
+                <select class="form-select">
+                  <option>Nuevo artefacto</option>
+                  <option>Revisión de documento existente</option>
+                  <option>Subida de archivo / imagen</option>
+                  <option>Consulta estratégica</option>
+                  <option>Otro</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Asunto</label>
+                <input type="text" class="form-input" placeholder="Describe brevemente lo que necesitas" />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Descripción detallada</label>
+                <textarea class="form-textarea" rows="4" placeholder="Contexto, referencias, especificaciones..."></textarea>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Prioridad</label>
+                <div class="priority-selector">
+                  <button class="priority-btn" data-priority="low">Normal</button>
+                  <button class="priority-btn active" data-priority="medium">Urgente</button>
+                  <button class="priority-btn" data-priority="high">Cr›tico</button>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Adjuntar archivo (opcional)</label>
+                <div class="file-drop-zone" onclick="this.querySelector('input').click()">
+                  <div class="fdz-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" width="28" height="28"><path d="M21.44 11.05l-9.19 9.19a6 6 0 01-8.49-8.49l9.19-9.19a4 4 0 015.66 5.66l-9.2 9.19a2 2 0 01-2.83-2.83l8.49-8.48"/></svg></div>
+                  <div class="fdz-text">Arrastra un archivo o haz clic para seleccionar</div>
+                  <div class="fdz-sub">PNG, JPG, PDF, HTML › m›x. 20MB</div>
+                  <input type="file" style="display:none;" />
+                </div>
+              </div>
+              <button class="btn-primary full" onclick="submitRequest()">Enviar solicitud →</button>
+              <div class="form-lg-note">Gestionado a trav›s del LG Ecosystem › Tiempo de respuesta: 24›48h</div>
+            </div>
+          </div>
+
+          <div class="request-history-panel">
+            <div class="rhp-header">Historial de solicitudes</div>
+            <div class="request-history-list">
+              <div class="rh-item completed">
+                <div class="rh-dot teal"></div>
+                <div class="rh-content">
+                  <div class="rh-title">Media Kit › versión final deploy</div>
+                  <div class="rh-meta">Completado › Abr 2026</div>
+                </div>
+                <div class="rh-status-badge done">✔</div>
+              </div>
+              <div class="rh-item completed">
+                <div class="rh-dot teal"></div>
+                <div class="rh-content">
+                  <div class="rh-title">Reporte monetización EN</div>
+                  <div class="rh-meta">Completado › Abr 2026</div>
+                </div>
+                <div class="rh-status-badge done">✔</div>
+              </div>
+              <div class="rh-item completed">
+                <div class="rh-dot teal"></div>
+                <div class="rh-content">
+                  <div class="rh-title">CSC Viz ID › one pager</div>
+                  <div class="rh-meta">Completado › Abr 2026</div>
+                </div>
+                <div class="rh-status-badge done">✔</div>
+              </div>
+              <div class="rh-item completed">
+                <div class="rh-dot teal"></div>
+                <div class="rh-content">
+                  <div class="rh-title">Brief Activación › ES + EN</div>
+                  <div class="rh-meta">Completado › Abr 2026</div>
+                </div>
+                <div class="rh-status-badge done">✔</div>
+              </div>
+              <div class="rh-item in-progress">
+                <div class="rh-dot coral"></div>
+                <div class="rh-content">
+                  <div class="rh-title">Workspace privado › rebuild</div>
+                  <div class="rh-meta">En progreso › Abr 2026</div>
+                </div>
+                <div class="rh-status-badge wip">·</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="ws-footer">
+      <div class="wf-left">Criar Sin Culpas Workspace</div>
+      <div class="wf-center">nari@criarsinculpas.com › @criarsinculpas › criarsinculpas.com</div>
+      <div class="wf-right">Built inside the LG Ecosystem</div>
+    </footer>
+
+  </div>
+
+  <!-- -----------------------------------------------------------
+       SHARE MODAL
+  ----------------------------------------------------------- -->
+  <div id="share-modal" class="shr-backdrop" onclick="closeShareModal(event)" aria-modal="true" role="dialog" aria-label="Share" style="display:none;">
+    <div class="shr-panel">
+
+      <!-- Header -->
+      <div class="shr-header">
+        <div class="shr-header-left">
+          <div class="shr-eyebrow" id="shr-eyebrow">Artifact</div>
+          <div class="shr-title" id="shr-title">Share</div>
+        </div>
+        <button class="shr-close" onclick="closeShareModal()" aria-label="Close">&times;</button>
+      </div>
+
+      <!-- Tab bar -->
+      <div class="shr-tabs" role="tablist">
+        <button class="shr-tab active" data-tab="link" onclick="shrSwitchTab('link')" role="tab">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg>
+          <span class="lb-es active">Enlace</span><span class="lb-en">Link</span>
+        </button>
+        <button class="shr-tab" data-tab="social" onclick="shrSwitchTab('social')" role="tab">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+          Social
+        </button>
+        <button class="shr-tab" data-tab="email" onclick="shrSwitchTab('email')" role="tab">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2 4 12 13 22 4"/></svg>
+          Email
+        </button>
+        <button class="shr-tab" data-tab="embed" onclick="shrSwitchTab('embed')" role="tab">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+          Embed
+        </button>
+        <button class="shr-tab" data-tab="pdf" onclick="shrSwitchTab('pdf')" role="tab">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><path d="M9 13h6M9 17h4"/></svg>
+          PDF
+        </button>
+      </div>
+
+      <!-- -- TAB: LINK -- -->
+      <div class="shr-body" id="shr-tab-link">
+        <p class="shr-desc"><span class="lb-es active">Comparte un enlace directo a este contenido. El destinatario ver› solo esta sección › sin acceso al resto del workspace.</span><span class="lb-en">Share a direct link to this content. The recipient sees only this section › no access to the rest of the workspace.</span></p>
+
+        <div class="shr-field-group">
+          <div class="shr-field-label"><span class="lb-es active">Enlace p›blico</span><span class="lb-en">Public link</span></div>
+          <div class="shr-copy-row">
+            <input type="text" class="shr-input" id="shr-link-url" readonly />
+            <button class="shr-copy-btn" onclick="shrCopy('shr-link-url', this)">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+              <span class="lb-es active">Copiar</span><span class="lb-en">Copy</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="shr-privacy-note">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          <span class="lb-es active">Este enlace da acceso solo a este m›dulo. El workspace privado permanece protegido.</span><span class="lb-en">This link gives access to this module only. The private workspace remains protected.</span>
+        </div>
+
+        <div class="shr-qr-row">
+          <div class="shr-qr-box" id="shr-qr-canvas">
+            <svg viewBox="0 0 80 80" width="80" height="80" fill="none" xmlns="http://www.w3.org/2000/svg" id="shr-qr-svg">
+              <!-- QR placeholder grid -->
+              <rect width="80" height="80" rx="6" fill="var(--panel-2)"/>
+              <rect x="8" y="8" width="26" height="26" rx="3" fill="none" stroke="var(--teal)" stroke-width="2"/>
+              <rect x="13" y="13" width="16" height="16" rx="1" fill="var(--teal)" opacity="0.3"/>
+              <rect x="46" y="8" width="26" height="26" rx="3" fill="none" stroke="var(--teal)" stroke-width="2"/>
+              <rect x="51" y="13" width="16" height="16" rx="1" fill="var(--teal)" opacity="0.3"/>
+              <rect x="8" y="46" width="26" height="26" rx="3" fill="none" stroke="var(--teal)" stroke-width="2"/>
+              <rect x="13" y="51" width="16" height="16" rx="1" fill="var(--teal)" opacity="0.3"/>
+              <rect x="46" y="46" width="8" height="8" rx="1" fill="var(--teal)" opacity="0.5"/>
+              <rect x="58" y="46" width="8" height="8" rx="1" fill="var(--teal)" opacity="0.5"/>
+              <rect x="46" y="58" width="8" height="8" rx="1" fill="var(--teal)" opacity="0.5"/>
+              <rect x="58" y="58" width="8" height="8" rx="1" fill="var(--teal)" opacity="0.5"/>
+            </svg>
+          </div>
+          <div class="shr-qr-info">
+            <div class="shr-qr-label"><span class="lb-es active">C›digo QR</span><span class="lb-en">QR Code</span></div>
+            <p class="shr-qr-desc"><span class="lb-es active">Escanea para acceder directamente desde cualquier dispositivo. Ideal para materiales impresos y presentaciones.</span><span class="lb-en">Scan to access directly from any device. Ideal for printed materials and presentations.</span></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- -- TAB: SOCIAL -- -->
+      <div class="shr-body" id="shr-tab-social" style="display:none;">
+        <p class="shr-desc"><span class="lb-es active">Captions listos para publicar. Copia el texto, pega en tu red y a›ade el enlace.</span><span class="lb-en">Ready-to-post captions. Copy the text, paste into your network and add the link.</span></p>
+
+        <div class="shr-social-grid">
+
+          <!-- Instagram -->
+          <div class="shr-social-card">
+            <div class="shr-social-header">
+              <div class="shr-social-icon instagram">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/></svg>
+              </div>
+              <span class="shr-social-name">Instagram</span>
+              <button class="shr-copy-btn small" onclick="shrCopyField('shr-ig-caption', this)"><span class="lb-es active">Copiar</span><span class="lb-en">Copy</span></button>
+            </div>
+            <textarea class="shr-caption-field" id="shr-ig-caption" rows="5" readonly></textarea>
+          </div>
+
+          <!-- LinkedIn -->
+          <div class="shr-social-card">
+            <div class="shr-social-header">
+              <div class="shr-social-icon linkedin">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+              </div>
+              <span class="shr-social-name">LinkedIn</span>
+              <button class="shr-copy-btn small" onclick="shrCopyField('shr-li-caption', this)"><span class="lb-es active">Copiar</span><span class="lb-en">Copy</span></button>
+            </div>
+            <textarea class="shr-caption-field" id="shr-li-caption" rows="5" readonly></textarea>
+          </div>
+
+          <!-- X / Twitter -->
+          <div class="shr-social-card">
+            <div class="shr-social-header">
+              <div class="shr-social-icon x-twitter">
+                <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+              </div>
+              <span class="shr-social-name">X / Twitter</span>
+              <button class="shr-copy-btn small" onclick="shrCopyField('shr-x-caption', this)"><span class="lb-es active">Copiar</span><span class="lb-en">Copy</span></button>
+            </div>
+            <textarea class="shr-caption-field" id="shr-x-caption" rows="3" readonly></textarea>
+            <div class="shr-char-count" id="shr-x-count">0 / 280</div>
+          </div>
+
+          <!-- WhatsApp -->
+          <div class="shr-social-card">
+            <div class="shr-social-header">
+              <div class="shr-social-icon whatsapp">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" width="18" height="18"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg>
+              </div>
+              <span class="shr-social-name">WhatsApp</span>
+              <button class="shr-copy-btn small" onclick="shrOpenWhatsApp()">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                <span class="lb-es active">Abrir</span><span class="lb-en">Open</span>
+              </button>
+            </div>
+            <textarea class="shr-caption-field" id="shr-wa-caption" rows="3" readonly></textarea>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- -- TAB: EMAIL -- -->
+      <div class="shr-body" id="shr-tab-email" style="display:none;">
+        <p class="shr-desc"><span class="lb-es active">Plantilla de email lista para enviar a un organizador de eventos, marca o colaborador. Edita antes de enviar.</span><span class="lb-en">Email template ready to send to an event organizer, brand, or collaborator. Edit before sending.</span></p>
+
+        <div class="shr-field-group">
+          <div class="shr-field-label"><span class="lb-es active">Asunto</span><span class="lb-en">Subject</span></div>
+          <div class="shr-copy-row">
+            <input type="text" class="shr-input" id="shr-email-subject" readonly />
+            <button class="shr-copy-btn" onclick="shrCopy('shr-email-subject', this)"><span class="lb-es active">Copiar</span><span class="lb-en">Copy</span></button>
+          </div>
+        </div>
+
+        <div class="shr-field-group">
+          <div class="shr-field-label"><span class="lb-es active">Cuerpo del email</span><span class="lb-en">Email body</span></div>
+          <div class="shr-copy-row" style="flex-direction:column;align-items:stretch;gap:8px;">
+            <textarea class="shr-caption-field" id="shr-email-body" rows="8" readonly></textarea>
+            <div style="display:flex;gap:8px;">
+              <button class="shr-copy-btn" style="flex:1" onclick="shrCopyField('shr-email-body', this)"><span class="lb-es active">Copiar cuerpo</span><span class="lb-en">Copy body</span></button>
+              <button class="shr-copy-btn" style="flex:1;background:var(--teal);color:#fff;border-color:var(--teal);" onclick="shrOpenEmailClient()">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2 4 12 13 22 4"/></svg>
+                <span class="lb-es active">Abrir en mail</span><span class="lb-en">Open in mail</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- -- TAB: EMBED -- -->
+      <div class="shr-body" id="shr-tab-embed" style="display:none;">
+
+        <!-- Format picker -->
+        <div class="emb-format-grid">
+
+          <button class="emb-format-card active" data-fmt="speaker-card" onclick="shrPickEmbedFormat('speaker-card', this)">
+            <div class="emb-fmt-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="9" cy="9" r="2"/><path d="M15 8h2M15 12h2M7 16h10"/></svg>
+            </div>
+            <div class="emb-fmt-label"><span class="lb-es active">Tarjeta de speaker</span><span class="lb-en">Speaker card</span></div>
+            <div class="emb-fmt-where"><span class="lb-es active">Programas › Websites › Press</span><span class="lb-en">Programs › Websites › Press</span></div>
+          </button>
+
+          <button class="emb-format-card" data-fmt="email-sig" onclick="shrPickEmbedFormat('email-sig', this)">
+            <div class="emb-fmt-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2 4 12 13 22 4"/></svg>
+            </div>
+            <div class="emb-fmt-label"><span class="lb-es active">Firma de email</span><span class="lb-en">Email signature</span></div>
+            <div class="emb-fmt-where">Gmail › Outlook › Apple Mail</div>
+          </button>
+
+          <button class="emb-format-card" data-fmt="bio-block" onclick="shrPickEmbedFormat('bio-block', this)">
+            <div class="emb-fmt-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            </div>
+            <div class="emb-fmt-label"><span class="lb-es active">Bloque de bio</span><span class="lb-en">Bio block</span></div>
+            <div class="emb-fmt-where">Notion › Docs › Press kit</div>
+          </button>
+
+          <button class="emb-format-card" data-fmt="notion" onclick="shrPickEmbedFormat('notion', this)">
+            <div class="emb-fmt-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><path d="M4 6h16M4 10h16M4 14h10M4 18h6"/></svg>
+            </div>
+            <div class="emb-fmt-label">Notion / iframe</div>
+            <div class="emb-fmt-where"><span class="lb-es active">Embeds interactivos</span><span class="lb-en">Interactive embeds</span></div>
+          </button>
+
+        </div>
+
+        <!-- Output area -->
+        <div class="emb-output" id="emb-output-area">
+
+          <!-- Speaker card output -->
+          <div id="emb-out-speaker-card" class="emb-out-panel">
+            <div class="emb-out-context">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+              <span><span class="lb-es active">HTML listo para pegar en cualquier CMS, web de evento o página de prensa. Sin dependencias externas.</span><span class="lb-en">HTML ready to paste into any CMS, event website, or press page. No external dependencies.</span></span>
+            </div>
+            <!-- Live preview -->
+            <div class="emb-live-preview" id="emb-preview-speaker-card"></div>
+            <div class="emb-code-wrap">
+              <textarea class="shr-caption-field mono" id="emb-code-speaker-card" rows="5" readonly></textarea>
+              <button class="shr-copy-btn" style="width:100%;justify-content:center;" onclick="shrCopyField('emb-code-speaker-card', this)">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+                <span class="lb-es active">Copiar HTML</span><span class="lb-en">Copy HTML</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Email signature output -->
+          <div id="emb-out-email-sig" class="emb-out-panel" style="display:none;">
+            <div class="emb-out-context">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              <span><span class="lb-es active">Tabla HTML con estilos inline › compatible con Gmail, Outlook y Apple Mail. Los clientes de email bloquean iframes y CSS externo; este formato funciona en todos.</span><span class="lb-en">HTML table with inline styles › compatible with Gmail, Outlook and Apple Mail. Email clients block iframes and external CSS; this format works everywhere.</span></span>
+            </div>
+            <div class="emb-sig-steps">
+              <div class="emb-sig-step"><span class="emb-sig-num">1</span><span><span class="lb-es active">Copia el c›digo</span><span class="lb-en">Copy the code</span></span></div>
+              <div class="emb-sig-step"><span class="emb-sig-num">2</span><span>Gmail › Settings › See all settings › Signature › <em><span class="lb-es active">pega en modo HTML</span><span class="lb-en">paste in HTML mode</span></em></span></div>
+              <div class="emb-sig-step"><span class="emb-sig-num">3</span><span>Outlook › New Email › Insert › Signature › <em><span class="lb-es active">editar firma</span><span class="lb-en">edit signature</span></em></span></div>
+            </div>
+            <div class="emb-live-preview" id="emb-preview-email-sig" style="background:#fff;border-radius:8px;padding:16px;"></div>
+            <div class="emb-code-wrap">
+              <textarea class="shr-caption-field mono" id="emb-code-email-sig" rows="5" readonly></textarea>
+              <button class="shr-copy-btn" style="width:100%;justify-content:center;" onclick="shrCopyField('emb-code-email-sig', this)">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+                <span class="lb-es active">Copiar HTML de firma</span><span class="lb-en">Copy signature HTML</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Bio block output -->
+          <div id="emb-out-bio-block" class="emb-out-panel" style="display:none;">
+            <div class="emb-out-context">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+              <span><span class="lb-es active">Texto plano con formato Markdown. Perfecto para Notion, Google Docs, documentos de prensa y kits de prensa digitales.</span><span class="lb-en">Plain text with Markdown formatting. Perfect for Notion, Google Docs, press documents, and digital press kits.</span></span>
+            </div>
+            <div class="emb-live-preview" id="emb-preview-bio-block" style="font-family:-apple-system,sans-serif;line-height:1.65;"></div>
+            <div class="emb-code-wrap">
+              <textarea class="shr-caption-field mono" id="emb-code-bio-block" rows="7" readonly></textarea>
+              <div style="display:flex;gap:8px;">
+                <button class="shr-copy-btn" style="flex:1;justify-content:center;" onclick="shrCopyField('emb-code-bio-block', this)">
+                  <span class="lb-es active">Copiar Markdown</span><span class="lb-en">Copy Markdown</span>
+                </button>
+                <button class="shr-copy-btn" style="flex:1;justify-content:center;" onclick="shrCopyBioPlain()">
+                  <span class="lb-es active">Copiar texto plano</span><span class="lb-en">Copy plain text</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Notion / iframe output -->
+          <div id="emb-out-notion" class="emb-out-panel" style="display:none;">
+            <div class="emb-out-context">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+              <span><span class="lb-es active">En Notion: escribe /embed y pega la URL. En Webflow / Squarespace: usa el bloque "Embed" y pega el iframe. En Linktree Pro: Custom HTML block.</span><span class="lb-en">In Notion: type /embed and paste the URL. In Webflow / Squarespace: use the "Embed" block and paste the iframe. In Linktree Pro: Custom HTML block.</span></span>
+            </div>
+
+            <div class="emb-notion-options">
+              <div class="shr-field-group">
+                <div class="shr-field-label"><span class="lb-es active">URL directa (para Notion)</span><span class="lb-en">Direct URL (for Notion)</span></div>
+                <div class="shr-copy-row">
+                  <input type="text" class="shr-input" id="emb-notion-url" readonly />
+                  <button class="shr-copy-btn" onclick="shrCopy('emb-notion-url', this)"><span class="lb-es active">Copiar</span><span class="lb-en">Copy</span></button>
+                </div>
+              </div>
+              <div class="shr-field-group">
+                <div class="shr-field-label"><span class="lb-es active">C›digo iframe (para webs y Linktree)</span><span class="lb-en">iframe code (for websites &amp; Linktree)</span></div>
+                <div class="shr-copy-row" style="flex-direction:column;gap:8px;align-items:stretch;">
+                  <textarea class="shr-caption-field mono" id="emb-iframe-code" rows="3" readonly></textarea>
+                  <button class="shr-copy-btn" style="width:100%;justify-content:center;" onclick="shrCopyField('emb-iframe-code', this)">
+                    <span class="lb-es active">Copiar iframe</span><span class="lb-en">Copy iframe</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div class="emb-compat-grid">
+              <div class="emb-compat-item yes">
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                Notion
+              </div>
+              <div class="emb-compat-item yes">
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                Webflow
+              </div>
+              <div class="emb-compat-item yes">
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                Squarespace
+              </div>
+              <div class="emb-compat-item yes">
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                Linktree Pro
+              </div>
+              <div class="emb-compat-item no">
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                Gmail
+              </div>
+              <div class="emb-compat-item no">
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                Outlook
+              </div>
+            </div>
+          </div>
+
+        </div><!-- /emb-output -->
+      </div>
+
+      <!-- -- TAB: PDF -- -->
+      <div class="shr-body" id="shr-tab-pdf" style="display:none;">
+        <p class="shr-desc"><span class="lb-es active">Versión en PDF de este artefacto para enviar por email, subir a Drive o incluir en propuestas. Disponible en espa›ol e ingl›s.</span><span class="lb-en">PDF version of this artifact for sending by email, uploading to Drive, or including in proposals. Available in Spanish and English.</span></p>
+
+        <div class="shr-pdf-options">
+          <a class="shr-pdf-card" id="shr-pdf-es" href="#" target="_blank">
+            <div class="shr-pdf-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="28" height="28"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="13" y2="17"/></svg>
+            </div>
+            <div class="shr-pdf-info">
+              <div class="shr-pdf-lang">ES</div>
+              <div class="shr-pdf-name" id="shr-pdf-es-name">›</div>
+              <div class="shr-pdf-meta">PDF › <span class="lb-es active">Espa›ol</span><span class="lb-en">Spanish</span></div>
+            </div>
+            <div class="shr-pdf-action">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            </div>
+          </a>
+          <a class="shr-pdf-card" id="shr-pdf-en" href="#" target="_blank">
+            <div class="shr-pdf-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="28" height="28"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="13" y2="17"/></svg>
+            </div>
+            <div class="shr-pdf-info">
+              <div class="shr-pdf-lang">EN</div>
+              <div class="shr-pdf-name" id="shr-pdf-en-name">›</div>
+              <div class="shr-pdf-meta">PDF › <span class="lb-es active">English</span><span class="lb-en">English</span></div>
+            </div>
+            <div class="shr-pdf-action">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            </div>
+          </a>
+        </div>
+
+        <div class="shr-print-option">
+          <button class="shr-print-btn" onclick="shrPrintContent()">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+            <span class="lb-es active">Imprimir / Guardar como PDF</span><span class="lb-en">Print / Save as PDF</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <div class="shr-footer">
+        <span class="shr-footer-tag">Built inside the LG Ecosystem</span>
+        <div class="shr-footer-actions">
+          <button class="shr-footer-btn" onclick="closeShareModal()"><span class="lb-es active">Cerrar</span><span class="lb-en">Close</span></button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SUCCESS TOAST -->
+  <div id="toast" class="toast hidden">
+    <div class="toast-icon">✔</div>
+    <div class="toast-msg"><span class="lb-en">Request sent. The LG team will respond within 24›48h.</span><span class="lb-es active">Solicitud enviada. El equipo LG responder› en 24›48h.</span></div>
+  </div>
+
+  <!-- SIGNALS LEDGER MODAL -->
+  <div id="signals-modal" style="position:fixed;inset:0;z-index:9999;background:rgba(5,5,5,0.88);backdrop-filter:blur(8px);display:none;align-items:center;justify-content:center;padding:20px;opacity:0;transition:opacity 0.3s ease;">
+    <div style="background:var(--panel);border:1px solid var(--border-strong);border-radius:var(--r-2xl);width:100%;max-width:600px;overflow:hidden;box-shadow:var(--shadow-lg);">
+      <div style="padding:20px 24px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;background:var(--panel-2);">
+        <div>
+          <div style="font-size:9px;font-weight:700;letter-spacing:0.14em;color:var(--teal);text-transform:uppercase;margin-bottom:6px;">Audience Intelligence › Signal Ledger</div>
+          <div style="font-family:var(--font-display);font-size:18px;font-weight:300;color:var(--text-primary);"><span class="lb-en">Audience Patterns</span><span class="lb-es active">Dificultades más comunes de los padres</span></div>
+        </div>
+        <button onclick="closeSignalsLedger()" style="background:none;border:none;color:var(--text-muted);font-size:22px;cursor:pointer;padding:4px;line-height:1;transition:color 0.2s;" onmouseover="this.style.color='var(--text-primary)'" onmouseout="this.style.color='var(--text-muted)'">&times;</button>
+      </div>
+      <div id="signals-ledger-container" style="padding:24px;max-height:65vh;overflow-y:auto;"></div>
+    </div>
+  </div>
+
+  <script src="js/workspace.js"></script></body>
+</html>
+
+
