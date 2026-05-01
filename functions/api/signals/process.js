@@ -22,6 +22,7 @@ export async function onRequestPost(context) {
 
         const body = await request.json();
         const rawInput = body.text || "";
+        const isDebug = body.debug === true;
 
         if (!rawInput) {
             return new Response(JSON.stringify({ error: "No input text provided" }), {
@@ -277,6 +278,18 @@ Only return the artifact. No explanation.`;
             stagingPreview: stagingPreview,
             artifact: artifact
         };
+
+        if (isDebug) {
+            response.debug = {
+                deploymentCommit: "d0e536c",
+                provider: "anthropic",
+                hasAnthropicKey: !!apiKey,
+                anthropicKeyPrefix: apiKey ? apiKey.substring(0, 12) : "none",
+                anthropicKeyLength: apiKey ? apiKey.length : 0,
+                model: 'claude-3-5-sonnet-20241022',
+                functionFileVersion: "process-js-d0e536c-debug"
+            };
+        }
 
         return new Response(JSON.stringify(response), {
             headers: { "Content-Type": "application/json" }
