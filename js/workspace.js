@@ -390,6 +390,12 @@ function goToSection(sectionId, animate = true) {
     section.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 
+  // Hide artifact banner on review route to prevent layout issues
+  const addCta = document.querySelector('.artifact-add-cta');
+  if (addCta) {
+    addCta.style.display = (sectionId === 'review') ? 'none' : '';
+  }
+
   const navItem = document.querySelector(`[data-section="${sectionId}"]`);
   if (navItem) navItem.classList.add('active');
   state.currentSection = sectionId;
@@ -1146,13 +1152,24 @@ window.publishSignal = function(btn) {
     const data = JSON.parse(decodeURIComponent(btn.getAttribute('data-payload')));
     const log = JSON.parse(localStorage.getItem('signals_log') || '[]');
     
+    // Stable identifier for duplicate prevention
+    const signalId = data.id || btoa(data.summary?.headline + data.summary?.synthesis + data.summary?.recommendedAction).substring(0, 16);
+    
+    const exists = log.some(entry => entry.id === signalId);
+    if (exists) {
+      console.log('Signal already published.');
+      return;
+    }
+
     const newEntry = {
-      signal: data.summary?.headline || 'Unknown Signal',
-      refinedInsight: data.summary?.synthesis || '',
-      whyItMatters: data.signals?.[0]?.why_it_matters || data.summary?.prioritySignal || '',
+      id: signalId,
+      title: data.summary?.headline || 'Unknown Signal',
+      synthesis: data.summary?.synthesis || '',
+      priority: data.summary?.prioritySignal || '',
       recommendedAction: data.summary?.recommendedAction || '',
-      output: data.output || 'Artifact Draft',
-      timestamp: new Date().toISOString()
+      timestamp: new Date().toISOString(),
+      source: "review_queue",
+      status: "published"
     };
     
     log.push(newEntry);
@@ -1174,16 +1191,59 @@ window.publishSignal = function(btn) {
       statusText.style.opacity = '1';
     }
 
-    console.log('Signal published to localStorage:', newEntry);
+    console.log('Published signals count:', log.length);
+    renderPublishedSignals();
   } catch (err) {
     console.error('Publishing failed:', err);
     alert('Publishing failed. Check console for details.');
   }
 };
 
+window.renderPublishedSignals = function() {
+  const container = document.getElementById('published-signals-container');
+  if (!container) return;
+
+  const log = JSON.parse(localStorage.getItem('signals_log') || '[]');
+  
+  if (log.length === 0) {
+    container.innerHTML = `
+      <div style="text-align: center; padding: 60px 20px; color: var(--text-muted); border: 1px dashed var(--border); border-radius: var(--r-xl);">
+        <p style="font-size: 14px;">No published signals yet</p>
+      </div>`;
+    return;
+  }
+
+  container.innerHTML = log.slice().reverse().map(entry => `
+    <div class="published-card" style="background: var(--panel); border: 1px solid var(--border); border-radius: var(--r-lg); padding: 24px; margin-bottom: 20px; border-left: 3px solid var(--teal);">
+      <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px;">
+        <div>
+          <div style="font-size: 10px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 4px;">
+            Published › ${new Date(entry.timestamp).toLocaleString()}
+          </div>
+          <h3 style="font-family: var(--font-display); font-size: 20px; color: var(--text-primary);">${entry.title}</h3>
+        </div>
+        <div style="display: flex; gap: 8px;">
+          <span style="font-size: 8px; font-weight: 700; color: var(--teal); background: rgba(75,173,168,0.1); padding: 3px 8px; border-radius: 4px; border: 1px solid rgba(75,173,168,0.2);">PUBLISHED</span>
+          <span style="font-size: 8px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; padding: 3px 0;">review_queue</span>
+        </div>
+      </div>
+      <div style="margin-bottom: 16px;">
+        <p style="font-size: 14px; line-height: 1.5; color: var(--text-mid); font-weight: 300;">${entry.synthesis}</p>
+      </div>
+      <div style="background: rgba(75,173,168,0.03); border-radius: 6px; padding: 12px 16px; border: 1px solid rgba(75,173,168,0.1);">
+        <h4 style="font-size: 9px; font-weight: 700; color: var(--teal); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px;">Recommended Action</h4>
+        <p style="font-size: 13px; color: var(--text-primary); font-weight: 400;">${entry.recommendedAction}</p>
+      </div>
+    </div>
+  `).join('');
+};
+
 async function renderReviewQueue() {
   const container = document.querySelector('.review-queue-container');
   if (!container) return;
+
+  // Render published signals section as well
+  renderPublishedSignals();
 
   try {
     const response = await fetch('data/intelligence/staged/manifest.json');
@@ -1201,6 +1261,7 @@ async function renderReviewQueue() {
       return;
     }
 
+    const log = JSON.parse(localStorage.getItem('signals_log') || '[]');
     container.innerHTML = ''; // Clear placeholders
 
     for (const filename of updates) {
@@ -1209,6 +1270,10 @@ async function renderReviewQueue() {
         if (!res.ok) continue;
         const data = await res.json();
         
+        // Check if already published
+        const signalId = data.id || btoa((data.summary?.headline || '') + (data.summary?.synthesis || '') + (data.summary?.recommendedAction || '')).substring(0, 16);
+        const isPublished = log.some(entry => entry.id === signalId);
+
         const card = document.createElement('div');
         card.className = 'review-card';
         card.style.cssText = 'background: var(--panel); border: 1px solid var(--border-strong); border-radius: var(--r-xl); padding: 32px; margin-bottom: 40px;';
@@ -1241,7 +1306,7 @@ async function renderReviewQueue() {
                     ${(data.decisions || []).map(d => `
                       <li style="display: flex; align-items: flex-start; gap: 10px; font-size: 14px; color: var(--text-mid);">
                         <span style="color: var(--teal); font-weight: 700;">→</span>
-                        <span>${d.observation || d.title || 'Decision detail missing'}</span>
+                        <span>${d.observation || d.title || (typeof d === 'string' ? d : 'Decision detail missing')}</span>
                       </li>
                     `).join('') || '<li style="color:var(--text-muted); font-size:12px; font-style:italic;">No specific decisions identified.</li>'}
                   </ul>
@@ -1261,9 +1326,16 @@ async function renderReviewQueue() {
               </div>
               
               <div style="margin-top: 40px; display: flex; flex-direction: column; gap: 12px;">
-                <button class="btn-primary" style="width: 100%;" data-payload='${encodeURIComponent(JSON.stringify(data))}' onclick="publishSignal(this)">Approve & Publish</button>
+                <button class="btn-primary" style="width: 100%; ${isPublished ? 'background:var(--teal); border-color:var(--teal); color:white;' : ''}" 
+                  data-payload='${encodeURIComponent(JSON.stringify(data))}' 
+                  onclick="publishSignal(this)"
+                  ${isPublished ? 'disabled' : ''}>
+                  ${isPublished ? '✔ Published' : 'Approve & Publish'}
+                </button>
                 <button class="btn-ghost" style="width: 100%;" onclick="this.closest('.review-card').style.opacity='0.5'; this.disabled=true;">Dismiss Update</button>
-                <p class="publish-status" style="font-size: 10px; color: var(--text-muted); text-align: center; font-style: italic;">Ready for workspace integration</p>
+                <p class="publish-status" style="font-size: 10px; color: var(--text-muted); text-align: center; font-style: italic;">
+                  ${isPublished ? 'Signal published successfully' : 'Ready for workspace integration'}
+                </p>
               </div>
             </div>
           </div>
