@@ -704,6 +704,7 @@ function sendToWorkspace() {
   if (!latestSynthesis || !lastExtractedData) return;
 
   const payload = {
+    "id": "sig-" + Date.now(),
     "type": "workspace_intelligence_update",
     "client": "Criar Sin Culpas",
     "source": {
@@ -718,40 +719,38 @@ function sendToWorkspace() {
       "recommendedAction": (latestSynthesis.actions && latestSynthesis.actions[0]) ? latestSynthesis.actions[0].action : ""
     },
     "signals": lastExtractedData.strategic || [],
-    "decisions": lastExtractedData.decision || [],
+    "decisions": latestSynthesis.actions || [],
     "workspaceTargets": {
       "signalRoom": true,
       "activityTimeline": true,
       "pendingDecisions": true,
       "artifactDraft": true
     },
-    "status": "staged_for_review"
+    "status": "staged_for_review",
+    "timestamp": new Date().toISOString()
   };
 
-  const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
-  const url = URL.createObjectURL(blob);
-  
-  const now = new Date();
-  const timestamp = now.getFullYear() + 
-    String(now.getMonth() + 1).padStart(2, '0') + 
-    String(now.getDate()).padStart(2, '0') + '-' + 
-    String(now.getHours()).padStart(2, '0') + 
-    String(now.getMinutes()).padStart(2, '0');
-  
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = `workspace-intelligence-update-${timestamp}.json`;
-  a.click();
-  URL.revokeObjectURL(url);
+  // Save to localStorage for the workspace to pick up
+  try {
+    localStorage.setItem('staged_intelligence_package', JSON.stringify(payload));
+  } catch(e) {
+    console.error('Failed to save staged package:', e);
+    alert('Storage limit exceeded. Could not stage package.');
+    return;
+  }
 
   // Show success state
   const statusDiv = document.getElementById('workspace-status');
-  statusDiv.style.display = 'block';
+  if (statusDiv) statusDiv.style.display = 'block';
   
   const btn = document.getElementById('send-to-workspace-btn');
-  btn.innerHTML = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg> Staged for Review';
-  btn.style.borderColor = '#4BADA8';
-  btn.style.color = '#4BADA8';
+  if (btn) {
+    btn.innerHTML = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg> Open Review Queue';
+    btn.onclick = () => window.location.href = '/#review';
+    btn.style.borderColor = '#4BADA8';
+    btn.style.color = '#4BADA8';
+    btn.style.background = 'rgba(75,173,168,0.1)';
+  }
 }
 
 function esc(s){if(!s)return'';return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
