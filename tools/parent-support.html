@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apoyo Rápido · Pantallas</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0A0908;
+            --bg-card: #141312;
+            --coral: #F96F6E;
+            --teal: #4BADA8;
+            --text-primary: #F5F0EB;
+            --text-muted: rgba(245, 240, 235, 0.6);
+            --border: rgba(255, 255, 255, 0.08);
+            --r-lg: 12px;
+            --r-xl: 20px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg);
+            color: var(--text-primary);
+            line-height: 1.6;
+            padding: 24px 20px 100px;
+            max-width: 500px;
+            margin: 0 auto;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            margin-bottom: 32px;
+            text-align: center;
+        }
+
+        .header-eyebrow {
+            font-size: 10px;
+            font-weight: 700;
+            color: var(--teal);
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            margin-bottom: 12px;
+        }
+
+        h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 32px;
+            font-weight: 400;
+            margin-bottom: 8px;
+            color: var(--text-primary);
+        }
+
+        .subtitle {
+            font-size: 14px;
+            color: var(--text-muted);
+            font-weight: 300;
+        }
+
+        .options-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+
+        .option-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--r-lg);
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .option-card:active {
+            transform: scale(0.98);
+            border-color: var(--teal);
+        }
+
+        .option-card.selected {
+            border-color: var(--teal);
+            background: rgba(75, 173, 168, 0.05);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .option-label {
+            font-size: 9px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--teal);
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .option-text {
+            font-size: 17px;
+            font-weight: 400;
+            line-height: 1.4;
+        }
+
+        .reminder-box {
+            background: rgba(249, 111, 110, 0.03);
+            border: 1px dashed rgba(249, 111, 110, 0.2);
+            border-radius: var(--r-lg);
+            padding: 16px;
+            margin-bottom: 32px;
+            text-align: center;
+        }
+
+        .reminder-text {
+            font-size: 13px;
+            color: var(--coral);
+            font-weight: 500;
+            font-style: italic;
+        }
+
+        .collapsible {
+            border-top: 1px solid var(--border);
+            padding-top: 24px;
+        }
+
+        .collapsible-trigger {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            padding-bottom: 12px;
+        }
+
+        .collapsible-content {
+            display: none;
+            padding: 12px 0 24px;
+            font-size: 15px;
+            color: var(--text-muted);
+            font-weight: 300;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .collapsible.open .collapsible-content {
+            display: block;
+        }
+
+        .collapsible.open .chevron {
+            transform: rotate(180deg);
+        }
+
+        .chevron {
+            transition: transform 0.3s ease;
+        }
+
+        footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(10, 9, 8, 0.95);
+            backdrop-filter: blur(10px);
+            border-top: 1px solid var(--border);
+            padding: 20px;
+            text-align: center;
+            z-index: 100;
+        }
+
+        .footer-text {
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--text-muted);
+        }
+
+        .footer-text span {
+            color: var(--teal);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .copy-hint {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            font-size: 8px;
+            color: var(--text-muted);
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+
+        .option-card:hover .copy-hint {
+            opacity: 1;
+        }
+
+        .toast {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%) translateY(-20px);
+            background: var(--teal);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: 1000;
+            pointer-events: none;
+        }
+
+        .toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <div id="toast" class="toast">¡Copiado al portapapeles!</div>
+
+    <header>
+        <div class="header-eyebrow">Apoyo en tiempo real</div>
+        <h1>Pantalla → Parar sin pelea</h1>
+        <p class="subtitle">No tienes que hacerlo perfecto. Solo necesitas un siguiente paso.</p>
+    </header>
+
+    <div class="options-grid">
+        <div class="option-card" onclick="selectOption(this, '5 minutos más y luego tú eliges qué hacemos')">
+            <span class="copy-hint">Tocar para copiar</span>
+            <span class="option-label">Opción 1: Suave</span>
+            <p class="option-text">"5 minutos más y luego tú eliges qué hacemos"</p>
+        </div>
+
+        <div class="option-card" onclick="selectOption(this, 'Sé que quieres seguir. Es difícil parar. Vamos a parar juntos.')">
+            <span class="copy-hint">Tocar para copiar</span>
+            <span class="option-label">Opción 2: Guiado</span>
+            <p class="option-text">"Sé que quieres seguir. Es difícil parar. Vamos a parar juntos."</p>
+        </div>
+
+        <div class="option-card" onclick="selectOption(this, 'Veo que estás molesto. Es hora de parar. Estoy aquí contigo.')">
+            <span class="copy-hint">Tocar para copiar</span>
+            <span class="option-label">Opción 3: Firme + Calma</span>
+            <p class="option-text">"Veo que estás molesto. Es hora de parar. Estoy aquí contigo."</p>
+        </div>
+    </div>
+
+    <div class="reminder-box">
+        <p class="reminder-text">No expliques demasiado. No negocies. Quédate cerca.</p>
+    </div>
+
+    <div class="collapsible" id="after-section">
+        <button class="collapsible-trigger" onclick="toggleCollapsible()">
+            <span>Después (cuando todo se calme)</span>
+            <svg class="chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+        </button>
+        <div class="collapsible-content">
+            <p>"Eso fue difícil, ¿verdad?"</p>
+            <p style="margin-top:12px; font-size:13px; color:var(--text-muted);">Valida la emoción, no la conducta. Una vez regulados, pueden hablar de lo que pasó.</p>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-text">
+            <span>Avisa</span> → <span>Valida</span> → <span>Guía</span> → <span>Sostén</span>
+        </div>
+    </footer>
+
+    <script>
+        function selectOption(el, text) {
+            // Remove previous selection
+            document.querySelectorAll('.option-card').forEach(card => card.classList.remove('selected'));
+            
+            // Add selection
+            el.classList.add('selected');
+
+            // Copy to clipboard
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(text).then(() => {
+                    showToast();
+                });
+            }
+        }
+
+        function toggleCollapsible() {
+            const section = document.getElementById('after-section');
+            section.classList.toggle('open');
+        }
+
+        function showToast() {
+            const toast = document.getElementById('toast');
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 2000);
+        }
+    </script>
+</body>
+</html>
