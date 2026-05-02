@@ -1125,9 +1125,118 @@ document.addEventListener('DOMContentLoaded', function() {
     if (e.target === this) closeSignalsLedger();
   });
 
+  // Initialize and render artifacts
+  initArtifactsLog();
+  renderArtifacts();
+
   // Vault info tooltips
   initVaultTooltips();
 });
+
+/* ── ARTIFACTS LOG SYSTEM ────────────────────────────────── */
+function initArtifactsLog() {
+  const log = JSON.parse(localStorage.getItem('artifacts_log') || '[]');
+  
+  // Seed with initial artifact if empty
+  if (log.length === 0) {
+    const initialArtifact = {
+      id: "artifact-screen-time-protocol-01",
+      title: "Screen Time Transition Protocol",
+      type: "real_time_support",
+      category: "parenting_protocol",
+      language: "bilingual",
+      description: "A 3-step practical guide to ending screen time without power struggles.",
+      content: `
+        <div class="protocol-content">
+          <div class="protocol-step">
+            <span class="step-num">01</span>
+            <div class="step-text">
+              <strong>The Connection Bridge (Minute -5)</strong>: Enter their world first. Sit next to them for 2 minutes. Ask one question about what they are watching. Build the bridge before you try to cross it.
+            </div>
+          </div>
+          <div class="protocol-step">
+            <span class="step-num">02</span>
+            <div class="step-text">
+              <strong>The Choice of Future (Minute -2)</strong>: Instead of saying "Time is up", give them agency. Ask: "When the screen goes off, do you want to play with the blocks or have a snack first?"
+            </div>
+          </div>
+          <div class="protocol-step">
+            <span class="step-num">03</span>
+            <div class="step-text">
+              <strong>The Physical Anchor (Minute 0)</strong>: Use a physical object (a transition toy or a snack) to anchor them into the "real world" as the screen goes dark. Hand it to them exactly as the device is put away.
+            </div>
+          </div>
+          <div class="protocol-note">
+            <em>Goal: Transition from high-dopamine stimulation to low-dopamine reality via human connection.</em>
+          </div>
+        </div>
+      `,
+      source: "manual_artifact_creation",
+      linkedSignal: "protocol-first-architecture",
+      timestamp: new Date().toISOString()
+    };
+    log.push(initialArtifact);
+    localStorage.setItem('artifacts_log', JSON.stringify(log));
+  }
+}
+
+window.renderArtifacts = function() {
+  const container = document.getElementById('artifacts-log-container');
+  if (!container) return;
+
+  const log = JSON.parse(localStorage.getItem('artifacts_log') || '[]');
+  
+  if (log.length === 0) {
+    container.innerHTML = `
+      <div style="text-align: center; padding: 60px 20px; color: var(--text-muted); border: 1px dashed var(--border); border-radius: var(--r-xl);">
+        <p style="font-size: 14px;">No artifacts generated yet</p>
+      </div>`;
+    return;
+  }
+
+  container.innerHTML = log.slice().reverse().map(art => `
+    <div class="artifact-log-card" style="background: var(--panel); border: 1px solid var(--border); border-radius: var(--r-lg); padding: 24px; margin-bottom: 24px; transition: all 0.3s ease;">
+      <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px;">
+        <div>
+          <div style="display: flex; gap: 8px; align-items: center; margin-bottom: 8px;">
+            <span style="font-size: 9px; font-weight: 700; color: var(--teal); background: rgba(75,173,168,0.1); padding: 3px 10px; border-radius: 4px; border: 1px solid rgba(75,173,168,0.2); text-transform: uppercase; letter-spacing: 0.05em;">Real-time support</span>
+            <span style="font-size: 10px; color: var(--text-muted);">${new Date(art.timestamp).toLocaleDateString()}</span>
+          </div>
+          <h3 style="font-family: var(--font-display); font-size: 22px; color: var(--text-primary); margin-bottom: 4px;">${art.title}</h3>
+          <p style="font-size: 14px; color: var(--text-muted); font-weight: 300;">${art.description || ''}</p>
+        </div>
+        <button onclick="this.closest('.artifact-log-card').classList.toggle('expanded')" style="background: none; border: 1px solid var(--border); color: var(--text-muted); width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s ease;">
+          <svg class="chevron-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="transition: transform 0.3s ease;"><polyline points="6 9 12 15 18 9"></polyline></svg>
+        </button>
+      </div>
+      
+      <div class="artifact-details" style="display: none; padding-top: 20px; border-top: 1px solid var(--border); margin-top: 16px; animation: fadeIn 0.3s ease;">
+        <div style="font-size: 15px; line-height: 1.6; color: var(--text-mid);">
+          ${art.content}
+        </div>
+        <div style="margin-top: 24px; display: flex; gap: 12px;">
+          <button class="btn-primary small" onclick="copyText(this, \`${art.title}\\n\\n${art.description}\\n\\n${art.content.replace(/<[^>]*>/g, '')}\`)">Copy Protocol</button>
+          <button class="btn-ghost small">Share as PDF</button>
+        </div>
+      </div>
+    </div>
+  `).join('');
+
+  // Add styles for expansion and protocol
+  if (!document.getElementById('artifact-log-styles')) {
+    const style = document.createElement('style');
+    style.id = 'artifact-log-styles';
+    style.textContent = `
+      .artifact-log-card.expanded .artifact-details { display: block !important; }
+      .artifact-log-card.expanded .chevron-icon { transform: rotate(180deg); }
+      .protocol-step { display: flex; gap: 16px; margin-bottom: 16px; }
+      .step-num { font-family: var(--font-display); font-size: 18px; color: var(--teal); font-weight: 700; opacity: 0.5; }
+      .protocol-note { margin-top: 20px; padding: 12px; background: rgba(255,255,255,0.02); border-radius: 8px; border-left: 2px solid var(--border); font-size: 13px; }
+      @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+    `;
+    document.head.appendChild(style);
+  }
+};
 
 /* ── HASH ROUTING ────────────────────────────────────────── */
 function initHashRoute() {
