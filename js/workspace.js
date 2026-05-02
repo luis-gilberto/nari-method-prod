@@ -1141,6 +1141,46 @@ function initHashRoute() {
 }
 
 /* ── INTELLIGENCE REVIEW QUEUE ────────────────────────────── */
+window.publishSignal = function(btn) {
+  try {
+    const data = JSON.parse(decodeURIComponent(btn.getAttribute('data-payload')));
+    const log = JSON.parse(localStorage.getItem('signals_log') || '[]');
+    
+    const newEntry = {
+      signal: data.summary?.headline || 'Unknown Signal',
+      refinedInsight: data.summary?.synthesis || '',
+      whyItMatters: data.signals?.[0]?.why_it_matters || data.summary?.prioritySignal || '',
+      recommendedAction: data.summary?.recommendedAction || '',
+      output: data.output || 'Artifact Draft',
+      timestamp: new Date().toISOString()
+    };
+    
+    log.push(newEntry);
+    localStorage.setItem('signals_log', JSON.stringify(log));
+    
+    // UI Feedback
+    btn.innerHTML = '✔ Published';
+    btn.disabled = true;
+    btn.style.background = 'var(--teal)';
+    btn.style.color = 'white';
+    btn.style.borderColor = 'var(--teal)';
+    
+    const card = btn.closest('.review-card');
+    const statusText = card.querySelector('.publish-status');
+    if (statusText) {
+      statusText.innerHTML = 'Signal published successfully';
+      statusText.style.color = 'var(--teal)';
+      statusText.style.fontWeight = '600';
+      statusText.style.opacity = '1';
+    }
+
+    console.log('Signal published to localStorage:', newEntry);
+  } catch (err) {
+    console.error('Publishing failed:', err);
+    alert('Publishing failed. Check console for details.');
+  }
+};
+
 async function renderReviewQueue() {
   const container = document.querySelector('.review-queue-container');
   if (!container) return;
@@ -1221,9 +1261,9 @@ async function renderReviewQueue() {
               </div>
               
               <div style="margin-top: 40px; display: flex; flex-direction: column; gap: 12px;">
-                <button class="btn-primary" style="width: 100%;" onclick="alert('Manual integration required in workspace.js (v1.0)')">Approve & Publish</button>
+                <button class="btn-primary" style="width: 100%;" data-payload='${encodeURIComponent(JSON.stringify(data))}' onclick="publishSignal(this)">Approve & Publish</button>
                 <button class="btn-ghost" style="width: 100%;" onclick="this.closest('.review-card').style.opacity='0.5'; this.disabled=true;">Dismiss Update</button>
-                <p style="font-size: 10px; color: var(--text-muted); text-align: center; font-style: italic;">Requires manual data integration in workspace.js (v1.0)</p>
+                <p class="publish-status" style="font-size: 10px; color: var(--text-muted); text-align: center; font-style: italic;">Ready for workspace integration</p>
               </div>
             </div>
           </div>
