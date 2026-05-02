@@ -1370,9 +1370,182 @@
               </p>
             </div>
           </section>
+
+          <!-- 22. Próximos pasos -->
+          <section class="slide" data-notes="Acciones inmediatas para el equipo.">
+            <div class="slide-content left">
+              <span class="eyebrow">Criar Sin Culpas · Abril 2026</span>
+              <h2>Próximos pasos estratégicos</h2>
+              <p class="subtitle">Lo que sigue en nuestro cronograma</p>
+              
+              <div class="grid-2" style="margin-top: 3rem">
+                <div class="stacked-block">
+                  <h4 style="color: var(--teal)">01 · Validación de Metodología</h4>
+                  <p>Revisión final de los 4 pilares y su aplicación en casos reales.</p>
+                </div>
+                <div class="stacked-block">
+                  <h4 style="color: var(--teal)">02 · Desarrollo de Contenidos</h4>
+                  <p>Creación de guías prácticas para los momentos de mayor fricción.</p>
+                </div>
+                <div class="stacked-block">
+                  <h4 style="color: var(--coral)">03 · Preparación para Córdoba</h4>
+                  <p>Diseño de la narrativa principal y materiales de apoyo para el evento.</p>
+                </div>
+                <div class="stacked-block">
+                  <h4 style="color: var(--coral)">04 · Lanzamiento del Workspace</h4>
+                  <p>Apertura formal del entorno privado para el equipo estratégico.</p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- 23. Cierre -->
+          <section class="slide" data-notes="Cierre inspirador. Reforzar el valor de la claridad.">
+            <div class="slide-content">
+              <h1 class="serif" style="font-size: 5rem; margin-bottom: 2rem">Claridad es<br><span class="accent-teal">libertad</span></h1>
+              <p class="subtitle" style="font-size: 1.5rem">Gracias por confiar en el proceso.</p>
+              
+              <div style="margin-top: 4rem">
+                <span class="eyebrow" style="color: var(--muted)">Nari Fateha · Criar Sin Culpas</span>
+                <p style="margin-top: 1rem; color: var(--muted); font-size: 0.9rem">
+                  Ecosistema de Estrategia [SiQ] · StrategyIQ<br>
+                  Abril 2026
+                </p>
+              </div>
+            </div>
+          </section>
         </div>
       </div>
     </div>
-  <script defer src="https://static.cloudflareinsights.com/beacon.min.js/v8c78df7c7c0f484497ecbca7046644da1771523124516" integrity="sha512-8DS7rgIrAmghBFwoOTujcf6D9rXvH8xm8JQ1Ja01h9QX8EzXldiszufYa4IFfKdLUKTTrnSFXLDkUEOTrZQ8Qg==" data-cf-beacon='{"version":"2024.11.0","token":"4edd5f8ec12a48cfa682ab8261b80a79","server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+
+    <script>
+      // Break out of iframe if loaded inside one 
+      try { 
+        if (window.top !== window.self) { 
+          window.top.location = window.self.location; 
+        } 
+      } catch (error) { 
+        window.location = window.self.location; 
+      } 
+ 
+      document.addEventListener('DOMContentLoaded', () => { 
+        const slides = Array.from(document.querySelectorAll('.slide')); 
+        const track = document.getElementById('track'); 
+        const startScreen = document.getElementById('start-screen'); 
+        const startBtn = document.getElementById('start-btn'); 
+        const prevBtn = document.getElementById('prev-btn'); 
+        const nextBtn = document.getElementById('next-btn'); 
+        const currentNum = document.getElementById('current-num'); 
+        const totalNum = document.getElementById('total-num'); 
+        const progressBar = document.getElementById('progress'); 
+        const notesToggle = document.getElementById('toggle-notes'); 
+        const notesPanel = document.getElementById('notes-panel'); 
+        const notesText = document.getElementById('notes-text'); 
+ 
+        if (!slides.length || !track) return; 
+ 
+        let currentIndex = 0; 
+        const total = slides.length; 
+ 
+        if (totalNum) totalNum.textContent = total; 
+        track.style.width = `${total * 100}vw`; 
+ 
+        function updateUI() { 
+          slides.forEach((slide, index) => { 
+            slide.classList.toggle('active', index === currentIndex); 
+          }); 
+ 
+          track.style.transform = `translateX(-${currentIndex * 100}vw)`; 
+ 
+          if (currentNum) currentNum.textContent = currentIndex + 1; 
+          if (progressBar) { 
+            progressBar.style.width = `${((currentIndex + 1) / total) * 100}%`; 
+          } 
+ 
+          if (notesText) { 
+            const currentNotes = 
+              slides[currentIndex].getAttribute('data-notes') || 'Sin notas adicionales.'; 
+            notesText.textContent = currentNotes; 
+          } 
+ 
+          if (prevBtn) prevBtn.style.visibility = currentIndex === 0 ? 'hidden' : 'visible'; 
+          if (nextBtn) nextBtn.style.visibility = currentIndex === total - 1 ? 'hidden' : 'visible'; 
+        } 
+ 
+        function goToSlide(index) { 
+          if (index < 0 || index >= total) return; 
+          currentIndex = index; 
+          updateUI(); 
+        } 
+ 
+        if (startBtn && startScreen) { 
+          startBtn.addEventListener('click', () => { 
+            startScreen.style.opacity = '0'; 
+            setTimeout(() => { 
+              startScreen.style.display = 'none'; 
+            }, 400); 
+            updateUI(); 
+          }); 
+        } 
+ 
+        if (prevBtn) { 
+          prevBtn.addEventListener('click', () => goToSlide(currentIndex - 1)); 
+        } 
+ 
+        if (nextBtn) { 
+          nextBtn.addEventListener('click', () => goToSlide(currentIndex + 1)); 
+        } 
+ 
+        if (notesToggle && notesPanel) { 
+          notesToggle.addEventListener('click', () => { 
+            notesPanel.classList.toggle('visible'); 
+          }); 
+        } 
+ 
+        document.addEventListener('keydown', (e) => { 
+          if (startScreen && startScreen.style.display !== 'none') return; 
+ 
+          if (e.key === 'ArrowRight') { 
+            e.preventDefault(); 
+            goToSlide(currentIndex + 1); 
+          } else if (e.key === 'ArrowLeft') { 
+            e.preventDefault(); 
+            goToSlide(currentIndex - 1); 
+          } else if (e.key === ' ' || e.code === 'Space' || e.key === 'Spacebar') { 
+            e.preventDefault(); 
+            goToSlide(currentIndex + 1); 
+          } 
+        }); 
+ 
+        let touchStartX = 0; 
+        let touchEndX = 0; 
+ 
+        document.addEventListener( 
+          'touchstart', 
+          (e) => { 
+            touchStartX = e.changedTouches[0].screenX; 
+          }, 
+          { passive: true } 
+        ); 
+ 
+        document.addEventListener( 
+          'touchend', 
+          (e) => { 
+            if (startScreen && startScreen.style.display !== 'none') return; 
+            touchEndX = e.changedTouches[0].screenX; 
+            const threshold = 50; 
+ 
+            if (touchEndX < touchStartX - threshold) { 
+              goToSlide(currentIndex + 1); 
+            } else if (touchEndX > touchStartX + threshold) { 
+              goToSlide(currentIndex - 1); 
+            } 
+          }, 
+          { passive: true } 
+        ); 
+ 
+        updateUI(); 
+      }); 
+    </script>
 </body>
 </html>
