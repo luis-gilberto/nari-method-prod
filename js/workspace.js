@@ -581,6 +581,26 @@ function copyText(btn, text) {
   }
 }
 
+/* ── PROTOCOL LIBRARY ACTIONS ────────────────────────────── */
+window.copyProtocolLink = function(path, btn) {
+  const fullUrl = window.location.origin + path;
+  if (navigator.clipboard) {
+    navigator.clipboard.writeText(fullUrl).then(() => {
+      const orig = btn.textContent;
+      btn.textContent = '✓ Link copiado';
+      btn.style.color = 'var(--teal)';
+      setTimeout(() => { btn.textContent = orig; btn.style.color = ''; }, 2000);
+    });
+  }
+};
+
+window.shareProtocolWA = function(title, path) {
+  const fullUrl = window.location.origin + path;
+  const message = `Esto me ayudó en un momento difícil con mi hijo. Te lo comparto: ${title} → ${fullUrl}`;
+  const waUrl = `https://wa.me/?text=${encodeURIComponent(message)}`;
+  window.open(waUrl, '_blank');
+};
+
 /* ══════════════════════════════════════════════════════════
    SHARE MODAL SYSTEM
 ══════════════════════════════════════════════════════════ */
