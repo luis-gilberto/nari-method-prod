@@ -16,7 +16,7 @@ const protocolsData = [
     id: 'P01',
     title: { en: 'Screens: how to stop without a fight', es: 'Pantallas: cómo parar sin pelea' },
     desc: { en: 'Practical guide for high-friction moments in real time.', es: 'Guía práctica para momentos de alta fricción en tiempo real.' },
-    path: '/tools/parent-support.html',
+    path: '/tools/parent-support/screen-time.html',
     status: { en: 'Published', es: 'Publicado' },
     source: { en: 'Derived from signals', es: 'Derivado de señales' }
   },
@@ -25,6 +25,22 @@ const protocolsData = [
     title: { en: 'Emotions: how to accompany without escalating', es: 'Emociones: cómo acompañar sin escalar' },
     desc: { en: 'Practical guide for high-friction moments in real time.', es: 'Guía práctica para momentos de alta fricción en tiempo real.' },
     path: '/tools/parent-support/emotional-escalation.html',
+    status: { en: 'Published', es: 'Publicado' },
+    source: { en: 'Derived from signals', es: 'Derivado de señales' }
+  },
+  {
+    id: 'P03',
+    title: { en: 'Bedtime: how to end the day without a fight', es: 'Dormir: cómo cerrar el día sin pelea' },
+    desc: { en: 'Practical guide for high-friction moments in real time.', es: 'Guía práctica para momentos de alta fricción en tiempo real.' },
+    path: '/tools/parent-support/bedtime-resistance.html',
+    status: { en: 'Published', es: 'Publicado' },
+    source: { en: 'Derived from signals', es: 'Derivado de señales' }
+  },
+  {
+    id: 'P04',
+    title: { en: 'Siblings: how to step in without taking sides', es: 'Hermanos: cómo intervenir sin tomar partido' },
+    desc: { en: 'Practical guide for high-friction moments in real time.', es: 'Guía práctica para momentos de alta fricción en tiempo real.' },
+    path: '/tools/parent-support/sibling-conflict.html',
     status: { en: 'Published', es: 'Publicado' },
     source: { en: 'Derived from signals', es: 'Derivado de señales' }
   }

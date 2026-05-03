@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title data-i18n="doc_title" data-es="Emociones: cómo acompañar sin escalar" data-en="Emotions: how to support without escalating">Emociones: cómo acompañar sin escalar</title>
+    <title data-i18n="doc_title" data-es="Pantallas: cómo parar sin pelea" data-en="Screens: how to stop without a fight">Pantallas: cómo parar sin pelea</title>
     <style>
       :root {
         /* Color Palette */
@@ -48,15 +48,7 @@
       }
 
       body {
-        font-family:
-          system-ui,
-          -apple-system,
-          BlinkMacSystemFont,
-          'Segoe UI',
-          Roboto,
-          Helvetica,
-          Arial,
-          sans-serif;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
         background-color: var(--bg-color);
         background-image:
           radial-gradient(circle at 10% 0%, var(--bg-glow-top), transparent 50%),
@@ -65,7 +57,6 @@
         color: var(--text-main);
         line-height: 1.5;
         min-height: 100vh;
-        /* Account for fixed footer */
         padding-bottom: calc(100px + env(safe-area-inset-bottom));
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
@@ -84,7 +75,6 @@
         gap: var(--spacing-xl);
       }
 
-      /* Language Toggle */
       .lang-switcher {
         position: absolute;
         top: 24px;
@@ -114,12 +104,11 @@
         border-color: var(--accent-teal);
       }
 
-      /* Header */
       header {
         display: flex;
         flex-direction: column;
         gap: var(--spacing-sm);
-        padding-right: 80px; /* Space for lang switcher */
+        padding-right: 80px;
       }
 
       .brand-label {
@@ -163,7 +152,6 @@
         margin-bottom: calc(-1 * var(--spacing-md));
       }
 
-      /* Action Cards */
       .cards-section {
         display: grid;
         grid-template-columns: 1fr;
@@ -192,12 +180,6 @@
         flex-direction: column;
         gap: var(--spacing-md);
         box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.02);
-      }
-
-      .action-card:focus-visible {
-        outline: none;
-        border-color: var(--accent-teal);
-        box-shadow: 0 0 0 3px rgba(78, 168, 154, 0.25);
       }
 
       .card-title {
@@ -235,7 +217,6 @@
         opacity: 0.4;
       }
 
-      /* Selected State */
       .action-card[aria-pressed='true'] {
         background-color: var(--surface-hover);
         border-color: var(--border-strong);
@@ -248,16 +229,6 @@
         font-weight: 600;
       }
 
-      .action-card[aria-pressed='true'] .card-helper {
-        color: var(--text-muted);
-      }
-
-      .action-card[aria-pressed='true'] .card-helper::before {
-        background-color: var(--accent-teal);
-        opacity: 1;
-      }
-
-      /* Collapsible Section */
       .collapsible-wrapper {
         border-top: 1px solid var(--border-soft);
         padding-top: var(--spacing-sm);
@@ -277,13 +248,6 @@
         align-items: center;
         cursor: pointer;
         text-align: left;
-      }
-
-      .collapsible-trigger:focus-visible {
-        outline: none;
-        color: var(--accent-teal);
-        border-radius: 8px;
-        box-shadow: 0 0 0 2px rgba(78, 168, 154, 0.25);
       }
 
       .collapsible-icon {
@@ -337,7 +301,20 @@
         font-weight: 500;
       }
 
-      /* Sticky Footer */
+      .sc-btn {
+        display: inline-block;
+        background: var(--accent-teal);
+        color: white;
+        padding: 8px 16px;
+        border-radius: 20px;
+        font-size: 0.85rem;
+        font-weight: 600;
+        text-align: center;
+        border: none;
+        cursor: pointer;
+        transition: opacity 0.2s;
+      }
+
       .sticky-footer {
         position: fixed;
         bottom: 0;
@@ -359,17 +336,12 @@
         letter-spacing: 0.03em;
       }
 
-      .footer-text span {
-        color: var(--text-main);
-      }
-
       .footer-arrow {
         opacity: 0.4;
         margin: 0 6px;
         font-weight: 400;
       }
 
-      /* Toast */
       .toast {
         position: fixed;
         top: 24px;
@@ -405,30 +377,30 @@
     <main class="app-shell">
       <header>
         <div class="brand-label" data-i18n="eyebrow" data-es="Apoyo en tiempo real" data-en="Real-time support">Apoyo en tiempo real</div>
-        <h1 data-i18n="title" data-es="Emociones: cómo acompañar sin escalar" data-en="Emotions: how to support without escalating">Emociones: cómo acompañar sin escalar</h1>
-        <p class="subtitle" data-i18n="subtitle" data-es="No tienes que apagar la emoción. Solo necesitas acompañarla." data-en="You don’t have to stop the emotion. You just need to support it.">No tienes que apagar la emoción. Solo necesitas acompañarla.</p>
-        <p class="reminder" data-i18n="reminder" data-es="No expliques demasiado. No corrijas en el momento. Quédate cerca." data-en="Don’t over-explain. Don’t correct in the moment. Stay close.">No expliques demasiado. No corrijas en el momento. Quédate cerca.</p>
+        <h1 data-i18n="title" data-es="Pantallas: cómo parar sin pelea" data-en="Screens: how to stop without a fight">Pantallas: cómo parar sin pelea</h1>
+        <p class="subtitle" data-i18n="subtitle" data-es="No tienes que hacerlo perfecto. Solo necesitas un siguiente paso." data-en="You don’t have to do it perfectly. You just need a next step.">No tienes que hacerlo perfecto. Solo necesitas un siguiente paso.</p>
+        <p class="reminder" data-i18n="reminder" data-es="No expliques demasiado. No negocies. Quédate cerca." data-en="Don’t over-explain. Don’t negotiate. Stay close.">No expliques demasiado. No negocies. Quédate cerca.</p>
       </header>
 
       <div class="cards-intro" data-i18n="cards_intro" data-es="Elige según el momento" data-en="Choose based on the moment">Elige según el momento</div>
 
       <section class="cards-section" aria-label="Opciones de respuesta" data-i18n-aria="cards_section_aria" data-es="Opciones de respuesta" data-en="Response options">
         <button class="action-card" aria-pressed="false">
-          <span class="card-title" data-i18n="card1_title" data-es="Contener" data-en="Contain">Contener</span>
-          <span class="card-phrase" data-i18n="card1_phrase" data-es="“Estoy aquí. Puedes sentirte así.”" data-en="“I’m here. You’re allowed to feel this.”">“Estoy aquí. Puedes sentirte así.”</span>
-          <span class="card-helper" data-i18n="card1_helper" data-es="Empieza la intensidad." data-en="The intensity is starting.">Empieza la intensidad.</span>
+          <span class="card-title" data-i18n="card1_title" data-es="Suave" data-en="Gentle">Suave</span>
+          <span class="card-phrase" data-i18n="card1_phrase" data-es="5 minutos más y luego tú eliges qué hacemos." data-en="Five more minutes, and then you choose what we do next.">5 minutos más y luego tú eliges qué hacemos.</span>
+          <span class="card-helper" data-i18n="card1_helper" data-es="Todo está tranquilo." data-en="Everything is calm.">Todo está tranquilo.</span>
         </button>
 
         <button class="action-card" aria-pressed="false">
-          <span class="card-title" data-i18n="card2_title" data-es="Regular juntos" data-en="Regulate together">Regular juntos</span>
-          <span class="card-phrase" data-i18n="card2_phrase" data-es="“Respira conmigo… uno, dos…”" data-en="“Breathe with me… one, two…”">“Respira conmigo… uno, dos…”</span>
-          <span class="card-helper" data-i18n="card2_helper" data-es="La emoción está subiendo." data-en="The emotion is rising.">La emoción está subiendo.</span>
+          <span class="card-title" data-i18n="card2_title" data-es="Guiado" data-en="Guided">Guiado</span>
+          <span class="card-phrase" data-i18n="card2_phrase" data-es="Sé que quieres seguir. Es difícil parar. Vamos a parar juntos." data-en="I know you want to keep going. It is hard to stop. Let’s stop together.">Sé que quieres seguir. Es difícil parar. Vamos a parar juntos.</span>
+          <span class="card-helper" data-i18n="card2_helper" data-es="Empieza la resistencia." data-en="Resistance is starting.">Empieza la resistencia.</span>
         </button>
 
         <button class="action-card" aria-pressed="false">
-          <span class="card-title" data-i18n="card3_title" data-es="Sostener + proteger" data-en="Hold + protect">Sostener + proteger</span>
-          <span class="card-phrase" data-i18n="card3_phrase" data-es="“No te voy a dejar hacer daño. Estoy contigo.”" data-en="“I won’t let you hurt anyone. I’m here with you.”">“No te voy a dejar hacer daño. Estoy contigo.”</span>
-          <span class="card-helper" data-i18n="card3_helper" data-es="Hay llanto fuerte o descontrol." data-en="There is strong crying or loss of control.">Hay llanto fuerte o descontrol.</span>
+          <span class="card-title" data-i18n="card3_title" data-es="Firme + Calma" data-en="Firm + Calm">Firme + Calma</span>
+          <span class="card-phrase" data-i18n="card3_phrase" data-es="Veo que estás molesto. Es hora de parar. Estoy aquí contigo." data-en="I see you are upset. It is time to stop. I am here with you.">Veo que estás molesto. Es hora de parar. Estoy aquí contigo.</span>
+          <span class="card-helper" data-i18n="card3_helper" data-es="Ya hay llanto o enojo." data-en="There is already crying or anger.">Ya hay llanto o enojo.</span>
         </button>
       </section>
 
@@ -442,9 +414,9 @@
         <div id="after-content" class="collapsible-content">
           <div class="collapsible-inner">
             <div class="collapsible-box">
-               <p data-i18n="after_primary" data-es="Eso fue muy intenso, ¿verdad?" data-en="That was really intense, wasn’t it?">Eso fue muy intenso, ¿verdad?</p>
-               <p style="color: var(--text-muted); font-size: 0.95rem;" data-i18n="after_helper" data-es="Primero conecta. Luego, cuando todo esté en calma, pueden hablar de lo que pasó." data-en="Connect first. Then, when everything is calm, you can talk about what happened.">Primero conecta. Luego, cuando todo esté en calma, pueden hablar de lo que pasó.</p>
-               <div class="safety-note" data-i18n="safety_note" data-es="Si hay riesgo físico, prioriza seguridad y pausa." data-en="If there is physical risk, prioritize safety and pause.">Si hay riesgo físico, prioriza seguridad y pausa.</div>
+               <p data-i18n="after_primary" data-es="Eso fue difícil, ¿verdad?" data-en="That was hard, wasn’t it?">Eso fue difícil, ¿verdad?</p>
+               <p style="color: var(--text-muted); font-size: 0.95rem;" data-i18n="after_helper" data-es="Valida la emoción. Luego, cuando todo esté en calma, pueden hablar de lo que pasó." data-en="Validate the feeling. Then, when everything is calm, you can talk about what happened.">Valida la emoción. Luego, cuando todo esté en calma, pueden hablar de lo que pasó.</p>
+               <div class="safety-note" data-i18n="safety_note" data-es="Si hay riesgo físico o el niño está fuera de control, primero busca seguridad y pausa." data-en="If there is physical risk or your child is out of control, focus on safety first and pause.">Si hay riesgo físico o el niño está fuera de control, primero busca seguridad y pausa.</div>
             </div>
           </div>
         </div>
@@ -472,19 +444,15 @@
 
     <footer class="sticky-footer">
       <div class="footer-text">
-        <span data-i18n="footer_s1" data-es="Presencia" data-en="Presence">Presencia</span><span class="footer-arrow">→</span><span data-i18n="footer_s2" data-es="Validación" data-en="Validate">Validación</span><span class="footer-arrow">→</span><span data-i18n="footer_s3" data-es="Regulación" data-en="Regulate">Regulación</span><span class="footer-arrow">→</span><span data-i18n="footer_s4" data-es="Protección" data-en="Protect">Protección</span>
+        <span data-i18n="footer_s1" data-es="Avisa" data-en="Prepare">Avisa</span><span class="footer-arrow">→</span><span data-i18n="footer_s2" data-es="Valida" data-en="Validate">Valida</span><span class="footer-arrow">→</span><span data-i18n="footer_s3" data-es="Guía" data-en="Guide">Guía</span><span class="footer-arrow">→</span><span data-i18n="footer_s4" data-es="Sostén" data-en="Stay close">Sostén</span>
       </div>
     </footer>
 
     <script>
       (function() {
-        /**
-         * Robust initialization pattern for Trae/Live environments
-         */
         function initTool() {
-          // Idempotency guard
-          if (window.__pantallasToolInitialized) return;
-          window.__pantallasToolInitialized = true;
+          if (window.__toolInitialized) return;
+          window.__toolInitialized = true;
 
           const state = {
             lang: localStorage.getItem('lg_parent_lang') || 'es'
@@ -494,38 +462,24 @@
             langBtns: document.querySelectorAll('.lang-btn'),
             cards: document.querySelectorAll('.action-card'),
             collapsibleTrigger: document.getElementById('collapsible-trigger'),
+            shareTrigger: document.getElementById('share-trigger'),
             toast: document.getElementById('toast'),
             i18n: document.querySelectorAll('[data-i18n]'),
-            i18nAria: document.querySelectorAll('[data-i18n-aria]'),
             docTitle: document.querySelector('title[data-i18n="doc_title"]')
           };
 
-          // 1. Language Logic
           function updateLanguage(lang) {
             state.lang = lang;
             document.documentElement.lang = lang;
             localStorage.setItem('lg_parent_lang', lang);
-
-            // Update text content
             elements.i18n.forEach(el => {
               if (el.hasAttribute(`data-${lang}`)) {
                 el.textContent = el.getAttribute(`data-${lang}`);
               }
             });
-
-            // Update aria labels
-            elements.i18nAria.forEach(el => {
-              if (el.hasAttribute(`data-${lang}`)) {
-                el.setAttribute('aria-label', el.getAttribute(`data-${lang}`));
-              }
-            });
-
-            // Update document title
             if (elements.docTitle && elements.docTitle.hasAttribute(`data-${lang}`)) {
               document.title = elements.docTitle.getAttribute(`data-${lang}`);
             }
-
-            // Update toggle buttons
             elements.langBtns.forEach(btn => {
               const isActive = btn.getAttribute('data-lang') === lang;
               btn.setAttribute('aria-pressed', isActive);
@@ -533,20 +487,15 @@
           }
 
           elements.langBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-              updateLanguage(btn.getAttribute('data-lang'));
-            });
+            btn.addEventListener('click', () => updateLanguage(btn.getAttribute('data-lang')));
           });
 
-          // 2. Action Cards Logic
           function showToast() {
             if (!elements.toast) return;
             const msg = state.lang === 'es' ? 'Frase copiada. Respira. Úsala con calma.' : 'Phrase copied. Breathe. Use it calmly.';
             elements.toast.textContent = msg;
             elements.toast.classList.add('visible');
-            setTimeout(() => {
-              elements.toast.classList.remove('visible');
-            }, 2000);
+            setTimeout(() => elements.toast.classList.remove('visible'), 2000);
           }
 
           async function copyToClipboard(text) {
@@ -562,13 +511,8 @@
               textArea.style.position = 'fixed';
               textArea.style.left = '-9999px';
               document.body.appendChild(textArea);
-              textArea.focus();
-              textArea.select();
-              try {
-                document.execCommand('copy');
-              } catch (copyErr) {
-                console.warn('Fallback copy failed', copyErr);
-              }
+              textArea.focus(); textArea.select();
+              try { document.execCommand('copy'); } catch (copyErr) {}
               document.body.removeChild(textArea);
             }
             showToast();
@@ -577,21 +521,15 @@
           elements.cards.forEach(card => {
             card.addEventListener('click', () => {
               const isPressed = card.getAttribute('aria-pressed') === 'true';
-              
-              // Reset others
               elements.cards.forEach(c => c.setAttribute('aria-pressed', 'false'));
-              
               if (!isPressed) {
                 card.setAttribute('aria-pressed', 'true');
                 const phrase = card.querySelector('.card-phrase');
-                if (phrase) {
-                  copyToClipboard(phrase.textContent);
-                }
+                if (phrase) copyToClipboard(phrase.textContent);
               }
             });
           });
 
-          // 3. Collapsible Logic
           if (elements.collapsibleTrigger) {
             elements.collapsibleTrigger.addEventListener('click', () => {
               const expanded = elements.collapsibleTrigger.getAttribute('aria-expanded') === 'true';
@@ -625,11 +563,9 @@
             window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, '_blank');
           });
 
-          // 4. Initial Run
           updateLanguage(state.lang);
         }
 
-        // Production-safe execution
         if (document.readyState === 'loading') {
           document.addEventListener('DOMContentLoaded', initTool);
         } else {

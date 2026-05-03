@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title data-i18n="doc_title" data-es="Pantallas: cómo parar sin pelea" data-en="Screens: how to stop without a fight">Pantallas: cómo parar sin pelea</title>
+    <title data-i18n="doc_title" data-es="Hermanos: cómo intervenir sin tomar partido" data-en="Siblings: how to step in without taking sides">Hermanos: cómo intervenir sin tomar partido</title>
     <style>
       :root {
         /* Color Palette */
@@ -48,15 +48,7 @@
       }
 
       body {
-        font-family:
-          system-ui,
-          -apple-system,
-          BlinkMacSystemFont,
-          'Segoe UI',
-          Roboto,
-          Helvetica,
-          Arial,
-          sans-serif;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
         background-color: var(--bg-color);
         background-image:
           radial-gradient(circle at 10% 0%, var(--bg-glow-top), transparent 50%),
@@ -65,7 +57,6 @@
         color: var(--text-main);
         line-height: 1.5;
         min-height: 100vh;
-        /* Account for fixed footer */
         padding-bottom: calc(100px + env(safe-area-inset-bottom));
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
@@ -84,7 +75,6 @@
         gap: var(--spacing-xl);
       }
 
-      /* Language Toggle */
       .lang-switcher {
         position: absolute;
         top: 24px;
@@ -114,12 +104,11 @@
         border-color: var(--accent-teal);
       }
 
-      /* Header */
       header {
         display: flex;
         flex-direction: column;
         gap: var(--spacing-sm);
-        padding-right: 80px; /* Space for lang switcher */
+        padding-right: 80px;
       }
 
       .brand-label {
@@ -163,7 +152,6 @@
         margin-bottom: calc(-1 * var(--spacing-md));
       }
 
-      /* Action Cards */
       .cards-section {
         display: grid;
         grid-template-columns: 1fr;
@@ -192,12 +180,6 @@
         flex-direction: column;
         gap: var(--spacing-md);
         box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.02);
-      }
-
-      .action-card:focus-visible {
-        outline: none;
-        border-color: var(--accent-teal);
-        box-shadow: 0 0 0 3px rgba(78, 168, 154, 0.25);
       }
 
       .card-title {
@@ -235,7 +217,6 @@
         opacity: 0.4;
       }
 
-      /* Selected State */
       .action-card[aria-pressed='true'] {
         background-color: var(--surface-hover);
         border-color: var(--border-strong);
@@ -248,16 +229,6 @@
         font-weight: 600;
       }
 
-      .action-card[aria-pressed='true'] .card-helper {
-        color: var(--text-muted);
-      }
-
-      .action-card[aria-pressed='true'] .card-helper::before {
-        background-color: var(--accent-teal);
-        opacity: 1;
-      }
-
-      /* Collapsible Section */
       .collapsible-wrapper {
         border-top: 1px solid var(--border-soft);
         padding-top: var(--spacing-sm);
@@ -277,13 +248,6 @@
         align-items: center;
         cursor: pointer;
         text-align: left;
-      }
-
-      .collapsible-trigger:focus-visible {
-        outline: none;
-        color: var(--accent-teal);
-        border-radius: 8px;
-        box-shadow: 0 0 0 2px rgba(78, 168, 154, 0.25);
       }
 
       .collapsible-icon {
@@ -337,7 +301,20 @@
         font-weight: 500;
       }
 
-      /* Sticky Footer */
+      .sc-btn {
+        display: inline-block;
+        background: var(--accent-teal);
+        color: white;
+        padding: 8px 16px;
+        border-radius: 20px;
+        font-size: 0.85rem;
+        font-weight: 600;
+        text-align: center;
+        border: none;
+        cursor: pointer;
+        transition: opacity 0.2s;
+      }
+
       .sticky-footer {
         position: fixed;
         bottom: 0;
@@ -359,17 +336,12 @@
         letter-spacing: 0.03em;
       }
 
-      .footer-text span {
-        color: var(--text-main);
-      }
-
       .footer-arrow {
         opacity: 0.4;
         margin: 0 6px;
         font-weight: 400;
       }
 
-      /* Toast */
       .toast {
         position: fixed;
         top: 24px;
@@ -405,30 +377,30 @@
     <main class="app-shell">
       <header>
         <div class="brand-label" data-i18n="eyebrow" data-es="Apoyo en tiempo real" data-en="Real-time support">Apoyo en tiempo real</div>
-        <h1 data-i18n="title" data-es="Pantallas: cómo parar sin pelea" data-en="Screens: how to stop without a fight">Pantallas: cómo parar sin pelea</h1>
-        <p class="subtitle" data-i18n="subtitle" data-es="No tienes que hacerlo perfecto. Solo necesitas un siguiente paso." data-en="You don’t have to do it perfectly. You just need a next step.">No tienes que hacerlo perfecto. Solo necesitas un siguiente paso.</p>
-        <p class="reminder" data-i18n="reminder" data-es="No expliques demasiado. No negocies. Quédate cerca." data-en="Don’t over-explain. Don’t negotiate. Stay close.">No expliques demasiado. No negocies. Quédate cerca.</p>
+        <h1 data-i18n="title" data-es="Hermanos: cómo intervenir sin tomar partido" data-en="Siblings: how to step in without taking sides">Hermanos: cómo intervenir sin tomar partido</h1>
+        <p class="subtitle" data-i18n="subtitle" data-es="No tienes que resolverlo todo en el momento. Primero baja la intensidad y protege la relación." data-en="You don’t have to solve everything in the moment. First lower the intensity and protect the relationship.">No tienes que resolverlo todo en el momento. Primero baja la intensidad y protege la relación.</p>
+        <p class="reminder" data-i18n="reminder" data-es="No investigues culpables en plena tensión. Separa, regula y luego conversa." data-en="Don’t investigate blame in the middle of tension. Separate, regulate, then talk.">No investigues culpables en plena tensión. Separa, regula y luego conversa.</p>
       </header>
 
       <div class="cards-intro" data-i18n="cards_intro" data-es="Elige según el momento" data-en="Choose based on the moment">Elige según el momento</div>
 
       <section class="cards-section" aria-label="Opciones de respuesta" data-i18n-aria="cards_section_aria" data-es="Opciones de respuesta" data-en="Response options">
         <button class="action-card" aria-pressed="false">
-          <span class="card-title" data-i18n="card1_title" data-es="Suave" data-en="Gentle">Suave</span>
-          <span class="card-phrase" data-i18n="card1_phrase" data-es="5 minutos más y luego tú eliges qué hacemos." data-en="Five more minutes, and then you choose what we do next.">5 minutos más y luego tú eliges qué hacemos.</span>
-          <span class="card-helper" data-i18n="card1_helper" data-es="Todo está tranquilo." data-en="Everything is calm.">Todo está tranquilo.</span>
+          <span class="card-title" data-i18n="card1_title" data-es="Separar" data-en="Separate">Separar</span>
+          <span class="card-phrase" data-i18n="card1_phrase" data-es="“Voy a separarlos para que todos estén seguros.”" data-en="“I’m going to separate you so everyone stays safe.”">“Voy a separarlos para que todos estén seguros.”</span>
+          <span class="card-helper" data-i18n="card1_helper" data-es="Hay empujones, gritos o tensión física." data-en="There is pushing, yelling, or physical tension.">Hay empujones, gritos o tensión física.</span>
         </button>
 
         <button class="action-card" aria-pressed="false">
-          <span class="card-title" data-i18n="card2_title" data-es="Guiado" data-en="Guided">Guiado</span>
-          <span class="card-phrase" data-i18n="card2_phrase" data-es="Sé que quieres seguir. Es difícil parar. Vamos a parar juntos." data-en="I know you want to keep going. It is hard to stop. Let’s stop together.">Sé que quieres seguir. Es difícil parar. Vamos a parar juntos.</span>
-          <span class="card-helper" data-i18n="card2_helper" data-es="Empieza la resistencia." data-en="Resistance is starting.">Empieza la resistencia.</span>
+          <span class="card-title" data-i18n="card2_title" data-es="Nombrar" data-en="Name it">Nombrar</span>
+          <span class="card-phrase" data-i18n="card2_phrase" data-es="“Veo que los dos están muy molestos. Primero vamos a calmarnos.”" data-en="“I see both of you are very upset. First we’re going to calm down.”">“Veo que los dos están muy molestos. Primero vamos a calmarnos.”</span>
+          <span class="card-helper" data-i18n="card2_helper" data-es="Ambos quieren ser escuchados." data-en="Both want to be heard.">Ambos quieren ser escuchados.</span>
         </button>
 
         <button class="action-card" aria-pressed="false">
-          <span class="card-title" data-i18n="card3_title" data-es="Firme + Calma" data-en="Firm + Calm">Firme + Calma</span>
-          <span class="card-phrase" data-i18n="card3_phrase" data-es="Veo que estás molesto. Es hora de parar. Estoy aquí contigo." data-en="I see you are upset. It is time to stop. I am here with you.">Veo que estás molesto. Es hora de parar. Estoy aquí contigo.</span>
-          <span class="card-helper" data-i18n="card3_helper" data-es="Ya hay llanto o enojo." data-en="There is already crying or anger.">Ya hay llanto o enojo.</span>
+          <span class="card-title" data-i18n="card3_title" data-es="Reparar" data-en="Repair">Reparar</span>
+          <span class="card-phrase" data-i18n="card3_phrase" data-es="“Cuando estén listos, buscamos una forma de reparar lo que pasó.”" data-en="“When you’re ready, we’ll find a way to repair what happened.”">“Cuando estén listos, buscamos una forma de reparar lo que pasó.”</span>
+          <span class="card-helper" data-i18n="card3_helper" data-es="Ya bajó la intensidad." data-en="The intensity has lowered.">Ya bajó la intensidad.</span>
         </button>
       </section>
 
@@ -442,9 +414,28 @@
         <div id="after-content" class="collapsible-content">
           <div class="collapsible-inner">
             <div class="collapsible-box">
-               <p data-i18n="after_primary" data-es="Eso fue difícil, ¿verdad?" data-en="That was hard, wasn’t it?">Eso fue difícil, ¿verdad?</p>
-               <p style="color: var(--text-muted); font-size: 0.95rem;" data-i18n="after_helper" data-es="Valida la emoción. Luego, cuando todo esté en calma, pueden hablar de lo que pasó." data-en="Validate the feeling. Then, when everything is calm, you can talk about what happened.">Valida la emoción. Luego, cuando todo esté en calma, pueden hablar de lo que pasó.</p>
-               <div class="safety-note" data-i18n="safety_note" data-es="Si hay riesgo físico o el niño está fuera de control, primero busca seguridad y pausa." data-en="If there is physical risk or your child is out of control, focus on safety first and pause.">Si hay riesgo físico o el niño está fuera de control, primero busca seguridad y pausa.</div>
+               <p data-i18n="after_primary" data-es="¿Qué necesitaba cada uno?" data-en="What did each person need?">¿Qué necesitaba cada uno?</p>
+               <p style="color: var(--text-muted); font-size: 0.95rem;" data-i18n="after_helper" data-es="Después de la calma puedes ayudarles a nombrar lo que pasó, escuchar necesidades y reparar sin humillar." data-en="After calm returns, help them name what happened, listen to needs, and repair without shame.">Después de la calma puedes ayudarles a nombrar lo que pasó, escuchar necesidades y reparar sin humillar.</p>
+               <div class="safety-note" data-i18n="safety_note" data-es="Si hay agresión física fuerte o riesgo de daño, separa primero y prioriza seguridad." data-en="If there is strong physical aggression or risk of harm, separate first and prioritize safety.">Si hay agresión física fuerte o riesgo de daño, separa primero y prioriza seguridad.</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="collapsible-wrapper" style="margin-top: var(--spacing-md);">
+        <button id="share-trigger" class="collapsible-trigger" aria-expanded="false" aria-controls="share-content">
+          <span data-i18n="share_label" data-es="Compartir esta guía" data-en="Share this guide">Compartir esta guía</span>
+          <svg class="collapsible-icon" viewBox="0 0 24 24">
+            <polyline points="6 9 12 15 18 9" stroke-linecap="round" stroke-linejoin="round"></polyline>
+          </svg>
+        </button>
+        <div id="share-content" class="collapsible-content">
+          <div class="collapsible-inner">
+            <div class="collapsible-box" style="flex-direction: row; flex-wrap: wrap; gap: 12px; justify-content: center;">
+               <p style="width: 100%; text-align: center; font-size: 0.9rem; color: var(--text-muted); margin-bottom: 8px;" data-i18n="share_helper" data-es="Si esto te ayudó, puedes enviárselo a otra persona." data-en="If this helped, you can send it to someone else.">Si esto te ayudó, puedes enviárselo a otra persona.</p>
+               <button class="sc-btn share-native" style="background: var(--surface-alt); color: var(--text-main); border: 1px solid var(--border-soft); display: none;" data-i18n="share_btn_native" data-es="Compartir" data-en="Share">Compartir</button>
+               <button class="sc-btn share-copy" style="background: var(--surface-alt); color: var(--text-main); border: 1px solid var(--border-soft);" data-i18n="share_btn_copy" data-es="Copiar link" data-en="Copy link">Copiar link</button>
+               <button class="sc-btn share-wa" style="background: #25D366; color: white;" data-i18n="share_btn_wa" data-es="WhatsApp" data-en="WhatsApp">WhatsApp</button>
             </div>
           </div>
         </div>
@@ -453,19 +444,15 @@
 
     <footer class="sticky-footer">
       <div class="footer-text">
-        <span data-i18n="footer_s1" data-es="Avisa" data-en="Prepare">Avisa</span><span class="footer-arrow">→</span><span data-i18n="footer_s2" data-es="Valida" data-en="Validate">Valida</span><span class="footer-arrow">→</span><span data-i18n="footer_s3" data-es="Guía" data-en="Guide">Guía</span><span class="footer-arrow">→</span><span data-i18n="footer_s4" data-es="Sostén" data-en="Stay close">Sostén</span>
+        <span data-i18n="footer_s1" data-es="Separa" data-en="Separate">Separa</span><span class="footer-arrow">→</span><span data-i18n="footer_s2" data-es="Regula" data-en="Regulate">Regula</span><span class="footer-arrow">→</span><span data-i18n="footer_s3" data-es="Escucha" data-en="Listen">Escucha</span><span class="footer-arrow">→</span><span data-i18n="footer_s4" data-es="Repara" data-en="Repair">Repara</span>
       </div>
     </footer>
 
     <script>
       (function() {
-        /**
-         * Robust initialization pattern for Trae/Live environments
-         */
         function initTool() {
-          // Idempotency guard
-          if (window.__pantallasToolInitialized) return;
-          window.__pantallasToolInitialized = true;
+          if (window.__toolInitialized) return;
+          window.__toolInitialized = true;
 
           const state = {
             lang: localStorage.getItem('lg_parent_lang') || 'es'
@@ -475,38 +462,24 @@
             langBtns: document.querySelectorAll('.lang-btn'),
             cards: document.querySelectorAll('.action-card'),
             collapsibleTrigger: document.getElementById('collapsible-trigger'),
+            shareTrigger: document.getElementById('share-trigger'),
             toast: document.getElementById('toast'),
             i18n: document.querySelectorAll('[data-i18n]'),
-            i18nAria: document.querySelectorAll('[data-i18n-aria]'),
             docTitle: document.querySelector('title[data-i18n="doc_title"]')
           };
 
-          // 1. Language Logic
           function updateLanguage(lang) {
             state.lang = lang;
             document.documentElement.lang = lang;
             localStorage.setItem('lg_parent_lang', lang);
-
-            // Update text content
             elements.i18n.forEach(el => {
               if (el.hasAttribute(`data-${lang}`)) {
                 el.textContent = el.getAttribute(`data-${lang}`);
               }
             });
-
-            // Update aria labels
-            elements.i18nAria.forEach(el => {
-              if (el.hasAttribute(`data-${lang}`)) {
-                el.setAttribute('aria-label', el.getAttribute(`data-${lang}`));
-              }
-            });
-
-            // Update document title
             if (elements.docTitle && elements.docTitle.hasAttribute(`data-${lang}`)) {
               document.title = elements.docTitle.getAttribute(`data-${lang}`);
             }
-
-            // Update toggle buttons
             elements.langBtns.forEach(btn => {
               const isActive = btn.getAttribute('data-lang') === lang;
               btn.setAttribute('aria-pressed', isActive);
@@ -514,20 +487,15 @@
           }
 
           elements.langBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-              updateLanguage(btn.getAttribute('data-lang'));
-            });
+            btn.addEventListener('click', () => updateLanguage(btn.getAttribute('data-lang')));
           });
 
-          // 2. Action Cards Logic
           function showToast() {
             if (!elements.toast) return;
             const msg = state.lang === 'es' ? 'Frase copiada. Respira. Úsala con calma.' : 'Phrase copied. Breathe. Use it calmly.';
             elements.toast.textContent = msg;
             elements.toast.classList.add('visible');
-            setTimeout(() => {
-              elements.toast.classList.remove('visible');
-            }, 2000);
+            setTimeout(() => elements.toast.classList.remove('visible'), 2000);
           }
 
           async function copyToClipboard(text) {
@@ -543,13 +511,8 @@
               textArea.style.position = 'fixed';
               textArea.style.left = '-9999px';
               document.body.appendChild(textArea);
-              textArea.focus();
-              textArea.select();
-              try {
-                document.execCommand('copy');
-              } catch (copyErr) {
-                console.warn('Fallback copy failed', copyErr);
-              }
+              textArea.focus(); textArea.select();
+              try { document.execCommand('copy'); } catch (copyErr) {}
               document.body.removeChild(textArea);
             }
             showToast();
@@ -558,21 +521,15 @@
           elements.cards.forEach(card => {
             card.addEventListener('click', () => {
               const isPressed = card.getAttribute('aria-pressed') === 'true';
-              
-              // Reset others
               elements.cards.forEach(c => c.setAttribute('aria-pressed', 'false'));
-              
               if (!isPressed) {
                 card.setAttribute('aria-pressed', 'true');
                 const phrase = card.querySelector('.card-phrase');
-                if (phrase) {
-                  copyToClipboard(phrase.textContent);
-                }
+                if (phrase) copyToClipboard(phrase.textContent);
               }
             });
           });
 
-          // 3. Collapsible Logic
           if (elements.collapsibleTrigger) {
             elements.collapsibleTrigger.addEventListener('click', () => {
               const expanded = elements.collapsibleTrigger.getAttribute('aria-expanded') === 'true';
@@ -580,11 +537,35 @@
             });
           }
 
-          // 4. Initial Run
+          if (elements.shareTrigger) {
+            elements.shareTrigger.addEventListener('click', () => {
+              const expanded = elements.shareTrigger.getAttribute('aria-expanded') === 'true';
+              elements.shareTrigger.setAttribute('aria-expanded', !expanded);
+            });
+          }
+
+          const shareNative = document.querySelector('.share-native');
+          const shareCopy = document.querySelector('.share-copy');
+          const shareWA = document.querySelector('.share-wa');
+
+          if (navigator.share) {
+            shareNative.style.display = 'inline-block';
+            shareNative.addEventListener('click', () => {
+              navigator.share({ title: document.title, url: window.location.href });
+            });
+          }
+
+          shareCopy.addEventListener('click', () => copyToClipboard(window.location.href));
+          shareWA.addEventListener('click', () => {
+            const text = state.lang === 'es' 
+              ? `Te comparto esta guía de Criar Sin Culpas: ${window.location.href}`
+              : `I'm sharing this guide from Criar Sin Culpas with you: ${window.location.href}`;
+            window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, '_blank');
+          });
+
           updateLanguage(state.lang);
         }
 
-        // Production-safe execution
         if (document.readyState === 'loading') {
           document.addEventListener('DOMContentLoaded', initTool);
         } else {
