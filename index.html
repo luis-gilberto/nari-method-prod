@@ -156,6 +156,10 @@
                   <div class="csc-mega-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 7l10 7 10-7"/></svg></div>
                   <div class="csc-mega-text"><b><span class="lb-en">Requests</span><span class="lb-es active">Solicitudes</span></b><em><span class="lb-en">Send a brief, idea or priority flag</span><span class="lb-es active">Envía un brief, idea o prioridad</span></em></div>
                 </button>
+                <button class="csc-mega-link" onclick="cscNavGo('protocol')">
+                  <div class="csc-mega-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 1 1-7.6-10.6 8.38 8.38 0 0 1 3.9.9L23 3z"></path></svg></div>
+                  <div class="csc-mega-text"><b><span class="lb-en">Protocol Library</span><span class="lb-es active">Protocol Library</span></b><em><span class="lb-en">Real-time parenting support tools</span><span class="lb-es active">Herramientas de apoyo en tiempo real</span></em></div>
+                </button>
               </div>
             </div>
 
@@ -1839,11 +1843,25 @@
 
             <div class="signal-quick-actions">
               <div class="sqa-header">Acciones rápidas</div>
+              <button class="sqa-btn" onclick="goToSection('protocol')">Abrir Protocol Library</button>
               <button class="sqa-btn" onclick="goToSection('requests')">+ Nueva solicitud</button>
               <button class="sqa-btn" onclick="goToSection('artifacts')">Ver todos los artefactos</button>
               <button class="sqa-btn" onclick="goToSection('vault')">Abrir Brand Vault › Identidad</button>
             </div>
           </div>
+        </div>
+      </section>
+
+      <!-- --- SECTION: PROTOCOL LIBRARY --- -->
+      <section id="section-protocol" class="ws-section">
+        <div class="section-header">
+          <div class="section-eyebrow" data-t="protocolEyebrow">Protocol Library › powered by the LG Ecosystem</div>
+          <h2 class="section-title" data-t="protocolTitle">Protocol Library</h2>
+          <p class="section-desc" data-t="protocolDesc">Tools generated from audience signals and designed for in-the-moment parenting support.</p>
+        </div>
+
+        <div id="protocols-grid-container" class="artifacts-grid">
+          <!-- Content injected via workspace.js -->
         </div>
       </section>
 

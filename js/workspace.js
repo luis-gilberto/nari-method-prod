@@ -10,6 +10,26 @@ const state = {
   mobileMenuOpen: false,
 };
 
+/* ── PROTOCOLS DATA ──────────────────────────────────────── */
+const protocolsData = [
+  {
+    id: 'P01',
+    title: { en: 'Screens: how to stop without a fight', es: 'Pantallas: cómo parar sin pelea' },
+    desc: { en: 'Practical guide for high-friction moments in real time.', es: 'Guía práctica para momentos de alta fricción en tiempo real.' },
+    path: '/tools/parent-support.html',
+    status: { en: 'Published', es: 'Publicado' },
+    source: { en: 'Derived from signals', es: 'Derivado de señales' }
+  },
+  {
+    id: 'P02',
+    title: { en: 'Emotions: how to accompany without escalating', es: 'Emociones: cómo acompañar sin escalar' },
+    desc: { en: 'Practical guide for high-friction moments in real time.', es: 'Guía práctica para momentos de alta fricción en tiempo real.' },
+    path: '/tools/parent-support/emotional-escalation.html',
+    status: { en: 'Published', es: 'Publicado' },
+    source: { en: 'Derived from signals', es: 'Derivado de señales' }
+  }
+];
+
 /* ── BILINGUAL ENGINE ────────────────────────────────────── */
 const uiText = {
   // Nav
@@ -85,6 +105,10 @@ const uiText = {
   requestsEyebrow: { en: 'Requests',         es: 'Solicitudes' },
   requestsTitle:   { en: 'Send a request',   es: 'Envía una solicitud' },
   requestsDesc:    { en: 'Need a new artifact, an edit or a strategic consultation? Use this form.', es: '¿Necesitas un nuevo artefacto, una edición o una consulta estratégica? Usa este formulario.' },
+  // Protocol Library
+  protocolEyebrow: { en: 'Protocol Library', es: 'Protocol Library' },
+  protocolTitle:   { en: 'Protocol Library', es: 'Protocol Library' },
+  protocolDesc:    { en: 'Tools generated from audience signals and designed for in-the-moment parenting support.', es: 'Herramientas generadas a partir de señales de la audiencia y diseñadas para apoyo parental en el momento.' },
 };
 
 function t(key) {
@@ -120,6 +144,7 @@ function applyLang() {
   // Re-render dynamic artifacts
   if (typeof renderArtifactPhases === 'function') renderArtifactPhases();
   if (typeof renderSignals === 'function') renderSignals();
+  if (typeof renderProtocols === 'function') renderProtocols();
 }
 
 function setLang(lang) {
@@ -149,7 +174,7 @@ const artifactsData = [
     type:    { en: 'Market Intelligence · Bilingual', es: 'Inteligencia de mercado · Bilingüe' },
     desc:    { en: 'Competitive landscape analysis, creator benchmarking and monetization model research for Criar Sin Culpas.', es: 'Inteligencia de mercado y arquitectura de ingresos. Proyecciones, mix de monetización, precios de cursos y alianzas de marca.' },
     urlEn:   'files/SIQ_A02_MonetizationReport_CSC.html?lang=en',
-    urlEs:   'files/SIQ_A02_MonetizationReport_CSC.html?lang=es',
+    urlEs:   'files/SIQ_A02_MonetizationReport_CSC_ES.html',
     status:  'approved', pages: '3',
     langs:   'ES / EN',
   },
@@ -337,6 +362,41 @@ function renderSignals() {
   }).join('');
 }
 
+/* ── RENDER PROTOCOLS (dynamic, bilingual) ──────────────── */
+function renderProtocols() {
+  const container = document.getElementById('protocols-grid-container');
+  if (!container) return;
+
+  container.innerHTML = protocolsData.map(proto => {
+    const title = proto.title[state.lang] || proto.title.es;
+    const desc = proto.desc[state.lang] || proto.desc.es;
+    const status = proto.status[state.lang] || proto.status.es;
+    const source = proto.source[state.lang] || proto.source.es;
+    
+    return `
+      <div class="artifact-card protocol-card" style="margin-bottom:16px;">
+        <div class="ac-status-row">
+          <span class="ac-type strategy">${source}</span>
+          <span class="ac-status approved">
+            <svg width="6" height="6" viewBox="0 0 6 6" style="display:inline-block;vertical-align:middle;margin-right:4px;"><circle cx="3" cy="3" r="3" fill="#2ED3C6"/></svg>
+            ${status}
+          </span>
+        </div>
+        <h3 class="ac-title">${title}</h3>
+        <p class="ac-desc">${desc}</p>
+        <div class="ac-actions" style="margin-top: 20px; display: flex; gap: 8px; flex-wrap: wrap;">
+          <a href="${proto.path}" class="btn-primary small">${state.lang === 'en' ? 'Preview' : 'Abrir'}</a>
+          <button class="btn-ghost small" onclick="copyProtocolLink('${proto.path}', this)">${state.lang === 'en' ? 'Copy Link' : 'Copiar Link'}</button>
+          <button class="btn-ghost small" onclick="shareProtocolWA('${title}', '${proto.path}')">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:4px"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 1 1-7.6-10.6 8.38 8.38 0 0 1 3.9.9L23 3z"></path></svg>
+            WhatsApp
+          </button>
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
 /* ── GATE / ENTRY ────────────────────────────────────────── */
 function returnToGate() {
   document.getElementById("workspace").classList.add("hidden");
@@ -364,6 +424,7 @@ function enterWorkspace(targetSection = 'home') {
     animateSectionEntrance(targetSection);
     renderArtifactPhases();
     renderSignals();
+    renderProtocols();
     applyLang();
   }, 500);
 }
@@ -587,16 +648,36 @@ window.copyProtocolLink = function(path, btn) {
   if (navigator.clipboard) {
     navigator.clipboard.writeText(fullUrl).then(() => {
       const orig = btn.textContent;
-      btn.textContent = '✓ Link copiado';
+      btn.textContent = state.lang === 'en' ? '✓ Link copied' : '✓ Link copiado';
       btn.style.color = 'var(--teal)';
       setTimeout(() => { btn.textContent = orig; btn.style.color = ''; }, 2000);
+      
+      const toast = document.getElementById('toast');
+      if (toast) {
+        const msg = toast.querySelector('.toast-msg');
+        const origMsg = msg.innerHTML;
+        msg.innerHTML = state.lang === 'en' ? 'Link copied' : 'Link copiado';
+        toast.classList.remove('hidden');
+        toast.style.opacity = '1';
+        toast.style.transform = 'translateY(0)';
+        setTimeout(() => {
+          toast.style.opacity = '0';
+          toast.style.transform = 'translateY(8px)';
+          setTimeout(() => { 
+            toast.classList.add('hidden'); 
+            msg.innerHTML = origMsg;
+          }, 300);
+        }, 2000);
+      }
     });
   }
 };
 
 window.shareProtocolWA = function(title, path) {
   const fullUrl = window.location.origin + path;
-  const message = `Esto me ayudó en un momento difícil con mi hijo. Te lo comparto: ${title} → ${fullUrl}`;
+  const message = state.lang === 'en'
+    ? `This helped me in a difficult moment with my child. Sharing it with you: ${fullUrl}`
+    : `Esto me ayudó en un momento difícil con mi hijo. Te lo comparto: ${fullUrl}`;
   const waUrl = `https://wa.me/?text=${encodeURIComponent(message)}`;
   window.open(waUrl, '_blank');
 };
@@ -1121,6 +1202,7 @@ document.addEventListener('DOMContentLoaded', function() {
         setTimeout(observeSections, 200);
         renderArtifactPhases();
         renderSignals();
+        renderProtocols();
         workspaceObserver.disconnect();
       }
     });
