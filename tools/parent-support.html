@@ -1,320 +1,377 @@
 <!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Apoyo Rápido · Pantallas</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+<html lang="es" data-theme="light" style=""><head><meta charset="utf-8">
+    
+    
+    <title>Pantalla → Parar sin pelea</title>
     <style>
-        :root {
-            --bg: #0A0908;
-            --bg-card: #141312;
-            --coral: #F96F6E;
-            --teal: #4BADA8;
-            --text-primary: #F5F0EB;
-            --text-muted: rgba(245, 240, 235, 0.6);
-            --border: rgba(255, 255, 255, 0.08);
-            --r-lg: 12px;
-            --r-xl: 20px;
-        }
+      :root {
+        /* Color Palette */
+        --bg-color: #171515;
+        --bg-glow-top: rgba(78, 168, 154, 0.08);
+        --bg-glow-bottom: rgba(224, 122, 95, 0.08);
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            -webkit-tap-highlight-color: transparent;
-        }
+        --surface-base: rgba(37, 33, 33, 0.7);
+        --surface-hover: rgba(48, 43, 43, 0.9);
+        --surface-alt: rgba(255, 255, 255, 0.04);
 
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--bg);
-            color: var(--text-primary);
-            line-height: 1.6;
-            padding: 24px 20px 100px;
-            max-width: 500px;
-            margin: 0 auto;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-        }
+        --text-main: #f8f3ef;
+        --text-muted: #b7aea8;
+        --text-soft: #958b85;
 
-        header {
-            margin-bottom: 32px;
-            text-align: center;
-        }
+        --accent-coral: #e07a5f;
+        --accent-teal: #4ea89a;
 
-        .header-eyebrow {
-            font-size: 10px;
-            font-weight: 700;
-            color: var(--teal);
-            text-transform: uppercase;
-            letter-spacing: 0.15em;
-            margin-bottom: 12px;
-        }
+        --border-soft: rgba(255, 255, 255, 0.08);
+        --border-strong: rgba(78, 168, 154, 0.4);
 
-        h1 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 32px;
-            font-weight: 400;
-            margin-bottom: 8px;
-            color: var(--text-primary);
-        }
+        --shadow-soft: 0 12px 32px rgba(0, 0, 0, 0.2);
 
-        .subtitle {
-            font-size: 14px;
-            color: var(--text-muted);
-            font-weight: 300;
-        }
+        /* Spacing & Radii */
+        --radius-md: 14px;
+        --radius-lg: 20px;
 
-        .options-grid {
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-            margin-bottom: 32px;
-        }
+        --spacing-xs: 6px;
+        --spacing-sm: 12px;
+        --spacing-md: 16px;
+        --spacing-lg: 24px;
+        --spacing-xl: 32px;
 
-        .option-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: var(--r-lg);
-            padding: 20px;
-            cursor: pointer;
-            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
-        }
+        --transition: 250ms cubic-bezier(0.2, 0.8, 0.2, 1);
+      }
 
-        .option-card:active {
-            transform: scale(0.98);
-            border-color: var(--teal);
-        }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        -webkit-tap-highlight-color: transparent;
+      }
 
-        .option-card.selected {
-            border-color: var(--teal);
-            background: rgba(75, 173, 168, 0.05);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-        }
+      body {
+        font-family:
+          system-ui,
+          -apple-system,
+          BlinkMacSystemFont,
+          'Segoe UI',
+          Roboto,
+          Helvetica,
+          Arial,
+          sans-serif;
+        background-color: var(--bg-color);
+        background-image:
+          radial-gradient(circle at 10% 0%, var(--bg-glow-top), transparent 50%),
+          radial-gradient(circle at 90% 100%, var(--bg-glow-bottom), transparent 50%);
+        background-attachment: fixed;
+        color: var(--text-main);
+        line-height: 1.5;
+        min-height: 100%;
+        /* Account for fixed footer */
+        padding-bottom: calc(80px + env(safe-area-inset-bottom));
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
 
-        .option-label {
-            font-size: 9px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: var(--teal);
-            margin-bottom: 8px;
-            display: block;
-        }
+      .app-shell {
+        width: 100%;
+        max-width: 760px;
+        padding: clamp(24px, 5vw, 40px) 20px;
+        display: flex;
+        flex-direction: column;
+        gap: var(--spacing-xl);
+      }
 
-        .option-text {
-            font-size: 17px;
-            font-weight: 400;
-            line-height: 1.4;
-        }
+      /* Header */
+      header {
+        display: flex;
+        flex-direction: column;
+        gap: var(--spacing-sm);
+      }
 
-        .reminder-box {
-            background: rgba(249, 111, 110, 0.03);
-            border: 1px dashed rgba(249, 111, 110, 0.2);
-            border-radius: var(--r-lg);
-            padding: 16px;
-            margin-bottom: 32px;
-            text-align: center;
-        }
+      .brand-label {
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: var(--text-soft);
+        font-weight: 600;
+      }
 
-        .reminder-text {
-            font-size: 13px;
-            color: var(--coral);
-            font-weight: 500;
-            font-style: italic;
-        }
+      h1 {
+        font-size: clamp(1.8rem, 5vw, 2.8rem);
+        font-weight: 700;
+        line-height: 1.1;
+        letter-spacing: -0.02em;
+      }
 
-        .collapsible {
-            border-top: 1px solid var(--border);
-            padding-top: 24px;
-        }
+      .subtitle {
+        font-size: clamp(1.05rem, 3vw, 1.25rem);
+        color: var(--text-muted);
+        max-width: 36ch;
+      }
 
-        .collapsible-trigger {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            width: 100%;
-            background: none;
-            border: none;
-            color: var(--text-muted);
-            font-size: 14px;
-            font-weight: 600;
-            cursor: pointer;
-            padding-bottom: 12px;
-        }
+      .reminder {
+        margin-top: var(--spacing-sm);
+        font-size: 0.95rem;
+        color: var(--text-soft);
+        font-weight: 500;
+        border-left: 2px solid var(--accent-coral);
+        padding-left: var(--spacing-sm);
+      }
 
-        .collapsible-content {
-            display: none;
-            padding: 12px 0 24px;
-            font-size: 15px;
-            color: var(--text-muted);
-            font-weight: 300;
-            animation: fadeIn 0.3s ease;
-        }
+      /* Action Cards */
+      .cards-section {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: var(--spacing-md);
+      }
 
-        .collapsible.open .collapsible-content {
-            display: block;
+      @media (min-width: 640px) {
+        .cards-section {
+          grid-template-columns: repeat(3, 1fr);
+          align-items: stretch;
         }
+      }
 
-        .collapsible.open .chevron {
-            transform: rotate(180deg);
-        }
+      .action-card {
+        background-color: var(--surface-base);
+        border: 1px solid var(--border-soft);
+        border-radius: var(--radius-lg);
+        padding: var(--spacing-lg);
+        text-align: left;
+        color: inherit;
+        cursor: pointer;
+        font-family: inherit;
+        position: relative;
+        transition: all var(--transition);
+        display: flex;
+        flex-direction: column;
+        gap: var(--spacing-md);
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.02);
+      }
 
-        .chevron {
-            transition: transform 0.3s ease;
-        }
+      .action-card:focus-visible {
+        outline: none;
+        border-color: var(--accent-teal);
+        box-shadow: 0 0 0 3px rgba(78, 168, 154, 0.25);
+      }
 
-        footer {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: rgba(10, 9, 8, 0.95);
-            backdrop-filter: blur(10px);
-            border-top: 1px solid var(--border);
-            padding: 20px;
-            text-align: center;
-            z-index: 100;
-        }
+      .card-title {
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: var(--text-soft);
+        font-weight: 700;
+      }
 
-        .footer-text {
-            font-size: 10px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.2em;
-            color: var(--text-muted);
-        }
+      .card-phrase {
+        font-size: clamp(1.15rem, 3vw, 1.3rem);
+        font-weight: 400;
+        line-height: 1.35;
+        color: var(--text-muted);
+        transition:
+          color var(--transition),
+          font-weight var(--transition);
+        flex-grow: 1;
+      }
 
-        .footer-text span {
-            color: var(--teal);
-        }
+      .card-helper {
+        font-size: 0.9rem;
+        color: var(--text-soft);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-5px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+      .card-helper::before {
+        content: '';
+        display: block;
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background-color: currentColor;
+        opacity: 0.4;
+      }
 
-        .copy-hint {
-            position: absolute;
-            top: 12px;
-            right: 12px;
-            font-size: 8px;
-            color: var(--text-muted);
-            opacity: 0;
-            transition: opacity 0.2s;
-        }
+      /* Selected State */
+      .action-card[aria-pressed='true'] {
+        background-color: var(--surface-hover);
+        border-color: var(--border-strong);
+        box-shadow:
+          var(--shadow-soft),
+          inset 0 1px 0 rgba(255, 255, 255, 0.05);
+        transform: translateY(-2px);
+      }
 
-        .option-card:hover .copy-hint {
-            opacity: 1;
-        }
+      .action-card[aria-pressed='true'] .card-phrase {
+        color: var(--text-main);
+        font-weight: 600;
+      }
 
-        .toast {
-            position: fixed;
-            top: 20px;
-            left: 50%;
-            transform: translateX(-50%) translateY(-20px);
-            background: var(--teal);
-            color: white;
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 600;
-            opacity: 0;
-            transition: all 0.3s ease;
-            z-index: 1000;
-            pointer-events: none;
-        }
+      .action-card[aria-pressed='true'] .card-helper {
+        color: var(--text-muted);
+      }
 
-        .toast.show {
-            opacity: 1;
-            transform: translateX(-50%) translateY(0);
-        }
+      .action-card[aria-pressed='true'] .card-helper::before {
+        background-color: var(--accent-teal);
+        opacity: 1;
+      }
+
+      /* Collapsible Section */
+      .collapsible-wrapper {
+        border-top: 1px solid var(--border-soft);
+        padding-top: var(--spacing-sm);
+      }
+
+      .collapsible-trigger {
+        width: 100%;
+        background: none;
+        border: none;
+        color: var(--text-main);
+        font-size: 1.05rem;
+        font-family: inherit;
+        font-weight: 500;
+        padding: var(--spacing-sm) 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        cursor: pointer;
+        text-align: left;
+      }
+
+      .collapsible-trigger:focus-visible {
+        outline: none;
+        color: var(--accent-teal);
+        border-radius: 8px;
+        box-shadow: 0 0 0 2px rgba(78, 168, 154, 0.25);
+      }
+
+      .collapsible-icon {
+        width: 20px;
+        height: 20px;
+        stroke: currentColor;
+        stroke-width: 2;
+        fill: none;
+        transition: transform var(--transition);
+        opacity: 0.7;
+      }
+
+      .collapsible-trigger[aria-expanded='true'] .collapsible-icon {
+        transform: rotate(180deg);
+      }
+
+      .collapsible-content {
+        display: grid;
+        grid-template-rows: 0fr;
+        transition:
+          grid-template-rows var(--transition),
+          opacity var(--transition);
+        opacity: 0;
+      }
+
+      .collapsible-trigger[aria-expanded='true'] + .collapsible-content {
+        grid-template-rows: 1fr;
+        opacity: 1;
+      }
+
+      .collapsible-inner {
+        overflow: hidden;
+      }
+
+      .collapsible-box {
+        margin-top: var(--spacing-md);
+        background-color: var(--surface-alt);
+        padding: var(--spacing-lg);
+        border-radius: var(--radius-md);
+        color: var(--text-main);
+        font-size: 1.05rem;
+      }
+
+      /* Sticky Footer */
+      .sticky-footer {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: rgba(23, 21, 21, 0.85);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border-top: 1px solid var(--border-soft);
+        padding: 16px env(safe-area-inset-right) calc(16px + env(safe-area-inset-bottom)) env(safe-area-inset-left);
+        text-align: center;
+        z-index: 10;
+      }
+
+      .footer-text {
+        font-size: 0.9rem;
+        font-weight: 600;
+        color: var(--text-muted);
+        letter-spacing: 0.03em;
+      }
+
+      .footer-text span {
+        color: var(--text-main);
+      }
+
+      .footer-arrow {
+        opacity: 0.4;
+        margin: 0 6px;
+        font-weight: 400;
+      }
     </style>
-</head>
-<body>
-    <div id="toast" class="toast">¡Copiado al portapapeles!</div>
-
-    <header>
-        <div class="header-eyebrow">Apoyo en tiempo real</div>
+  </head>
+  <body style="">
+    <main class="app-shell">
+      <header>
+        <div class="brand-label">Criar Sin Culpas</div>
         <h1>Pantalla → Parar sin pelea</h1>
         <p class="subtitle">No tienes que hacerlo perfecto. Solo necesitas un siguiente paso.</p>
-    </header>
+        <p class="reminder">No expliques demasiado. No negocies. Quédate cerca.</p>
+      </header>
 
-    <div class="options-grid">
-        <div class="option-card" onclick="selectOption(this, '5 minutos más y luego tú eliges qué hacemos')">
-            <span class="copy-hint">Tocar para copiar</span>
-            <span class="option-label">Opción 1: Suave</span>
-            <p class="option-text">"5 minutos más y luego tú eliges qué hacemos"</p>
-        </div>
-
-        <div class="option-card" onclick="selectOption(this, 'Sé que quieres seguir. Es difícil parar. Vamos a parar juntos.')">
-            <span class="copy-hint">Tocar para copiar</span>
-            <span class="option-label">Opción 2: Guiado</span>
-            <p class="option-text">"Sé que quieres seguir. Es difícil parar. Vamos a parar juntos."</p>
-        </div>
-
-        <div class="option-card" onclick="selectOption(this, 'Veo que estás molesto. Es hora de parar. Estoy aquí contigo.')">
-            <span class="copy-hint">Tocar para copiar</span>
-            <span class="option-label">Opción 3: Firme + Calma</span>
-            <p class="option-text">"Veo que estás molesto. Es hora de parar. Estoy aquí contigo."</p>
-        </div>
-    </div>
-
-    <div class="reminder-box">
-        <p class="reminder-text">No expliques demasiado. No negocies. Quédate cerca.</p>
-    </div>
-
-    <div class="collapsible" id="after-section">
-        <button class="collapsible-trigger" onclick="toggleCollapsible()">
-            <span>Después (cuando todo se calme)</span>
-            <svg class="chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="6 9 12 15 18 9"></polyline>
-            </svg>
+      <section class="cards-section" aria-label="Opciones de respuesta">
+        <button class="action-card" aria-pressed="false">
+          <span class="card-title">Suave</span>
+          <span class="card-phrase">5 minutos más y luego tú eliges qué hacemos</span>
+          <span class="card-helper">Todo está tranquilo.</span>
         </button>
-        <div class="collapsible-content">
-            <p>"Eso fue difícil, ¿verdad?"</p>
-            <p style="margin-top:12px; font-size:13px; color:var(--text-muted);">Valida la emoción, no la conducta. Una vez regulados, pueden hablar de lo que pasó.</p>
-        </div>
-    </div>
 
-    <footer>
-        <div class="footer-text">
-            <span>Avisa</span> → <span>Valida</span> → <span>Guía</span> → <span>Sostén</span>
+        <button class="action-card" aria-pressed="true">
+          <span class="card-title">Guiado</span>
+          <span class="card-phrase">Sé que quieres seguir. Es difícil parar. Vamos a parar juntos.</span>
+          <span class="card-helper">Empieza la resistencia.</span>
+        </button>
+
+        <button class="action-card" aria-pressed="false">
+          <span class="card-title">Firme + Calma</span>
+          <span class="card-phrase">Veo que estás molesto. Es hora de parar. Estoy aquí contigo.</span>
+          <span class="card-helper">Ya hay llanto o enojo.</span>
+        </button>
+      </section>
+
+      <section class="collapsible-wrapper">
+        <button class="collapsible-trigger" aria-expanded="false" aria-controls="after-content">
+          Después (cuando todo se calme)
+          <svg class="collapsible-icon" viewBox="0 0 24 24">
+            <polyline points="6 9 12 15 18 9" stroke-linecap="round" stroke-linejoin="round"></polyline>
+          </svg>
+        </button>
+        <div id="after-content" class="collapsible-content">
+          <div class="collapsible-inner">
+            <div class="collapsible-box">Eso fue difícil, ¿verdad?</div>
+          </div>
         </div>
+      </section>
+    </main>
+
+    <footer class="sticky-footer">
+      <div class="footer-text">
+        <span>Avisa</span><span class="footer-arrow">→</span><span>Valida</span><span class="footer-arrow">→</span><span>Guía</span><span class="footer-arrow">→</span><span>Sostén</span>
+      </div>
     </footer>
 
-    <script>
-        function selectOption(el, text) {
-            // Remove previous selection
-            document.querySelectorAll('.option-card').forEach(card => card.classList.remove('selected'));
-            
-            // Add selection
-            el.classList.add('selected');
+    
+  
 
-            // Copy to clipboard
-            if (navigator.clipboard) {
-                navigator.clipboard.writeText(text).then(() => {
-                    showToast();
-                });
-            }
-        }
-
-        function toggleCollapsible() {
-            const section = document.getElementById('after-section');
-            section.classList.toggle('open');
-        }
-
-        function showToast() {
-            const toast = document.getElementById('toast');
-            toast.classList.add('show');
-            setTimeout(() => {
-                toast.classList.remove('show');
-            }, 2000);
-        }
-    </script>
-</body>
-</html>
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v8c78df7c7c0f484497ecbca7046644da1771523124516" integrity="sha512-8DS7rgIrAmghBFwoOTujcf6D9rXvH8xm8JQ1Ja01h9QX8EzXldiszufYa4IFfKdLUKTTrnSFXLDkUEOTrZQ8Qg==" data-cf-beacon='{"version":"2024.11.0","token":"4edd5f8ec12a48cfa682ab8261b80a79","server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+</body></html>
