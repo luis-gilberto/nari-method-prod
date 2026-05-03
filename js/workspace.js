@@ -109,6 +109,13 @@ const uiText = {
   protocolEyebrow: { en: 'Protocol Library', es: 'Protocol Library' },
   protocolTitle:   { en: 'Protocol Library', es: 'Protocol Library' },
   protocolDesc:    { en: 'Tools generated from audience signals and designed for in-the-moment parenting support.', es: 'Herramientas generadas a partir de señales de la audiencia y diseñadas para apoyo parental en el momento.' },
+  // Draft Protocols
+  draftsTitle:     { en: 'Draft Protocols',  es: 'Borradores de Protocolos' },
+  createProtocol:  { en: 'Create Protocol',  es: 'Crear Protocolo' },
+  draftCreated:    { en: 'Draft Created',    es: 'Borrador Creado' },
+  buildTool:       { en: 'Build Tool',       es: 'Construir Herramienta' },
+  comingNext:      { en: 'Coming next',      es: 'Próximamente' },
+  openParentHub:   { en: 'Open Parent Support Hub', es: 'Abrir Hub de Apoyo Parental' },
 };
 
 function t(key) {
@@ -367,7 +374,9 @@ function renderProtocols() {
   const container = document.getElementById('protocols-grid-container');
   if (!container) return;
 
-  container.innerHTML = protocolsData.map(proto => {
+  const drafts = JSON.parse(localStorage.getItem('protocol_drafts') || '[]');
+  
+  let html = protocolsData.map(proto => {
     const title = proto.title[state.lang] || proto.title.es;
     const desc = proto.desc[state.lang] || proto.desc.es;
     const status = proto.status[state.lang] || proto.status.es;
@@ -395,6 +404,34 @@ function renderProtocols() {
       </div>
     `;
   }).join('');
+
+  if (drafts.length > 0) {
+    html += `
+      <div style="grid-column: 1 / -1; margin-top: 40px; margin-bottom: 24px;">
+        <h3 style="font-family: var(--font-display); font-size: 24px; color: var(--text-primary); border-bottom: 1px solid var(--border); padding-bottom: 12px;">${t('draftsTitle')}</h3>
+      </div>
+    `;
+    html += drafts.map(draft => `
+      <div class="artifact-card protocol-card draft" style="margin-bottom:16px; border-style: dashed; border-color: var(--border-strong);">
+        <div class="ac-status-row">
+          <span class="ac-type strategy">${draft.sourceSignalTitle || 'Signal'}</span>
+          <span class="ac-status" style="color: var(--text-muted);">
+            <svg width="6" height="6" viewBox="0 0 6 6" style="display:inline-block;vertical-align:middle;margin-right:4px;"><circle cx="3" cy="3" r="3" fill="var(--text-muted)"/></svg>
+            Draft
+          </span>
+        </div>
+        <h3 class="ac-title">${draft.title}</h3>
+        <p class="ac-desc">${draft.description}</p>
+        ${draft.suggestedArtifact ? `<div style="font-size: 11px; color: var(--teal); margin-top: 8px; font-weight: 500;">Suggested: ${draft.suggestedArtifact}</div>` : ''}
+        <div class="ac-actions" style="margin-top: 20px; display: flex; flex-direction: column; gap: 8px;">
+          <button class="btn-primary small" disabled style="opacity: 0.5;">${t('buildTool')}</button>
+          <span style="font-size: 10px; color: var(--text-muted); text-align: center;">${t('comingNext')}</span>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  container.innerHTML = html;
 }
 
 /* ── GATE / ENTRY ────────────────────────────────────────── */
@@ -1428,6 +1465,7 @@ window.renderPublishedSignals = function() {
   if (!container) return;
 
   const log = JSON.parse(localStorage.getItem('signals_log') || '[]');
+  const drafts = JSON.parse(localStorage.getItem('protocol_drafts') || '[]');
   
   if (log.length === 0) {
     container.innerHTML = `
@@ -1437,7 +1475,12 @@ window.renderPublishedSignals = function() {
     return;
   }
 
-  container.innerHTML = log.slice().reverse().map(entry => `
+  container.innerHTML = log.slice().reverse().map(entry => {
+    const hasDraft = drafts.some(d => d.sourceSignalId === entry.id);
+    const btnText = hasDraft ? t('draftCreated') : t('createProtocol');
+    const btnDisabled = hasDraft ? 'disabled' : '';
+
+    return `
     <div class="published-card" style="background: var(--panel); border: 1px solid var(--border); border-radius: var(--r-lg); padding: 24px; margin-bottom: 20px; border-left: 3px solid var(--teal);">
       <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px;">
         <div>
@@ -1454,12 +1497,93 @@ window.renderPublishedSignals = function() {
       <div style="margin-bottom: 16px;">
         <p style="font-size: 14px; line-height: 1.5; color: var(--text-mid); font-weight: 300;">${entry.synthesis}</p>
       </div>
-      <div style="background: rgba(75,173,168,0.03); border-radius: 6px; padding: 12px 16px; border: 1px solid rgba(75,173,168,0.1);">
-        <h4 style="font-size: 9px; font-weight: 700; color: var(--teal); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px;">Recommended Action</h4>
-        <p style="font-size: 13px; color: var(--text-primary); font-weight: 400;">${entry.recommendedAction}</p>
+      <div style="background: rgba(75,173,168,0.03); border-radius: 6px; padding: 12px 16px; border: 1px solid rgba(75,173,168,0.1); display: flex; justify-content: space-between; align-items: center; gap: 20px;">
+        <div style="flex: 1;">
+          <h4 style="font-size: 9px; font-weight: 700; color: var(--teal); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px;">Recommended Action</h4>
+          <p style="font-size: 13px; color: var(--text-primary); font-weight: 400;">${entry.recommendedAction}</p>
+        </div>
+        <button class="btn-ghost small" onclick="createProtocolFromSignal('${entry.id}', this)" ${btnDisabled}>
+          ${btnText}
+        </button>
       </div>
     </div>
-  `).join('');
+  `}).join('');
+};
+
+window.createProtocolFromSignal = function(signalId, btn) {
+  const log = JSON.parse(localStorage.getItem('signals_log') || '[]');
+  const signal = log.find(s => s.id === signalId);
+  if (!signal) return;
+
+  const drafts = JSON.parse(localStorage.getItem('protocol_drafts') || '[]');
+  if (drafts.some(d => d.sourceSignalId === signalId)) return;
+
+  // Task 3: Draft content generation rules
+  let title = "";
+  const suggestedArtifact = signal.recommendedAction && signal.recommendedAction !== 'None' ? signal.recommendedAction : null;
+  
+  if (suggestedArtifact) {
+    title = suggestedArtifact;
+  } else {
+    const text = (signal.title + ' ' + (signal.synthesis || '')).toLowerCase();
+    if (text.includes('screen time') || text.includes('pantallas')) {
+      title = 'Pantallas: cómo parar sin pelea';
+    } else if (text.includes('emotion') || text.includes('emociones') || text.includes('meltdown') || text.includes('escalada')) {
+      title = 'Emociones: cómo acompañar sin escalar';
+    } else {
+      title = 'Nuevo protocolo de apoyo en tiempo real';
+    }
+  }
+
+  // Task 2: ID logic
+  // Use stable sourceSignalId if available. Otherwise generate content-based ID.
+  let draftId = signal.id;
+  if (!draftId) {
+    const contentString = (signal.title + (signal.recommendedAction || '')).replace(/\s+/g, '').toLowerCase();
+    draftId = 'draft-' + btoa(contentString).substring(0, 16);
+  } else {
+    draftId = 'proto-' + draftId;
+  }
+
+  const draft = {
+    id: draftId,
+    sourceSignalId: signal.id || draftId,
+    sourceSignalTitle: signal.title,
+    title: title,
+    description: "Protocolo creado desde una señal aprobada para convertirse en una herramienta práctica de apoyo en tiempo real.",
+    suggestedArtifact: suggestedArtifact,
+    status: "draft",
+    source: "signal_archive",
+    timestamp: new Date().toISOString()
+  };
+
+  drafts.push(draft);
+  localStorage.setItem('protocol_drafts', JSON.stringify(drafts));
+
+  // UI Feedback
+  btn.textContent = t('draftCreated');
+  btn.disabled = true;
+
+  const toast = document.getElementById('toast');
+  if (toast) {
+    const msg = toast.querySelector('.toast-msg');
+    const origMsg = msg.innerHTML;
+    msg.innerHTML = state.lang === 'en' ? 'Protocol draft created' : 'Borrador de protocolo creado';
+    toast.classList.remove('hidden');
+    toast.style.opacity = '1';
+    toast.style.transform = 'translateY(0)';
+    setTimeout(() => {
+      toast.style.opacity = '0';
+      toast.style.transform = 'translateY(8px)';
+      setTimeout(() => { 
+        toast.classList.add('hidden'); 
+        msg.innerHTML = origMsg;
+      }, 300);
+    }, 2500);
+  }
+
+  // Refresh protocol library if visible
+  if (typeof renderProtocols === 'function') renderProtocols();
 };
 
 async function renderReviewQueue() {
