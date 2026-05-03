@@ -540,8 +540,8 @@ button { cursor: pointer; font-family: var(--font-body); border: none; backgroun
 }
 
 .workspace-main {
-  padding-top: var(--sys-bar-h);
-  min-height: calc(100vh - 48px);
+  padding-top: calc(var(--sys-bar-h) + 12px);
+  min-height: auto;
   overflow-x: hidden;
   width: 100%;
 }
@@ -549,8 +549,8 @@ button { cursor: pointer; font-family: var(--font-body); border: none; backgroun
 /* ── SECTIONS ─────────────────────────────────────────── */
 .ws-section {
   display: none;
-  min-height: calc(100vh - var(--sys-bar-h) - 48px);
-  padding: var(--space-2xl) var(--space-xl);
+  min-height: auto;
+  padding: 0 var(--space-xl) var(--space-xl);
   max-width: 1200px;
   width: 100%;
   box-sizing: border-box;
@@ -597,7 +597,7 @@ button { cursor: pointer; font-family: var(--font-body); border: none; backgroun
   gap: var(--space-2xl);
   align-items: center;
   margin-bottom: var(--space-3xl);
-  padding-top: var(--space-xl);
+  padding-top: 0;
 }
 
 .hero-portrait-col {
@@ -934,7 +934,7 @@ button { cursor: pointer; font-family: var(--font-body); border: none; backgroun
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: var(--space-lg);
-  margin-bottom: var(--space-2xl);
+  margin-bottom: var(--space-lg);
 }
 
 .artifact-card {

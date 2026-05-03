@@ -85,6 +85,43 @@
         z-index: 20;
       }
 
+      .top-nav {
+        position: absolute;
+        top: 24px;
+        left: 20px;
+        display: flex;
+        gap: 16px;
+        z-index: 20;
+      }
+
+      .nav-link {
+        color: var(--text-soft);
+        text-decoration: none;
+        font-size: 0.75rem;
+        font-weight: 600;
+        transition: color var(--transition);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+
+      .nav-link:hover {
+        color: var(--text-main);
+      }
+
+      @media (max-width: 480px) {
+        .top-nav {
+          position: static;
+          padding: 20px 20px 0;
+          margin-bottom: -10px;
+        }
+        .lang-switcher {
+          top: 20px;
+        }
+        .app-shell {
+          padding-top: 10px;
+        }
+      }
+
       .lang-btn {
         background: var(--surface-alt);
         border: 1px solid var(--border-soft);
@@ -234,6 +271,10 @@
     </style>
   </head>
   <body>
+    <nav class="top-nav" aria-label="Main navigation">
+      <a href="/" class="nav-link" data-i18n="nav_workspace" data-es="Volver al workspace" data-en="Back to workspace">Volver al workspace</a>
+    </nav>
+
     <nav class="lang-switcher" aria-label="Language selection">
       <button class="lang-btn" data-lang="es" aria-pressed="true">ES</button>
       <button class="lang-btn" data-lang="en" aria-pressed="false">EN</button>
@@ -295,7 +336,21 @@
           <span class="sc-btn" data-i18n="sc_btn_open" data-es="Abrir guía" data-en="Open guide">Abrir guía</span>
         </a>
       </section>
+
+      <section style="margin-top: var(--spacing-xl); border-top: 1px solid var(--border-soft); padding-top: var(--spacing-lg);">
+        <div style="text-align: center;">
+          <h2 style="font-size: 1.2rem; font-weight: 600; margin-bottom: 8px;" data-i18n="share_hub_title" data-es="Compartir el hub de apoyo" data-en="Share support hub">Compartir el hub de apoyo</h2>
+          <p style="font-size: 0.95rem; color: var(--text-muted); margin-bottom: 24px;" data-i18n="share_hub_helper" data-es="Comparte todas las guías de apoyo en tiempo real." data-en="Share all real-time support guides.">Comparte todas las guías de apoyo en tiempo real.</p>
+          <div style="display: flex; flex-wrap: wrap; gap: 12px; justify-content: center;">
+             <button class="sc-btn share-native" style="background: var(--surface-alt); color: var(--text-main); border: 1px solid var(--border-soft); display: none;" data-i18n="share_btn_native" data-es="Compartir" data-en="Share">Compartir</button>
+             <button class="sc-btn share-copy" style="background: var(--surface-alt); color: var(--text-main); border: 1px solid var(--border-soft);" data-i18n="share_btn_copy" data-es="Copiar link" data-en="Copy link">Copiar link</button>
+             <button class="sc-btn share-wa" style="background: #25D366; color: white;" data-i18n="share_btn_wa" data-es="WhatsApp" data-en="WhatsApp">WhatsApp</button>
+          </div>
+        </div>
+      </section>
     </main>
+
+    <div id="toast" style="position: fixed; top: 24px; left: 50%; transform: translateX(-50%) translateY(-20px); background: var(--accent-teal); color: white; padding: 10px 20px; border-radius: 30px; font-size: 0.9rem; font-weight: 600; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3); opacity: 0; pointer-events: none; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); z-index: 100;">Link copiado.</div>
 
     <footer class="sticky-footer">
       <div class="footer-text">
@@ -319,7 +374,8 @@
           const elements = {
             langBtns: document.querySelectorAll('.lang-btn'),
             i18n: document.querySelectorAll('[data-i18n]'),
-            docTitle: document.querySelector('title[data-i18n="doc_title"]')
+            docTitle: document.querySelector('title[data-i18n="doc_title"]'),
+            toast: document.getElementById('toast')
           };
 
           function updateLanguage(lang) {
@@ -340,6 +396,59 @@
             elements.langBtns.forEach(btn => {
               const isActive = btn.getAttribute('data-lang') === lang;
               btn.setAttribute('aria-pressed', isActive);
+            });
+          }
+
+          function showToast() {
+            if (!elements.toast) return;
+            const msg = state.lang === 'es' ? 'Link copiado al portapapeles.' : 'Link copied to clipboard.';
+            elements.toast.textContent = msg;
+            elements.toast.style.opacity = '1';
+            elements.toast.style.transform = 'translateX(-50%) translateY(0)';
+            setTimeout(() => {
+              elements.toast.style.opacity = '0';
+              elements.toast.style.transform = 'translateX(-50%) translateY(-20px)';
+            }, 2000);
+          }
+
+          async function copyToClipboard(text) {
+            try {
+              if (navigator.clipboard && navigator.clipboard.writeText) {
+                await navigator.clipboard.writeText(text);
+              } else {
+                throw new Error('Clipboard API unavailable');
+              }
+            } catch (err) {
+              const textArea = document.createElement('textarea');
+              textArea.value = text;
+              textArea.style.position = 'fixed';
+              textArea.style.left = '-9999px';
+              document.body.appendChild(textArea);
+              textArea.focus(); textArea.select();
+              try { document.execCommand('copy'); } catch (copyErr) {}
+              document.body.removeChild(textArea);
+            }
+            showToast();
+          }
+
+          const shareNative = document.querySelector('.share-native');
+          const shareCopy = document.querySelector('.share-copy');
+          const shareWA = document.querySelector('.share-wa');
+
+          if (navigator.share) {
+            shareNative.style.display = 'inline-block';
+            shareNative.addEventListener('click', () => {
+              navigator.share({ title: document.title, url: window.location.href });
+            });
+          }
+
+          if (shareCopy) shareCopy.addEventListener('click', () => copyToClipboard(window.location.href));
+          if (shareWA) {
+            shareWA.addEventListener('click', () => {
+              const text = state.lang === 'es' 
+                ? `Te comparto el Hub de Apoyo de Criar Sin Culpas: ${window.location.href}`
+                : `I'm sharing the Criar Sin Culpas Support Hub with you: ${window.location.href}`;
+              window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, '_blank');
             });
           }
 
