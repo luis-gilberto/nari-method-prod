@@ -1,1 +1,3 @@
-# Redirects cleared to resolve SSL error
+/apoyo /tools/parent-support/index.html 200
+/tools/parent-support /tools/parent-support/index.html 200
+/tools/parent-support/ /tools/parent-support/index.html 200

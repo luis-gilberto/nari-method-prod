@@ -1,43 +1,50 @@
 <!DOCTYPE html>
 <html lang="es">
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="theme-color" content="#141316" />
     <title data-i18n="doc_title" data-es="Emociones: cómo acompañar sin escalar" data-en="Emotions: how to support without escalating">Emociones: cómo acompañar sin escalar</title>
+    <meta name="description" content="Guía rápida para acompañar desbordes emocionales sin escalar el conflicto. Criar Sin Culpas.">
+    <meta property="og:title" content="Emociones: cómo acompañar sin escalar · Criar Sin Culpas">
+    <meta property="og:description" content="Guía rápida para acompañar desbordes emocionales sin escalar el conflicto. Elige lo que está pasando y encuentra un siguiente paso sin culpa.">
+    <meta property="og:site_name" content="Criar Sin Culpas">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
     <style>
       :root {
-        /* Color Palette */
-        --bg-color: #171515;
-        --bg-glow-top: rgba(78, 168, 154, 0.08);
-        --bg-glow-bottom: rgba(224, 122, 95, 0.08);
+        --bg: #141316;
+        --bg-elevated: rgba(255, 255, 255, 0.04);
+        --bg-elevated-strong: rgba(255, 255, 255, 0.065);
+        --bg-soft: rgba(255, 255, 255, 0.025);
+        --text-main: #fbf7f1;
+        --text-muted: #c5bcb3;
+        --text-soft: #978d86;
+        --line: rgba(255, 255, 255, 0.08);
+        --line-strong: rgba(255, 255, 255, 0.14);
+        --teal: #4bada8;
+        --coral: #f96f6e;
+        --purple: #3e2a6b;
+        --paper: #fbf7f1;
+        --shadow-soft: 0 10px 30px rgba(0, 0, 0, 0.22);
+        --shadow-card: 0 18px 40px rgba(0, 0, 0, 0.22);
+        --radius-sm: 12px;
+        --radius-md: 18px;
+        --radius-lg: 24px;
+        --radius-pill: 999px;
+        --transition: 280ms cubic-bezier(0.22, 1, 0.36, 1);
+      }
 
-        --surface-base: rgba(37, 33, 33, 0.7);
-        --surface-hover: rgba(48, 43, 43, 0.9);
-        --surface-alt: rgba(255, 255, 255, 0.04);
-
-        --text-main: #f8f3ef;
-        --text-muted: #b7aea8;
-        --text-soft: #958b85;
-
-        --accent-coral: #e07a5f;
-        --accent-teal: #4ea89a;
-
-        --border-soft: rgba(255, 255, 255, 0.08);
-        --border-strong: rgba(78, 168, 154, 0.4);
-
-        --shadow-soft: 0 12px 32px rgba(0, 0, 0, 0.2);
-
-        /* Spacing & Radii */
-        --radius-md: 14px;
-        --radius-lg: 20px;
-
-        --spacing-xs: 6px;
-        --spacing-sm: 12px;
-        --spacing-md: 16px;
-        --spacing-lg: 24px;
-        --spacing-xl: 32px;
-
-        --transition: 250ms cubic-bezier(0.2, 0.8, 0.2, 1);
+      @media (prefers-reduced-motion: reduce) {
+        :root {
+          --transition: 0ms linear;
+        }
       }
 
       * {
@@ -47,300 +54,396 @@
         -webkit-tap-highlight-color: transparent;
       }
 
+      html {
+        scroll-behavior: smooth;
+      }
+
       body {
-        font-family:
-          system-ui,
-          -apple-system,
-          BlinkMacSystemFont,
-          'Segoe UI',
-          Roboto,
-          Helvetica,
-          Arial,
-          sans-serif;
-        background-color: var(--bg-color);
-        background-image:
-          radial-gradient(circle at 10% 0%, var(--bg-glow-top), transparent 50%),
-          radial-gradient(circle at 90% 100%, var(--bg-glow-bottom), transparent 50%);
-        background-attachment: fixed;
-        color: var(--text-main);
-        line-height: 1.5;
         min-height: 100vh;
-        /* Account for fixed footer */
-        padding-bottom: calc(100px + env(safe-area-inset-bottom));
+        font-family: 'Inter', sans-serif;
+        color: var(--text-main);
+        background:
+          radial-gradient(circle at top left, rgba(75, 173, 168, 0.12), transparent 34%),
+          radial-gradient(circle at bottom right, rgba(249, 111, 110, 0.1), transparent 32%),
+          linear-gradient(180deg, #18161a 0%, #141316 42%, #100f12 100%);
+        display: flex;
+        justify-content: center;
+        padding: max(14px, env(safe-area-inset-top)) 0 calc(112px + env(safe-area-inset-bottom));
+        line-height: 1.55;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
+        overflow-x: hidden;
         position: relative;
       }
 
-      .app-shell {
-        width: 100%;
-        max-width: 760px;
-        padding: clamp(24px, 5vw, 40px) 20px;
-        display: flex;
-        flex-direction: column;
-        gap: var(--spacing-xl);
+      body::before {
+        content: '';
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        opacity: 0.028;
+        mix-blend-mode: soft-light;
+        background-image:
+          radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.85) 0 1px, transparent 1px),
+          radial-gradient(circle at 80% 60%, rgba(255, 255, 255, 0.65) 0 1px, transparent 1px),
+          radial-gradient(circle at 60% 85%, rgba(255, 255, 255, 0.6) 0 1px, transparent 1px);
+        background-size:
+          220px 220px,
+          280px 280px,
+          320px 320px;
+        z-index: 0;
       }
 
-      /* Language Toggle */
-      .lang-switcher {
-        position: absolute;
-        top: 24px;
-        right: 20px;
+      .shell {
+        width: 100%;
+        max-width: 760px;
+        padding: 0 16px;
+        position: relative;
+        z-index: 1;
+      }
+
+      .app {
+        width: 100%;
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.015), rgba(255, 255, 255, 0.01));
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        border-radius: 30px;
+        box-shadow: 0 24px 70px rgba(0, 0, 0, 0.28);
+        overflow: hidden;
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+      }
+
+      .utility-bar {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 12px;
+        align-items: start;
+        padding: 14px 14px 0;
+      }
+
+      .utility-links {
+        grid-column: 1 / -1;
         display: flex;
         gap: 8px;
-        z-index: 20;
+        overflow-x: auto;
+        scrollbar-width: none;
+        padding-bottom: 2px;
+      }
+
+      .utility-links::-webkit-scrollbar {
+        display: none;
+      }
+
+      .utility-link {
+        white-space: nowrap;
+        text-decoration: none;
+        color: var(--text-soft);
+        font-size: 0.78rem;
+        font-weight: 500;
+        letter-spacing: -0.01em;
+        padding: 9px 12px;
+        border-radius: var(--radius-pill);
+        background: rgba(255, 255, 255, 0.02);
+        border: 1px solid transparent;
+        transition:
+          color var(--transition),
+          background var(--transition),
+          border-color var(--transition),
+          transform var(--transition);
+      }
+
+      .utility-link:hover,
+      .utility-link:focus-visible {
+        color: var(--text-main);
+        background: rgba(255, 255, 255, 0.045);
+        border-color: rgba(255, 255, 255, 0.08);
+        outline: none;
+      }
+
+      .utility-link:active {
+        transform: translateY(1px);
+      }
+
+      .lang-control {
+        justify-self: end;
+        display: inline-flex;
+        align-items: center;
+        gap: 2px;
+        padding: 3px;
+        border-radius: var(--radius-pill);
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
       }
 
       .lang-btn {
-        background: var(--surface-alt);
-        border: 1px solid var(--border-soft);
+        border: 0;
+        background: transparent;
         color: var(--text-soft);
-        padding: 6px 12px;
-        border-radius: 20px;
-        font-size: 0.7rem;
-        font-weight: 700;
-        cursor: pointer;
-        transition: all var(--transition);
-        text-transform: uppercase;
-        letter-spacing: 0.05em;
-      }
-
-      .lang-btn[aria-pressed="true"] {
-        background: var(--accent-teal);
-        color: white;
-        border-color: var(--accent-teal);
-      }
-
-      .top-nav {
-        position: absolute;
-        top: 24px;
-        left: 20px;
-        display: flex;
-        gap: 16px;
-        z-index: 20;
-      }
-
-      .nav-link {
-        color: var(--text-soft);
-        text-decoration: none;
-        font-size: 0.75rem;
+        font: inherit;
+        font-size: 0.76rem;
         font-weight: 600;
-        transition: color var(--transition);
-        text-transform: uppercase;
-        letter-spacing: 0.05em;
+        letter-spacing: 0.01em;
+        min-width: 40px;
+        padding: 7px 10px;
+        border-radius: var(--radius-pill);
+        cursor: pointer;
+        transition:
+          color var(--transition),
+          background var(--transition),
+          box-shadow var(--transition),
+          transform var(--transition);
       }
 
-      .nav-link:hover {
+      .lang-btn[aria-pressed='true'] {
         color: var(--text-main);
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.06));
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.16);
       }
 
-      @media (max-width: 480px) {
-        .top-nav {
-          position: static;
-          padding: 20px 20px 0;
-          margin-bottom: -10px;
-        }
-        .lang-switcher {
-          top: 20px;
-        }
-        .app-shell {
-          padding-top: 10px;
-        }
+      .lang-btn:focus-visible,
+      .action-card:focus-visible,
+      .collapsible-trigger:focus-visible,
+      .share-btn:focus-visible {
+        outline: 2px solid rgba(75, 173, 168, 0.8);
+        outline-offset: 2px;
       }
 
-      /* Header */
-      header {
+      .content {
         display: flex;
         flex-direction: column;
-        gap: var(--spacing-sm);
-        padding-right: 80px; /* Space for lang switcher */
+        gap: 30px;
+        padding: 16px 16px 24px;
       }
 
-      .brand-label {
-        font-size: 0.75rem;
-        text-transform: uppercase;
-        letter-spacing: 0.1em;
-        color: var(--text-soft);
+      .hero {
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+        padding-top: 6px;
+      }
+
+      .eyebrow-row {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        width: fit-content;
+      }
+
+      .eyebrow-line {
+        width: 28px;
+        height: 1px;
+        background: linear-gradient(90deg, var(--teal), rgba(75, 173, 168, 0.12));
+      }
+
+      .eyebrow {
+        font-size: 0.74rem;
         font-weight: 600;
+        letter-spacing: 0.04em;
+        color: var(--teal);
       }
 
       h1 {
-        font-size: clamp(1.8rem, 5vw, 2.8rem);
-        font-weight: 700;
-        line-height: 1.1;
-        letter-spacing: -0.02em;
-        color: var(--text-main);
+        font-family: 'Cormorant Garamond', serif;
+        font-size: clamp(1.95rem, 8vw, 3.55rem);
+        line-height: 0.98;
+        letter-spacing: -0.03em;
+        font-weight: 600;
+        text-wrap: balance;
       }
 
       .subtitle {
-        font-size: clamp(1.05rem, 3vw, 1.25rem);
+        max-width: 33ch;
         color: var(--text-muted);
-        max-width: 36ch;
-        font-weight: 400;
+        font-size: clamp(0.98rem, 3.7vw, 1.14rem);
+        line-height: 1.58;
       }
 
       .reminder {
-        margin-top: var(--spacing-sm);
-        font-size: 0.95rem;
-        color: var(--text-soft);
+        margin-top: 2px;
+        padding: 14px 16px;
+        border-radius: 0 16px 16px 0;
+        border-left: 2px solid var(--coral);
+        background: linear-gradient(90deg, rgba(249, 111, 110, 0.08), rgba(249, 111, 110, 0.02));
+        color: var(--paper);
+        font-size: 0.93rem;
         font-weight: 500;
-        border-left: 2px solid var(--accent-coral);
-        padding-left: var(--spacing-sm);
       }
 
-      .cards-intro {
-        font-size: 0.85rem;
-        text-transform: uppercase;
-        letter-spacing: 0.05em;
+      .panel {
+        border: 1px solid var(--line);
+        border-radius: 26px;
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.018));
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
+      }
+
+      .responses-panel {
+        padding: 18px;
+      }
+
+      .panel-kicker {
+        font-size: 0.8rem;
         color: var(--text-soft);
-        font-weight: 700;
-        margin-bottom: calc(-1 * var(--spacing-md));
+        font-weight: 600;
+        margin-bottom: 14px;
       }
 
-      /* Action Cards */
-      .cards-section {
+      .cards-grid {
         display: grid;
         grid-template-columns: 1fr;
-        gap: var(--spacing-md);
-      }
-
-      @media (min-width: 640px) {
-        .cards-section {
-          grid-template-columns: repeat(3, 1fr);
-          align-items: stretch;
-        }
+        gap: 12px;
       }
 
       .action-card {
-        background-color: var(--surface-base);
-        border: 1px solid var(--border-soft);
-        border-radius: var(--radius-lg);
-        padding: var(--spacing-lg);
+        appearance: none;
+        width: 100%;
         text-align: left;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        background:
+          linear-gradient(180deg, rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0.018)), rgba(255, 255, 255, 0.018);
+        border-radius: 22px;
+        padding: 18px 18px 17px;
         color: inherit;
         cursor: pointer;
-        font-family: inherit;
-        position: relative;
-        transition: all var(--transition);
         display: flex;
         flex-direction: column;
-        gap: var(--spacing-md);
-        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.02);
+        gap: 14px;
+        transition:
+          transform var(--transition),
+          background var(--transition),
+          border-color var(--transition),
+          box-shadow var(--transition);
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
+        position: relative;
+        overflow: hidden;
       }
 
-      .action-card:focus-visible {
-        outline: none;
-        border-color: var(--accent-teal);
-        box-shadow: 0 0 0 3px rgba(78, 168, 154, 0.25);
-      }
-
-      .card-title {
-        font-size: 0.8rem;
-        text-transform: uppercase;
-        letter-spacing: 0.08em;
-        color: var(--text-soft);
-        font-weight: 700;
-      }
-
-      .card-phrase {
-        font-size: clamp(1.15rem, 3vw, 1.3rem);
-        font-weight: 400;
-        line-height: 1.35;
-        color: var(--text-muted);
-        transition: color var(--transition), font-weight var(--transition);
-        flex-grow: 1;
-      }
-
-      .card-helper {
-        font-size: 0.9rem;
-        color: var(--text-soft);
-        display: flex;
-        align-items: center;
-        gap: 8px;
-      }
-
-      .card-helper::before {
+      .action-card::before {
         content: '';
-        display: block;
-        width: 6px;
-        height: 6px;
-        border-radius: 50%;
-        background-color: currentColor;
-        opacity: 0.4;
+        position: absolute;
+        inset: 0;
+        border-radius: inherit;
+        pointer-events: none;
+        background: linear-gradient(135deg, rgba(75, 173, 168, 0.08), transparent 42%, rgba(249, 111, 110, 0.07));
+        opacity: 0;
+        transition: opacity var(--transition);
       }
 
-      /* Selected State */
       .action-card[aria-pressed='true'] {
-        background-color: var(--surface-hover);
-        border-color: var(--border-strong);
-        box-shadow: var(--shadow-soft), inset 0 1px 0 rgba(255, 255, 255, 0.05);
-        transform: translateY(-2px);
+        background:
+          linear-gradient(180deg, rgba(62, 42, 107, 0.28), rgba(255, 255, 255, 0.03)), rgba(255, 255, 255, 0.03);
+        border-color: rgba(184, 165, 214, 0.24);
+        box-shadow:
+          inset 0 0 0 1px rgba(184, 165, 214, 0.1),
+          0 16px 34px rgba(0, 0, 0, 0.22);
       }
 
-      .action-card[aria-pressed='true'] .card-phrase {
-        color: var(--text-main);
-        font-weight: 600;
-      }
-
-      .action-card[aria-pressed='true'] .card-helper {
-        color: var(--text-muted);
-      }
-
-      .action-card[aria-pressed='true'] .card-helper::before {
-        background-color: var(--accent-teal);
+      .action-card[aria-pressed='true']::before {
         opacity: 1;
       }
 
-      /* Collapsible Section */
-      .collapsible-wrapper {
-        border-top: 1px solid var(--border-soft);
-        padding-top: var(--spacing-sm);
+      .card-meta {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .card-title {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 0.82rem;
+        font-weight: 600;
+        color: var(--paper);
+      }
+
+      .card-title::before {
+        content: '';
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: currentColor;
+        opacity: 0.55;
+      }
+
+      .card-helper {
+        font-size: 0.77rem;
+        line-height: 1.35;
+        color: var(--text-soft);
+        text-align: right;
+        max-width: 15ch;
+      }
+
+      .card-phrase {
+        font-size: clamp(1.05rem, 3.7vw, 1.16rem);
+        line-height: 1.46;
+        letter-spacing: -0.015em;
+        color: var(--text-main);
+      }
+
+      .card-foot {
+        margin-top: auto;
+        font-size: 0.75rem;
+        color: rgba(251, 247, 241, 0.5);
+      }
+
+      .after-panel {
+        padding: 18px;
       }
 
       .collapsible-trigger {
         width: 100%;
-        background: none;
-        border: none;
-        color: var(--text-main);
-        font-size: 1.05rem;
-        font-family: inherit;
-        font-weight: 500;
-        padding: var(--spacing-sm) 0;
+        appearance: none;
+        background: transparent;
+        border: 0;
+        color: inherit;
         display: flex;
-        justify-content: space-between;
         align-items: center;
+        justify-content: space-between;
+        gap: 16px;
         cursor: pointer;
         text-align: left;
       }
 
-      .collapsible-trigger:focus-visible {
-        outline: none;
-        color: var(--accent-teal);
-        border-radius: 8px;
-        box-shadow: 0 0 0 2px rgba(78, 168, 154, 0.25);
+      .collapsible-label {
+        font-size: 1rem;
+        font-weight: 600;
+        letter-spacing: -0.01em;
       }
 
-      .collapsible-icon {
-        width: 20px;
-        height: 20px;
+      .chevron-wrap {
+        width: 34px;
+        height: 34px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        flex-shrink: 0;
+      }
+
+      .icon-chevron {
+        width: 18px;
+        height: 18px;
         stroke: currentColor;
         stroke-width: 2;
         fill: none;
+        opacity: 0.72;
         transition: transform var(--transition);
-        opacity: 0.7;
       }
 
-      .collapsible-trigger[aria-expanded='true'] .collapsible-icon {
+      .collapsible-trigger[aria-expanded='true'] .icon-chevron {
         transform: rotate(180deg);
       }
 
       .collapsible-content {
         display: grid;
         grid-template-rows: 0fr;
-        transition: grid-template-rows var(--transition), opacity var(--transition);
+        transition:
+          grid-template-rows var(--transition),
+          opacity var(--transition);
         opacity: 0;
       }
 
@@ -354,244 +457,640 @@
       }
 
       .collapsible-box {
-        margin-top: var(--spacing-md);
-        background-color: var(--surface-alt);
-        padding: var(--spacing-lg);
-        border-radius: var(--radius-md);
-        color: var(--text-main);
-        font-size: 1.05rem;
+        margin-top: 16px;
+        padding: 18px;
+        border-radius: 20px;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        background: rgba(255, 255, 255, 0.022);
         display: flex;
         flex-direction: column;
         gap: 12px;
       }
 
-      .safety-note {
-        font-size: 0.85rem;
-        color: var(--accent-coral);
-        border-top: 1px solid var(--border-soft);
-        padding-top: 12px;
-        margin-top: 12px;
-        font-weight: 500;
-      }
-
-      /* Sticky Footer */
-      .sticky-footer {
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        background: rgba(23, 21, 21, 0.85);
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
-        border-top: 1px solid var(--border-soft);
-        padding: 16px env(safe-area-inset-right) calc(16px + env(safe-area-inset-bottom)) env(safe-area-inset-left);
-        text-align: center;
-        z-index: 10;
-      }
-
-      .footer-text {
-        font-size: 0.9rem;
+      .after-primary {
+        font-size: 1rem;
         font-weight: 600;
+        color: var(--paper);
+      }
+
+      .after-helper {
+        font-size: 0.92rem;
         color: var(--text-muted);
-        letter-spacing: 0.03em;
       }
 
-      .footer-text span {
-        color: var(--text-main);
+      .safety-note {
+        margin-top: 2px;
+        padding-top: 12px;
+        border-top: 1px solid rgba(249, 111, 110, 0.18);
+        color: var(--coral);
+        font-size: 0.84rem;
+        line-height: 1.5;
       }
 
-      .footer-arrow {
-        opacity: 0.4;
-        margin: 0 6px;
-        font-weight: 400;
+      .share-panel {
+        padding: 18px;
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
       }
 
-      /* Toast */
+      .share-head {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        text-align: center;
+      }
+
+      .share-title {
+        font-size: 1rem;
+        font-weight: 600;
+        color: var(--paper);
+      }
+
+      .share-copy {
+        font-size: 0.88rem;
+        color: var(--text-muted);
+      }
+
+      .share-actions {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+      }
+
+      .share-btn {
+        appearance: none;
+        border: 1px solid rgba(255, 255, 255, 0.09);
+        background: rgba(255, 255, 255, 0.03);
+        color: var(--paper);
+        border-radius: var(--radius-pill);
+        min-height: 44px;
+        padding: 0 14px;
+        font: inherit;
+        font-size: 0.86rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition:
+          background var(--transition),
+          border-color var(--transition),
+          transform var(--transition);
+      }
+
+      .share-btn:active,
+      .action-card:active {
+        transform: translateY(1px);
+      }
+
+      .share-btn.wa {
+        grid-column: 1 / -1;
+        background: rgba(37, 211, 102, 0.12);
+        color: #8af0b0;
+        border-color: rgba(37, 211, 102, 0.22);
+      }
+
+      .floating-footer {
+        position: fixed;
+        left: 50%;
+        bottom: max(12px, env(safe-area-inset-bottom));
+        transform: translateX(-50%);
+        width: calc(100% - 24px);
+        max-width: 580px;
+        padding: 13px 18px;
+        border-radius: 20px;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        background: rgba(15, 15, 18, 0.72);
+        backdrop-filter: blur(18px);
+        -webkit-backdrop-filter: blur(18px);
+        box-shadow: 0 18px 40px rgba(0, 0, 0, 0.28);
+        z-index: 30;
+      }
+
+      .footer-steps {
+        text-align: center;
+        font-size: 0.78rem;
+        font-weight: 600;
+        letter-spacing: 0.01em;
+        color: rgba(251, 247, 241, 0.78);
+      }
+
       .toast {
         position: fixed;
-        top: 24px;
         left: 50%;
-        transform: translateX(-50%) translateY(-20px);
-        background: var(--accent-teal);
-        color: white;
-        padding: 10px 20px;
-        border-radius: 30px;
-        font-size: 0.9rem;
-        font-weight: 600;
-        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+        bottom: calc(86px + env(safe-area-inset-bottom));
+        transform: translate(-50%, 16px);
         opacity: 0;
         pointer-events: none;
-        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        z-index: 100;
+        padding: 11px 16px;
+        border-radius: var(--radius-pill);
+        background: linear-gradient(135deg, rgba(62, 42, 107, 0.96), rgba(75, 173, 168, 0.9));
+        color: #fff;
+        font-size: 0.84rem;
+        font-weight: 600;
+        box-shadow: 0 16px 34px rgba(0, 0, 0, 0.24);
+        white-space: nowrap;
+        transition:
+          opacity 220ms ease,
+          transform 320ms cubic-bezier(0.22, 1, 0.36, 1);
+        z-index: 40;
       }
 
       .toast.visible {
         opacity: 1;
-        transform: translateX(-50%) translateY(0);
+        transform: translate(-50%, 0);
+      }
+
+      @media (hover: hover) and (pointer: fine) {
+        .action-card:hover {
+          transform: translateY(-2px);
+          border-color: rgba(255, 255, 255, 0.14);
+          background:
+            linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02)), rgba(255, 255, 255, 0.02);
+          box-shadow: var(--shadow-card);
+        }
+
+        .action-card:hover::before {
+          opacity: 0.9;
+        }
+
+        .share-btn:hover {
+          background: rgba(255, 255, 255, 0.06);
+          border-color: rgba(255, 255, 255, 0.14);
+        }
+
+        .share-btn.wa:hover {
+          background: rgba(37, 211, 102, 0.18);
+        }
+      }
+
+      @media (min-width: 700px) {
+        .shell {
+          padding: 0 20px;
+        }
+
+        .utility-bar {
+          grid-template-columns: 1fr auto;
+          align-items: center;
+          padding: 18px 18px 0;
+        }
+
+        .utility-links {
+          grid-column: auto;
+          overflow: visible;
+          gap: 10px;
+        }
+
+        .content {
+          padding: 22px 22px 28px;
+          gap: 34px;
+        }
+
+        .hero {
+          gap: 16px;
+          padding-top: 2px;
+        }
+
+        .responses-panel,
+        .after-panel,
+        .share-panel {
+          padding: 22px;
+        }
+
+        .cards-grid {
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+          gap: 14px;
+        }
+
+        .action-card {
+          min-height: 228px;
+        }
+
+        .share-actions {
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+
+        .share-btn.wa {
+          grid-column: auto;
+        }
+      }
+
+      @media (max-width: 420px) {
+        .app {
+          border-radius: 24px;
+        }
+
+        .content {
+          gap: 26px;
+        }
+
+        .card-helper {
+          max-width: 12ch;
+        }
+
+        .toast {
+          max-width: calc(100% - 32px);
+          white-space: normal;
+          text-align: center;
+        }
       }
     </style>
   </head>
   <body>
-    <nav class="top-nav" aria-label="Main navigation">
-      <a href="/" class="nav-link" data-i18n="nav_workspace" data-es="Volver al workspace" data-en="Back to workspace">Volver al workspace</a>
-      <a href="/tools/parent-support/" class="nav-link" data-i18n="nav_hub" data-es="Ver todas las guías" data-en="See all guides">Ver todas las guías</a>
-    </nav>
+    <div class="shell">
+      <main class="app">
+        <div class="utility-bar">
+          <div class="utility-links" aria-label="Main navigation">
+            <a
+              href="/"
+              class="utility-link"
+              data-i18n="nav_workspace"
+              data-es="Volver al workspace"
+              data-en="Back to workspace"
+              >Volver al workspace</a
+            >
+            <a
+              href="/tools/parent-support/"
+              class="utility-link"
+              data-i18n="nav_hub"
+              data-es="Ver todas las guías"
+              data-en="See all guides"
+              >Ver todas las guías</a
+            >
+          </div>
 
-    <nav class="lang-switcher" aria-label="Language selection">
-      <button class="lang-btn" data-lang="es" aria-pressed="true">ES</button>
-      <button class="lang-btn" data-lang="en" aria-pressed="false">EN</button>
-    </nav>
-    
-    <div id="toast" class="toast" aria-live="polite">Frase copiada. Respira. Úsala con calma.</div>
+          <div class="lang-control" aria-label="Language selection">
+            <button type="button" class="lang-btn" data-lang="es" aria-pressed="true">ES</button>
+            <button type="button" class="lang-btn" data-lang="en" aria-pressed="false">EN</button>
+          </div>
+        </div>
 
-    <main class="app-shell">
-      <header>
-        <div class="brand-label" data-i18n="eyebrow" data-es="Apoyo en tiempo real" data-en="Real-time support">Apoyo en tiempo real</div>
-        <h1 data-i18n="title" data-es="Emociones: cómo acompañar sin escalar" data-en="Emotions: how to support without escalating">Emociones: cómo acompañar sin escalar</h1>
-        <p class="subtitle" data-i18n="subtitle" data-es="No tienes que apagar la emoción. Solo necesitas acompañarla." data-en="You don’t have to stop the emotion. You just need to support it.">No tienes que apagar la emoción. Solo necesitas acompañarla.</p>
-        <p class="reminder" data-i18n="reminder" data-es="No expliques demasiado. No corrijas en el momento. Quédate cerca." data-en="Don’t over-explain. Don’t correct in the moment. Stay close.">No expliques demasiado. No corrijas en el momento. Quédate cerca.</p>
-      </header>
-
-      <div class="cards-intro" data-i18n="cards_intro" data-es="Elige según el momento" data-en="Choose based on the moment">Elige según el momento</div>
-
-      <section class="cards-section" aria-label="Opciones de respuesta" data-i18n-aria="cards_section_aria" data-es="Opciones de respuesta" data-en="Response options">
-        <button class="action-card" aria-pressed="false">
-          <span class="card-title" data-i18n="card1_title" data-es="Contener" data-en="Contain">Contener</span>
-          <span class="card-phrase" data-i18n="card1_phrase" data-es="“Estoy aquí. Puedes sentirte así.”" data-en="“I’m here. You’re allowed to feel this.”">“Estoy aquí. Puedes sentirte así.”</span>
-          <span class="card-helper" data-i18n="card1_helper" data-es="Empieza la intensidad." data-en="The intensity is starting.">Empieza la intensidad.</span>
-        </button>
-
-        <button class="action-card" aria-pressed="false">
-          <span class="card-title" data-i18n="card2_title" data-es="Regular juntos" data-en="Regulate together">Regular juntos</span>
-          <span class="card-phrase" data-i18n="card2_phrase" data-es="“Respira conmigo… uno, dos…”" data-en="“Breathe with me… one, two…”">“Respira conmigo… uno, dos…”</span>
-          <span class="card-helper" data-i18n="card2_helper" data-es="La emoción está subiendo." data-en="The emotion is rising.">La emoción está subiendo.</span>
-        </button>
-
-        <button class="action-card" aria-pressed="false">
-          <span class="card-title" data-i18n="card3_title" data-es="Sostener + proteger" data-en="Hold + protect">Sostener + proteger</span>
-          <span class="card-phrase" data-i18n="card3_phrase" data-es="“No te voy a dejar hacer daño. Estoy contigo.”" data-en="“I won’t let you hurt anyone. I’m here with you.”">“No te voy a dejar hacer daño. Estoy contigo.”</span>
-          <span class="card-helper" data-i18n="card3_helper" data-es="Hay llanto fuerte o descontrol." data-en="There is strong crying or loss of control.">Hay llanto fuerte o descontrol.</span>
-        </button>
-      </section>
-
-      <section class="collapsible-wrapper">
-        <button id="collapsible-trigger" class="collapsible-trigger" aria-expanded="false" aria-controls="after-content">
-          <span data-i18n="after_label" data-es="Después (cuando todo se calme)" data-en="After (when everything is calm)">Después (cuando todo se calme)</span>
-          <svg class="collapsible-icon" viewBox="0 0 24 24">
-            <polyline points="6 9 12 15 18 9" stroke-linecap="round" stroke-linejoin="round"></polyline>
-          </svg>
-        </button>
-        <div id="after-content" class="collapsible-content">
-          <div class="collapsible-inner">
-            <div class="collapsible-box">
-               <p data-i18n="after_primary" data-es="Eso fue muy intenso, ¿verdad?" data-en="That was really intense, wasn’t it?">Eso fue muy intenso, ¿verdad?</p>
-               <p style="color: var(--text-muted); font-size: 0.95rem;" data-i18n="after_helper" data-es="Primero conecta. Luego, cuando todo esté en calma, pueden hablar de lo que pasó." data-en="Connect first. Then, when everything is calm, you can talk about what happened.">Primero conecta. Luego, cuando todo esté en calma, pueden hablar de lo que pasó.</p>
-               <div class="safety-note" data-i18n="safety_note" data-es="Si hay riesgo físico, prioriza seguridad y pausa." data-en="If there is physical risk, prioritize safety and pause.">Si hay riesgo físico, prioriza seguridad y pausa.</div>
+        <div class="content">
+          <header class="hero">
+            <div class="eyebrow-row">
+              <span class="eyebrow-line" aria-hidden="true"></span>
+              <div class="eyebrow" data-i18n="eyebrow" data-es="Apoyo en tiempo real" data-en="Real-time support">
+                Apoyo en tiempo real
+              </div>
             </div>
-          </div>
-        </div>
-      </section>
 
-      <section style="margin-top: var(--spacing-md); border-top: 1px solid var(--border-soft); padding-top: var(--spacing-lg);">
-        <div style="text-align: center;">
-          <h2 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 8px;" data-i18n="share_label" data-es="Compartir esta guía" data-en="Share this guide">Compartir esta guía</h2>
-          <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 20px;" data-i18n="share_helper" data-es="Si esto te ayudó, puedes enviárselo a otra persona." data-en="If this helped, you can send it to someone else.">Si esto te ayudó, puedes enviárselo a otra persona.</p>
-          <div style="display: flex; flex-wrap: wrap; gap: 12px; justify-content: center;">
-             <button class="sc-btn share-native" style="background: var(--surface-alt); color: var(--text-main); border: 1px solid var(--border-soft); display: none;" data-i18n="share_btn_native" data-es="Compartir" data-en="Share">Compartir</button>
-             <button class="sc-btn share-copy" style="background: var(--surface-alt); color: var(--text-main); border: 1px solid var(--border-soft);" data-i18n="share_btn_copy" data-es="Copiar link" data-en="Copy link">Copiar link</button>
-             <button class="sc-btn share-wa" style="background: #25D366; color: white;" data-i18n="share_btn_wa" data-es="WhatsApp" data-en="WhatsApp">WhatsApp</button>
-          </div>
-        </div>
-      </section>
-    </main>
+            <h1
+              data-i18n="title"
+              data-es="Emociones: cómo acompañar sin escalar"
+              data-en="Emotions: how to support without escalating"
+            >
+              Emociones: cómo acompañar sin escalar
+            </h1>
 
-    <footer class="sticky-footer">
-      <div class="footer-text">
-        <span data-i18n="footer_s1" data-es="Presencia" data-en="Presence">Presencia</span><span class="footer-arrow">→</span><span data-i18n="footer_s2" data-es="Validación" data-en="Validate">Validación</span><span class="footer-arrow">→</span><span data-i18n="footer_s3" data-es="Regulación" data-en="Regulate">Regulación</span><span class="footer-arrow">→</span><span data-i18n="footer_s4" data-es="Protección" data-en="Protect">Protección</span>
+            <p
+              class="subtitle"
+              data-i18n="subtitle"
+              data-es="No tienes que apagar la emoción. Solo necesitas acompañarla."
+              data-en="You don’t have to stop the emotion. You just need to support it."
+            >
+              No tienes que apagar la emoción. Solo necesitas acompañarla.
+            </p>
+
+            <div
+              class="reminder"
+              data-i18n="reminder"
+              data-es="No expliques demasiado. No corrijas en el momento. Quédate cerca."
+              data-en="Don’t over-explain. Don’t correct in the moment. Stay close."
+            >
+              No expliques demasiado. No corrijas en el momento. Quédate cerca.
+            </div>
+          </header>
+
+          <section
+            class="panel responses-panel"
+            aria-label="Opciones de respuesta"
+            data-i18n-aria="cards_section_aria"
+            data-es="Opciones de respuesta"
+            data-en="Response options"
+          >
+            <div
+              class="panel-kicker"
+              data-i18n="cards_intro"
+              data-es="Elige según el momento"
+              data-en="Choose based on the moment"
+            >
+              Elige según el momento
+            </div>
+
+            <div class="cards-grid">
+              <button type="button" class="action-card" aria-pressed="false">
+                <div class="card-meta">
+                  <span class="card-title" data-i18n="card1_title" data-es="Contener" data-en="Contain">Contener</span>
+                  <span
+                    class="card-helper"
+                    data-i18n="card1_helper"
+                    data-es="Empieza la intensidad."
+                    data-en="The intensity is starting."
+                    >Empieza la intensidad.</span
+                  >
+                </div>
+                <div
+                  class="card-phrase"
+                  data-i18n="card1_phrase"
+                  data-es="Estoy aquí. Puedes sentirte así."
+                  data-en="I’m here. You’re allowed to feel this."
+                >
+                  Estoy aquí. Puedes sentirte así.
+                </div>
+                <div
+                  class="card-foot"
+                  data-i18n="card1_foot"
+                  data-es="Toca para copiar la frase"
+                  data-en="Tap to copy the phrase"
+                >
+                  Toca para copiar la frase
+                </div>
+              </button>
+
+              <button type="button" class="action-card" aria-pressed="false">
+                <div class="card-meta">
+                  <span class="card-title" data-i18n="card2_title" data-es="Regular juntos" data-en="Regulate together"
+                    >Regular juntos</span
+                  >
+                  <span
+                    class="card-helper"
+                    data-i18n="card2_helper"
+                    data-es="La emoción está subiendo."
+                    data-en="The emotion is rising."
+                    >La emoción está subiendo.</span
+                  >
+                </div>
+                <div
+                  class="card-phrase"
+                  data-i18n="card2_phrase"
+                  data-es="Respira conmigo… uno, dos…"
+                  data-en="Breathe with me… one, two…"
+                >
+                  Respira conmigo… uno, dos…
+                </div>
+                <div
+                  class="card-foot"
+                  data-i18n="card2_foot"
+                  data-es="Toca para copiar la frase"
+                  data-en="Tap to copy the phrase"
+                >
+                  Toca para copiar la frase
+                </div>
+              </button>
+
+              <button type="button" class="action-card" aria-pressed="false">
+                <div class="card-meta">
+                  <span
+                    class="card-title"
+                    data-i18n="card3_title"
+                    data-es="Sostener + proteger"
+                    data-en="Hold + protect"
+                    >Sostener + proteger</span
+                  >
+                  <span
+                    class="card-helper"
+                    data-i18n="card3_helper"
+                    data-es="Hay llanto fuerte o descontrol."
+                    data-en="There is strong crying or loss of control."
+                    >Hay llanto fuerte o descontrol.</span
+                  >
+                </div>
+                <div
+                  class="card-phrase"
+                  data-i18n="card3_phrase"
+                  data-es="No te voy a dejar hacer daño. Estoy contigo."
+                  data-en="I won’t let you hurt anyone. I’m here with you."
+                >
+                  No te voy a dejar hacer daño. Estoy contigo.
+                </div>
+                <div
+                  class="card-foot"
+                  data-i18n="card3_foot"
+                  data-es="Toca para copiar la frase"
+                  data-en="Tap to copy the phrase"
+                >
+                  Toca para copiar la frase
+                </div>
+              </button>
+            </div>
+          </section>
+
+          <section class="panel after-panel">
+            <button
+              type="button"
+              id="collapsible-trigger"
+              class="collapsible-trigger"
+              aria-expanded="false"
+              aria-controls="after-content"
+            >
+              <span
+                class="collapsible-label"
+                data-i18n="after_label"
+                data-es="Después (cuando todo se calme)"
+                data-en="After (when everything is calm)"
+                >Después (cuando todo se calme)</span
+              >
+              <span class="chevron-wrap" aria-hidden="true">
+                <svg class="icon-chevron" viewBox="0 0 24 24">
+                  <polyline points="6 9 12 15 18 9" stroke-linecap="round" stroke-linejoin="round"></polyline>
+                </svg>
+              </span>
+            </button>
+
+            <div id="after-content" class="collapsible-content">
+              <div class="collapsible-inner">
+                <div class="collapsible-box">
+                  <p
+                    class="after-primary"
+                    data-i18n="after_primary"
+                    data-es="Eso fue muy intenso, ¿verdad?"
+                    data-en="That was really intense, wasn’t it?"
+                  >
+                    Eso fue muy intenso, ¿verdad?
+                  </p>
+                  <p
+                    class="after-helper"
+                    data-i18n="after_helper"
+                    data-es="Primero conecta. Luego, cuando todo esté en calma, pueden hablar de lo que pasó."
+                    data-en="Connect first. Then, when everything is calm, you can talk about what happened."
+                  >
+                    Primero conecta. Luego, cuando todo esté en calma, pueden hablar de lo que pasó.
+                  </p>
+                  <div
+                    class="safety-note"
+                    data-i18n="safety_note"
+                    data-es="Si hay riesgo físico, prioriza seguridad y pausa."
+                    data-en="If there is physical risk, prioritize safety and pause."
+                  >
+                    Si hay riesgo físico, prioriza seguridad y pausa.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="panel share-panel">
+            <div class="share-head">
+              <h2 class="share-title" data-i18n="share_label" data-es="Compartir esta guía" data-en="Share this guide">
+                Compartir esta guía
+              </h2>
+              <p
+                class="share-copy"
+                data-i18n="share_helper"
+                data-es="Si esto te ayudó, puedes enviárselo a otra persona."
+                data-en="If this helped, you can send it to someone else."
+              >
+                Si esto te ayudó, puedes enviárselo a otra persona.
+              </p>
+            </div>
+
+            <div class="share-actions">
+              <button
+                type="button"
+                class="share-btn share-native"
+                style="display: none"
+                data-i18n="share_btn_native"
+                data-es="Compartir"
+                data-en="Share"
+              >
+                Compartir
+              </button>
+              <button
+                type="button"
+                class="share-btn share-copy-btn"
+                data-i18n="share_btn_copy"
+                data-es="Copiar link"
+                data-en="Copy link"
+              >
+                Copiar link
+              </button>
+              <button
+                type="button"
+                class="share-btn wa share-wa"
+                data-i18n="share_btn_wa"
+                data-es="WhatsApp"
+                data-en="WhatsApp"
+              >
+                WhatsApp
+              </button>
+            </div>
+          </section>
+        </div>
+      </main>
+    </div>
+
+    <footer class="floating-footer">
+      <div
+        class="footer-steps"
+        data-i18n="footer_steps"
+        data-es="Presencia → Validación → Regulación → Protección"
+        data-en="Presence → Validate → Regulate → Protect"
+      >
+        Presencia → Validación → Regulación → Protección
       </div>
     </footer>
 
+    <div id="toast" class="toast" aria-live="polite">Frase copiada. Respira. Úsala con calma.</div>
+
     <script>
-      (function() {
-        /**
-         * Robust initialization pattern for Trae/Live environments
-         */
+      (function () {
         function initTool() {
-          // Idempotency guard
-          if (window.__pantallasToolInitialized) return;
-          window.__pantallasToolInitialized = true;
+          if (window.__toolInitialized) return;
+          window.__toolInitialized = true;
+
+          function getCanonicalUrl(url) {
+            const clean = url.split('?')[0].split('#')[0];
+            return clean.replace(/https:\/\/.*\.pages\.dev/, 'https://nari.luis-gilberto.com');
+          }
+
+          function getStoredLang() {
+            try {
+              return localStorage.getItem('lg_parent_lang') || 'es';
+            } catch (error) {
+              return 'es';
+            }
+          }
+
+          function setStoredLang(lang) {
+            try {
+              localStorage.setItem('lg_parent_lang', lang);
+            } catch (error) {}
+          }
 
           const state = {
-            lang: localStorage.getItem('lg_parent_lang') || 'es'
+            lang: getStoredLang(),
           };
 
           const elements = {
             langBtns: document.querySelectorAll('.lang-btn'),
             cards: document.querySelectorAll('.action-card'),
-            collapsibleTrigger: document.getElementById('collapsible-trigger'),
+            afterTrigger: document.getElementById('collapsible-trigger'),
             toast: document.getElementById('toast'),
             i18n: document.querySelectorAll('[data-i18n]'),
             i18nAria: document.querySelectorAll('[data-i18n-aria]'),
-            docTitle: document.querySelector('title[data-i18n="doc_title"]')
+            docTitle: document.querySelector('title[data-i18n="doc_title"]'),
+            shareNative: document.querySelector('.share-native'),
+            shareCopy: document.querySelector('.share-copy-btn'),
+            shareWA: document.querySelector('.share-wa'),
           };
 
-          // 1. Language Logic
           function updateLanguage(lang) {
             state.lang = lang;
             document.documentElement.lang = lang;
-            localStorage.setItem('lg_parent_lang', lang);
+            setStoredLang(lang);
 
-            // Update text content
-            elements.i18n.forEach(el => {
+            elements.i18n.forEach((el) => {
               if (el.hasAttribute(`data-${lang}`)) {
                 el.textContent = el.getAttribute(`data-${lang}`);
               }
             });
 
-            // Update aria labels
-            elements.i18nAria.forEach(el => {
+            elements.i18nAria.forEach((el) => {
               if (el.hasAttribute(`data-${lang}`)) {
                 el.setAttribute('aria-label', el.getAttribute(`data-${lang}`));
               }
             });
 
-            // Update document title
             if (elements.docTitle && elements.docTitle.hasAttribute(`data-${lang}`)) {
               document.title = elements.docTitle.getAttribute(`data-${lang}`);
             }
 
-            // Update toggle buttons
-            elements.langBtns.forEach(btn => {
+            elements.langBtns.forEach((btn) => {
               const isActive = btn.getAttribute('data-lang') === lang;
-              btn.setAttribute('aria-pressed', isActive);
+              btn.setAttribute('aria-pressed', String(isActive));
             });
           }
 
-          elements.langBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-              updateLanguage(btn.getAttribute('data-lang'));
-            });
+          elements.langBtns.forEach((btn) => {
+            btn.addEventListener('click', () => updateLanguage(btn.getAttribute('data-lang')));
           });
 
-          // 2. Action Cards Logic
-          function showToast() {
+          let toastTimeout;
+          function showToast(isPhrase) {
             if (!elements.toast) return;
-            const msg = state.lang === 'es' ? 'Frase copiada. Respira. Úsala con calma.' : 'Phrase copied. Breathe. Use it calmly.';
-            elements.toast.textContent = msg;
+            clearTimeout(toastTimeout);
+
+            const message = isPhrase
+              ? state.lang === 'es'
+                ? 'Frase copiada. Respira. Úsala con calma.'
+                : 'Phrase copied. Breathe. Use it calmly.'
+              : state.lang === 'es'
+                ? 'Link copiado al portapapeles.'
+                : 'Link copied to clipboard.';
+
+            elements.toast.textContent = message;
             elements.toast.classList.add('visible');
-            setTimeout(() => {
+            toastTimeout = setTimeout(() => {
               elements.toast.classList.remove('visible');
-            }, 2000);
+            }, 2200);
           }
 
-          async function copyToClipboard(text) {
+          async function copyToClipboard(text, isPhrase) {
             try {
               if (navigator.clipboard && navigator.clipboard.writeText) {
                 await navigator.clipboard.writeText(text);
               } else {
                 throw new Error('Clipboard API unavailable');
               }
-            } catch (err) {
+            } catch (error) {
               const textArea = document.createElement('textarea');
               textArea.value = text;
               textArea.style.position = 'fixed';
@@ -601,70 +1100,66 @@
               textArea.select();
               try {
                 document.execCommand('copy');
-              } catch (copyErr) {
-                console.warn('Fallback copy failed', copyErr);
-              }
+              } catch (copyError) {}
               document.body.removeChild(textArea);
             }
-            showToast();
+            showToast(isPhrase);
           }
 
-          elements.cards.forEach(card => {
+          elements.cards.forEach((card) => {
             card.addEventListener('click', () => {
               const isPressed = card.getAttribute('aria-pressed') === 'true';
-              
-              // Reset others
-              elements.cards.forEach(c => c.setAttribute('aria-pressed', 'false'));
-              
+              elements.cards.forEach((item) => item.setAttribute('aria-pressed', 'false'));
+
               if (!isPressed) {
                 card.setAttribute('aria-pressed', 'true');
                 const phrase = card.querySelector('.card-phrase');
                 if (phrase) {
-                  copyToClipboard(phrase.textContent);
+                  copyToClipboard(phrase.textContent.trim(), true);
                 }
               }
             });
           });
 
-          // 3. Collapsible Logic
-          if (elements.collapsibleTrigger) {
-            elements.collapsibleTrigger.addEventListener('click', () => {
-              const expanded = elements.collapsibleTrigger.getAttribute('aria-expanded') === 'true';
-              elements.collapsibleTrigger.setAttribute('aria-expanded', !expanded);
+          if (elements.afterTrigger) {
+            elements.afterTrigger.addEventListener('click', () => {
+              const expanded = elements.afterTrigger.getAttribute('aria-expanded') === 'true';
+              elements.afterTrigger.setAttribute('aria-expanded', String(!expanded));
             });
           }
 
-          if (elements.shareTrigger) {
-            elements.shareTrigger.addEventListener('click', () => {
-              const expanded = elements.shareTrigger.getAttribute('aria-expanded') === 'true';
-              elements.shareTrigger.setAttribute('aria-expanded', !expanded);
+          if (navigator.share && elements.shareNative) {
+            elements.shareNative.style.display = 'inline-flex';
+            elements.shareNative.addEventListener('click', async () => {
+              try {
+                await navigator.share({
+                  title: document.title,
+                  url: getCanonicalUrl(window.location.href),
+                });
+              } catch (error) {}
             });
           }
 
-          const shareNative = document.querySelector('.share-native');
-          const shareCopy = document.querySelector('.share-copy');
-          const shareWA = document.querySelector('.share-wa');
-
-          if (navigator.share) {
-            shareNative.style.display = 'inline-block';
-            shareNative.addEventListener('click', () => {
-              navigator.share({ title: document.title, url: window.location.href });
+          if (elements.shareCopy) {
+            elements.shareCopy.addEventListener('click', () => {
+              copyToClipboard(getCanonicalUrl(window.location.href), false);
             });
           }
 
-          shareCopy.addEventListener('click', () => copyToClipboard(window.location.href));
-          shareWA.addEventListener('click', () => {
-            const text = state.lang === 'es' 
-              ? `Te comparto esta guía de Criar Sin Culpas: ${window.location.href}`
-              : `I'm sharing this guide from Criar Sin Culpas with you: ${window.location.href}`;
-            window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, '_blank');
-          });
+          if (elements.shareWA) {
+            elements.shareWA.addEventListener('click', () => {
+              const canonicalUrl = getCanonicalUrl(window.location.href);
+              const text =
+                state.lang === 'es'
+                  ? `Te comparto esta guía de Criar Sin Culpas: ${canonicalUrl}`
+                  : `I'm sharing this guide from Criar Sin Culpas with you: ${canonicalUrl}`;
+              window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, '_blank');
+            });
+          }
 
-          // 4. Initial Run
           updateLanguage(state.lang);
         }
 
-        // Production-safe execution
         if (document.readyState === 'loading') {
           document.addEventListener('DOMContentLoaded', initTool);
         } else {
@@ -672,5 +1167,6 @@
         }
       })();
     </script>
-  </body>
+  <script defer src="https://static.cloudflareinsights.com/beacon.min.js/v8c78df7c7c0f484497ecbca7046644da1771523124516" integrity="sha512-8DS7rgIrAmghBFwoOTujcf6D9rXvH8xm8JQ1Ja01h9QX8EzXldiszufYa4IFfKdLUKTTrnSFXLDkUEOTrZQ8Qg==" data-cf-beacon='{"version":"2024.11.0","token":"4edd5f8ec12a48cfa682ab8261b80a79","server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+</body>
 </html>
