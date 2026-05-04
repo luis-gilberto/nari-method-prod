@@ -1,10 +1,9 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Criar Sin Culpas Workspace – LG Ecosystem</title>
-  <link rel="icon" type="image/png" href="/assets/favicon/favicon.png">
+  <title>Criar Sin Culpas Workspace — LG Ecosystem</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
@@ -12,10 +11,9 @@
 </head>
 <body>
 
-  <!-- ===========================================================
+  <!-- ═══════════════════════════════════════════════════════════
        ENTRY GATE / THRESHOLD
-       Handles language selection and initial entry.
-  =========================================================== -->
+  ═══════════════════════════════════════════════════════════ -->
   <div id="gate" class="gate-screen"> 
      <div class="gate-inner"> 
        <div class="gate-logo"> 
@@ -50,10 +48,9 @@
     <div class="gate-overlay"></div>
   </div>
 
-  <!-- ===========================================================
+  <!-- ═══════════════════════════════════════════════════════════
        MAIN WORKSPACE SHELL
-       The primary container for the workspace experience.
-  =========================================================== -->
+  ═══════════════════════════════════════════════════════════ -->
   <div id="workspace" class="workspace hidden">
 
     <!-- TOP SYSTEM BAR -->
@@ -132,7 +129,7 @@
                 </button>
                 <button class="csc-mega-link" onclick="cscNavGo('vault')">
                   <div class="csc-mega-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a10 10 0 000 20c1.1 0 2-.9 2-2v-1c0-.55.45-1 1-1h2a3 3 0 000-6h-1c-1.66 0-3-1.34-3-3V5"/></svg></div>
-                  <div class="csc-mega-text"><b><span class="lb-en">Brand Vault › Identidad</span><span class="lb-es active">Bóveda de Marca</span></b><em><span class="lb-en">Colors, type, voice &amp; identity</span><span class="lb-es active">Colores, tipografía, voz e identidad</span></em></div>
+                  <div class="csc-mega-text"><b><span class="lb-en">Brand Vault · Identidad</span><span class="lb-es active">Bóveda de Marca</span></b><em><span class="lb-en">Colors, type, voice &amp; identity</span><span class="lb-es active">Colores, tipografía, voz e identidad</span></em></div>
                 </button>
               </div>
               <div class="csc-mega-divider"></div>
@@ -155,10 +152,6 @@
                 <button class="csc-mega-link" onclick="cscNavGo('requests')">
                   <div class="csc-mega-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 7l10 7 10-7"/></svg></div>
                   <div class="csc-mega-text"><b><span class="lb-en">Requests</span><span class="lb-es active">Solicitudes</span></b><em><span class="lb-en">Send a brief, idea or priority flag</span><span class="lb-es active">Envía un brief, idea o prioridad</span></em></div>
-                </button>
-                <button class="csc-mega-link" onclick="cscNavGo('protocol')">
-                  <div class="csc-mega-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 1 1-7.6-10.6 8.38 8.38 0 0 1 3.9.9L23 3z"></path></svg></div>
-                  <div class="csc-mega-text"><b><span class="lb-en">Protocol Library</span><span class="lb-es active">Protocol Library</span></b><em><span class="lb-en">Real-time parenting support tools</span><span class="lb-es active">Herramientas de apoyo en tiempo real</span></em></div>
                 </button>
               </div>
             </div>
@@ -192,7 +185,7 @@
           <div class="csc-drawer-eyebrow">Criar Sin Culpas</div>
           <div class="csc-drawer-title"><span class="lb-en">Workspace</span><span class="lb-es active">Proyecto CSC</span></div>
         </div>
-        <button class="csc-drawer-close" onclick="toggleMobileMenu()">×</button>
+        <button class="csc-drawer-close" onclick="toggleMobileMenu()">✕</button>
       </div>
 
       <div class="csc-drawer-section">
@@ -208,8 +201,8 @@
         <div class="csc-drawer-label teal"><span class="lb-en">Brand</span><span class="lb-es active">Marca</span></div>
         <button class="csc-drawer-link" onclick="cscNavGo('speaking')"><span><span class="lb-en">Speaking</span><span class="lb-es active">Conferencias</span></span><span class="csc-dnl-arrow">›</span></button>
         <button class="csc-drawer-link" onclick="cscNavGo('growth')"><span><span class="lb-en">Growth</span><span class="lb-es active">Growth &amp; Monetización</span></span><span class="csc-dnl-arrow">›</span></button>
-        <button class="csc-drawer-link" onclick="cscNavGo('vault')"><span><span class="lb-en">Brand Vault › Identidad</span><span class="lb-es active">Bóveda de Marca</span></span><span class="csc-dnl-arrow">›</span></button>
-        <a href="method.html" class="csc-drawer-link" style="text-decoration:none;"><span>El Método Nari</span><span class="csc-dnl-arrow" style="color:var(--teal)">→</span></a>
+        <button class="csc-drawer-link" onclick="cscNavGo('vault')"><span><span class="lb-en">Brand Vault · Identidad</span><span class="lb-es active">Bóveda de Marca</span></span><span class="csc-dnl-arrow">›</span></button>
+        <a href="method.html" class="csc-drawer-link" style="text-decoration:none;"><span>El Método Nari</span><span class="csc-dnl-arrow" style="color:var(--teal)">↗</span></a>
       </div>
 
       <div class="csc-drawer-section" style="border-bottom:none;">
@@ -233,9 +226,7 @@
     <!-- MAIN CONTENT AREA -->
     <main class="workspace-main">
 
-      <!-- --- SECTION: HOME --- 
-           Dashboard snapshot, featured artifacts, and quick actions.
-      -->
+      <!-- ─── SECTION: HOME ─── -->
       <section id="section-home" class="ws-section active">
 
         <!-- HERO ZONE -->
@@ -247,9 +238,9 @@
             </div>
           </div>
           <div class="hero-content-col">
-            <div class="hero-eyebrow"><span class="lb-en">Private Workspace › Criar Sin Culpas</span><span class="lb-es active">ESPACIO PRIVADO › CRIAR SIN CULPAS</span></div>
+            <div class="hero-eyebrow"><span class="lb-en">Private Workspace · Criar Sin Culpas</span><span class="lb-es active">ESPACIO PRIVADO · CRIAR SIN CULPAS</span></div>
             <h1 class="hero-title">Nari Fateha</h1>
-            <p class="hero-role"><span class="lb-en">Parenting Educator › Founder of Criar Sin Culpas</span><span class="lb-es active">Educadora en crianza › Fundadora de Criar Sin Culpas</span></p>
+            <p class="hero-role"><span class="lb-en">Parenting Educator · Founder of Criar Sin Culpas</span><span class="lb-es active">Educadora en crianza · Fundadora de Criar Sin Culpas</span></p>
             <p class="hero-desc"><span class="lb-en">This is where we organize your work so you can use it with clarity, present it with confidence, and grow it.</span><span class="lb-es active">Aquí es donde organizamos tu trabajo para que puedas usarlo con claridad, presentarlo con confianza y hacerlo crecer.</span></p>
             <p class="hero-reassurance"><span class="lb-en">You don't need to understand all of this right now. This space is built to help you see clearly what you've already created.</span><span class="lb-es active">No necesitas entender todo esto ahora. Este espacio está hecho para ayudarte a ver con claridad lo que ya has construido.</span></p>
             <div class="hero-ctas">
@@ -268,11 +259,11 @@
               </div>
               <div class="phase-cell active">
                 <div class="phase-num" style="color:var(--coral);"><span class="lb-en">PHASE 03</span><span class="lb-es active">FASE 03</span></div>
-                <div class="phase-title"><span class="lb-en">Program Roadmap › In Progress</span><span class="lb-es active">Programa › En Progreso</span></div>
+                <div class="phase-title"><span class="lb-en">Program Roadmap · In Progress</span><span class="lb-es active">Programa · En Progreso</span></div>
               </div>
               <div class="phase-cell locked">
                 <div class="phase-num"><span class="lb-en">PHASE 04</span><span class="lb-es active">FASE 04</span></div>
-                <div class="phase-title"><span class="lb-en">Launch Narrative</span><span class="lb-es active">Narrativa de lanzamiento › Próximo</span></div>
+                <div class="phase-title"><span class="lb-en">Launch Narrative</span><span class="lb-es active">Narrativa de lanzamiento · Próximo</span></div>
               </div>
             </div>
 
@@ -300,8 +291,8 @@
         <!-- TICKER -->
         <div class="ticker-wrap">
           <div class="ticker-track">
-            <div class="ticker-item">Ya tenemos todo tu material | Lo estamos organizando para que sea claro y fácil de usar | La estructura del programa está tomando forma | El sistema está activo y funcionando | </div>
-            <div class="ticker-item">Ya tenemos todo tu material | Lo estamos organizando para que sea claro y fácil de usar | La estructura del programa está tomando forma | El sistema está activo y funcionando | </div>
+            <div class="ticker-item">Ya tenemos todo tu material → Lo estamos organizando para que sea claro y fácil de usar → La estructura del programa está tomando forma → El sistema está activo y funcionando → </div>
+            <div class="ticker-item">Ya tenemos todo tu material → Lo estamos organizando para que sea claro y fácil de usar → La estructura del programa está tomando forma → El sistema está activo y funcionando → </div>
           </div>
         </div>
 
@@ -344,7 +335,7 @@
               <div class="acard-content">
                 <div class="acard-eyebrow"><span class="lb-en">Speaking</span><span class="lb-es active">Speaking</span></div>
                 <div class="acard-title"><span class="lb-en">Speaker Dossier</span><span class="lb-es active">Dossier de Conferencias</span></div>
-                <div class="acard-meta">ES / EN › Aprobado › Abr 2026</div>
+                <div class="acard-meta">ES / EN · Aprobado · Abr 2026</div>
               </div>
               <div class="acard-arrow">→</div>
             </div>
@@ -353,7 +344,7 @@
               <div class="acard-content">
                 <div class="acard-eyebrow"><span class="lb-en">Strategy</span><span class="lb-es active">Estrategia</span></div>
                 <div class="acard-title"><span class="lb-en">Monetization Report</span><span class="lb-es active">Reporte de Monetización</span></div>
-                <div class="acard-meta">ES / EN › Aprobado › Abr 2026</div>
+                <div class="acard-meta">ES / EN · Aprobado · Abr 2026</div>
               </div>
               <div class="acard-arrow">→</div>
             </div>
@@ -362,7 +353,7 @@
               <div class="acard-content">
                 <div class="acard-eyebrow"><span class="lb-en">Business</span><span class="lb-es active">Negocio</span></div>
                 <div class="acard-title"><span class="lb-en">Commercial Activation Brief</span><span class="lb-es active">Brief de Activación Comercial</span></div>
-                <div class="acard-meta">ES / EN › Aprobado › Abr 2026</div>
+                <div class="acard-meta">ES / EN · Aprobado · Abr 2026</div>
               </div>
               <div class="acard-arrow">→</div>
             </div>
@@ -371,7 +362,7 @@
               <div class="acard-content">
                 <div class="acard-eyebrow"><span class="lb-en">Brand</span><span class="lb-es active">Marca</span></div>
                 <div class="acard-title"><span class="lb-en">CSC Viz ID</span><span class="lb-es active">CSC Viz ID</span></div>
-                <div class="acard-meta">ES › Aprobado › Abr 2026</div>
+                <div class="acard-meta">ES · Aprobado · Abr 2026</div>
               </div>
               <div class="acard-arrow">→</div>
             </div>
@@ -381,23 +372,23 @@
         <!-- JOURNEY TEASER --> 
          <div class="journey-teaser" onclick="goToSection('journey')"> 
            <div class="jt-left"> 
-             <div class="jt-eyebrow"><span class="lb-en">StrategyIQ › Criar Sin Culpas</span><span class="lb-es active">StrategyIQ › Criar Sin Culpas</span></div> 
+             <div class="jt-eyebrow"><span class="lb-en">StrategyIQ · Criar Sin Culpas</span><span class="lb-es active">StrategyIQ · Criar Sin Culpas</span></div> 
              <div class="jt-title"><span class="lb-en">From chaos to <em>growth</em></span><span class="lb-es active">De la <em>claridad</em> al crecimiento</span></div> 
              <div class="jt-desc"><span class="lb-en">Three phases. One transformation story. See the full arc of work behind Criar Sin Culpas.</span><span class="lb-es active">Tres fases. Una historia de transformación. El recorrido completo detrás de Criar Sin Culpas.</span></div> 
            </div> 
            <div class="jt-phases"> 
              <div class="jt-phase jt-done"> 
-               <div class="jt-node">·</div> 
+               <div class="jt-node">✓</div> 
                <div class="jt-phase-label"><span class="lb-en">Diagnosis</span><span class="lb-es active">Diagnóstico</span></div> 
              </div> 
              <div class="jt-divider"></div> 
              <div class="jt-phase jt-active"> 
-               <div class="jt-node jt-node-active">·</div> 
+               <div class="jt-node jt-node-active">◉</div> 
                <div class="jt-phase-label" style="color:var(--coral);"><span class="lb-en">Architecture</span><span class="lb-es active">Arquitectura</span></div> 
              </div> 
              <div class="jt-divider"></div> 
              <div class="jt-phase jt-locked"> 
-               <div class="jt-node jt-node-locked">·</div> 
+               <div class="jt-node jt-node-locked">○</div> 
                <div class="jt-phase-label jt-muted"><span class="lb-en">Activation</span><span class="lb-es active">Activación</span></div> 
              </div> 
            </div> 
@@ -423,7 +414,7 @@
           </div>
           <div class="qa-item" onclick="goToSection('vault')">
             <div class="qa-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="5" rx="1"/><rect x="3" y="10" width="18" height="5" rx="1"/><rect x="3" y="17" width="18" height="4" rx="1"/><circle cx="7" cy="5.5" r="0.8" fill="currentColor"/><circle cx="7" cy="12.5" r="0.8" fill="currentColor"/></svg></div>
-            <div class="qa-label">Brand Vault › Identidad</div>
+            <div class="qa-label">Brand Vault · Identidad</div>
             <div class="qa-sub">Colores, tipografías y activos visuales</div>
           </div>
           <div class="qa-item" onclick="goToSection('signal')">
@@ -440,9 +431,7 @@
 
       </section>
 
-      <!-- --- SECTION: ARTIFACTS --- 
-           The central registry for all project deliverables and documents.
-      -->
+      <!-- ─── SECTION: ARTIFACTS ─── -->
       <section id="section-artifacts" class="ws-section">
         <div class="section-header">
           <div class="section-eyebrow"><span class="lb-en">Artifact Registry</span><span class="lb-es active">Registro de Artefactos</span></div>
@@ -459,26 +448,23 @@
 
         <!-- PHASE 01 -->
         <div class="phase-container">
-          <div class="artifact-section-heading teal"><span class="lb-en">PHASE 01 › DIAGNOSIS</span><span class="lb-es active">FASE 01 › DIAGNÓSTICO</span></div>
+          <div class="artifact-section-heading teal"><span class="lb-en">PHASE 01 · DIAGNOSIS</span><span class="lb-es active">FASE 01 · DIAGNÓSTICO</span></div>
           <p class="phase-desc"><span class="lb-en">Market analysis, brand positioning and audience signal validation.</span><span class="lb-es active">Identificación de la oportunidad, posicionamiento y validación de señales de audiencia.</span></p>
           <div id="phase-1-artifacts"></div>
         </div>
 
         <!-- PHASE 02 -->
         <div class="phase-container">
-          <div class="artifact-section-heading amber"><span class="lb-en">PHASE 02 › ARCHITECTURE</span><span class="lb-es active">FASE 02 › ARQUITECTURA</span></div>
+          <div class="artifact-section-heading amber"><span class="lb-en">PHASE 02 · ARCHITECTURE</span><span class="lb-es active">FASE 02 · ARQUITECTURA</span></div>
           <p class="phase-desc"><span class="lb-en">Method construction, financial viability and execution roadmap.</span><span class="lb-es active">Construcción del método, viabilidad financiera y hoja de ruta de ejecución.</span></p>
           <div id="phase-2-artifacts"></div>
         </div>
 
         <!-- PHASE 03 -->
         <div class="phase-container">
-          <div class="artifact-section-heading coral"><span class="lb-en">PHASE 03 › ACTIVATION</span><span class="lb-es active">FASE 03 › ACTIVACI›N</span></div>
+          <div class="artifact-section-heading coral"><span class="lb-en">PHASE 03 · ACTIVATION</span><span class="lb-es active">FASE 03 · ACTIVACIÓN</span></div>
           <p class="phase-desc"><span class="lb-en">Revenue engine activation, brand partnerships and growth systems.</span><span class="lb-es active">Activación de motores de ingresos, alianzas comerciales y sistema de Growth &amp; Monetización.</span></p>
-          <div id="phase-3-artifacts"></div>          
-
-          </div>
-
+          <div id="phase-3-artifacts"></div>
         </div>
 
         <div class="artifacts-grid" style="display:none">
@@ -493,7 +479,7 @@
               <p class="ac-code">SIQ_A01_SpeakerMediaKit_CSC</p>
             </div>
             <div class="featured-col-right">
-              <p class="ac-desc">Media kit completo de speaking › conferencias magistrales, talleres, colaboraciones editoriales, y prueba de autoridad. Versión final en espa›ol e ingl›s.</p>
+              <p class="ac-desc">Media kit completo de speaking — conferencias magistrales, talleres, colaboraciones editoriales, y prueba de autoridad. Versión final en español e inglés.</p>
               <div class="ac-meta-row">
                 <span class="ac-meta-item"><svg class="meta-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 3c-2.5 3-4 5.5-4 9s1.5 6 4 9M12 3c2.5 3 4 5.5 4 9s-1.5 6-4 9M3 12h18"/></svg> ES / EN</span>
                 <span class="ac-meta-item"><svg class="meta-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="3" y="4" width="18" height="17" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="16" y1="2" x2="16" y2="6"/></svg> Abr 2026</span>
@@ -521,8 +507,8 @@
               <span class="ac-meta-item"><svg class="meta-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="13" y2="17"/></svg> 3 páginas</span>
             </div>
             <div class="ac-actions">
-              <a href="files/SIQ_A02_MonetizationReport_CSC_ES.html" target="_blank" class="btn-primary small">Abrir documento</a>
-              <a href="files/SIQ_A02_MonetizationReport_CSC_ES.html" target="_blank" class="btn-ghost small">Ver en español</a>
+              <a href="https://www.luis-gilberto.com/TheHub/clients/nari/files/SIQ_A02_MonetizationReport_CSC_ES.html" target="_blank" class="btn-primary small">Abrir documento</a>
+              <a href="https://www.luis-gilberto.com/TheHub/clients/nari/files/SIQ_A02_MonetizationReport_CSC_ES.html" target="_blank" class="btn-ghost small">Ver en español</a>
             </div>
             <div class="ac-lg-note">Estructurado en el LG Ecosystem</div>
           </div>
@@ -554,7 +540,7 @@
             </div>
             <h3 class="ac-title">CSC Viz ID</h3>
             <p class="ac-code">SIQ_BrandAsset_VizID_CSC</p>
-            <p class="ac-desc">Guía visual completa de Brand Vault › Identidad. Colores, tipografía, dirección de imagen, voz, componentes de firma y checklist de activos. La referencia de marca en una sola página.</p>
+            <p class="ac-desc">Guía visual completa de Brand Vault · Identidad. Colores, tipografía, dirección de imagen, voz, componentes de firma y checklist de activos. La referencia de marca en una sola página.</p>
             <div class="ac-meta-row">
               <span class="ac-meta-item"><svg class="meta-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 3c-2.5 3-4 5.5-4 9s1.5 6 4 9M12 3c2.5 3 4 5.5 4 9s-1.5 6-4 9M3 12h18"/></svg> ES</span>
               <span class="ac-meta-item"><svg class="meta-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="3" y="4" width="18" height="17" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="16" y1="2" x2="16" y2="6"/></svg> Abr 2026</span>
@@ -568,11 +554,17 @@
           </div>
 
         </div>
+
+        <div class="artifact-add-cta">
+          <div class="add-cta-content">
+            <div class="add-cta-label"><span class="lb-en">Need a new artifact?</span><span class="lb-es active">¿Necesitas un nuevo artefacto?</span></div>
+            <p class="add-cta-desc"><span class="lb-en">Submit a request and the LG team will produce it at premium dossier level.</span><span class="lb-es active">Envía una solicitud y el equipo LG lo producirá a nivel de dossier premium.</span></p>
+            <button class="btn-primary" onclick="goToSection('requests')"><span class="lb-en">New Request →</span><span class="lb-es active">Nueva Solicitud →</span></button>
+          </div>
+        </div>
       </section>
 
-      <!-- --- SECTION: ACTIVITY --- 
-           Intelligence timeline and key ideas emerging from workshops.
-      -->
+      <!-- ─── SECTION: ACTIVITY ─── -->
       <section id="section-activity" class="ws-section">
         <div class="section-header">
           <div class="section-eyebrow"><span class="lb-en">Activity</span><span class="lb-es active">Actividad</span></div>
@@ -583,9 +575,9 @@
         <!-- PHASE PROGRESS -->
         <div class="activation-card" style="margin-bottom:var(--space-xl);">
           <div class="activation-left">
-            <div class="eyebrow eyebrow-coral"><span class="lb-en">PHASE 03 › IN PROGRESS</span><span class="lb-es active">FASE 03 › EN PROGRESO</span></div>
+            <div class="eyebrow eyebrow-coral"><span class="lb-en">PHASE 03 · IN PROGRESS</span><span class="lb-es active">FASE 03 · EN PROGRESO</span></div>
             <div class="activation-title"><span class="lb-en">Strategic Architecture Phase</span><span class="lb-es active">Fase de Arquitectura Estratégica</span></div>
-            <div class="activation-sub"><span class="lb-en">Criar Sin Culpas › System Development</span><span class="lb-es active">Criar Sin Culpas › Desarrollo del Sistema</span></div>
+            <div class="activation-sub"><span class="lb-en">Criar Sin Culpas · System Development</span><span class="lb-es active">Criar Sin Culpas · Desarrollo del Sistema</span></div>
           </div>
           <div class="chip chip-teal"><span class="lb-en">Engine Running</span><span class="lb-es active">Sistema en Marcha</span></div>
         </div>
@@ -600,34 +592,34 @@
             <div class="siq-timeline">
 
               <div class="siq-node completed">
-                <div class="siq-date"><span class="lb-en">April 10 › Signal Captured</span><span class="lb-es active">10 de Abril › Señal Capturada</span></div>
+                <div class="siq-date"><span class="lb-en">April 10 · Signal Captured</span><span class="lb-es active">10 de Abril · Señal Capturada</span></div>
                 <div class="siq-title"><span class="lb-en">Strategic Diagnosis</span><span class="lb-es active">Diagnóstico Estratégico</span></div>
-                <div class="siq-summary"><span class="lb-en">Discovery of the emotional core of the method. Parents find Criar Sin Culpas in crisis › the system identified this as the entry point for a structured transformation journey.</span><span class="lb-es active">Descubrimiento del núcleo emocional del método. Los padres llegan a Criar Sin Culpas en crisis › el sistema identificó ese momento como el punto de entrada para un recorrido de transformación estructurado.</span></div>
+                <div class="siq-summary"><span class="lb-en">Discovery of the emotional core of the method. Parents find Criar Sin Culpas in crisis — the system identified this as the entry point for a structured transformation journey.</span><span class="lb-es active">Descubrimiento del núcleo emocional del método. Los padres llegan a Criar Sin Culpas en crisis — el sistema identificó ese momento como el punto de entrada para un recorrido de transformación estructurado.</span></div>
                 <div class="siq-actions">
-                  <a href="https://www.luis-gilberto.com/TheHub/clients/nari/files/SIQ-01_StrategicDiagnosis_CriarSinCulpas.pdf" target="_blank" class="siq-btn coral"><span class="lb-en">Open Document →</span><span class="lb-es active">Abrir Documento →</span></a>
+                  <a href="https://www.luis-gilberto.com/TheHub/clients/nari/files/SIQ-01_StrategicDiagnosis_CriarSinCulpas.pdf" target="_blank" class="siq-btn coral"><span class="lb-en">Open Document ↗</span><span class="lb-es active">Abrir Documento ↗</span></a>
                 </div>
               </div>
 
               <div class="siq-node completed">
-                <div class="siq-date"><span class="lb-en">April 15 › Curriculum Mapped</span><span class="lb-es active">15 de Abril › Currículo Mapeado</span></div>
+                <div class="siq-date"><span class="lb-en">April 15 · Curriculum Mapped</span><span class="lb-es active">15 de Abril · Currículo Mapeado</span></div>
                 <div class="siq-title"><span class="lb-en">Program Architecture</span><span class="lb-es active">Arquitectura del Programa</span></div>
                 <div class="siq-summary"><span class="lb-en">Transformation of 50+ workshops into a structured learning journey. Curriculum mapped to the emotional readiness of the parent: Accept → Stabilize → Connect → Guide.</span><span class="lb-es active">Transformación de 50+ talleres en un recorrido de aprendizaje estructurado. Currículo mapeado a la preparación emocional del padre: Aceptar → Estabilizar → Conectar → Guiar.</span></div>
                 <div class="siq-actions">
-                  <a href="https://www.luis-gilberto.com/TheHub/clients/nari/files/SIQ-02_ProgramArchitecture_CriarSinCulpas.pdf" target="_blank" class="siq-btn coral"><span class="lb-en">Open Document →</span><span class="lb-es active">Abrir Documento →</span></a>
+                  <a href="https://www.luis-gilberto.com/TheHub/clients/nari/files/SIQ-02_ProgramArchitecture_CriarSinCulpas.pdf" target="_blank" class="siq-btn coral"><span class="lb-en">Open Document ↗</span><span class="lb-es active">Abrir Documento ↗</span></a>
                 </div>
               </div>
 
               <div class="siq-node current">
-                <div class="siq-date eyebrow-coral"><span class="lb-en">Now › Engine Active</span><span class="lb-es active">Ahora › Motor Activo</span></div>
+                <div class="siq-date eyebrow-coral"><span class="lb-en">Now · Engine Active</span><span class="lb-es active">Ahora · Motor Activo</span></div>
                 <div class="siq-title"><span class="lb-en">Product Architecture</span><span class="lb-es active">Arquitectura de Productos</span></div>
-                <div class="siq-summary"><span class="lb-en">Conversion of the method into scalable offerings. Workshops being organized into Entry, Core and Premium tracks › structured around the commercial intelligence layer now active.</span><span class="lb-es active">Conversión del método en ofertas escalables. Los talleres se están organizando en rutas de Entrada, Principal y Premium › estructuradas sobre la capa de inteligencia comercial ahora activa.</span></div>
+                <div class="siq-summary"><span class="lb-en">Conversion of the method into scalable offerings. Workshops being organized into Entry, Core and Premium tracks — structured around the commercial intelligence layer now active.</span><span class="lb-es active">Conversión del método en ofertas escalables. Los talleres se están organizando en rutas de Entrada, Principal y Premium — estructuradas sobre la capa de inteligencia comercial ahora activa.</span></div>
                 <div class="siq-actions">
-                  <a href="https://www.luis-gilberto.com/TheHub/clients/nari/files/SIQ-03_ProductArchitecture_CriarSinCulpas.pdf" target="_blank" class="siq-btn coral"><span class="lb-en">Open Document →</span><span class="lb-es active">Abrir Documento →</span></a>
+                  <a href="https://www.luis-gilberto.com/TheHub/clients/nari/files/SIQ-03_ProductArchitecture_CriarSinCulpas.pdf" target="_blank" class="siq-btn coral"><span class="lb-en">Open Document ↗</span><span class="lb-es active">Abrir Documento ↗</span></a>
                 </div>
               </div>
 
               <div class="siq-node">
-                <div class="siq-date"><span class="lb-en">Next › Pending</span><span class="lb-es active">Siguiente › Pendiente</span> <span class="chip chip-ghost" style="font-size:8px;padding:2px 8px;margin-left:8px;vertical-align:middle;"><span class="lb-en">Pending</span><span class="lb-es active">Pendiente</span></span></div>
+                <div class="siq-date"><span class="lb-en">Next · Pending</span><span class="lb-es active">Siguiente · Pendiente</span> <span class="chip chip-ghost" style="font-size:8px;padding:2px 8px;margin-left:8px;vertical-align:middle;"><span class="lb-en">Pending</span><span class="lb-es active">Pendiente</span></span></div>
                 <div class="siq-title" style="color:var(--text-muted);"><span class="lb-en">Launch Architecture</span><span class="lb-es active">Arquitectura de Lanzamiento</span></div>
                 <div class="siq-summary" style="color:var(--text-muted);"><span class="lb-en">Defining the offer structure, entry points and bilingual go-to-market strategy.</span><span class="lb-es active">Definición de la estructura de ofertas, puntos de entrada y estrategia de lanzamiento bilingüe.</span></div>
               </div>
@@ -678,7 +670,7 @@
           </div>
           <div class="key-ideas-grid">
             <div class="signal-card">
-              <div class="signal-num">Signal 01 ›</div>
+              <div class="signal-num">Signal 01 ·</div>
               <p class="signal-title"><span class="lb-en">The emotional crisis is not the problem. It is the signal.</span><span class="lb-es active">La crisis emocional no es el problema. Es la señal.</span></p>
               <p class="signal-subtitle"><span class="lb-en">Identifying the underlying triggers when a child loses emotional control.</span><span class="lb-es active">Identificación de los detonantes reales durante una crisis emocional infantil.</span></p>
               <div class="signal-card-footer">
@@ -688,7 +680,7 @@
               </div>
             </div>
             <div class="signal-card">
-              <div class="signal-num">Signal 02 ›</div>
+              <div class="signal-num">Signal 02 ·</div>
               <p class="signal-title"><span class="lb-en">Connection does not calm. It regulates.</span><span class="lb-es active">La conexión no calma. Regula.</span></p>
               <p class="signal-subtitle"><span class="lb-en">Using play and emotional safety to guide children back to regulation.</span><span class="lb-es active">El uso del juego y la seguridad emocional para recuperar la regulación.</span></p>
               <div class="signal-card-footer">
@@ -698,7 +690,7 @@
               </div>
             </div>
             <div class="signal-card">
-              <div class="signal-num">Signal 03 ›</div>
+              <div class="signal-num">Signal 03 ·</div>
               <p class="signal-title"><span class="lb-en">Guilt does not correct. It disconnects.</span><span class="lb-es active">La culpa no corrige. Desconecta.</span></p>
               <p class="signal-subtitle"><span class="lb-en">Leading with clarity and calm by releasing the burden of parental guilt.</span><span class="lb-es active">Liderar con claridad y calma al liberar la carga de la culpa parental.</span></p>
               <div class="signal-card-footer">
@@ -716,16 +708,14 @@
 
       </section>
 
-      <!-- --- SECTION: PROJECT JOURNEY --- 
-           Visual roadmap of the project's evolution and phases.
-      -->
+      <!-- ─── SECTION: PROJECT JOURNEY ─── -->
       <section id="section-journey" class="ws-section">
 
         <!-- SECTION HEADER -->
         <div class="section-header">
-          <div class="section-eyebrow"><span class="lb-en">StrategyIQ › Criar Sin Culpas</span><span class="lb-es active">StrategyIQ › Criar Sin Culpas</span></div>
+          <div class="section-eyebrow"><span class="lb-en">StrategyIQ · Criar Sin Culpas</span><span class="lb-es active">StrategyIQ · Criar Sin Culpas</span></div>
           <h2 class="section-title"><span class="lb-en">From chaos to <em>growth</em></span><span class="lb-es active">De la <em>claridad</em> al crecimiento</span></h2>
-          <p class="section-desc"><span class="lb-en">This is not a document archive. It is the record of a transformation › from understanding the business, to building the system, to activating it and making it grow.</span><span class="lb-es active">Este no es un archivo de documentos. Es el registro de una transformación › de entender el negocio, a construir el sistema, a activarlo y hacerlo crecer.</span></p>
+          <p class="section-desc"><span class="lb-en">This is not a document archive. It is the record of a transformation — from understanding the business, to building the system, to activating it and making it grow.</span><span class="lb-es active">Este no es un archivo de documentos. Es el registro de una transformación — de entender el negocio, a construir el sistema, a activarlo y hacerlo crecer.</span></p>
         </div>
 
         <!-- PROGRESS BAR -->
@@ -734,8 +724,8 @@
             <div style="height:100%;width:60%;background:linear-gradient(90deg,#4ecdc4,#f96f6e);border-radius:999px;"></div>
           </div>
           <div style="display:flex;justify-content:space-between;">
-            <span style="font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#4ecdc4;"><span class="lb-en">Diagnosis ✔</span><span class="lb-es active">Diagnóstico ✔</span></span>
-            <span style="font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#f96f6e;"><span class="lb-en">Architecture →</span><span class="lb-es active">Arquitectura →</span></span>
+            <span style="font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#4ecdc4;"><span class="lb-en">Diagnosis ✓</span><span class="lb-es active">Diagnóstico ✓</span></span>
+            <span style="font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#f96f6e;"><span class="lb-en">Architecture ◉</span><span class="lb-es active">Arquitectura ◉</span></span>
             <span style="font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:rgba(240,236,229,0.35);"><span class="lb-en">Activation</span><span class="lb-es active">Activación</span></span>
           </div>
         </div>
@@ -743,18 +733,18 @@
         <!-- JOURNEY SPINE -->
         <div class="pj-journey">
 
-          <!-- -- PHASE 01 › DIAGNÓSTICO -- -->
+          <!-- ── PHASE 01 · DIAGNÓSTICO ── -->
           <div class="pj-phase">
             <div class="pj-node pj-done">01</div>
             <div class="pj-connector"></div>
             <div class="pj-card pj-card-done">
               <div class="pj-head">
                 <div class="pj-head-left">
-                  <div class="pj-label pj-label-done"><span class="lb-en">Phase 01 › Diagnosis</span><span class="lb-es active">Fase 01 › Diagnóstico</span></div>
+                  <div class="pj-label pj-label-done"><span class="lb-en">Phase 01 · Diagnosis</span><span class="lb-es active">Fase 01 · Diagnóstico</span></div>
                   <div class="pj-title"><span class="lb-en">Understand the business</span><span class="lb-es active">Entender el negocio</span></div>
                   <div class="pj-subtitle"><span class="lb-en">"What is actually happening here?"</span><span class="lb-es active">"¿Qué está pasando realmente aquí?"</span></div>
                 </div>
-                <div class="pj-status pj-status-done"><span class="lb-en">Certified ✔</span><span class="lb-es active">Certificado ✔</span></div>
+                <div class="pj-status pj-status-done"><span class="lb-en">Certified ✓</span><span class="lb-es active">Certificado ✓</span></div>
               </div>
               <div class="pj-body">
                 <p class="pj-narrative">
@@ -767,11 +757,11 @@
                   <div class="pj-output-card">
                     <div class="pj-output-info">
                       <div class="pj-output-tag pj-tag-teal"><span class="lb-en">Certified Diagnosis</span><span class="lb-es active">Diagnóstico Certificado</span></div>
-                      <div class="pj-output-name"><span class="lb-en">Strategic Diagnosis › SIQ-01</span><span class="lb-es active">Diagnóstico Estratégico › SIQ-01</span></div>
+                      <div class="pj-output-name"><span class="lb-en">Strategic Diagnosis · SIQ-01</span><span class="lb-es active">Diagnóstico Estratégico · SIQ-01</span></div>
                       <div class="pj-output-desc"><span class="lb-en">The moment everything makes sense. We understand the game being played.</span><span class="lb-es active">El momento en que todo toma sentido. Entendemos el juego que se está jugando.</span></div>
                     </div>
                     <a href="https://www.luis-gilberto.com/TheHub/clients/nari/files/SIQ-01_StrategicDiagnosis_CriarSinCulpas.pdf" target="_blank" class="pj-output-link pj-link-teal">
-                      <span class="lb-en">Open →</span><span class="lb-es active">Abrir →</span>
+                      <span class="lb-en">Open ↗</span><span class="lb-es active">Abrir ↗</span>
                     </a>
                   </div>
                 </div>
@@ -782,39 +772,39 @@
                     <div class="pj-tile-code">A01</div>
                     <div class="pj-tile-name"><span class="lb-en">Speaker Positioning Kit</span><span class="lb-es active">Kit de Posicionamiento para Ponentes</span></div>
                     <div class="pj-tile-desc"><span class="lb-en">External expression of positioning. This is how the world should see you.</span><span class="lb-es active">Expresión externa del posicionamiento. Así es como el mundo debería verte.</span></div>
-                    <div class="pj-tile-foot"><span class="pj-tile-lang">ES / EN</span><span class="pj-tile-arrow">→</span></div>
+                    <div class="pj-tile-foot"><span class="pj-tile-lang">ES / EN</span><span class="pj-tile-arrow">↗</span></div>
                   </a>
-                  <a href="files/SIQ_A02_MonetizationReport_CSC_ES.html" target="_blank" class="pj-tile">
-                    <div class="pj-tile-code">A02 › Reporte</div>
+                  <a href="https://www.luis-gilberto.com/TheHub/clients/nari/files/SIQ_A02_MonetizationReport_CSC_ES.html" target="_blank" class="pj-tile">
+                    <div class="pj-tile-code">A02 · Reporte</div>
                     <div class="pj-tile-name"><span class="lb-en">Monetization Research</span><span class="lb-es active">Investigación de Monetización</span></div>
                     <div class="pj-tile-desc"><span class="lb-en">Market reality. This is how people like you generate income.</span><span class="lb-es active">Realidad del mercado. Así es como personas como tú generan ingresos.</span></div>
-                    <div class="pj-tile-foot"><span class="pj-tile-lang">ES / EN</span><span class="pj-tile-arrow">→</span></div>
+                    <div class="pj-tile-foot"><span class="pj-tile-lang">ES / EN</span><span class="pj-tile-arrow">↗</span></div>
                   </a>
                 </div>
 
                 <div class="pj-decision">
-                  <div class="pj-decision-icon">→</div>
+                  <div class="pj-decision-icon">⚡</div>
                   <div>
-                    <div class="pj-decision-label"><span class="lb-en">Strategic Decision › SR-001 + SR-002</span><span class="lb-es active">Decisión estratégica › SR-001 + SR-002</span></div>
-                    <div class="pj-decision-text"><span class="lb-en">Strategy will focus on translating existing parenting frameworks into a structured learning architecture › not on increasing content production or audience size.</span><span class="lb-es active">La estrategia se enfocará en traducir los marcos de crianza existentes en una arquitectura de aprendizaje estructurada › no en aumentar la producción de contenido ni el tamaño de la audiencia.</span></div>
+                    <div class="pj-decision-label"><span class="lb-en">Strategic Decision · SR-001 + SR-002</span><span class="lb-es active">Decisión estratégica · SR-001 + SR-002</span></div>
+                    <div class="pj-decision-text"><span class="lb-en">Strategy will focus on translating existing parenting frameworks into a structured learning architecture — not on increasing content production or audience size.</span><span class="lb-es active">La estrategia se enfocará en traducir los marcos de crianza existentes en una arquitectura de aprendizaje estructurada — no en aumentar la producción de contenido ni el tamaño de la audiencia.</span></div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
 
-          <!-- -- PHASE 02 › ARQUITECTURA -- -->
+          <!-- ── PHASE 02 · ARQUITECTURA ── -->
           <div class="pj-phase">
             <div class="pj-node pj-active">02</div>
             <div class="pj-connector"></div>
             <div class="pj-card pj-card-active">
               <div class="pj-head">
                 <div class="pj-head-left">
-                  <div class="pj-label pj-label-active"><span class="lb-en">Phase 02 › Architecture › In Progress</span><span class="lb-es active">Fase 02 › Arquitectura › En Progreso</span></div>
+                  <div class="pj-label pj-label-active"><span class="lb-en">Phase 02 · Architecture · In Progress</span><span class="lb-es active">Fase 02 · Arquitectura · En Progreso</span></div>
                   <div class="pj-title"><span class="lb-en">Build the system</span><span class="lb-es active">Construir el sistema</span></div>
                   <div class="pj-subtitle"><span class="lb-en">"Now we build the machine."</span><span class="lb-es active">"Ahora construimos la máquina."</span></div>
                 </div>
-                <div class="pj-status pj-status-active"><span class="lb-en">· In Progress</span><span class="lb-es active">· En Progreso</span></div>
+                <div class="pj-status pj-status-active"><span class="lb-en">◉ In Progress</span><span class="lb-es active">◉ En Progreso</span></div>
               </div>
               <div class="pj-body">
                 <p class="pj-narrative">
@@ -824,7 +814,7 @@
 
                 <!-- METHOD BLOCK -->
                 <div class="pj-method">
-                  <div class="pj-method-label"><span class="lb-en">The heart of it all › The Nari Method</span><span class="lb-es active">El corazón de todo › El Método Nari</span></div>
+                  <div class="pj-method-label"><span class="lb-en">The heart of it all · The Nari Method</span><span class="lb-es active">El corazón de todo · El Método Nari</span></div>
                   <div class="pj-method-title"><span class="lb-en">The transformation engine of Criar Sin Culpas</span><span class="lb-es active">El motor de transformación de Criar Sin Culpas</span></div>
                   <div class="pj-method-steps">
                     <div class="pj-step"><div class="pj-step-num">01</div><div class="pj-step-name"><span class="lb-en">Accept</span><span class="lb-es active">Aceptar</span></div></div>
@@ -839,11 +829,11 @@
                   <div class="pj-output-card pj-output-coral">
                     <div class="pj-output-info">
                       <div class="pj-output-tag pj-tag-coral"><span class="lb-en">Certified Architecture</span><span class="lb-es active">Arquitectura Certificada</span></div>
-                      <div class="pj-output-name"><span class="lb-en">Program Architecture › SIQ-02</span><span class="lb-es active">Arquitectura del Programa › SIQ-02</span></div>
+                      <div class="pj-output-name"><span class="lb-en">Program Architecture · SIQ-02</span><span class="lb-es active">Arquitectura del Programa · SIQ-02</span></div>
                       <div class="pj-output-desc"><span class="lb-en">50+ workshops converted into a structured learning journey.</span><span class="lb-es active">50+ talleres convertidos en un recorrido de aprendizaje estructurado.</span></div>
                     </div>
                     <a href="https://www.luis-gilberto.com/TheHub/clients/nari/files/SIQ-02_ProgramArchitecture_CriarSinCulpas.pdf" target="_blank" class="pj-output-link pj-link-coral">
-                      <span class="lb-en">Open →</span><span class="lb-es active">Abrir →</span>
+                      <span class="lb-en">Open ↗</span><span class="lb-es active">Abrir ↗</span>
                     </a>
                   </div>
                 </div>
@@ -851,38 +841,38 @@
                 <div class="pj-sublabel"><span class="lb-en">Supporting artifacts</span><span class="lb-es active">Artefactos de soporte</span></div>
                 <div class="pj-artifacts">
                   <a href="https://www.luis-gilberto.com/TheHub/clients/nari/files/SIQ-03_ProductArchitecture_CriarSinCulpas.pdf" target="_blank" class="pj-tile">
-                    <div class="pj-tile-code"><span class="lb-en">SIQ-03 › In Progress</span><span class="lb-es active">SIQ-03 › En Progreso</span></div>
+                    <div class="pj-tile-code"><span class="lb-en">SIQ-03 · In Progress</span><span class="lb-es active">SIQ-03 · En Progreso</span></div>
                     <div class="pj-tile-name"><span class="lb-en">Product Architecture</span><span class="lb-es active">Arquitectura de Productos</span></div>
-                    <div class="pj-tile-desc"><span class="lb-en">Converting the method into scalable offers › Entry, Core and Premium.</span><span class="lb-es active">Conversión del método en ofertas escalables › Entry, Core y Premium.</span></div>
-                    <div class="pj-tile-foot"><span class="pj-tile-lang">ES / EN</span><span class="pj-tile-arrow">→</span></div>
+                    <div class="pj-tile-desc"><span class="lb-en">Converting the method into scalable offers — Entry, Core and Premium.</span><span class="lb-es active">Conversión del método en ofertas escalables — Entry, Core y Premium.</span></div>
+                    <div class="pj-tile-foot"><span class="pj-tile-lang">ES / EN</span><span class="pj-tile-arrow">↗</span></div>
                   </a>
                   <a href="https://www.luis-gilberto.com/TheHub/clients/nari/files/SIQ_A02_CommercialActivationBrief_CSC.html" target="_blank" class="pj-tile">
-                    <div class="pj-tile-code">A04 › Brief</div>
+                    <div class="pj-tile-code">A04 · Brief</div>
                     <div class="pj-tile-name"><span class="lb-en">Commercial Activation Brief</span><span class="lb-es active">Dossier de Activación Comercial</span></div>
                     <div class="pj-tile-desc"><span class="lb-en">Two revenue engines, three scenarios, first steps to activate the business model.</span><span class="lb-es active">Dos motores de ingreso, tres escenarios, primeros pasos para activar el modelo de negocio.</span></div>
-                    <div class="pj-tile-foot"><span class="pj-tile-lang">ES / EN</span><span class="pj-tile-arrow">→</span></div>
+                    <div class="pj-tile-foot"><span class="pj-tile-lang">ES / EN</span><span class="pj-tile-arrow">↗</span></div>
                   </a>
                 </div>
 
                 <div class="pj-decision">
-                  <div class="pj-decision-icon">→</div>
+                  <div class="pj-decision-icon">⚡</div>
                   <div>
-                    <div class="pj-decision-label"><span class="lb-en">Strategic Decision › SR-003</span><span class="lb-es active">Decisión estratégica › SR-003</span></div>
-                    <div class="pj-decision-text"><span class="lb-en">Three audience segments defined: Ashamed & Overwhelmed (highest volume) › Suspecting Neurodivergence (fastest growth) › Under-Equipped & Aware (highest purchase intent).</span><span class="lb-es active">Tres segmentos de audiencia definidos: Avergonzados y abrumados (mayor volumen) › Sospechan Neurodivergencia (Growth &amp; Monetización rápido) › Conscientes pero sin herramientas (mayor intención de compra).</span></div>
+                    <div class="pj-decision-label"><span class="lb-en">Strategic Decision · SR-003</span><span class="lb-es active">Decisión estratégica · SR-003</span></div>
+                    <div class="pj-decision-text"><span class="lb-en">Three audience segments defined: Ashamed & Overwhelmed (highest volume) · Suspecting Neurodivergence (fastest growth) · Under-Equipped & Aware (highest purchase intent).</span><span class="lb-es active">Tres segmentos de audiencia definidos: Avergonzados y abrumados (mayor volumen) · Sospechan Neurodivergencia (Growth &amp; Monetización rápido) · Conscientes pero sin herramientas (mayor intención de compra).</span></div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
 
-          <!-- -- PHASE 03 › ACTIVACI›N -- -->
+          <!-- ── PHASE 03 · ACTIVACIÓN ── -->
           <div class="pj-phase">
             <div class="pj-node pj-pending">03</div>
             <div class="pj-connector"></div>
             <div class="pj-card pj-card-pending">
               <div class="pj-head">
                 <div class="pj-head-left">
-                  <div class="pj-label pj-label-pending"><span class="lb-en">Phase 03 › Activation</span><span class="lb-es active">Fase 03 › Activación</span></div>
+                  <div class="pj-label pj-label-pending"><span class="lb-en">Phase 03 · Activation</span><span class="lb-es active">Fase 03 · Activación</span></div>
                   <div class="pj-title"><span class="lb-en">Activate and grow</span><span class="lb-es active">Activar y crecer</span></div>
                   <div class="pj-subtitle"><span class="lb-en">"Now we turn it into revenue."</span><span class="lb-es active">"Ahora lo convertimos en ingresos."</span></div>
                 </div>
@@ -892,7 +882,7 @@
                 <div class="pj-pending-icon">
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v4l3 3"/></svg>
                 </div>
-                <div class="pj-pending-text"><span class="lb-en">This phase activates upon completing Architecture. Will include: Commercial Activation Dossier › Brand Partnership Kit › StrategyIQ Campaign System.</span><span class="lb-es active">Esta fase se activa al completar la Arquitectura. Incluirá: Dossier de Activación Comercial › Kit de Alianzas con Marcas › Sistema de Campañas StrategyIQ.</span></div>
+                <div class="pj-pending-text"><span class="lb-en">This phase activates upon completing Architecture. Will include: Commercial Activation Dossier · Brand Partnership Kit · StrategyIQ Campaign System.</span><span class="lb-es active">Esta fase se activa al completar la Arquitectura. Incluirá: Dossier de Activación Comercial · Kit de Alianzas con Marcas · Sistema de Campañas StrategyIQ.</span></div>
               </div>
             </div>
           </div>
@@ -900,11 +890,9 @@
         </div><!-- /pj-journey -->
 
       </section>
-      <!-- --- END SECTION: PROJECT JOURNEY --- -->
+      <!-- ─── END SECTION: PROJECT JOURNEY ─── -->
 
-      <!-- --- SECTION: STRATEGIC RECORD --- 
-           Inventory of all materials and assets received/reviewed.
-      -->
+      <!-- ─── SECTION: STRATEGIC RECORD ─── -->
       <section id="section-record" class="ws-section">
         <div class="section-header">
           <div class="section-eyebrow"><span class="lb-en">Strategic Record</span><span class="lb-es active">Registro Estratégico</span></div>
@@ -917,7 +905,7 @@
           <div class="readiness-title"><span class="lb-en">We've received everything needed. Now we're organizing it inside the system.</span><span class="lb-es active">Ya recibimos todo lo necesario. Ahora lo estamos organizando dentro del sistema.</span></div>
           <div class="readiness-item">
             <span class="readiness-label"><span class="lb-en">Common parent difficulties</span><span class="lb-es active">Dificultades más comunes de los padres</span></span>
-            <span class="readiness-state"><span class="lb-en">Identified</span><span class="lb-es active">Mapa de Problemas Validado</span> &nbsp;<button class="js-open-ledger" onclick="openSignalsLedger()" style="background:none;border:none;color:var(--text-muted);font-size:9px;letter-spacing:0.06em;cursor:pointer;padding:0;transition:color 0.2s;" onmouseover="this.style.color='var(--teal)'" onmouseout="this.style.color='var(--text-muted)'">[ <span class="lb-en">View Source →</span><span class="lb-es active">Ver Origen →</span> ]</button></span>
+            <span class="readiness-state"><span class="lb-en">Identified</span><span class="lb-es active">Mapa de Problemas Validado</span> &nbsp;<button class="js-open-ledger" onclick="openSignalsLedger()" style="background:none;border:none;color:var(--text-muted);font-size:9px;letter-spacing:0.06em;cursor:pointer;padding:0;transition:color 0.2s;" onmouseover="this.style.color='var(--teal)'" onmouseout="this.style.color='var(--text-muted)'">[ <span class="lb-en">View Source ↗</span><span class="lb-es active">Ver Origen ↗</span> ]</button></span>
           </div>
           <div class="readiness-item">
             <span class="readiness-label"><span class="lb-en">50+ Workshop Inventory</span><span class="lb-es active">Inventario de 50+ Talleres</span></span>
@@ -929,7 +917,7 @@
           </div>
           <div class="readiness-item">
             <span class="readiness-label"><span class="lb-en">Core Methodology Signals</span><span class="lb-es active">Señales de Metodología</span></span>
-            <span class="readiness-state"><span class="lb-en">Identified</span><span class="lb-es active">N›cleo del Método Identificado</span></span>
+            <span class="readiness-state"><span class="lb-en">Identified</span><span class="lb-es active">Núcleo del Método Identificado</span></span>
           </div>
         </div>
 
@@ -942,7 +930,7 @@
               <span class="ac-status approved"><svg width="6" height="6" viewBox="0 0 6 6" style="display:inline-block;vertical-align:middle;margin-right:4px;"><circle cx="3" cy="3" r="3" fill="#2ED3C6"/></svg><span class="lb-en">Active</span><span class="lb-es active">Activo</span></span>
             </div>
             <h3 class="ac-title"><span class="lb-en">Core Constraint Identified</span><span class="lb-es active">Restricción Central Identificada</span></h3>
-            <p class="ac-desc"><span class="lb-en">Strategy will focus on translating existing parenting frameworks into a structured learning architecture › not on increasing content output or audience size.</span><span class="lb-es active">La estrategia se enfocará en traducir los marcos de crianza existentes en una arquitectura de aprendizaje estructurada › no en aumentar la producción de contenido ni el tamaño de la audiencia.</span></p>
+            <p class="ac-desc"><span class="lb-en">Strategy will focus on translating existing parenting frameworks into a structured learning architecture — not on increasing content output or audience size.</span><span class="lb-es active">La estrategia se enfocará en traducir los marcos de crianza existentes en una arquitectura de aprendizaje estructurada — no en aumentar la producción de contenido ni el tamaño de la audiencia.</span></p>
             <div class="ac-lg-note"><span class="lb-en">Structured inside the LG Ecosystem</span><span class="lb-es active">Estructurado en el LG Ecosystem</span></div>
           </div>
           <div class="artifact-card">
@@ -950,7 +938,7 @@
               <span class="ac-type strategy">SR-002</span>
               <span class="ac-status approved"><svg width="6" height="6" viewBox="0 0 6 6" style="display:inline-block;vertical-align:middle;margin-right:4px;"><circle cx="3" cy="3" r="3" fill="#2ED3C6"/></svg><span class="lb-en">Active</span><span class="lb-es active">Activo</span></span>
             </div>
-            <h3 class="ac-title"><span class="lb-en">Strategic Framing › Translation, Not Expansion</span><span class="lb-es active">Marco Estratégico › Traducción, No Expansión</span></h3>
+            <h3 class="ac-title"><span class="lb-en">Strategic Framing · Translation, Not Expansion</span><span class="lb-es active">Marco Estratégico · Traducción, No Expansión</span></h3>
             <p class="ac-desc"><span class="lb-en">The platform's strategic direction is architectural translation. The 50+ existing workshops are the raw material. Structure is the product.</span><span class="lb-es active">La dirección estratégica de la plataforma es la traducción arquitectónica. Los más de 50 talleres existentes son la materia prima. La estructura es el producto.</span></p>
             <div class="ac-lg-note"><span class="lb-en">Structured inside the LG Ecosystem</span><span class="lb-es active">Estructurado en el LG Ecosystem</span></div>
           </div>
@@ -960,16 +948,14 @@
               <span class="ac-status" style="color:var(--coral);"><span class="lb-en">In Progress</span><span class="lb-es active">En Progreso</span></span>
             </div>
             <h3 class="ac-title"><span class="lb-en">Three Audience Segments Defined</span><span class="lb-es active">Tres Segmentos de Audiencia Definidos</span></h3>
-            <p class="ac-desc"><span class="lb-en">Segment A: Ashamed & Overwhelmed (highest volume) › Segment B: Suspecting Neurodivergence (growing fast) › Segment C: Under-Equipped & Aware (highest intent, most likely to pay).</span><span class="lb-es active">Segmento A: Avergonzados y abrumados (mayor volumen) › Segmento B: Sospechan Neurodivergencia (Growth &amp; Monetización rápido) › Segmento C: Conscientes pero sin herramientas (mayor intención de compra).</span></p>
+            <p class="ac-desc"><span class="lb-en">Segment A: Ashamed & Overwhelmed (highest volume) · Segment B: Suspecting Neurodivergence (growing fast) · Segment C: Under-Equipped & Aware (highest intent, most likely to pay).</span><span class="lb-es active">Segmento A: Avergonzados y abrumados (mayor volumen) · Segmento B: Sospechan Neurodivergencia (Growth &amp; Monetización rápido) · Segmento C: Conscientes pero sin herramientas (mayor intención de compra).</span></p>
             <div class="ac-lg-note"><span class="lb-en">Structured inside the LG Ecosystem</span><span class="lb-es active">Estructurado en el LG Ecosystem</span></div>
           </div>
         </div>
 
       </section>
 
-      <!-- --- SECTION: SPEAKING --- 
-           Media kits, talking points, and conference assets.
-      -->
+      <!-- ─── SECTION: SPEAKING ─── -->
       <section id="section-speaking" class="ws-section">
         <div class="section-header">
           <div class="section-eyebrow">Speaking &amp; Media</div>
@@ -980,12 +966,12 @@
         <div class="speaking-hero-band">
           <div class="speaking-img-col">
             <div class="speaking-img-frame speaking-img-main">
-              <img src="assets/images/nari-podcast.jpg" alt="Nari Fateha › Podcast &amp; Speaking" class="speaking-main-img" />
-              <div class="speaking-img-label"><span class="lb-es active">Podcast › Medios › Speaking</span><span class="lb-en">Podcast › Media › Speaking</span></div>
+              <img src="assets/images/nari-podcast.jpg" alt="Nari Fateha · Podcast &amp; Speaking" class="speaking-main-img" />
+              <div class="speaking-img-label"><span class="lb-es active">Podcast · Medios · Speaking</span><span class="lb-en">Podcast · Media · Speaking</span></div>
             </div>
             <div class="speaking-img-frame speaking-img-secondary">
               <img src="assets/images/nari-conference.jpg" alt="Nari Fateha en conferencia" class="speaking-secondary-img" />
-              <div class="speaking-img-label"><span class="lb-es active">Conferencias › Imagen editorial</span><span class="lb-en">Conferences › Editorial image</span></div>
+              <div class="speaking-img-label"><span class="lb-es active">Conferencias · Imagen editorial</span><span class="lb-en">Conferences · Editorial image</span></div>
             </div>
           </div>
           <div class="speaking-content-col">
@@ -1007,14 +993,14 @@
                 <span class="format-dot coral"><svg width="8" height="8" viewBox="0 0 8 8"><circle cx="4" cy="4" r="4" fill="#F96F6E"/></svg></span>
                 <div>
                   <div class="format-name"><span class="lb-es active">Conferencia magistral</span><span class="lb-en">Keynote lecture</span></div>
-                  <div class="format-sub"><span class="lb-es active">45›60 min › presencial o virtual</span><span class="lb-en">45›60 min › in-person or virtual</span></div>
+                  <div class="format-sub"><span class="lb-es active">45–60 min · presencial o virtual</span><span class="lb-en">45–60 min · in-person or virtual</span></div>
                 </div>
               </div>
               <div class="format-item">
                 <span class="format-dot teal"><svg width="8" height="8" viewBox="0 0 8 8"><circle cx="4" cy="4" r="4" fill="#2ED3C6"/></svg></span>
                 <div>
                   <div class="format-name"><span class="lb-es active">Taller participativo</span><span class="lb-en">Participatory workshop</span></div>
-                  <div class="format-sub"><span class="lb-es active">90 min › 3 horas › grupos de trabajo</span><span class="lb-en">90 min › 3 hours › working groups</span></div>
+                  <div class="format-sub"><span class="lb-es active">90 min – 3 horas · grupos de trabajo</span><span class="lb-en">90 min – 3 hours · working groups</span></div>
                 </div>
               </div>
               <div class="format-item">
@@ -1047,7 +1033,7 @@
             </div>
             <div class="talk-card">
               <div class="talk-number coral">03</div>
-              <h4 class="talk-title"><span class="lb-es active">Conversaciones difáciles en casa</span><span class="lb-en">Difficult conversations at home</span></h4>
+              <h4 class="talk-title"><span class="lb-es active">Conversaciones difíciles en casa</span><span class="lb-en">Difficult conversations at home</span></h4>
               <p class="talk-desc"><span class="lb-es active">Cómo hablar de seguridad, privacidad y consentimiento digital con niños y adolescentes de manera efectiva y sin drama.</span><span class="lb-en">How to talk about digital safety, privacy, and consent with children and teens effectively and without drama.</span></p>
               <div class="talk-tag"><span class="lb-es active">Taller participativo</span><span class="lb-en">Participatory workshop</span></div>
             </div>
@@ -1060,31 +1046,31 @@
             <div class="media-asset-item" onclick="goToSection('artifacts')">
               <div class="mai-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="13" y2="17"/></svg></div>
               <div class="mai-label"><span class="lb-es active">Dossier de Conferencias</span><span class="lb-en">Speaker Dossier</span></div>
-              <div class="mai-sub">PDF › ES / EN</div>
+              <div class="mai-sub">PDF · ES / EN</div>
             </div>
             <div class="media-asset-item">
               <div class="mai-thumb-wrap" style="min-height:80px;border-radius:var(--r-md);overflow:hidden;">
                 <img src="assets/images/nari-portrait.jpg" alt="Retrato editorial Nari" class="mai-thumb" style="width:100%;height:100%;object-fit:cover;object-position:center top;" />
               </div>
               <div class="mai-label" style="padding:8px 12px 2px;"><span class="lb-es active">Retrato editorial</span><span class="lb-en">Editorial portrait</span></div>
-              <div class="mai-sub" style="padding:0 12px 10px;">PNG › Nari_Portrait.png</div>
+              <div class="mai-sub" style="padding:0 12px 10px;">PNG · Nari_Portrait.png</div>
             </div>
             <div class="media-asset-item media-asset-item--podcast">
               <div class="mai-thumb-wrap">
                 <img src="assets/images/nari-podcast.jpg" alt="Nari podcast" class="mai-thumb" />
               </div>
               <div class="mai-label"><span class="lb-es active">Imagen podcast / medios</span><span class="lb-en">Podcast / media image</span></div>
-              <div class="mai-sub">PNG › Nari_podcast.png</div>
+              <div class="mai-sub">PNG · Nari_podcast.png</div>
             </div>
             <div class="media-asset-item">
               <div class="mai-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 10a7 7 0 0014 0"/><line x1="12" y1="19" x2="12" y2="22"/><line x1="8" y1="22" x2="16" y2="22"/></svg></div>
               <div class="mai-label"><span class="lb-es active">Imagen en conferencia</span><span class="lb-en">Conference image</span></div>
-              <div class="mai-sub">PNG › NariEnConferencia.png</div>
+              <div class="mai-sub">PNG · NariEnConferencia.png</div>
             </div>
             <div class="media-asset-item" onclick="goToSection('vault')">
               <div class="mai-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></div>
               <div class="mai-label"><span class="lb-es active">Bio aprobada (corta/larga)</span><span class="lb-en">Approved bio (short/long)</span></div>
-              <div class="mai-sub"><span class="lb-es active">Texto</span><span class="lb-en">Text</span> › ES / EN</div>
+              <div class="mai-sub"><span class="lb-es active">Texto</span><span class="lb-en">Text</span> · ES / EN</div>
             </div>
           </div>
         </div>
@@ -1112,9 +1098,7 @@
         </div>
       </section>
 
-      <!-- --- SECTION: GROWTH --- 
-           Scaling strategies and activation plans.
-      -->
+      <!-- ─── SECTION: GROWTH ─── -->
       <section id="section-growth" class="ws-section">
         <div class="section-header">
           <div class="section-eyebrow">Growth &amp; Monetización</div>
@@ -1126,20 +1110,20 @@
           <div class="revenue-scenario-card conservative">
             <div class="rs-label"><span class="lb-es active">Conservador</span><span class="lb-en">Conservative</span></div>
             <div class="rs-amount">$48K</div>
-            <div class="rs-sub"><span class="lb-es active">Año 1 › $4K/mes</span><span class="lb-en">Year 1 › $4K/mo</span></div>
+            <div class="rs-sub"><span class="lb-es active">Año 1 · $4K/mes</span><span class="lb-en">Year 1 · $4K/mo</span></div>
             <div class="rs-growth"><span class="lb-es active">+3% mensual</span><span class="lb-en">+3% monthly</span></div>
           </div>
           <div class="revenue-scenario-card moderate featured-scenario">
             <div class="rs-recommended"><span class="lb-es active">Recomendado</span><span class="lb-en">Recommended</span></div>
             <div class="rs-label"><span class="lb-es active">Moderado</span><span class="lb-en">Moderate</span></div>
             <div class="rs-amount">Proyección anual</div>
-            <div class="rs-sub"><span class="lb-es active">Año 1 › $6K/mes</span><span class="lb-en">Year 1 › $6K/mo</span></div>
+            <div class="rs-sub"><span class="lb-es active">Año 1 · $6K/mes</span><span class="lb-en">Year 1 · $6K/mo</span></div>
             <div class="rs-growth"><span class="lb-es active">+5% mensual</span><span class="lb-en">+5% monthly</span></div>
           </div>
           <div class="revenue-scenario-card optimistic">
             <div class="rs-label"><span class="lb-es active">Optimista</span><span class="lb-en">Optimistic</span></div>
             <div class="rs-amount">$96K</div>
-            <div class="rs-sub"><span class="lb-es active">Año 1 › $8K/mes</span><span class="lb-en">Year 1 › $8K/mo</span></div>
+            <div class="rs-sub"><span class="lb-es active">Año 1 · $8K/mes</span><span class="lb-en">Year 1 · $8K/mo</span></div>
             <div class="rs-growth"><span class="lb-es active">+8% mensual</span><span class="lb-en">+8% monthly</span></div>
           </div>
         </div>
@@ -1150,12 +1134,12 @@
             <div class="mix-card">
               <div class="mix-pct coral">40%</div>
               <div class="mix-label"><span class="lb-es active">Productos digitales y cursos</span><span class="lb-en">Digital products &amp; courses</span></div>
-              <div class="mix-desc"><span class="lb-es active">Curso insignia $197›$297, mini-cursos $47›$97, downloads $9›$27</span><span class="lb-en">Flagship course $197›$297, mini-courses $47›$97, downloads $9›$27</span></div>
+              <div class="mix-desc"><span class="lb-es active">Curso insignia $197–$297, mini-cursos $47–$97, downloads $9–$27</span><span class="lb-en">Flagship course $197–$297, mini-courses $47–$97, downloads $9–$27</span></div>
             </div>
             <div class="mix-card">
               <div class="mix-pct teal">30%</div>
               <div class="mix-label"><span class="lb-es active">Alianzas de marca</span><span class="lb-en">Brand partnerships</span></div>
-              <div class="mix-desc"><span class="lb-es active">Posts $300›$750, Reels $500›$1,250, Paquetes $800›$2,000, Ambassador $1K›$5K/mes</span><span class="lb-en">Posts $300›$750, Reels $500›$1,250, Packages $800›$2,000, Ambassador $1K›$5K/mo</span></div>
+              <div class="mix-desc"><span class="lb-es active">Posts $300–$750, Reels $500–$1,250, Paquetes $800–$2,000, Ambassador $1K–$5K/mes</span><span class="lb-en">Posts $300–$750, Reels $500–$1,250, Packages $800–$2,000, Ambassador $1K–$5K/mo</span></div>
             </div>
             <div class="mix-card">
               <div class="mix-pct coral">20%</div>
@@ -1173,18 +1157,18 @@
         <div class="growth-docs-section">
           <h3 class="growth-section-title"><span class="lb-es active">Documentos estratégicos</span><span class="lb-en">Strategic documents</span></h3>
           <div class="growth-docs-grid">
-            <div class="growth-doc-card" onclick="window.open('files/SIQ_A02_MonetizationReport_CSC_ES.html','_blank')">
+            <div class="growth-doc-card" onclick="window.open('https://www.luis-gilberto.com/TheHub/clients/nari/files/SIQ_A02_MonetizationReport_CSC','_blank')">
               <div class="gdc-eyebrow"><span class="lb-es active">Reporte</span><span class="lb-en">Report</span></div>
               <h4 class="gdc-title">Market Intelligence &amp; <span class="lb-es active">Monetización</span><span class="lb-en">Monetization</span></h4>
-              <p class="gdc-desc"><span class="lb-es active">An›lisis de mercado, proyecciones, precios y mix de ingresos recomendado para Criar Sin Culpas.</span><span class="lb-en">Market analysis, projections, pricing, and recommended revenue mix for Criar Sin Culpas.</span></p>
-              <div class="gdc-meta">ES / EN › <span class="lb-es active">Abr</span><span class="lb-en">Apr</span> 2026 › <span class="lb-es active">3 páginas</span><span class="lb-en">3 pages</span></div>
+              <p class="gdc-desc"><span class="lb-es active">Análisis de mercado, proyecciones, precios y mix de ingresos recomendado para Criar Sin Culpas.</span><span class="lb-en">Market analysis, projections, pricing, and recommended revenue mix for Criar Sin Culpas.</span></p>
+              <div class="gdc-meta">ES / EN · <span class="lb-es active">Abr</span><span class="lb-en">Apr</span> 2026 · <span class="lb-es active">3 páginas</span><span class="lb-en">3 pages</span></div>
               <div class="gdc-cta"><span class="lb-es active">Abrir documento →</span><span class="lb-en">Open document →</span></div>
             </div>
             <div class="growth-doc-card" onclick="window.open('https://www.luis-gilberto.com/TheHub/clients/nari/files/SIQ_A02_CommercialActivationBrief_CSC','_blank')">
               <div class="gdc-eyebrow">Brief</div>
               <h4 class="gdc-title"><span class="lb-es active">Activación Comercial</span><span class="lb-en">Commercial Activation</span></h4>
               <p class="gdc-desc"><span class="lb-es active">Dos motores de ingresos, tres escenarios, señales estratégicas y los primeros pasos para activar el modelo de negocio.</span><span class="lb-en">Two revenue engines, three scenarios, strategic signals and first steps to activate the business model.</span></p>
-              <div class="gdc-meta">ES / EN › <span class="lb-es active">Abr</span><span class="lb-en">Apr</span> 2026 › <span class="lb-es active">2 páginas</span><span class="lb-en">2 pages</span></div>
+              <div class="gdc-meta">ES / EN · <span class="lb-es active">Abr</span><span class="lb-en">Apr</span> 2026 · <span class="lb-es active">2 páginas</span><span class="lb-en">2 pages</span></div>
               <div class="gdc-cta"><span class="lb-es active">Abrir documento →</span><span class="lb-en">Open document →</span></div>
             </div>
           </div>
@@ -1195,7 +1179,7 @@
           <div class="gp-list">
             <div class="gp-item">
               <span class="gp-num coral">01</span>
-              <div class="gp-text"><span class="lb-es active">Enviar deck de alianzas a 3›5 marcas alineadas esta semana</span><span class="lb-en">Send partnerships deck to 3›5 aligned brands this week</span></div>
+              <div class="gp-text"><span class="lb-es active">Enviar deck de alianzas a 3–5 marcas alineadas esta semana</span><span class="lb-en">Send partnerships deck to 3–5 aligned brands this week</span></div>
             </div>
             <div class="gp-item">
               <span class="gp-num teal">02</span>
@@ -1207,21 +1191,21 @@
             </div>
             <div class="gp-item">
               <span class="gp-num teal">04</span>
-              <div class="gp-text"><span class="lb-es active">Definir estructura del programa insignia en la pr›xima sesión estratégica</span><span class="lb-en">Define flagship program structure in next strategic session</span></div>
+              <div class="gp-text"><span class="lb-es active">Definir estructura del programa insignia en la próxima sesión estratégica</span><span class="lb-en">Define flagship program structure in next strategic session</span></div>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- --- SECTION: Brand Vault › Identidad --- -->
+      <!-- ─── SECTION: Brand Vault · Identidad ─── -->
       <section id="section-vault" class="ws-section">
         <div class="section-header">
-          <div class="section-eyebrow"><span class="lb-es active">Bóveda de Marca › CSC</span><span class="lb-en">Brand Vault › Identidad › CSC</span></div>
+          <div class="section-eyebrow"><span class="lb-es active">Bóveda de Marca · CSC</span><span class="lb-en">Brand Vault · Identidad · CSC</span></div>
           <h2 class="section-title"><span class="lb-es active">Sistema visual y de marca</span><span class="lb-en">Visual &amp; brand system</span></h2>
-          <p class="section-desc"><span class="lb-es active">La identidad de Criar Sin Culpas: colores, tipografía, voz y componentes editoriales. Esta es la paleta de Nari › no la del entorno de trabajo.</span><span class="lb-en">The Criar Sin Culpas identity: colors, typography, voice, and editorial components. This is Nari's palette › not the workspace environment's.</span></p>
+          <p class="section-desc"><span class="lb-es active">La identidad de Criar Sin Culpas: colores, tipografía, voz y componentes editoriales. Esta es la paleta de Nari — no la del entorno de trabajo.</span><span class="lb-en">The Criar Sin Culpas identity: colors, typography, voice, and editorial components. This is Nari's palette — not the workspace environment's.</span></p>
         </div>
 
-        <!-- -- Brand Book entry card (PUBLIC › no password) -- -->
+        <!-- ── Brand Book entry card (PUBLIC — no password) ── -->
         <div class="brand-book-entry-card" style="
           display:flex; align-items:center; justify-content:space-between; gap:24px;
           background: linear-gradient(135deg, #3e2a6b 0%, #2a1c4a 100%);
@@ -1232,8 +1216,8 @@
           <div style="position:absolute;bottom:-40px;left:-20px;width:200px;height:200px;background:radial-gradient(circle,rgba(75,173,168,0.18) 0%,transparent 70%);pointer-events:none;"></div>
           <div style="position:relative;z-index:1;">
             <div style="font-size:0.68rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:rgba(249,111,110,0.85);margin-bottom:8px;font-family:var(--font-sans);">
-              <span class="lb-es active">Recurso p›blico › Sin contraseña</span>
-              <span class="lb-en">Public resource › No password needed</span>
+              <span class="lb-es active">Recurso público · Sin contraseña</span>
+              <span class="lb-en">Public resource · No password needed</span>
             </div>
             <h3 style="font-family:var(--font-serif);font-size:1.9rem;font-weight:400;color:#fff;margin:0 0 10px;line-height:1.15;display:flex;align-items:center;gap:10px;">
               <span>
@@ -1243,10 +1227,10 @@
               <span class="vault-info-icon" data-tooltip="The Visual Brand Book is your complete external brand toolkit. Use it for Instagram posts, website design, speaker kits, merch, and sharing with collaborators who need the full CSC visual system + asset library." aria-label="More info">ⓘ</span>
             </h3>
             <p style="font-size:0.88rem;color:rgba(255,255,255,0.68);margin:0 0 12px;max-width:460px;line-height:1.6;">
-              <span class="lb-es active">El sistema visual completo de Criar Sin Culpas › colores, tipografía, logo, plantillas sociales, DNA de marca y activos descargables. Diseñado para compartir.</span>
-              <span class="lb-en">The complete visual system for Criar Sin Culpas › colors, type, logo, social templates, brand DNA, and downloadable assets. Designed to share.</span>
+              <span class="lb-es active">El sistema visual completo de Criar Sin Culpas — colores, tipografía, logo, plantillas sociales, DNA de marca y activos descargables. Diseñado para compartir.</span>
+              <span class="lb-en">The complete visual system for Criar Sin Culpas — colors, type, logo, social templates, brand DNA, and downloadable assets. Designed to share.</span>
             </p>
-            <p class="vault-helper-text">›› <span class="lb-es active">Úsalo para: activos de marketing, redes sociales, alianzas, entrega al diseñador</span><span class="lb-en">Use for: Marketing assets, social media, partnerships, designer handoff</span></p>
+            <p class="vault-helper-text">🎨 <span class="lb-es active">Úsalo para: activos de marketing, redes sociales, alianzas, entrega al diseñador</span><span class="lb-en">Use for: Marketing assets, social media, partnerships, designer handoff</span></p>
             <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;">
               <a href="https://nari.luis-gilberto.com/brand" target="_blank" style="display:inline-flex;align-items:center;gap:7px;padding:11px 22px;border-radius:999px;background:#f96f6e;color:#fff;text-decoration:none;font-size:0.84rem;font-weight:600;letter-spacing:0.02em;box-shadow:0 6px 18px rgba(249,111,110,0.35);transition:all 0.25s;">
                 <span class="lb-es active">Abrir Brand Book →</span>
@@ -1258,8 +1242,8 @@
               </a>
               <span style="font-size:0.74rem;color:rgba(255,255,255,0.4);display:flex;align-items:center;gap:5px;">
                 <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-                <span class="lb-es active">Acceso libre › no requiere contraseña</span>
-                <span class="lb-en">Open access › no login required</span>
+                <span class="lb-es active">Acceso libre · no requiere contraseña</span>
+                <span class="lb-en">Open access · no login required</span>
               </span>
             </div>
           </div>
@@ -1275,9 +1259,9 @@
             .brand-book-entry-card { flex-direction:column; }
             .brand-book-swatches { display:none !important; }
           }
-            /* -------------------------------------------
+            /* ═══════════════════════════════════════════
        PROJECT JOURNEY SECTION  (pj-*)
-       ------------------------------------------- */
+       ─────────────────────────────────────────── */
     .pj-journey {
       max-width: 860px;
       margin: 0 auto;
@@ -1496,7 +1480,7 @@
       .pj-output-card { flex-direction: column; align-items: flex-start; }
       .pj-artifacts { grid-template-columns: 1fr; }
     }
-    /* --- END PROJECT JOURNEY --- */ 
+    /* ─── END PROJECT JOURNEY ─── */ 
  
  
      /* JOURNEY TEASER (home section) */ 
@@ -1546,7 +1530,7 @@
               <span class="vault-info-icon vault-info-icon--dark" data-tooltip="The Viz ID is your compact brand DNA sheet. Use it when creating documents inside the workspace or feeding brand guidelines to AI tools. Think: workshop handouts, internal reports, AI-generated content." aria-label="More info">ⓘ</span>
             </h3>
             <p class="vcvb-desc"><span class="lb-es active">La guía visual completa de Criar Sin Culpas en una sola página. Colores, tipografía, imagen, voz, componentes y checklist de activos.</span><span class="lb-en">The complete visual guide for Criar Sin Culpas on one page. Colors, typography, imagery, voice, components, and asset checklist.</span></p>
-            <p class="vault-helper-text vault-helper-text--dark">›› <span class="lb-es active">Úsalo para: documentos del workspace, prompts de IA, entrega al equipo</span><span class="lb-en">Use for: Workspace documents, AI prompts, team handoff</span></p>
+            <p class="vault-helper-text vault-helper-text--dark">📋 <span class="lb-es active">Úsalo para: documentos del workspace, prompts de IA, entrega al equipo</span><span class="lb-en">Use for: Workspace documents, AI prompts, team handoff</span></p>
             <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;">
               <a href="files/SIQ_BrandAsset_VizIDReference_CSC.html" target="_blank" class="btn-primary"><span class="lb-es active">Abrir CSC Viz ID →</span><span class="lb-en">Open CSC Viz ID →</span></a>
               
@@ -1567,40 +1551,40 @@
         </div>
 
         <div class="vault-tokens-section">
-          <h3 class="vault-section-title"><span class="lb-es active">Paleta de color › CSC Viz ID</span><span class="lb-en">Color palette › CSC Viz ID</span></h3>
+          <h3 class="vault-section-title"><span class="lb-es active">Paleta de color — CSC Viz ID</span><span class="lb-en">Color palette — CSC Viz ID</span></h3>
           <div class="tokens-grid">
             <div class="token-group">
-              <div class="tg-label"><span class="lb-es active">Color › Acento principal</span><span class="lb-en">Color › Primary accent</span></div>
+              <div class="tg-label"><span class="lb-es active">Color · Acento principal</span><span class="lb-en">Color · Primary accent</span></div>
               <div class="tg-swatch" style="background:#F96F6E;"></div>
               <div class="tg-name">Coral</div>
               <div class="tg-value">#F96F6E</div>
             </div>
             <div class="token-group">
-              <div class="tg-label"><span class="lb-es active">Color › Acento secundario</span><span class="lb-en">Color › Secondary accent</span></div>
+              <div class="tg-label"><span class="lb-es active">Color · Acento secundario</span><span class="lb-en">Color · Secondary accent</span></div>
               <div class="tg-swatch" style="background:#4BADA8;"></div>
               <div class="tg-name">Teal</div>
               <div class="tg-value">#4BADA8</div>
             </div>
             <div class="token-group">
-              <div class="tg-label"><span class="lb-es active">Tipografía › Tinta principal</span><span class="lb-en">Typography › Primary ink</span></div>
+              <div class="tg-label"><span class="lb-es active">Tipografía · Tinta principal</span><span class="lb-en">Typography · Primary ink</span></div>
               <div class="tg-swatch" style="background:#151515;"></div>
               <div class="tg-name">Ink</div>
               <div class="tg-value">#151515</div>
             </div>
             <div class="token-group">
-              <div class="tg-label"><span class="lb-es active">Surface › Fondo editorial</span><span class="lb-en">Surface › Editorial background</span></div>
+              <div class="tg-label"><span class="lb-es active">Surface · Fondo editorial</span><span class="lb-en">Surface · Editorial background</span></div>
               <div class="tg-swatch" style="background:#FBF7F1; border:1px solid #EDE3D7;"></div>
               <div class="tg-name">Warm Paper</div>
               <div class="tg-value">#FBF7F1</div>
             </div>
             <div class="token-group">
-              <div class="tg-label"><span class="lb-es active">Surface › Separador suave</span><span class="lb-en">Surface › Soft divider</span></div>
+              <div class="tg-label"><span class="lb-es active">Surface · Separador suave</span><span class="lb-en">Surface · Soft divider</span></div>
               <div class="tg-swatch" style="background:#EDE3D7;"></div>
               <div class="tg-name">Soft Sand</div>
               <div class="tg-value">#EDE3D7</div>
             </div>
             <div class="token-group">
-              <div class="tg-label"><span class="lb-es active">Surface › Acento profundo</span><span class="lb-en">Surface › Deep accent</span></div>
+              <div class="tg-label"><span class="lb-es active">Surface · Acento profundo</span><span class="lb-en">Surface · Deep accent</span></div>
               <div class="tg-swatch" style="background:#274B49;"></div>
               <div class="tg-name">Deep Moss</div>
               <div class="tg-value">#274B49</div>
@@ -1608,8 +1592,8 @@
           </div>
           <div class="vault-token-note">
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;opacity:0.5;"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-            <span class="lb-es active">El teal de la marca CSC es <code>#4BADA8</code> › c›lido y editorial. El entorno de trabajo usa <code>#2ED3C6</code> como token de sistema digital. No son intercambiables en materiales de marca externos.</span>
-            <span class="lb-en">CSC's brand teal is <code>#4BADA8</code> › warm and editorial. The workspace uses <code>#2ED3C6</code> as a digital system token. They are not interchangeable in external brand materials.</span>
+            <span class="lb-es active">El teal de la marca CSC es <code>#4BADA8</code> — cálido y editorial. El entorno de trabajo usa <code>#2ED3C6</code> como token de sistema digital. No son intercambiables en materiales de marca externos.</span>
+            <span class="lb-en">CSC's brand teal is <code>#4BADA8</code> — warm and editorial. The workspace uses <code>#2ED3C6</code> as a digital system token. They are not interchangeable in external brand materials.</span>
           </div>
         </div>
 
@@ -1618,13 +1602,13 @@
           <div class="type-demo-grid">
             <div class="type-demo-card">
               <div class="td-sample serif">Cormorant Garamond</div>
-              <div class="td-label"><span class="lb-es active">Headlines › Display › Citas</span><span class="lb-en">Headlines › Display › Pull quotes</span></div>
-              <div class="td-desc"><span class="lb-es active">Serif de alta moda. Pesos 300›700. Usa para t›tulos, nombres, secciones heroicas y pull quotes.</span><span class="lb-en">High-fashion serif. Weights 300›700. Use for headings, names, hero sections and pull quotes.</span></div>
+              <div class="td-label"><span class="lb-es active">Headlines · Display · Citas</span><span class="lb-en">Headlines · Display · Pull quotes</span></div>
+              <div class="td-desc"><span class="lb-es active">Serif de alta moda. Pesos 300–700. Usa para títulos, nombres, secciones heroicas y pull quotes.</span><span class="lb-en">High-fashion serif. Weights 300–700. Use for headings, names, hero sections and pull quotes.</span></div>
             </div>
             <div class="type-demo-card">
               <div class="td-sample sans">Inter</div>
-              <div class="td-label"><span class="lb-es active">Cuerpo › Metadata › Utilities</span><span class="lb-en">Body › Metadata › Utilities</span></div>
-              <div class="td-desc"><span class="lb-es active">Sans-serif premium. Pesos 300›700. Usa para todo el cuerpo de texto, labels, botones y UI.</span><span class="lb-en">Premium sans-serif. Weights 300›700. Use for all body text, labels, buttons, and UI.</span></div>
+              <div class="td-label"><span class="lb-es active">Cuerpo · Metadata · Utilities</span><span class="lb-en">Body · Metadata · Utilities</span></div>
+              <div class="td-desc"><span class="lb-es active">Sans-serif premium. Pesos 300–700. Usa para todo el cuerpo de texto, labels, botones y UI.</span><span class="lb-en">Premium sans-serif. Weights 300–700. Use for all body text, labels, buttons, and UI.</span></div>
             </div>
           </div>
         </div>
@@ -1633,26 +1617,26 @@
           <h3 class="vault-section-title"><span class="lb-es active">Voz y tono</span><span class="lb-en">Voice &amp; tone</span></h3>
           <div class="voice-rules-grid">
             <div class="voice-rule do">
-              <div class="vr-icon">→</div>
-              <div class="vr-label"><span class="lb-es active">S› usamos</span><span class="lb-en">We do use</span></div>
+              <div class="vr-icon">✓</div>
+              <div class="vr-label"><span class="lb-es active">Sí usamos</span><span class="lb-en">We do use</span></div>
               <ul class="vr-list">
-                <li><span class="lb-es active">C›lido, directo y editorial</span><span class="lb-en">Warm, direct, and editorial</span></li>
+                <li><span class="lb-es active">Cálido, directo y editorial</span><span class="lb-en">Warm, direct, and editorial</span></li>
                 <li><span class="lb-es active">Autoridad sin arrogancia</span><span class="lb-en">Authority without arrogance</span></li>
-                <li><span class="lb-es active">P›rrafos cortos, ideas claras</span><span class="lb-en">Short paragraphs, clear ideas</span></li>
-                <li><span class="lb-es active">Espa›ol humano, no corporativo</span><span class="lb-en">Human Spanish, not corporate</span></li>
+                <li><span class="lb-es active">Párrafos cortos, ideas claras</span><span class="lb-en">Short paragraphs, clear ideas</span></li>
+                <li><span class="lb-es active">Español humano, no corporativo</span><span class="lb-en">Human Spanish, not corporate</span></li>
                 <li><span class="lb-es active">Emoción primero, estructura después</span><span class="lb-en">Emotion first, structure after</span></li>
-                <li><em><span class="lb-es active">Protección en línea › Ponencias › Dossier de conferencias</span><span class="lb-en">Online safety › Talks › Speaker dossier</span></em></li>
+                <li><em><span class="lb-es active">Protección en línea · Ponencias · Dossier de conferencias</span><span class="lb-en">Online safety · Talks · Speaker dossier</span></em></li>
               </ul>
             </div>
             <div class="voice-rule dont">
-              <div class="vr-icon">→</div>
+              <div class="vr-icon">✗</div>
               <div class="vr-label"><span class="lb-es active">No usamos</span><span class="lb-en">We don't use</span></div>
               <ul class="vr-list">
                 <li><span class="lb-es active">Anglicismos innecesarios en materiales ES</span><span class="lb-en">Unnecessary anglicisms in ES materials</span></li>
-                <li><span class="lb-es active">"Speaker Media Kit" (en espa›ol)</span><span class="lb-en">"Speaker Media Kit" (in Spanish assets)</span></li>
-                <li><span class="lb-es active">"Workshops" / "Keynotes" (en espa›ol)</span><span class="lb-en">"Workshops" / "Keynotes" (in Spanish)</span></li>
+                <li><span class="lb-es active">"Speaker Media Kit" (en español)</span><span class="lb-en">"Speaker Media Kit" (in Spanish assets)</span></li>
+                <li><span class="lb-es active">"Workshops" / "Keynotes" (en español)</span><span class="lb-en">"Workshops" / "Keynotes" (in Spanish)</span></li>
                 <li><span class="lb-es active">"Premium" o "Luxury" dirigido al cliente</span><span class="lb-en">"Premium" or "Luxury" toward the client</span></li>
-                <li><span class="lb-es active">Jerga de consultoría o autoayuda gen›rica</span><span class="lb-en">Consulting jargon or generic self-help phrasing</span></li>
+                <li><span class="lb-es active">Jerga de consultoría o autoayuda genérica</span><span class="lb-en">Consulting jargon or generic self-help phrasing</span></li>
                 <li><span class="lb-es active">Mezcla de idiomas en etiquetas de sección</span><span class="lb-en">Language mixing in section labels</span></li>
               </ul>
             </div>
@@ -1668,24 +1652,24 @@
                 <span class="bio-toggle">+</span>
               </div>
               <div class="bio-content">
-                <p>Nari Fateha <span class="lb-es active">es educadora en crianza y fundadora de Criar Sin Culpas. Acompaía a familias, escuelas e instituciones en crianza digital, regulación emocional y construcción de confianza familiar.</span><span class="lb-en">is a parenting educator and founder of Criar Sin Culpas. She supports families, schools, and institutions in digital parenting, emotional regulation, and building family trust.</span></p>
-                <button class="btn-ghost small" onclick="copyText(this, 'Nari Fateha es educadora en crianza y fundadora de Criar Sin Culpas. Acompaía a familias, escuelas e instituciones en crianza digital, regulación emocional y construcción de confianza familiar.')"><span class="lb-es active">Copiar texto</span><span class="lb-en">Copy text</span></button>
+                <p>Nari Fateha <span class="lb-es active">es educadora en crianza y fundadora de Criar Sin Culpas. Acompaña a familias, escuelas e instituciones en crianza digital, regulación emocional y construcción de confianza familiar.</span><span class="lb-en">is a parenting educator and founder of Criar Sin Culpas. She supports families, schools, and institutions in digital parenting, emotional regulation, and building family trust.</span></p>
+                <button class="btn-ghost small" onclick="copyText(this, 'Nari Fateha es educadora en crianza y fundadora de Criar Sin Culpas. Acompaña a familias, escuelas e instituciones en crianza digital, regulación emocional y construcción de confianza familiar.')"><span class="lb-es active">Copiar texto</span><span class="lb-en">Copy text</span></button>
               </div>
             </div>
             <div class="bio-item" onclick="toggleBio(this)">
               <div class="bio-header">
-                <span class="bio-title"><span class="lb-es active">Bio larga (p›rrafo completo)</span><span class="lb-en">Long bio (full paragraph)</span></span>
+                <span class="bio-title"><span class="lb-es active">Bio larga (párrafo completo)</span><span class="lb-en">Long bio (full paragraph)</span></span>
                 <span class="bio-toggle">+</span>
               </div>
               <div class="bio-content">
-                <p class="lb-es active">Nari Fateha es educadora en crianza y fundadora de Criar Sin Culpas, espacio de referencia para familias que navegan la crianza digital sin miedo y sin culpa. Desde su mezcla ›nica de experiencia vivida, regulación emocional y lenguaje pr›ctico, acompaía a padres, escuelas y marcas con propósito a construir v›nculos más fuertes en un mundo cada vez más conectado. Su trabajo abraza familias neurodivergentes, hogares bajo estr›s y cualquier padre que quiera proteger a sus hijos desde la conexión, no desde el control.</p>
+                <p class="lb-es active">Nari Fateha es educadora en crianza y fundadora de Criar Sin Culpas, espacio de referencia para familias que navegan la crianza digital sin miedo y sin culpa. Desde su mezcla única de experiencia vivida, regulación emocional y lenguaje práctico, acompaña a padres, escuelas y marcas con propósito a construir vínculos más fuertes en un mundo cada vez más conectado. Su trabajo abraza familias neurodivergentes, hogares bajo estrés y cualquier padre que quiera proteger a sus hijos desde la conexión, no desde el control.</p>
                 <p class="lb-en">Nari Fateha is a parenting educator and founder of Criar Sin Culpas, a reference space for families navigating digital parenting without fear or guilt. Drawing from her unique blend of lived experience, emotional regulation, and practical language, she supports parents, schools, and purpose-driven brands in building stronger connections in an increasingly connected world. Her work embraces neurodivergent families, stressed households, and any parent who wants to protect their children through connection, not control.</p>
                 <button class="btn-ghost small" onclick="copyText(this, 'Nari Fateha es educadora en crianza...')"><span class="lb-es active">Copiar texto</span><span class="lb-en">Copy text</span></button>
               </div>
             </div>
             <div class="bio-item" onclick="toggleBio(this)">
               <div class="bio-header">
-                <span class="bio-title"><span class="lb-es active">Bio en ingl›s (short)</span><span class="lb-en">English bio (short)</span></span>
+                <span class="bio-title"><span class="lb-es active">Bio en inglés (short)</span><span class="lb-en">English bio (short)</span></span>
                 <span class="bio-toggle">+</span>
               </div>
               <div class="bio-content">
@@ -1696,14 +1680,14 @@
           </div>
         </div>
 
-        <!-- -- BRAND BOOK CARD -- -->
+        <!-- ── BRAND BOOK CARD ── -->
         <div class="brand-book-entry-card">
           <div class="bbec-gradient-bar"></div>
           <div class="bbec-content">
             <div class="bbec-left">
               <div class="bbec-eyebrow"><span class="lb-es active">Identidad visual completa</span><span class="lb-en">Complete visual identity</span></div>
               <h3 class="bbec-title"><span class="lb-es active">Brand Book Interactivo</span><span class="lb-en">Interactive Brand Book</span></h3>
-              <p class="bbec-desc"><span class="lb-es active">La guía visual completa de Criar Sin Culpas en una experiencia interactiva: colores, tipografía, aplicaciones reales, ADN de marca y portal de descarga de activos. P›gina p›blica › no requiere acceso al workspace.</span><span class="lb-en">The complete visual guide for Criar Sin Culpas as an interactive experience: colors, typography, real-world applications, brand DNA, and a full asset download portal. Public page › no workspace access required.</span></p>
+              <p class="bbec-desc"><span class="lb-es active">La guía visual completa de Criar Sin Culpas en una experiencia interactiva: colores, tipografía, aplicaciones reales, ADN de marca y portal de descarga de activos. Página pública — no requiere acceso al workspace.</span><span class="lb-en">The complete visual guide for Criar Sin Culpas as an interactive experience: colors, typography, real-world applications, brand DNA, and a full asset download portal. Public page — no workspace access required.</span></p>
               <div class="bbec-chips">
                 <span class="bbec-chip">Identity</span>
                 <span class="bbec-chip">Logo System</span>
@@ -1714,7 +1698,7 @@
               </div>
               <div class="bbec-actions">
                 <a href="brand.html" target="_blank" class="bbec-btn-primary"><span class="lb-es active">Abrir Brand Book →</span><span class="lb-en">Open Brand Book →</span></a>
-                <button class="bbec-btn-ghost" onclick="if(typeof openShareModal==='function'){openShareModal({id:'brand-book',title:{es:'Brand Book › Criar Sin Culpas',en:'Brand Book › Criar Sin Culpas'},url:'brand.html',code:'CSC-BB-2026'})}"><span class="lb-es active">Compartir</span><span class="lb-en">Share</span></button>
+                <button class="bbec-btn-ghost" onclick="if(typeof openShareModal==='function'){openShareModal({id:'brand-book',title:{es:'Brand Book — Criar Sin Culpas',en:'Brand Book — Criar Sin Culpas'},url:'brand.html',code:'CSC-BB-2026'})}"><span class="lb-es active">Compartir</span><span class="lb-en">Share</span></button>
               </div>
             </div>
             <div class="bbec-preview">
@@ -1732,7 +1716,7 @@
                 </div>
                 <div class="bbec-public-badge">
                   <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-                  <span class="lb-es active">P›gina p›blica</span><span class="lb-en">Public page</span>
+                  <span class="lb-es active">Página pública</span><span class="lb-en">Public page</span>
                 </div>
               </div>
             </div>
@@ -1741,10 +1725,10 @@
 
       </section>
 
-      <!-- --- SECTION: SIGNAL ROOM --- -->
+      <!-- ─── SECTION: SIGNAL ROOM ─── -->
       <section id="section-signal" class="ws-section">
         <div class="section-header">
-          <div class="section-eyebrow">Signal Room › powered by the LG Ecosystem</div>
+          <div class="section-eyebrow">Signal Room · powered by the LG Ecosystem</div>
           <h2 class="section-title">Centro de Actualizaciones y decisiones del proyecto</h2>
           <p class="section-desc">El espacio donde el workspace vive y evoluciona. Revisions, decisiones pendientes, actividad reciente.</p>
         </div>
@@ -1760,45 +1744,45 @@
               <div class="signal-item new">
                 <div class="si-dot coral"></div>
                 <div class="si-content">
-                  <div class="si-title">Workspace lanzado →</div>
+                  <div class="si-title">Workspace lanzado ✨</div>
                   <div class="si-desc">El entorno privado de Criar Sin Culpas está activo. Homepage, navegación y secciones principales configuradas.</div>
-                  <div class="si-meta">Hoy › LG Ecosystem</div>
+                  <div class="si-meta">Hoy · LG Ecosystem</div>
                 </div>
               </div>
 
               <div class="signal-item">
                 <div class="si-dot teal"></div>
                 <div class="si-content">
-                  <div class="si-title">CSC Viz ID › Aprobado</div>
-                  <div class="si-desc">La guía visual de identidad está finalizada y disponible en el Brand Vault › Identidad.</div>
-                  <div class="si-meta">Abr 2026 › Luis Gilberto</div>
+                  <div class="si-title">CSC Viz ID — Aprobado</div>
+                  <div class="si-desc">La guía visual de identidad está finalizada y disponible en el Brand Vault · Identidad.</div>
+                  <div class="si-meta">Abr 2026 · Luis Gilberto</div>
                 </div>
               </div>
 
               <div class="signal-item">
                 <div class="si-dot coral"></div>
                 <div class="si-content">
-                  <div class="si-title">Brief de Activación › ES + EN completados</div>
+                  <div class="si-title">Brief de Activación — ES + EN completados</div>
                   <div class="si-desc">Ambas versiones del Commercial Activation Brief están listas y accesibles desde Artifacts.</div>
-                  <div class="si-meta">Abr 2026 › Luis Gilberto</div>
+                  <div class="si-meta">Abr 2026 · Luis Gilberto</div>
                 </div>
               </div>
 
               <div class="signal-item">
                 <div class="si-dot teal"></div>
                 <div class="si-content">
-                  <div class="si-title">Reporte de Monetización › EN aprobado</div>
-                  <div class="si-desc">La versión ingl›s del Market Intelligence Report está publicada con diseño dark luxury.</div>
-                  <div class="si-meta">Abr 2026 › Luis Gilberto</div>
+                  <div class="si-title">Reporte de Monetización — EN aprobado</div>
+                  <div class="si-desc">La versión inglés del Market Intelligence Report está publicada con diseño dark luxury.</div>
+                  <div class="si-meta">Abr 2026 · Luis Gilberto</div>
                 </div>
               </div>
 
               <div class="signal-item">
                 <div class="si-dot coral"></div>
                 <div class="si-content">
-                  <div class="si-title">Im›genes editoriales › seleccionadas</div>
+                  <div class="si-title">Imágenes editoriales — seleccionadas</div>
                   <div class="si-desc">Retrato circular (Nari_Portrait.png) e imagen de conferencia (NariEnConferencia.png) aprobadas y asignadas en el kit.</div>
-                  <div class="si-meta">Abr 2026 › Luis Gilberto</div>
+                  <div class="si-meta">Abr 2026 · Luis Gilberto</div>
                 </div>
               </div>
 
@@ -1813,13 +1797,13 @@
                   <div class="sdp-dot coral"></div>
                   <div class="sdp-content">
                     <div class="sdp-title">Selección de proveedor de email</div>
-                    <div class="sdp-sub">Dominio criarsinculpas.com listo › conectar a proveedor</div>
+                    <div class="sdp-sub">Dominio criarsinculpas.com listo · conectar a proveedor</div>
                   </div>
                 </div>
                 <div class="sdp-item">
                   <div class="sdp-dot teal"></div>
                   <div class="sdp-content">
-                    <div class="sdp-title">Programa insignia › estructura</div>
+                    <div class="sdp-title">Programa insignia — estructura</div>
                     <div class="sdp-sub">Definir formato y precio del flagship course</div>
                   </div>
                 </div>
@@ -1835,43 +1819,18 @@
 
             <div class="signal-quick-actions">
               <div class="sqa-header">Acciones rápidas</div>
-              <button class="sqa-btn" onclick="goToSection('protocol')">Abrir Protocol Library</button>
               <button class="sqa-btn" onclick="goToSection('requests')">+ Nueva solicitud</button>
               <button class="sqa-btn" onclick="goToSection('artifacts')">Ver todos los artefactos</button>
-              <button class="sqa-btn" onclick="goToSection('vault')">Abrir Brand Vault › Identidad</button>
+              <button class="sqa-btn" onclick="goToSection('vault')">Abrir Brand Vault · Identidad</button>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- --- SECTION: PROTOCOL LIBRARY --- -->
-      <section id="section-protocol" class="ws-section">
-        <div class="section-header">
-          <div class="section-eyebrow" data-t="protocolEyebrow">Protocol Library › powered by the LG Ecosystem</div>
-          <h2 class="section-title" data-t="protocolTitle">Protocol Library</h2>
-          <p class="section-desc" data-t="protocolDesc">Tools generated from audience signals and designed for in-the-moment parenting support.</p>
-          <div style="margin-top: 24px;">
-            <a href="/tools/parent-support/" class="btn-ghost small" data-t="openParentHub">Open Parent Support Hub</a>
-          </div>
-        </div>
-
-        <div id="protocols-grid-container" class="artifacts-grid">
-          <!-- Content injected via workspace.js -->
-        </div>
-
-        <div class="artifact-add-cta" style="margin-top: 12px;">
-          <div class="add-cta-content">
-            <div class="add-cta-label"><span class="lb-en">Need a new artifact?</span><span class="lb-es active">¿Necesitas un nuevo artefacto?</span></div>
-            <p class="add-cta-desc"><span class="lb-en">Submit a request and the LG team will produce it at premium dossier level.</span><span class="lb-es active">Envía una solicitud y el equipo LG lo producirá a nivel de dossier premium.</span></p>
-            <button class="btn-primary" onclick="goToSection('requests')"><span class="lb-en">New Request →</span><span class="lb-es active">Nueva Solicitud →</span></button>
-          </div>
-        </div>
-      </section>
-
-      <!-- --- SECTION: REQUESTS --- -->
+      <!-- ─── SECTION: REQUESTS ─── -->
       <section id="section-requests" class="ws-section">
         <div class="section-header">
-          <div class="section-eyebrow">Requests › LG Ecosystem</div>
+          <div class="section-eyebrow">Requests · LG Ecosystem</div>
           <h2 class="section-title">Solicitudes y colaboración</h2>
           <p class="section-desc">¿Necesitas un nuevo artefacto, una revisión o subir un archivo? Este es el canal directo con el equipo LG.</p>
         </div>
@@ -1906,7 +1865,7 @@
                 <div class="priority-selector">
                   <button class="priority-btn" data-priority="low">Normal</button>
                   <button class="priority-btn active" data-priority="medium">Urgente</button>
-                  <button class="priority-btn" data-priority="high">Cr›tico</button>
+                  <button class="priority-btn" data-priority="high">Crítico</button>
                 </div>
               </div>
               <div class="form-group">
@@ -1914,12 +1873,12 @@
                 <div class="file-drop-zone" onclick="this.querySelector('input').click()">
                   <div class="fdz-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" width="28" height="28"><path d="M21.44 11.05l-9.19 9.19a6 6 0 01-8.49-8.49l9.19-9.19a4 4 0 015.66 5.66l-9.2 9.19a2 2 0 01-2.83-2.83l8.49-8.48"/></svg></div>
                   <div class="fdz-text">Arrastra un archivo o haz clic para seleccionar</div>
-                  <div class="fdz-sub">PNG, JPG, PDF, HTML › m›x. 20MB</div>
+                  <div class="fdz-sub">PNG, JPG, PDF, HTML — máx. 20MB</div>
                   <input type="file" style="display:none;" />
                 </div>
               </div>
               <button class="btn-primary full" onclick="submitRequest()">Enviar solicitud →</button>
-              <div class="form-lg-note">Gestionado a trav›s del LG Ecosystem › Tiempo de respuesta: 24›48h</div>
+              <div class="form-lg-note">Gestionado a través del LG Ecosystem · Tiempo de respuesta: 24–48h</div>
             </div>
           </div>
 
@@ -1929,144 +1888,44 @@
               <div class="rh-item completed">
                 <div class="rh-dot teal"></div>
                 <div class="rh-content">
-                  <div class="rh-title">Media Kit › versión final deploy</div>
-                  <div class="rh-meta">Completado › Abr 2026</div>
+                  <div class="rh-title">Media Kit — versión final deploy</div>
+                  <div class="rh-meta">Completado · Abr 2026</div>
                 </div>
-                <div class="rh-status-badge done">✔</div>
+                <div class="rh-status-badge done">✓</div>
               </div>
               <div class="rh-item completed">
                 <div class="rh-dot teal"></div>
                 <div class="rh-content">
                   <div class="rh-title">Reporte monetización EN</div>
-                  <div class="rh-meta">Completado › Abr 2026</div>
+                  <div class="rh-meta">Completado · Abr 2026</div>
                 </div>
-                <div class="rh-status-badge done">✔</div>
+                <div class="rh-status-badge done">✓</div>
               </div>
               <div class="rh-item completed">
                 <div class="rh-dot teal"></div>
                 <div class="rh-content">
-                  <div class="rh-title">CSC Viz ID › one pager</div>
-                  <div class="rh-meta">Completado › Abr 2026</div>
+                  <div class="rh-title">CSC Viz ID — one pager</div>
+                  <div class="rh-meta">Completado · Abr 2026</div>
                 </div>
-                <div class="rh-status-badge done">✔</div>
+                <div class="rh-status-badge done">✓</div>
               </div>
               <div class="rh-item completed">
                 <div class="rh-dot teal"></div>
                 <div class="rh-content">
-                  <div class="rh-title">Brief Activación › ES + EN</div>
-                  <div class="rh-meta">Completado › Abr 2026</div>
+                  <div class="rh-title">Brief Activación — ES + EN</div>
+                  <div class="rh-meta">Completado · Abr 2026</div>
                 </div>
-                <div class="rh-status-badge done">✔</div>
+                <div class="rh-status-badge done">✓</div>
               </div>
               <div class="rh-item in-progress">
                 <div class="rh-dot coral"></div>
                 <div class="rh-content">
-                  <div class="rh-title">Workspace privado › rebuild</div>
-                  <div class="rh-meta">En progreso › Abr 2026</div>
+                  <div class="rh-title">Workspace privado — rebuild</div>
+                  <div class="rh-meta">En progreso · Abr 2026</div>
                 </div>
-                <div class="rh-status-badge wip">·</div>
+                <div class="rh-status-badge wip">→</div>
               </div>
             </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- --- SECTION: INTELLIGENCE REVIEW QUEUE --- -->
-      <section id="section-review" class="ws-section">
-        <div class="section-header">
-          <div class="section-eyebrow">Intelligence Review Queue › [SiQ] Engine</div>
-          <h2 class="section-title">Staged intelligence packages awaiting approval before client-visible publishing.</h2>
-          <p class="section-desc">Review synthesized intelligence and decide which signals to push to the live workspace.</p>
-        </div>
-
-        <div class="review-queue-container" style="max-width: 900px; margin: 0 auto; padding-top: 40px;">
-          <!-- Review Card Placeholder -->
-          <div class="review-card" style="background: var(--panel); border: 1px solid var(--border-strong); border-radius: var(--r-xl); padding: 32px; margin-bottom: 40px;">
-            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 24px; border-bottom: 1px solid var(--border); padding-bottom: 20px;">
-              <div>
-                <div style="font-size: 10px; font-weight: 700; color: var(--teal); text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: 8px;">Staged Update › ISO Timestamp</div>
-                <h3 style="font-family: var(--font-display); font-size: 28px; font-weight: 300; color: var(--text-primary);">Headline Placeholder</h3>
-              </div>
-              <div style="display: flex; gap: 12px; align-items: center;">
-                <span style="font-size: 9px; font-weight: 700; color: var(--coral); background: rgba(249,111,110,0.1); padding: 4px 10px; border-radius: 4px; border: 1px solid rgba(249,111,110,0.2);">STAGED FOR REVIEW</span>
-                <span style="font-size: 9px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em;">Not client visible</span>
-              </div>
-            </div>
-
-            <div class="review-body" style="display: grid; grid-template-columns: 1fr 300px; gap: 40px;">
-              <div class="review-main">
-                <div style="margin-bottom: 32px;">
-                  <h4 style="font-size: 11px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 12px;">Synthesis Narrative</h4>
-                  <p style="font-size: 16px; line-height: 1.6; color: var(--text-mid); font-weight: 300;">Synthesis placeholder text describing the core intelligence findings and strategic shift.</p>
-                </div>
-
-                <div>
-                  <h4 style="font-size: 11px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 12px;">Decision Ledger</h4>
-                  <div style="background: rgba(255,255,255,0.02); border-radius: 8px; padding: 20px; border: 1px solid var(--border);">
-                    <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 12px;">
-                      <li style="display: flex; align-items: flex-start; gap: 10px; font-size: 14px; color: var(--text-mid);">
-                        <span style="color: var(--teal); font-weight: 700;">→</span>
-                        <span>Decision Placeholder 01</span>
-                      </li>
-                      <li style="display: flex; align-items: flex-start; gap: 10px; font-size: 14px; color: var(--text-mid);">
-                        <span style="color: var(--teal); font-weight: 700;">→</span>
-                        <span>Decision Placeholder 02</span>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-
-              <div class="review-sidebar">
-                <div style="margin-bottom: 24px; background: rgba(249,111,110,0.05); border: 1px solid rgba(249,111,110,0.15); border-radius: 12px; padding: 20px;">
-                  <h4 style="font-size: 10px; font-weight: 700; color: var(--coral); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 8px;">Priority Signal</h4>
-                  <p style="font-size: 14px; font-weight: 500; color: var(--text-primary);">Priority signal placeholder description.</p>
-                </div>
-
-                <div style="background: rgba(75,173,168,0.05); border: 1px solid rgba(75,173,168,0.15); border-radius: 12px; padding: 20px;">
-                  <h4 style="font-size: 10px; font-weight: 700; color: var(--teal); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 8px;">Recommended Action</h4>
-                  <p style="font-size: 14px; font-weight: 500; color: var(--text-primary);">Recommended action placeholder description.</p>
-                </div>
-                
-                <div style="margin-top: 40px; display: flex; flex-direction: column; gap: 12px;">
-                  <button class="btn-primary" style="width: 100%;" disabled>Approve & Publish</button>
-                  <button class="btn-ghost" style="width: 100%;" disabled>Dismiss Update</button>
-                  <p style="font-size: 10px; color: var(--text-muted); text-align: center; font-style: italic;">Requires manual data integration in workspace.js (v1.0)</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- --- SECTION: PUBLISHED SIGNALS --- -->
-      <section id="section-published-signals" class="ws-section" style="border-top: 1px solid var(--border-strong); margin-top: 80px; padding-top: 80px;">
-        <div class="section-header">
-          <div class="section-eyebrow">Intelligence Archive › [SiQ] Ledger</div>
-          <h2 class="section-title">Published Signals</h2>
-          <p class="section-desc">Historical record of approved strategic intelligence and methodology shifts.</p>
-        </div>
-
-        <div id="published-signals-container" style="max-width: 900px; margin: 0 auto; padding-top: 40px;">
-          <!-- Content injected via workspace.js -->
-          <div style="text-align: center; padding: 60px 20px; color: var(--text-muted); border: 1px dashed var(--border); border-radius: var(--r-xl);">
-            <p style="font-size: 14px;">No published signals yet</p>
-          </div>
-        </div>
-      </section>
-
-      <!-- --- SECTION: DYNAMIC ARTIFACTS --- -->
-      <section id="section-artifacts-dynamic" class="ws-section" style="border-top: 1px solid var(--border-strong); margin-top: 80px; padding-top: 80px;">
-        <div class="section-header">
-          <div class="section-eyebrow">Product Architecture › [SiQ] Artifacts</div>
-          <h2 class="section-title">Artifacts</h2>
-          <p class="section-desc">High-fidelity protocols, scripts, and playbooks generated from strategic signals.</p>
-        </div>
-
-        <div id="artifacts-log-container" style="max-width: 900px; margin: 0 auto; padding-top: 40px;">
-          <!-- Content injected via workspace.js -->
-          <div style="text-align: center; padding: 60px 20px; color: var(--text-muted); border: 1px dashed var(--border); border-radius: var(--r-xl);">
-            <p style="font-size: 14px;">No artifacts generated yet</p>
           </div>
         </div>
       </section>
@@ -2076,15 +1935,15 @@
     <!-- FOOTER -->
     <footer class="ws-footer">
       <div class="wf-left">Criar Sin Culpas Workspace</div>
-      <div class="wf-center">nari@criarsinculpas.com › @criarsinculpas › criarsinculpas.com</div>
+      <div class="wf-center">nari@criarsinculpas.com · @criarsinculpas · criarsinculpas.com</div>
       <div class="wf-right">Built inside the LG Ecosystem</div>
     </footer>
 
   </div>
 
-  <!-- -----------------------------------------------------------
+  <!-- ═══════════════════════════════════════════════════════════
        SHARE MODAL
-  ----------------------------------------------------------- -->
+  ═══════════════════════════════════════════════════════════ -->
   <div id="share-modal" class="shr-backdrop" onclick="closeShareModal(event)" aria-modal="true" role="dialog" aria-label="Share" style="display:none;">
     <div class="shr-panel">
 
@@ -2121,12 +1980,12 @@
         </button>
       </div>
 
-      <!-- -- TAB: LINK -- -->
+      <!-- ── TAB: LINK ── -->
       <div class="shr-body" id="shr-tab-link">
-        <p class="shr-desc"><span class="lb-es active">Comparte un enlace directo a este contenido. El destinatario ver› solo esta sección › sin acceso al resto del workspace.</span><span class="lb-en">Share a direct link to this content. The recipient sees only this section › no access to the rest of the workspace.</span></p>
+        <p class="shr-desc"><span class="lb-es active">Comparte un enlace directo a este contenido. El destinatario verá solo esta sección — sin acceso al resto del workspace.</span><span class="lb-en">Share a direct link to this content. The recipient sees only this section — no access to the rest of the workspace.</span></p>
 
         <div class="shr-field-group">
-          <div class="shr-field-label"><span class="lb-es active">Enlace p›blico</span><span class="lb-en">Public link</span></div>
+          <div class="shr-field-label"><span class="lb-es active">Enlace público</span><span class="lb-en">Public link</span></div>
           <div class="shr-copy-row">
             <input type="text" class="shr-input" id="shr-link-url" readonly />
             <button class="shr-copy-btn" onclick="shrCopy('shr-link-url', this)">
@@ -2138,7 +1997,7 @@
 
         <div class="shr-privacy-note">
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-          <span class="lb-es active">Este enlace da acceso solo a este m›dulo. El workspace privado permanece protegido.</span><span class="lb-en">This link gives access to this module only. The private workspace remains protected.</span>
+          <span class="lb-es active">Este enlace da acceso solo a este módulo. El workspace privado permanece protegido.</span><span class="lb-en">This link gives access to this module only. The private workspace remains protected.</span>
         </div>
 
         <div class="shr-qr-row">
@@ -2159,15 +2018,15 @@
             </svg>
           </div>
           <div class="shr-qr-info">
-            <div class="shr-qr-label"><span class="lb-es active">C›digo QR</span><span class="lb-en">QR Code</span></div>
+            <div class="shr-qr-label"><span class="lb-es active">Código QR</span><span class="lb-en">QR Code</span></div>
             <p class="shr-qr-desc"><span class="lb-es active">Escanea para acceder directamente desde cualquier dispositivo. Ideal para materiales impresos y presentaciones.</span><span class="lb-en">Scan to access directly from any device. Ideal for printed materials and presentations.</span></p>
           </div>
         </div>
       </div>
 
-      <!-- -- TAB: SOCIAL -- -->
+      <!-- ── TAB: SOCIAL ── -->
       <div class="shr-body" id="shr-tab-social" style="display:none;">
-        <p class="shr-desc"><span class="lb-es active">Captions listos para publicar. Copia el texto, pega en tu red y a›ade el enlace.</span><span class="lb-en">Ready-to-post captions. Copy the text, paste into your network and add the link.</span></p>
+        <p class="shr-desc"><span class="lb-es active">Captions listos para publicar. Copia el texto, pega en tu red y añade el enlace.</span><span class="lb-en">Ready-to-post captions. Copy the text, paste into your network and add the link.</span></p>
 
         <div class="shr-social-grid">
 
@@ -2226,7 +2085,7 @@
         </div>
       </div>
 
-      <!-- -- TAB: EMAIL -- -->
+      <!-- ── TAB: EMAIL ── -->
       <div class="shr-body" id="shr-tab-email" style="display:none;">
         <p class="shr-desc"><span class="lb-es active">Plantilla de email lista para enviar a un organizador de eventos, marca o colaborador. Edita antes de enviar.</span><span class="lb-en">Email template ready to send to an event organizer, brand, or collaborator. Edit before sending.</span></p>
 
@@ -2253,7 +2112,7 @@
         </div>
       </div>
 
-      <!-- -- TAB: EMBED -- -->
+      <!-- ── TAB: EMBED ── -->
       <div class="shr-body" id="shr-tab-embed" style="display:none;">
 
         <!-- Format picker -->
@@ -2264,7 +2123,7 @@
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="9" cy="9" r="2"/><path d="M15 8h2M15 12h2M7 16h10"/></svg>
             </div>
             <div class="emb-fmt-label"><span class="lb-es active">Tarjeta de speaker</span><span class="lb-en">Speaker card</span></div>
-            <div class="emb-fmt-where"><span class="lb-es active">Programas › Websites › Press</span><span class="lb-en">Programs › Websites › Press</span></div>
+            <div class="emb-fmt-where"><span class="lb-es active">Programas · Websites · Press</span><span class="lb-en">Programs · Websites · Press</span></div>
           </button>
 
           <button class="emb-format-card" data-fmt="email-sig" onclick="shrPickEmbedFormat('email-sig', this)">
@@ -2272,7 +2131,7 @@
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2 4 12 13 22 4"/></svg>
             </div>
             <div class="emb-fmt-label"><span class="lb-es active">Firma de email</span><span class="lb-en">Email signature</span></div>
-            <div class="emb-fmt-where">Gmail › Outlook › Apple Mail</div>
+            <div class="emb-fmt-where">Gmail · Outlook · Apple Mail</div>
           </button>
 
           <button class="emb-format-card" data-fmt="bio-block" onclick="shrPickEmbedFormat('bio-block', this)">
@@ -2280,7 +2139,7 @@
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
             </div>
             <div class="emb-fmt-label"><span class="lb-es active">Bloque de bio</span><span class="lb-en">Bio block</span></div>
-            <div class="emb-fmt-where">Notion › Docs › Press kit</div>
+            <div class="emb-fmt-where">Notion · Docs · Press kit</div>
           </button>
 
           <button class="emb-format-card" data-fmt="notion" onclick="shrPickEmbedFormat('notion', this)">
@@ -2317,12 +2176,12 @@
           <div id="emb-out-email-sig" class="emb-out-panel" style="display:none;">
             <div class="emb-out-context">
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-              <span><span class="lb-es active">Tabla HTML con estilos inline › compatible con Gmail, Outlook y Apple Mail. Los clientes de email bloquean iframes y CSS externo; este formato funciona en todos.</span><span class="lb-en">HTML table with inline styles › compatible with Gmail, Outlook and Apple Mail. Email clients block iframes and external CSS; this format works everywhere.</span></span>
+              <span><span class="lb-es active">Tabla HTML con estilos inline — compatible con Gmail, Outlook y Apple Mail. Los clientes de email bloquean iframes y CSS externo; este formato funciona en todos.</span><span class="lb-en">HTML table with inline styles — compatible with Gmail, Outlook and Apple Mail. Email clients block iframes and external CSS; this format works everywhere.</span></span>
             </div>
             <div class="emb-sig-steps">
-              <div class="emb-sig-step"><span class="emb-sig-num">1</span><span><span class="lb-es active">Copia el c›digo</span><span class="lb-en">Copy the code</span></span></div>
-              <div class="emb-sig-step"><span class="emb-sig-num">2</span><span>Gmail › Settings › See all settings › Signature › <em><span class="lb-es active">pega en modo HTML</span><span class="lb-en">paste in HTML mode</span></em></span></div>
-              <div class="emb-sig-step"><span class="emb-sig-num">3</span><span>Outlook › New Email › Insert › Signature › <em><span class="lb-es active">editar firma</span><span class="lb-en">edit signature</span></em></span></div>
+              <div class="emb-sig-step"><span class="emb-sig-num">1</span><span><span class="lb-es active">Copia el código</span><span class="lb-en">Copy the code</span></span></div>
+              <div class="emb-sig-step"><span class="emb-sig-num">2</span><span>Gmail → Settings → See all settings → Signature → <em><span class="lb-es active">pega en modo HTML</span><span class="lb-en">paste in HTML mode</span></em></span></div>
+              <div class="emb-sig-step"><span class="emb-sig-num">3</span><span>Outlook → New Email → Insert → Signature → <em><span class="lb-es active">editar firma</span><span class="lb-en">edit signature</span></em></span></div>
             </div>
             <div class="emb-live-preview" id="emb-preview-email-sig" style="background:#fff;border-radius:8px;padding:16px;"></div>
             <div class="emb-code-wrap">
@@ -2370,7 +2229,7 @@
                 </div>
               </div>
               <div class="shr-field-group">
-                <div class="shr-field-label"><span class="lb-es active">C›digo iframe (para webs y Linktree)</span><span class="lb-en">iframe code (for websites &amp; Linktree)</span></div>
+                <div class="shr-field-label"><span class="lb-es active">Código iframe (para webs y Linktree)</span><span class="lb-en">iframe code (for websites &amp; Linktree)</span></div>
                 <div class="shr-copy-row" style="flex-direction:column;gap:8px;align-items:stretch;">
                   <textarea class="shr-caption-field mono" id="emb-iframe-code" rows="3" readonly></textarea>
                   <button class="shr-copy-btn" style="width:100%;justify-content:center;" onclick="shrCopyField('emb-iframe-code', this)">
@@ -2411,9 +2270,9 @@
         </div><!-- /emb-output -->
       </div>
 
-      <!-- -- TAB: PDF -- -->
+      <!-- ── TAB: PDF ── -->
       <div class="shr-body" id="shr-tab-pdf" style="display:none;">
-        <p class="shr-desc"><span class="lb-es active">Versión en PDF de este artefacto para enviar por email, subir a Drive o incluir en propuestas. Disponible en espa›ol e ingl›s.</span><span class="lb-en">PDF version of this artifact for sending by email, uploading to Drive, or including in proposals. Available in Spanish and English.</span></p>
+        <p class="shr-desc"><span class="lb-es active">Versión en PDF de este artefacto para enviar por email, subir a Drive o incluir en propuestas. Disponible en español e inglés.</span><span class="lb-en">PDF version of this artifact for sending by email, uploading to Drive, or including in proposals. Available in Spanish and English.</span></p>
 
         <div class="shr-pdf-options">
           <a class="shr-pdf-card" id="shr-pdf-es" href="#" target="_blank">
@@ -2422,8 +2281,8 @@
             </div>
             <div class="shr-pdf-info">
               <div class="shr-pdf-lang">ES</div>
-              <div class="shr-pdf-name" id="shr-pdf-es-name">›</div>
-              <div class="shr-pdf-meta">PDF › <span class="lb-es active">Espa›ol</span><span class="lb-en">Spanish</span></div>
+              <div class="shr-pdf-name" id="shr-pdf-es-name">–</div>
+              <div class="shr-pdf-meta">PDF · <span class="lb-es active">Español</span><span class="lb-en">Spanish</span></div>
             </div>
             <div class="shr-pdf-action">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
@@ -2435,8 +2294,8 @@
             </div>
             <div class="shr-pdf-info">
               <div class="shr-pdf-lang">EN</div>
-              <div class="shr-pdf-name" id="shr-pdf-en-name">›</div>
-              <div class="shr-pdf-meta">PDF › <span class="lb-es active">English</span><span class="lb-en">English</span></div>
+              <div class="shr-pdf-name" id="shr-pdf-en-name">–</div>
+              <div class="shr-pdf-meta">PDF · <span class="lb-es active">English</span><span class="lb-en">English</span></div>
             </div>
             <div class="shr-pdf-action">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
@@ -2465,8 +2324,8 @@
 
   <!-- SUCCESS TOAST -->
   <div id="toast" class="toast hidden">
-    <div class="toast-icon">✔</div>
-    <div class="toast-msg"><span class="lb-en">Request sent. The LG team will respond within 24›48h.</span><span class="lb-es active">Solicitud enviada. El equipo LG responder› en 24›48h.</span></div>
+    <div class="toast-icon">✓</div>
+    <div class="toast-msg"><span class="lb-en">Request sent. The LG team will respond within 24–48h.</span><span class="lb-es active">Solicitud enviada. El equipo LG responderá en 24–48h.</span></div>
   </div>
 
   <!-- SIGNALS LEDGER MODAL -->
@@ -2474,7 +2333,7 @@
     <div style="background:var(--panel);border:1px solid var(--border-strong);border-radius:var(--r-2xl);width:100%;max-width:600px;overflow:hidden;box-shadow:var(--shadow-lg);">
       <div style="padding:20px 24px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;background:var(--panel-2);">
         <div>
-          <div style="font-size:9px;font-weight:700;letter-spacing:0.14em;color:var(--teal);text-transform:uppercase;margin-bottom:6px;">Audience Intelligence › Signal Ledger</div>
+          <div style="font-size:9px;font-weight:700;letter-spacing:0.14em;color:var(--teal);text-transform:uppercase;margin-bottom:6px;">Audience Intelligence · Signal Ledger</div>
           <div style="font-family:var(--font-display);font-size:18px;font-weight:300;color:var(--text-primary);"><span class="lb-en">Audience Patterns</span><span class="lb-es active">Dificultades más comunes de los padres</span></div>
         </div>
         <button onclick="closeSignalsLedger()" style="background:none;border:none;color:var(--text-muted);font-size:22px;cursor:pointer;padding:4px;line-height:1;transition:color 0.2s;" onmouseover="this.style.color='var(--text-primary)'" onmouseout="this.style.color='var(--text-muted)'">&times;</button>

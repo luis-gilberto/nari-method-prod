@@ -1,13 +1,18 @@
-# Pure Vanity Routes (Internal Rewrites)
-/apoyo /tools/parent-support/index.html 200
-/apoyo/screen-time /tools/parent-support/screen-time.html 200
-/apoyo/emotional-escalation /tools/parent-support/emotional-escalation.html 200
-/apoyo/bedtime-resistance /tools/parent-support/bedtime-resistance.html 200
-/apoyo/sibling-conflict /tools/parent-support/sibling-conflict.html 200
+# Clean Vanity URLs for Parent Support
+/apoyo /apoyo/index.html 200
+/apoyo/ /apoyo/index.html 200
+/apoyo/screen-time /apoyo/screen-time.html 200
+/apoyo/emotional-escalation /apoyo/emotional-escalation.html 200
+/apoyo/bedtime-resistance /apoyo/bedtime-resistance.html 200
+/apoyo/sibling-conflict /apoyo/sibling-conflict.html 200
 
-# Fallbacks for direct access
-/tools/parent-support/index.html /apoyo 301
-/tools/parent-support/screen-time.html /apoyo/screen-time 301
-/tools/parent-support/emotional-escalation.html /apoyo/emotional-escalation 301
-/tools/parent-support/bedtime-resistance.html /apoyo/bedtime-resistance 301
-/tools/parent-support/sibling-conflict.html /apoyo/sibling-conflict 301
+# Clean Vanity URL for Signal Extractor
+/signals /signals/index.html 200
+/signals/ /signals/index.html 200
+/signals/extractor /signals/index.html 200
+
+# Legacy Redirects (Legacy path cleanup)
+/tools/parent-support/* /apoyo/:splat 301
+/tools/parent-support /apoyo 301
+/tools/SIQ_SignalExtractor_Tool /signals 301
+/tools/SIQ_SignalExtractor_Tool.html /signals 301

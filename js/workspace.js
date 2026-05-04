@@ -10,42 +10,6 @@ const state = {
   mobileMenuOpen: false,
 };
 
-/* ── PROTOCOLS DATA ──────────────────────────────────────── */
-const protocolsData = [
-  {
-    id: 'P01',
-    title: { en: 'Screens: how to stop without a fight', es: 'Pantallas: cómo parar sin pelea' },
-    desc: { en: 'Practical guide for high-friction moments in real time.', es: 'Guía práctica para momentos de alta fricción en tiempo real.' },
-    path: '/tools/parent-support/screen-time.html',
-    status: { en: 'Published', es: 'Publicado' },
-    source: { en: 'Derived from signals', es: 'Derivado de señales' }
-  },
-  {
-    id: 'P02',
-    title: { en: 'Emotions: how to accompany without escalating', es: 'Emociones: cómo acompañar sin escalar' },
-    desc: { en: 'Practical guide for high-friction moments in real time.', es: 'Guía práctica para momentos de alta fricción en tiempo real.' },
-    path: '/tools/parent-support/emotional-escalation.html',
-    status: { en: 'Published', es: 'Publicado' },
-    source: { en: 'Derived from signals', es: 'Derivado de señales' }
-  },
-  {
-    id: 'P03',
-    title: { en: 'Bedtime: how to end the day without a fight', es: 'Dormir: cómo cerrar el día sin pelea' },
-    desc: { en: 'Practical guide for high-friction moments in real time.', es: 'Guía práctica para momentos de alta fricción en tiempo real.' },
-    path: '/tools/parent-support/bedtime-resistance.html',
-    status: { en: 'Published', es: 'Publicado' },
-    source: { en: 'Derived from signals', es: 'Derivado de señales' }
-  },
-  {
-    id: 'P04',
-    title: { en: 'Siblings: how to step in without taking sides', es: 'Hermanos: cómo intervenir sin tomar partido' },
-    desc: { en: 'Practical guide for high-friction moments in real time.', es: 'Guía práctica para momentos de alta fricción en tiempo real.' },
-    path: '/tools/parent-support/sibling-conflict.html',
-    status: { en: 'Published', es: 'Publicado' },
-    source: { en: 'Derived from signals', es: 'Derivado de señales' }
-  }
-];
-
 /* ── BILINGUAL ENGINE ────────────────────────────────────── */
 const uiText = {
   // Nav
@@ -121,17 +85,6 @@ const uiText = {
   requestsEyebrow: { en: 'Requests',         es: 'Solicitudes' },
   requestsTitle:   { en: 'Send a request',   es: 'Envía una solicitud' },
   requestsDesc:    { en: 'Need a new artifact, an edit or a strategic consultation? Use this form.', es: '¿Necesitas un nuevo artefacto, una edición o una consulta estratégica? Usa este formulario.' },
-  // Protocol Library
-  protocolEyebrow: { en: 'Protocol Library', es: 'Protocol Library' },
-  protocolTitle:   { en: 'Protocol Library', es: 'Protocol Library' },
-  protocolDesc:    { en: 'Tools generated from audience signals and designed for in-the-moment parenting support.', es: 'Herramientas generadas a partir de señales de la audiencia y diseñadas para apoyo parental en el momento.' },
-  // Draft Protocols
-  draftsTitle:     { en: 'Draft Protocols',  es: 'Borradores de Protocolos' },
-  createProtocol:  { en: 'Create Protocol',  es: 'Crear Protocolo' },
-  draftCreated:    { en: 'Draft Created',    es: 'Borrador Creado' },
-  buildTool:       { en: 'Build Tool',       es: 'Construir Herramienta' },
-  comingNext:      { en: 'Coming next',      es: 'Próximamente' },
-  openParentHub:   { en: 'Open Parent Support Hub', es: 'Abrir Hub de Apoyo Parental' },
 };
 
 function t(key) {
@@ -167,7 +120,6 @@ function applyLang() {
   // Re-render dynamic artifacts
   if (typeof renderArtifactPhases === 'function') renderArtifactPhases();
   if (typeof renderSignals === 'function') renderSignals();
-  if (typeof renderProtocols === 'function') renderProtocols();
 }
 
 function setLang(lang) {
@@ -196,8 +148,8 @@ const artifactsData = [
     code:    'SIQ_A02_MonetizationReport_CSC',
     type:    { en: 'Market Intelligence · Bilingual', es: 'Inteligencia de mercado · Bilingüe' },
     desc:    { en: 'Competitive landscape analysis, creator benchmarking and monetization model research for Criar Sin Culpas.', es: 'Inteligencia de mercado y arquitectura de ingresos. Proyecciones, mix de monetización, precios de cursos y alianzas de marca.' },
-    urlEn:   'files/SIQ_A02_MonetizationReport_CSC_ES.html',
-    urlEs:   'files/SIQ_A02_MonetizationReport_CSC_ES.html',
+    urlEn:   'files/SIQ_A02_MonetizationReport_CSC.html?lang=en',
+    urlEs:   'files/SIQ_A02_MonetizationReport_CSC.html?lang=es',
     status:  'approved', pages: '3',
     langs:   'ES / EN',
   },
@@ -385,71 +337,6 @@ function renderSignals() {
   }).join('');
 }
 
-/* ── RENDER PROTOCOLS (dynamic, bilingual) ──────────────── */
-function renderProtocols() {
-  const container = document.getElementById('protocols-grid-container');
-  if (!container) return;
-
-  const drafts = JSON.parse(localStorage.getItem('protocol_drafts') || '[]');
-  
-  let html = protocolsData.map(proto => {
-    const title = proto.title[state.lang] || proto.title.es;
-    const desc = proto.desc[state.lang] || proto.desc.es;
-    const status = proto.status[state.lang] || proto.status.es;
-    const source = proto.source[state.lang] || proto.source.es;
-    
-    return `
-      <div class="artifact-card protocol-card" style="margin-bottom:16px;">
-        <div class="ac-status-row">
-          <span class="ac-type strategy">${source}</span>
-          <span class="ac-status approved">
-            <svg width="6" height="6" viewBox="0 0 6 6" style="display:inline-block;vertical-align:middle;margin-right:4px;"><circle cx="3" cy="3" r="3" fill="#2ED3C6"/></svg>
-            ${status}
-          </span>
-        </div>
-        <h3 class="ac-title">${title}</h3>
-        <p class="ac-desc">${desc}</p>
-        <div class="ac-actions" style="margin-top: 20px; display: flex; gap: 8px; flex-wrap: wrap;">
-          <a href="${proto.path}" class="btn-primary small">${state.lang === 'en' ? 'Preview' : 'Abrir'}</a>
-          <button class="btn-ghost small" onclick="copyProtocolLink('${proto.path}', this)">${state.lang === 'en' ? 'Copy Link' : 'Copiar Link'}</button>
-          <button class="btn-ghost small" onclick="shareProtocolWA('${title}', '${proto.path}')">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:4px"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 1 1-7.6-10.6 8.38 8.38 0 0 1 3.9.9L23 3z"></path></svg>
-            WhatsApp
-          </button>
-        </div>
-      </div>
-    `;
-  }).join('');
-
-  if (drafts.length > 0) {
-    html += `
-      <div style="grid-column: 1 / -1; margin-top: 40px; margin-bottom: 24px;">
-        <h3 style="font-family: var(--font-display); font-size: 24px; color: var(--text-primary); border-bottom: 1px solid var(--border); padding-bottom: 12px;">${t('draftsTitle')}</h3>
-      </div>
-    `;
-    html += drafts.map(draft => `
-      <div class="artifact-card protocol-card draft" style="margin-bottom:16px; border-style: dashed; border-color: var(--border-strong);">
-        <div class="ac-status-row">
-          <span class="ac-type strategy">${draft.sourceSignalTitle || 'Signal'}</span>
-          <span class="ac-status" style="color: var(--text-muted);">
-            <svg width="6" height="6" viewBox="0 0 6 6" style="display:inline-block;vertical-align:middle;margin-right:4px;"><circle cx="3" cy="3" r="3" fill="var(--text-muted)"/></svg>
-            Draft
-          </span>
-        </div>
-        <h3 class="ac-title">${draft.title}</h3>
-        <p class="ac-desc">${draft.description}</p>
-        ${draft.suggestedArtifact ? `<div style="font-size: 11px; color: var(--teal); margin-top: 8px; font-weight: 500;">Suggested: ${draft.suggestedArtifact}</div>` : ''}
-        <div class="ac-actions" style="margin-top: 20px; display: flex; flex-direction: column; gap: 8px;">
-          <button class="btn-primary small" disabled style="opacity: 0.5;">${t('buildTool')}</button>
-          <span style="font-size: 10px; color: var(--text-muted); text-align: center;">${t('comingNext')}</span>
-        </div>
-      </div>
-    `).join('');
-  }
-
-  container.innerHTML = html;
-}
-
 /* ── GATE / ENTRY ────────────────────────────────────────── */
 function returnToGate() {
   document.getElementById("workspace").classList.add("hidden");
@@ -477,7 +364,6 @@ function enterWorkspace(targetSection = 'home') {
     animateSectionEntrance(targetSection);
     renderArtifactPhases();
     renderSignals();
-    renderProtocols();
     applyLang();
   }, 500);
 }
@@ -502,12 +388,6 @@ function goToSection(sectionId, animate = true) {
     }
     section.classList.add('active');
     section.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  }
-
-  // Hide artifact banner on review route to prevent layout issues
-  const addCta = document.querySelector('.artifact-add-cta');
-  if (addCta) {
-    addCta.style.display = (sectionId === 'review') ? 'none' : '';
   }
 
   const navItem = document.querySelector(`[data-section="${sectionId}"]`);
@@ -694,46 +574,6 @@ function copyText(btn, text) {
     });
   }
 }
-
-/* ── PROTOCOL LIBRARY ACTIONS ────────────────────────────── */
-window.copyProtocolLink = function(path, btn) {
-  const fullUrl = window.location.origin + path;
-  if (navigator.clipboard) {
-    navigator.clipboard.writeText(fullUrl).then(() => {
-      const orig = btn.textContent;
-      btn.textContent = state.lang === 'en' ? '✓ Link copied' : '✓ Link copiado';
-      btn.style.color = 'var(--teal)';
-      setTimeout(() => { btn.textContent = orig; btn.style.color = ''; }, 2000);
-      
-      const toast = document.getElementById('toast');
-      if (toast) {
-        const msg = toast.querySelector('.toast-msg');
-        const origMsg = msg.innerHTML;
-        msg.innerHTML = state.lang === 'en' ? 'Link copied' : 'Link copiado';
-        toast.classList.remove('hidden');
-        toast.style.opacity = '1';
-        toast.style.transform = 'translateY(0)';
-        setTimeout(() => {
-          toast.style.opacity = '0';
-          toast.style.transform = 'translateY(8px)';
-          setTimeout(() => { 
-            toast.classList.add('hidden'); 
-            msg.innerHTML = origMsg;
-          }, 300);
-        }, 2000);
-      }
-    });
-  }
-};
-
-window.shareProtocolWA = function(title, path) {
-  const fullUrl = window.location.origin + path;
-  const message = state.lang === 'en'
-    ? `This helped me in a difficult moment with my child. Sharing it with you: ${fullUrl}`
-    : `Esto me ayudó en un momento difícil con mi hijo. Te lo comparto: ${fullUrl}`;
-  const waUrl = `https://wa.me/?text=${encodeURIComponent(message)}`;
-  window.open(waUrl, '_blank');
-};
 
 /* ══════════════════════════════════════════════════════════
    SHARE MODAL SYSTEM
@@ -1247,7 +1087,6 @@ document.addEventListener('DOMContentLoaded', function() {
   initKeyboardNav();
   initAmbientBg();
   initGateParticles();
-  initHashRoute();
 
   const workspaceObserver = new MutationObserver((mutations) => {
     mutations.forEach(mutation => {
@@ -1255,7 +1094,6 @@ document.addEventListener('DOMContentLoaded', function() {
         setTimeout(observeSections, 200);
         renderArtifactPhases();
         renderSignals();
-        renderProtocols();
         workspaceObserver.disconnect();
       }
     });
@@ -1280,465 +1118,9 @@ document.addEventListener('DOMContentLoaded', function() {
     if (e.target === this) closeSignalsLedger();
   });
 
-  // Initialize and render artifacts
-  initArtifactsLog();
-  renderArtifacts();
-
   // Vault info tooltips
   initVaultTooltips();
 });
-
-/* ── ARTIFACTS LOG SYSTEM ────────────────────────────────── */
-function initArtifactsLog() {
-  const log = JSON.parse(localStorage.getItem('artifacts_log') || '[]');
-  
-  // Seed with initial artifact if empty
-  if (log.length === 0) {
-    const initialArtifact = {
-      id: "artifact-screen-time-protocol-01",
-      title: "Screen Time Transition Protocol",
-      type: "real_time_support",
-      category: "parenting_protocol",
-      language: "bilingual",
-      description: "A 3-step practical guide to ending screen time without power struggles.",
-      content: `
-        <div class="protocol-content">
-          <div class="protocol-step">
-            <span class="step-num">01</span>
-            <div class="step-text">
-              <strong>The Connection Bridge (Minute -5)</strong>: Enter their world first. Sit next to them for 2 minutes. Ask one question about what they are watching. Build the bridge before you try to cross it.
-            </div>
-          </div>
-          <div class="protocol-step">
-            <span class="step-num">02</span>
-            <div class="step-text">
-              <strong>The Choice of Future (Minute -2)</strong>: Instead of saying "Time is up", give them agency. Ask: "When the screen goes off, do you want to play with the blocks or have a snack first?"
-            </div>
-          </div>
-          <div class="protocol-step">
-            <span class="step-num">03</span>
-            <div class="step-text">
-              <strong>The Physical Anchor (Minute 0)</strong>: Use a physical object (a transition toy or a snack) to anchor them into the "real world" as the screen goes dark. Hand it to them exactly as the device is put away.
-            </div>
-          </div>
-          <div class="protocol-note">
-            <em>Goal: Transition from high-dopamine stimulation to low-dopamine reality via human connection.</em>
-          </div>
-        </div>
-      `,
-      source: "manual_artifact_creation",
-      linkedSignal: "protocol-first-architecture",
-      timestamp: new Date().toISOString()
-    };
-    log.push(initialArtifact);
-    localStorage.setItem('artifacts_log', JSON.stringify(log));
-  }
-}
-
-window.renderArtifacts = function() {
-  const container = document.getElementById('artifacts-log-container');
-  if (!container) return;
-
-  const log = JSON.parse(localStorage.getItem('artifacts_log') || '[]');
-  
-  if (log.length === 0) {
-    container.innerHTML = `
-      <div style="text-align: center; padding: 60px 20px; color: var(--text-muted); border: 1px dashed var(--border); border-radius: var(--r-xl);">
-        <p style="font-size: 14px;">No artifacts generated yet</p>
-      </div>`;
-    return;
-  }
-
-  container.innerHTML = log.slice().reverse().map(art => `
-    <div class="artifact-log-card" style="background: var(--panel); border: 1px solid var(--border); border-radius: var(--r-lg); padding: 24px; margin-bottom: 24px; transition: all 0.3s ease;">
-      <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px;">
-        <div>
-          <div style="display: flex; gap: 8px; align-items: center; margin-bottom: 8px;">
-            <span style="font-size: 9px; font-weight: 700; color: var(--teal); background: rgba(75,173,168,0.1); padding: 3px 10px; border-radius: 4px; border: 1px solid rgba(75,173,168,0.2); text-transform: uppercase; letter-spacing: 0.05em;">Real-time support</span>
-            <span style="font-size: 10px; color: var(--text-muted);">${new Date(art.timestamp).toLocaleDateString()}</span>
-          </div>
-          <h3 style="font-family: var(--font-display); font-size: 22px; color: var(--text-primary); margin-bottom: 4px;">${art.title}</h3>
-          <p style="font-size: 14px; color: var(--text-muted); font-weight: 300;">${art.description || ''}</p>
-        </div>
-        <button onclick="this.closest('.artifact-log-card').classList.toggle('expanded')" style="background: none; border: 1px solid var(--border); color: var(--text-muted); width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s ease;">
-          <svg class="chevron-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="transition: transform 0.3s ease;"><polyline points="6 9 12 15 18 9"></polyline></svg>
-        </button>
-      </div>
-      
-      <div class="artifact-details" style="display: none; padding-top: 20px; border-top: 1px solid var(--border); margin-top: 16px; animation: fadeIn 0.3s ease;">
-        <div style="font-size: 15px; line-height: 1.6; color: var(--text-mid);">
-          ${art.content}
-        </div>
-        <div style="margin-top: 24px; display: flex; gap: 12px;">
-          <button class="btn-primary small" onclick="copyText(this, \`${art.title}\\n\\n${art.description}\\n\\n${art.content.replace(/<[^>]*>/g, '')}\`)">Copy Protocol</button>
-          <button class="btn-ghost small">Share as PDF</button>
-        </div>
-      </div>
-    </div>
-  `).join('');
-
-  // Add styles for expansion and protocol
-  if (!document.getElementById('artifact-log-styles')) {
-    const style = document.createElement('style');
-    style.id = 'artifact-log-styles';
-    style.textContent = `
-      .artifact-log-card.expanded .artifact-details { display: block !important; }
-      .artifact-log-card.expanded .chevron-icon { transform: rotate(180deg); }
-      .protocol-step { display: flex; gap: 16px; margin-bottom: 16px; }
-      .step-num { font-family: var(--font-display); font-size: 18px; color: var(--teal); font-weight: 700; opacity: 0.5; }
-      .protocol-note { margin-top: 20px; padding: 12px; background: rgba(255,255,255,0.02); border-radius: 8px; border-left: 2px solid var(--border); font-size: 13px; }
-      @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
-    `;
-    document.head.appendChild(style);
-  }
-};
-
-/* ── HASH ROUTING ────────────────────────────────────────── */
-function initHashRoute() {
-  const checkHash = () => {
-    const hash = window.location.hash.replace('#', '');
-    if (hash === 'review') {
-      goToSection('review');
-      renderReviewQueue();
-    }
-  };
-
-  window.addEventListener('hashchange', checkHash);
-  // Also check on initial load
-  if (window.location.hash === '#review') {
-    setTimeout(checkHash, 500); // Small delay to ensure workspace is ready
-  }
-}
-
-/* ── INTELLIGENCE REVIEW QUEUE ────────────────────────────── */
-window.publishSignal = function(btn) {
-  try {
-    const data = JSON.parse(decodeURIComponent(btn.getAttribute('data-payload')));
-    const log = JSON.parse(localStorage.getItem('signals_log') || '[]');
-    
-    // Stable identifier for duplicate prevention
-    const signalId = data.id || btoa(data.summary?.headline + data.summary?.synthesis + data.summary?.recommendedAction).substring(0, 16);
-    
-    const exists = log.some(entry => entry.id === signalId);
-    if (exists) {
-      console.log('Signal already published.');
-      return;
-    }
-
-    const newEntry = {
-      id: signalId,
-      title: data.summary?.headline || 'Unknown Signal',
-      synthesis: data.summary?.synthesis || '',
-      priority: data.summary?.prioritySignal || '',
-      recommendedAction: data.summary?.recommendedAction || '',
-      timestamp: new Date().toISOString(),
-      source: "review_queue",
-      status: "published"
-    };
-    
-    log.push(newEntry);
-    localStorage.setItem('signals_log', JSON.stringify(log));
-    
-    // UI Feedback
-    btn.innerHTML = '✔ Published';
-    btn.disabled = true;
-    btn.style.background = 'var(--teal)';
-    btn.style.color = 'white';
-    btn.style.borderColor = 'var(--teal)';
-    
-    const card = btn.closest('.review-card');
-    const statusText = card.querySelector('.publish-status');
-    if (statusText) {
-      statusText.innerHTML = 'Signal published successfully';
-      statusText.style.color = 'var(--teal)';
-      statusText.style.fontWeight = '600';
-      statusText.style.opacity = '1';
-    }
-
-    console.log('Published signals count:', log.length);
-    
-    // Clear the staged package from localStorage if this was the one published
-    const stagedRaw = localStorage.getItem('staged_intelligence_package');
-    if (stagedRaw) {
-      try {
-        const staged = JSON.parse(stagedRaw);
-        if (staged.id === signalId) {
-          localStorage.removeItem('staged_intelligence_package');
-          console.log('Staged package cleared from localStorage after publishing.');
-        }
-      } catch(e) {}
-    }
-
-    renderPublishedSignals();
-  } catch (err) {
-    console.error('Publishing failed:', err);
-    alert('Publishing failed. Check console for details.');
-  }
-};
-
-window.renderPublishedSignals = function() {
-  const container = document.getElementById('published-signals-container');
-  if (!container) return;
-
-  const log = JSON.parse(localStorage.getItem('signals_log') || '[]');
-  const drafts = JSON.parse(localStorage.getItem('protocol_drafts') || '[]');
-  
-  if (log.length === 0) {
-    container.innerHTML = `
-      <div style="text-align: center; padding: 60px 20px; color: var(--text-muted); border: 1px dashed var(--border); border-radius: var(--r-xl);">
-        <p style="font-size: 14px;">No published signals yet</p>
-      </div>`;
-    return;
-  }
-
-  container.innerHTML = log.slice().reverse().map(entry => {
-    const hasDraft = drafts.some(d => d.sourceSignalId === entry.id);
-    const btnText = hasDraft ? t('draftCreated') : t('createProtocol');
-    const btnDisabled = hasDraft ? 'disabled' : '';
-
-    return `
-    <div class="published-card" style="background: var(--panel); border: 1px solid var(--border); border-radius: var(--r-lg); padding: 24px; margin-bottom: 20px; border-left: 3px solid var(--teal);">
-      <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px;">
-        <div>
-          <div style="font-size: 10px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 4px;">
-            Published › ${new Date(entry.timestamp).toLocaleString()}
-          </div>
-          <h3 style="font-family: var(--font-display); font-size: 20px; color: var(--text-primary);">${entry.title}</h3>
-        </div>
-        <div style="display: flex; gap: 8px;">
-          <span style="font-size: 8px; font-weight: 700; color: var(--teal); background: rgba(75,173,168,0.1); padding: 3px 8px; border-radius: 4px; border: 1px solid rgba(75,173,168,0.2);">PUBLISHED</span>
-          <span style="font-size: 8px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; padding: 3px 0;">review_queue</span>
-        </div>
-      </div>
-      <div style="margin-bottom: 16px;">
-        <p style="font-size: 14px; line-height: 1.5; color: var(--text-mid); font-weight: 300;">${entry.synthesis}</p>
-      </div>
-      <div style="background: rgba(75,173,168,0.03); border-radius: 6px; padding: 12px 16px; border: 1px solid rgba(75,173,168,0.1); display: flex; justify-content: space-between; align-items: center; gap: 20px;">
-        <div style="flex: 1;">
-          <h4 style="font-size: 9px; font-weight: 700; color: var(--teal); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px;">Recommended Action</h4>
-          <p style="font-size: 13px; color: var(--text-primary); font-weight: 400;">${entry.recommendedAction}</p>
-        </div>
-        <button class="btn-ghost small" onclick="createProtocolFromSignal('${entry.id}', this)" ${btnDisabled}>
-          ${btnText}
-        </button>
-      </div>
-    </div>
-  `}).join('');
-};
-
-window.createProtocolFromSignal = function(signalId, btn) {
-  const log = JSON.parse(localStorage.getItem('signals_log') || '[]');
-  const signal = log.find(s => s.id === signalId);
-  if (!signal) return;
-
-  const drafts = JSON.parse(localStorage.getItem('protocol_drafts') || '[]');
-  if (drafts.some(d => d.sourceSignalId === signalId)) return;
-
-  // Task 3: Draft content generation rules
-  let title = "";
-  const suggestedArtifact = signal.recommendedAction && signal.recommendedAction !== 'None' ? signal.recommendedAction : null;
-  
-  if (suggestedArtifact) {
-    title = suggestedArtifact;
-  } else {
-    const text = (signal.title + ' ' + (signal.synthesis || '')).toLowerCase();
-    if (text.includes('screen time') || text.includes('pantallas')) {
-      title = 'Pantallas: cómo parar sin pelea';
-    } else if (text.includes('emotion') || text.includes('emociones') || text.includes('meltdown') || text.includes('escalada')) {
-      title = 'Emociones: cómo acompañar sin escalar';
-    } else {
-      title = 'Nuevo protocolo de apoyo en tiempo real';
-    }
-  }
-
-  // Task 2: ID logic
-  // Use stable sourceSignalId if available. Otherwise generate content-based ID.
-  let draftId = signal.id;
-  if (!draftId) {
-    const contentString = (signal.title + (signal.recommendedAction || '')).replace(/\s+/g, '').toLowerCase();
-    draftId = 'draft-' + btoa(contentString).substring(0, 16);
-  } else {
-    draftId = 'proto-' + draftId;
-  }
-
-  const draft = {
-    id: draftId,
-    sourceSignalId: signal.id || draftId,
-    sourceSignalTitle: signal.title,
-    title: title,
-    description: "Protocolo creado desde una señal aprobada para convertirse en una herramienta práctica de apoyo en tiempo real.",
-    suggestedArtifact: suggestedArtifact,
-    status: "draft",
-    source: "signal_archive",
-    timestamp: new Date().toISOString()
-  };
-
-  drafts.push(draft);
-  localStorage.setItem('protocol_drafts', JSON.stringify(drafts));
-
-  // UI Feedback
-  btn.textContent = t('draftCreated');
-  btn.disabled = true;
-
-  const toast = document.getElementById('toast');
-  if (toast) {
-    const msg = toast.querySelector('.toast-msg');
-    const origMsg = msg.innerHTML;
-    msg.innerHTML = state.lang === 'en' ? 'Protocol draft created' : 'Borrador de protocolo creado';
-    toast.classList.remove('hidden');
-    toast.style.opacity = '1';
-    toast.style.transform = 'translateY(0)';
-    setTimeout(() => {
-      toast.style.opacity = '0';
-      toast.style.transform = 'translateY(8px)';
-      setTimeout(() => { 
-        toast.classList.add('hidden'); 
-        msg.innerHTML = origMsg;
-      }, 300);
-    }, 2500);
-  }
-
-  // Refresh protocol library if visible
-  if (typeof renderProtocols === 'function') renderProtocols();
-};
-
-async function renderReviewQueue() {
-  const container = document.querySelector('.review-queue-container');
-  if (!container) return;
-
-  // Render published signals section as well
-  renderPublishedSignals();
-
-  const log = JSON.parse(localStorage.getItem('signals_log') || '[]');
-  const stagedPackageRaw = localStorage.getItem('staged_intelligence_package');
-  let stagedPackage = null;
-  
-  if (stagedPackageRaw) {
-    try {
-      stagedPackage = JSON.parse(stagedPackageRaw);
-    } catch(e) { console.error('Failed to parse staged package:', e); }
-  }
-
-  try {
-    const response = await fetch('data/intelligence/staged/manifest.json');
-    let filenames = [];
-    if (response.ok) {
-      const manifest = await response.json();
-      filenames = manifest.staged_updates || [];
-    }
-
-    if (filenames.length === 0 && !stagedPackage) {
-      container.innerHTML = `
-        <div style="text-align:center; padding:60px 20px; color:var(--text-muted);">
-          <div style="font-size:32px; margin-bottom:16px; opacity:0.3;">Empty</div>
-          <p style="font-size:14px; font-weight:300;">No staged intelligence packages yet.</p>
-        </div>`;
-      return;
-    }
-
-    container.innerHTML = ''; // Clear placeholders
-
-    // Helper to render a card
-    const renderCard = (data, isManualStaged = false) => {
-      // Check if already published
-      const signalId = data.id || btoa((data.summary?.headline || '') + (data.summary?.synthesis || '') + (data.summary?.recommendedAction || '')).substring(0, 16);
-      const isPublished = log.some(entry => entry.id === signalId);
-
-      const card = document.createElement('div');
-      card.className = 'review-card';
-      card.style.cssText = 'background: var(--panel); border: 1px solid var(--border-strong); border-radius: var(--r-xl); padding: 32px; margin-bottom: 40px;';
-      
-      const timestamp = data.source?.generatedAt ? new Date(data.source.generatedAt).toLocaleString() : 'Recent';
-      
-      card.innerHTML = `
-        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 24px; border-bottom: 1px solid var(--border); padding-bottom: 20px;">
-          <div>
-            <div style="font-size: 10px; font-weight: 700; color: var(--teal); text-transform: uppercase; letter-spacing: 0.15em; margin-bottom: 8px;">
-              ${isManualStaged ? 'Direct Stage' : 'Staged Update'} › ${timestamp}
-            </div>
-            <h3 style="font-family: var(--font-display); font-size: 28px; font-weight: 300; color: var(--text-primary);">${data.summary?.headline || 'Untitled Intelligence'}</h3>
-          </div>
-          <div style="display: flex; gap: 12px; align-items: center;">
-            <span style="font-size: 9px; font-weight: 700; color: var(--coral); background: rgba(249,111,110,0.1); padding: 4px 10px; border-radius: 4px; border: 1px solid rgba(249,111,110,0.2);">STAGED FOR REVIEW</span>
-            <span style="font-size: 9px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em;">Not client visible</span>
-          </div>
-        </div>
-
-        <div class="review-body" style="display: grid; grid-template-columns: 1fr 300px; gap: 40px;">
-          <div class="review-main">
-            <div style="margin-bottom: 32px;">
-              <h4 style="font-size: 11px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 12px;">Synthesis Narrative</h4>
-              <p style="font-size: 16px; line-height: 1.6; color: var(--text-mid); font-weight: 300;">${data.summary?.synthesis || 'No synthesis available.'}</p>
-            </div>
-
-            <div>
-              <h4 style="font-size: 11px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 12px;">Decision Ledger</h4>
-              <div style="background: rgba(255,255,255,0.02); border-radius: 8px; padding: 20px; border: 1px solid var(--border);">
-                <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 12px;">
-                  ${(data.decisions || []).map(d => `
-                    <li style="display: flex; align-items: flex-start; gap: 10px; font-size: 14px; color: var(--text-mid);">
-                      <span style="color: var(--teal); font-weight: 700;">→</span>
-                      <span>${d.observation || d.action || d.title || (typeof d === 'string' ? d : 'Decision detail missing')}</span>
-                    </li>
-                  `).join('') || '<li style="color:var(--text-muted); font-size:12px; font-style:italic;">No specific decisions identified.</li>'}
-                </ul>
-              </div>
-            </div>
-          </div>
-
-          <div class="review-sidebar">
-            <div style="margin-bottom: 24px; background: rgba(249,111,110,0.05); border: 1px solid rgba(249,111,110,0.15); border-radius: 12px; padding: 20px;">
-              <h4 style="font-size: 10px; font-weight: 700; color: var(--coral); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 8px;">Priority Signal</h4>
-              <p style="font-size: 14px; font-weight: 500; color: var(--text-primary);">${data.summary?.prioritySignal || 'None'}</p>
-            </div>
-
-            <div style="background: rgba(75,173,168,0.05); border: 1px solid rgba(75,173,168,0.15); border-radius: 12px; padding: 20px;">
-              <h4 style="font-size: 10px; font-weight: 700; color: var(--teal); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 8px;">Recommended Action</h4>
-              <p style="font-size: 14px; font-weight: 500; color: var(--text-primary);">${data.summary?.recommendedAction || 'None'}</p>
-            </div>
-            
-            <div style="margin-top: 40px; display: flex; flex-direction: column; gap: 12px;">
-              <button class="btn-primary" style="width: 100%; ${isPublished ? 'background:var(--teal); border-color:var(--teal); color:white;' : ''}" 
-                data-payload='${encodeURIComponent(JSON.stringify(data))}' 
-                onclick="publishSignal(this)"
-                ${isPublished ? 'disabled' : ''}>
-                ${isPublished ? '✔ Published' : 'Approve & Publish'}
-              </button>
-              <button class="btn-ghost" style="width: 100%;" onclick="this.closest('.review-card').style.opacity='0.5'; this.disabled=true;">Dismiss Update</button>
-              <p class="publish-status" style="font-size: 10px; color: var(--text-muted); text-align: center; font-style: italic;">
-                ${isPublished ? 'Signal published successfully' : 'Ready for workspace integration'}
-              </p>
-            </div>
-          </div>
-        </div>
-      `;
-      container.appendChild(card);
-    };
-
-    // Render the manual staged package first if it exists
-    if (stagedPackage) {
-      renderCard(stagedPackage, true);
-    }
-
-    // Render manifest packages
-    for (const filename of filenames) {
-      try {
-        const res = await fetch(`data/intelligence/staged/${filename}`);
-        if (!res.ok) continue;
-        const data = await res.json();
-        renderCard(data);
-      } catch (err) {
-        console.error(`Error loading update ${filename}:`, err);
-      }
-    }
-  } catch (err) {
-    console.error('Review Queue Error:', err);
-    container.innerHTML = `
-      <div style="text-align:center; padding:60px 20px; color:var(--coral);">
-        <p style="font-size:14px; font-weight:600;">Review Queue could not load staged intelligence.</p>
-      </div>`;
-  }
-}
 
 /* ══════════════════════════════════════════════════════════
    VAULT TOOLTIP ENGINE

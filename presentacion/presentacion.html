@@ -11,27 +11,6 @@
       rel="stylesheet"
     />
     <style>
-      /* Force standalone display - hide parent elements */
-      body {
-        margin: 0 !important;
-        padding: 0 !important;
-        overflow: hidden !important;
-        position: fixed !important;
-        top: 0 !important;
-        left: 0 !important;
-        width: 100vw !important;
-        height: 100vh !important;
-        background-color: var(--bg);
-        color: var(--text);
-        font-family: 'Inter', sans-serif;
-        line-height: 1.5;
-      }
-
-      /* Hide any parent navigation or headers */
-      body > *:not(.presentation-container) {
-        display: none !important;
-      }
-
       :root {
         --bg: #1a1a1a;
         --text: #ffffff;
@@ -48,26 +27,18 @@
         padding: 0;
       }
 
-      html {
-        width: 100%;
-        height: 100%;
+      body {
+        background-color: var(--bg);
+        color: var(--text);
+        font-family: 'Inter', sans-serif;
         overflow: hidden;
-        background: var(--bg);
-      }
-
-      .presentation-container {
-        position: fixed;
-        inset: 0;
         width: 100vw;
         height: 100vh;
-        overflow: hidden;
-        background: var(--bg);
-        z-index: 999999;
-        isolation: isolate;
+        line-height: 1.5;
       }
 
       /* Ambient Background Glow */
-      .presentation-container::before {
+      body::before {
         content: '';
         position: fixed;
         top: -50%;
@@ -91,7 +62,7 @@
       }
 
       h1 {
-        font-size: 4.5rem;
+        font-size: 4rem;
         margin-bottom: 1rem;
         color: var(--text);
       }
@@ -100,24 +71,10 @@
         margin-bottom: 1.5rem;
         color: var(--coral);
       }
-      h3 {
-        font-size: 1.8rem;
-        margin-bottom: 0.5rem;
-        color: var(--text);
-      }
-
       .subtitle {
         font-size: 1.5rem;
         color: var(--muted);
         font-weight: 300;
-      }
-      .eyebrow {
-        font-size: 1rem;
-        text-transform: uppercase;
-        letter-spacing: 2px;
-        color: var(--teal);
-        margin-bottom: 1rem;
-        display: block;
       }
 
       /* Layout */
@@ -129,9 +86,9 @@
 
       .slides-container {
         display: flex;
+        width: 2000vw;
         height: 100vh;
         transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
-        will-change: transform;
       }
 
       .slide {
@@ -151,7 +108,7 @@
       }
 
       .slide-content {
-        max-width: 950px;
+        max-width: 900px;
         width: 100%;
       }
       .slide-content.left {
@@ -164,79 +121,37 @@
         border: 1px solid var(--card-border);
         padding: 2rem;
         border-radius: 16px;
-        margin-top: 1.5rem;
+        margin-top: 2rem;
       }
       .grid-2 {
         display: grid;
         grid-template-columns: 1fr 1fr;
         gap: 2rem;
-        margin-top: 1.5rem;
+        margin-top: 2rem;
       }
       .grid-3 {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
         gap: 1.5rem;
-        margin-top: 1.5rem;
+        margin-top: 2rem;
       }
       .grid-4 {
         display: grid;
         grid-template-columns: repeat(4, 1fr);
         gap: 1rem;
-        margin-top: 1.5rem;
-      }
-      .stack {
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
-      }
-
-      .stacked-block {
-        background: var(--card-bg);
-        border: 1px solid var(--card-border);
-        padding: 1.5rem;
-        border-radius: 12px;
-        text-align: left;
-      }
-      .stacked-block h4 {
-        font-size: 1.1rem;
-        color: var(--teal);
-        margin-bottom: 0.5rem;
-        font-weight: 500;
-      }
-      .stacked-block p {
-        color: var(--text);
-        font-size: 1rem;
-        line-height: 1.4;
-      }
-
-      .highlight-footer {
-        background: rgba(45, 212, 191, 0.1);
-        border: 1px solid rgba(45, 212, 191, 0.2);
-        padding: 1.5rem;
-        border-radius: 12px;
         margin-top: 2rem;
-        text-align: left;
-      }
-      .highlight-footer p {
-        color: var(--text);
       }
 
       .bullet-list {
         list-style: none;
         text-align: left;
         display: inline-block;
-        width: 100%;
       }
       .bullet-list li {
         margin-bottom: 1rem;
         font-size: 1.2rem;
         position: relative;
         padding-left: 1.5rem;
-        color: var(--muted);
-      }
-      .bullet-list li strong {
-        color: var(--text);
-        font-weight: 500;
       }
       .bullet-list li::before {
         content: '·';
@@ -309,9 +224,6 @@
         border-radius: 12px;
         background: var(--card-bg);
         border: 1px solid var(--card-border);
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
       }
       .pricing-tier .label {
         font-size: 0.9rem;
@@ -329,18 +241,11 @@
       .pricing-tier .detail {
         color: var(--muted);
         font-size: 0.9rem;
-        margin-bottom: 1rem;
-      }
-      .pricing-tier .subdetail {
-        color: var(--text);
-        font-size: 0.8rem;
-        opacity: 0.7;
-        margin-top: auto;
       }
 
       .huge-text {
         font-size: 5rem;
-        line-height: 1.1;
+        line-height: 1;
         margin-bottom: 1rem;
       }
 
@@ -374,14 +279,11 @@
         transition: color 0.3s;
         cursor: pointer;
         background: none;
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        padding: 0.5rem 1rem;
-        border-radius: 20px;
+        border: none;
         font-family: inherit;
       }
       .btn-text:hover {
         color: var(--text);
-        border-color: rgba(255, 255, 255, 0.3);
       }
 
       .bottom-bar {
@@ -407,8 +309,8 @@
       }
       .progress-bar {
         height: 100%;
-        background: linear-gradient(90deg, var(--coral), var(--teal));
-        width: 0%;
+        background: var(--teal);
+        width: 5%;
         transition: width 0.3s ease;
       }
       .slide-counter {
@@ -502,8 +404,7 @@
         bottom: 80px;
         right: 2rem;
         width: 320px;
-        background: rgba(20, 20, 20, 0.95);
-        backdrop-filter: blur(10px);
+        background: #222;
         border: 1px solid var(--card-border);
         border-radius: 12px;
         padding: 1.5rem;
@@ -534,10 +435,10 @@
 
       @media (max-width: 768px) {
         h1 {
-          font-size: 3rem;
+          font-size: 2.5rem;
         }
         h2 {
-          font-size: 2.2rem;
+          font-size: 2rem;
         }
         .huge-text {
           font-size: 3rem;
@@ -549,7 +450,7 @@
           gap: 1rem;
         }
         .slide {
-          padding: 5rem 1.5rem 2rem;
+          padding: 2rem 1.5rem;
         }
         .nav-btn {
           opacity: 1;
@@ -559,993 +460,629 @@
         .progress-container {
           width: 150px;
         }
-        #notes-panel {
-          width: calc(100% - 4rem);
-          right: 2rem;
-        }
       }
     </style>
   </head>
   <body>
-    <div class="presentation-container">
-      <div id="start-screen">
-        <span class="eyebrow" style="color: var(--muted); margin-bottom: 1rem">Criar Sin Culpas · Nari Fateha</span>
-        <h1>De talleres a sistema</h1>
-        <p class="subtitle">Cómo lo que ya has construido empieza a tomar forma clara</p>
-        <button class="start-btn" id="start-btn">Iniciar presentación</button>
-        <div class="shortcuts">
-          <span><kbd>→</kbd> <kbd>Espacio</kbd> Siguiente</span>
-          <span><kbd>←</kbd> Anterior</span>
-          <span>👆 Swipe en móvil</span>
-        </div>
-      </div>
-
-      <div class="app-container" id="app">
-        <div class="top-bar">
-          <a href="#" class="btn-text">Volver al workspace</a>
-          <button class="btn-text" id="toggle-notes">Notas</button>
-        </div>
-
-        <button class="nav-btn" id="prev-btn" aria-label="Anterior">⟨</button>
-        <button class="nav-btn" id="next-btn" aria-label="Siguiente">⟩</button>
-
-        <div class="bottom-bar">
-          <div class="slide-counter"><span id="current-num">1</span> / <span id="total-num">23</span></div>
-          <div class="progress-container">
-            <div class="progress-bar" id="progress"></div>
-          </div>
-        </div>
-
-        <div id="notes-panel">
-          <h4>Notas del presentador</h4>
-          <p id="notes-text"></p>
-        </div>
-
-        <div class="slides-container" id="track">
-          <!-- 1. Cover -->
-          <section
-            class="slide active"
-            data-notes="Bienvenida. Establecer un tono tranquilo y seguro. El foco es formalizar su trabajo previo."
-          >
-            <div class="slide-content">
-              <span class="eyebrow" style="color: var(--muted)">Criar Sin Culpas · Nari Fateha</span>
-              <h1 style="margin-top: 1rem">De talleres<br /><span class="accent-coral">a sistema</span></h1>
-              <p class="subtitle" style="margin-top: 1.5rem">
-                Cómo lo que ya has construido empieza a tomar forma clara
-              </p>
-
-              <div
-                style="
-                  margin-top: 4rem;
-                  color: var(--muted);
-                  font-size: 0.85rem;
-                  text-transform: uppercase;
-                  letter-spacing: 2px;
-                "
-              >
-                Abril 2026<br /><br />
-                Signal [SiQ] · StrategyIQ
-              </div>
-            </div>
-          </section>
-
-          <!-- 2. La perspectiva correcta -->
-          <section
-            class="slide"
-            data-notes="Es clave quitarle presión: no tiene que inventar nada desde cero. Estamos ordenando la casa."
-          >
-            <div class="slide-content">
-              <span class="eyebrow">Criar Sin Culpas · Abril 2026</span>
-              <h2>La perspectiva correcta</h2>
-              <div class="card" style="padding: 3rem 2rem">
-                <h3 style="font-size: 2.2rem; font-weight: 400; margin-bottom: 1rem">No estamos creando algo nuevo.</h3>
-                <h3 style="font-size: 2.2rem; font-weight: 400; color: var(--teal)">
-                  Estamos organizando lo que ya existe.
-                </h3>
-              </div>
-              <p
-                style="
-                  margin-top: 2rem;
-                  font-size: 1.1rem;
-                  color: var(--muted);
-                  text-transform: uppercase;
-                  letter-spacing: 2px;
-                "
-              >
-                Estructura · lenguaje · orden
-              </p>
-            </div>
-          </section>
-
-          <!-- 3. El punto de partida -->
-          <section
-            class="slide"
-            data-notes="Validar su dolor pasado. El valor estaba ahí, pero el formato no acompañaba el crecimiento."
-          >
-            <div class="slide-content left">
-              <span class="eyebrow">Criar Sin Culpas · Abril 2026</span>
-              <h2>El punto de partida</h2>
-
-              <h3 class="serif" style="font-size: 3rem; margin-bottom: 0.2rem; margin-top: 2rem">
-                El problema no era contenido
-              </h3>
-              <h3 class="serif accent-coral" style="font-size: 3rem; margin-bottom: 2.5rem">Era claridad</h3>
-
-              <ul class="bullet-list" style="margin-bottom: 2rem">
-                <li><strong>Mucho valor disperso</strong> — difícil de explicar</li>
-                <li><strong>Difícil de convertir</strong> — en algo escalable</li>
-              </ul>
-
-              <p style="font-size: 0.95rem; color: var(--muted); text-transform: uppercase; letter-spacing: 1px">
-                Señales identificadas · dificultades más comunes en los padres
-              </p>
-            </div>
-          </section>
-
-          <!-- 4. Estado del proyecto -->
-          <section
-            class="slide"
-            data-notes="Mostrar avance. Que vea que hay un proceso metodológico funcionando y estamos en el core."
-          >
-            <div class="slide-content left">
-              <span class="eyebrow">Criar Sin Culpas · Abril 2026</span>
-              <h2>Estado del proyecto</h2>
-              <p class="subtitle" style="margin-bottom: 2.5rem">Dónde estamos ahora</p>
-
-              <div class="stack">
-                <div class="stacked-block" style="opacity: 0.6; padding: 1rem 1.5rem">
-                  <span style="color: var(--muted); font-size: 0.9rem; margin-right: 1rem">00</span> Ingesta Estratégica
-                </div>
-                <div class="stacked-block" style="opacity: 0.6; padding: 1rem 1.5rem">
-                  <span style="color: var(--muted); font-size: 0.9rem; margin-right: 1rem">01</span> Diagnóstico
-                </div>
-                <div
-                  class="stacked-block"
-                  style="border-color: var(--teal); background: rgba(45, 212, 191, 0.05); padding: 1.5rem"
-                >
-                  <div style="display: flex; align-items: center; justify-content: space-between">
-                    <h4 style="margin: 0">
-                      <span style="color: var(--teal); margin-right: 1rem">02</span> Arquitectura — ACTIVO
-                    </h4>
-                  </div>
-                  <p style="margin-top: 0.5rem; color: var(--muted); font-size: 0.95rem; padding-left: 2.3rem">
-                    Definiendo cómo funciona tu método
-                  </p>
-                </div>
-                <div class="stacked-block" style="opacity: 0.6; padding: 1rem 1.5rem">
-                  <span style="color: var(--muted); font-size: 0.9rem; margin-right: 1rem">03</span> Mapa del Programa
-                </div>
-                <div class="stacked-block" style="opacity: 0.6; padding: 1rem 1.5rem">
-                  <span style="color: var(--muted); font-size: 0.9rem; margin-right: 1rem">04</span> Narrativa
-                </div>
-              </div>
-            </div>
-          </section>
-
-          <!-- 5. Lo que ya está claro -->
-          <section
-            class="slide"
-            data-notes="Resumir hallazgos de la auditoría. Todo esto es oro. El método ya está siendo extraído."
-          >
-            <div class="slide-content left">
-              <span class="eyebrow">Criar Sin Culpas · Abril 2026</span>
-              <h2>Lo que ya está claro</h2>
-
-              <div class="grid-2">
-                <div class="stack">
-                  <div class="stacked-block">
-                    <h4>Entendimos tu trabajo y tu audiencia</h4>
-                    <p style="color: var(--muted); font-size: 0.9rem">Audiencia entendida · patrones identificados</p>
-                  </div>
-                  <div class="stacked-block">
-                    <h4>Identificamos patrones claros</h4>
-                    <p style="color: var(--muted); font-size: 0.9rem">Señales de la audiencia</p>
-                  </div>
-                  <div class="stacked-block">
-                    <h4>Empezamos a organizar tu método</h4>
-                    <p style="color: var(--muted); font-size: 0.9rem">Método organizado</p>
-                  </div>
-                </div>
-
-                <div class="stack">
-                  <div class="pricing-tier" style="padding: 1.5rem; text-align: left; align-items: flex-start">
-                    <span class="label" style="color: var(--text)">Inventario de talleres</span>
-                    <div class="price accent-coral">50+</div>
-                    <div class="subdetail">Certified</div>
-                  </div>
-                  <div class="pricing-tier" style="padding: 1.5rem; text-align: left; align-items: flex-start">
-                    <span class="label" style="color: var(--text)">Grabaciones Vimeo</span>
-                    <div class="price accent-teal">16</div>
-                    <div class="subdetail">Collected</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          <!-- 6. La estructura base -->
-          <section class="slide" data-notes="Presentar el core frame. Este es el corazón de su sistema.">
-            <div class="slide-content left">
-              <span class="eyebrow">La estructura base</span>
-              <h2>Tu método</h2>
-
-              <div class="grid-4" style="margin-top: 3rem; margin-bottom: 3rem">
-                <div class="flow-step" style="position: relative">
-                  <h3 style="font-size: 1.5rem">Aceptar</h3>
-                  <p>Confrontar<br />sin culpa</p>
-                  <div
-                    style="position: absolute; right: -15px; top: 50%; transform: translateY(-50%); color: var(--muted)"
-                  >
-                    →
-                  </div>
-                </div>
-                <div class="flow-step" style="position: relative">
-                  <h3 style="font-size: 1.5rem">Estabilizar</h3>
-                  <p>Regulación<br />emocional propia</p>
-                  <div
-                    style="position: absolute; right: -15px; top: 50%; transform: translateY(-50%); color: var(--muted)"
-                  >
-                    →
-                  </div>
-                </div>
-                <div class="flow-step" style="position: relative">
-                  <h3 style="font-size: 1.5rem">Conectar</h3>
-                  <p>Conexión<br />con el hijo</p>
-                  <div
-                    style="position: absolute; right: -15px; top: 50%; transform: translateY(-50%); color: var(--muted)"
-                  >
-                    →
-                  </div>
-                </div>
-                <div class="flow-step">
-                  <h3 style="font-size: 1.5rem">Guiar</h3>
-                  <p>Guía sin<br />violencia</p>
-                </div>
-              </div>
-
-              <div class="highlight-footer" style="background: transparent; border-color: var(--card-border)">
-                <p style="margin-bottom: 0.5rem">
-                  Esto no es algo que inventamos. Esto es algo que ya está en tu trabajo.
-                </p>
-                <p style="color: var(--teal)">Lo que hicimos fue hacerlo visible.</p>
-              </div>
-            </div>
-          </section>
-
-          <!-- 7. Divider -->
-          <section class="slide" data-notes="Pausa para asimilar el impacto de tener un método ordenado.">
-            <div class="slide-content">
-              <h2 class="huge-text accent-coral">Esto cambia todo</h2>
-              <p class="subtitle" style="font-size: 1.8rem; margin-top: 1rem">
-                De una idea dispersa a un método claro que se puede enseñar
-              </p>
-            </div>
-          </section>
-
-          <!-- 8. El impacto -->
-          <section class="slide" data-notes="Contraste claro entre el pasado y el futuro inmediato.">
-            <div class="slide-content left">
-              <span class="eyebrow">Criar Sin Culpas · Abril 2026</span>
-              <h2>El impacto</h2>
-              <p class="subtitle" style="margin-bottom: 1rem">Qué cambia con esto</p>
-
-              <p
-                style="
-                  font-size: 0.95rem;
-                  color: var(--muted);
-                  text-transform: uppercase;
-                  letter-spacing: 1px;
-                  margin-bottom: 2rem;
-                "
-              >
-                Puedes explicarlo. · Puedes enseñarlo. · Puedes convertirlo en productos.
-              </p>
-
-              <div class="grid-2">
-                <div class="card" style="border-color: rgba(255, 159, 137, 0.3); padding: 3rem 2rem">
-                  <span style="text-transform: uppercase; font-size: 0.85rem; color: var(--coral); letter-spacing: 1px"
-                    >Antes</span
-                  >
-                  <p
-                    style="
-                      font-size: 1.8rem;
-                      margin-top: 1rem;
-                      font-family: 'Cormorant Garamond', serif;
-                      line-height: 1.2;
-                    "
-                  >
-                    Solo experiencia difícil de comunicar
-                  </p>
-                </div>
-                <div class="card" style="border-color: rgba(45, 212, 191, 0.3); padding: 3rem 2rem">
-                  <span style="text-transform: uppercase; font-size: 0.85rem; color: var(--teal); letter-spacing: 1px"
-                    >Ahora</span
-                  >
-                  <p
-                    style="
-                      font-size: 1.8rem;
-                      margin-top: 1rem;
-                      font-family: 'Cormorant Garamond', serif;
-                      line-height: 1.2;
-                    "
-                  >
-                    Un método claro, enseñable y escalable
-                  </p>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          <!-- 9. La base estratégica -->
-          <section class="slide" data-notes="Los 3 pilares del sistema. La base sobre la cual se monta todo.">
-            <div class="slide-content left">
-              <span class="eyebrow">Criar Sin Culpas · Abril 2026</span>
-              <h2>La base estratégica</h2>
-              <p class="subtitle">El sistema que estamos construyendo</p>
-
-              <div class="grid-3" style="margin-top: 3rem">
-                <div class="stacked-block" style="padding: 2rem 1.5rem">
-                  <span
-                    class="accent-coral"
-                    style="font-weight: 600; font-size: 1.2rem; display: block; margin-bottom: 0.5rem"
-                    >01</span
-                  >
-                  <h4 style="font-size: 1.3rem; margin-bottom: 1rem; color: var(--text)">Metodología estructurada</h4>
-                  <p style="color: var(--muted)">Aceptar → Estabilizar → Conectar → Guiar</p>
-                </div>
-                <div class="stacked-block" style="padding: 2rem 1.5rem">
-                  <span
-                    class="accent-teal"
-                    style="font-weight: 600; font-size: 1.2rem; display: block; margin-bottom: 0.5rem"
-                    >02</span
-                  >
-                  <h4 style="font-size: 1.3rem; margin-bottom: 1rem; color: var(--text)">Caso de estudio validado</h4>
-                  <p style="color: var(--muted)">Experiencia real y resultados medibles.</p>
-                </div>
-                <div class="stacked-block" style="padding: 2rem 1.5rem">
-                  <span
-                    class="accent-coral"
-                    style="font-weight: 600; font-size: 1.2rem; display: block; margin-bottom: 0.5rem"
-                    >03</span
-                  >
-                  <h4 style="font-size: 1.3rem; margin-bottom: 1rem; color: var(--text)">Sistema propio</h4>
-                  <p style="color: var(--muted)">Lenguaje, herramientas y arquitectura definidos.</p>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          <!-- 10. Análisis de patrones -->
-          <section class="slide" data-notes="Lo que descubrimos analizando el comportamiento de los padres.">
-            <div class="slide-content left">
-              <span class="eyebrow">Criar Sin Culpas · Abril 2026</span>
-              <h2>Análisis de patrones</h2>
-              <p class="subtitle" style="margin-bottom: 2rem">Señales que empezaron a repetirse</p>
-
-              <p style="font-size: 1.1rem; margin-bottom: 1.5rem">
-                Analizando contenido, talleres y materiales, empezaron a aparecer patrones consistentes:
-              </p>
-
-              <ul class="bullet-list" style="margin-bottom: 2rem">
-                <li>Los padres conectan con la filosofía, pero <strong>se bloquean en momentos de tensión</strong></li>
-                <li>Entienden el “por qué”, pero <strong>no saben qué hacer en el momento exacto</strong></li>
-                <li>Las preguntas más frecuentes no son “por qué”, sino <strong>“¿qué hago ahora?”</strong></li>
-                <li>Los padres buscan <strong>acción concreta</strong>, no explicaciones teóricas</li>
-              </ul>
-
-              <div class="highlight-footer">
-                <p
-                  style="
-                    font-size: 0.9rem;
-                    text-transform: uppercase;
-                    color: var(--teal);
-                    margin-bottom: 0.5rem;
-                    letter-spacing: 1px;
-                  "
-                >
-                  Momentos críticos que se repiten: Transiciones de pantalla · Escalada emocional
-                </p>
-                <p style="font-size: 1.1rem">Esto no es algo aislado. Es un patrón en la audiencia.</p>
-              </div>
-            </div>
-          </section>
-
-          <!-- 11. La brecha que estaba oculta -->
-          <section class="slide" data-notes="El problema real: la distancia entre teoría y ejecución en crisis.">
-            <div class="slide-content left">
-              <span class="eyebrow">Criar Sin Culpas · Abril 2026</span>
-              <h2>La brecha que estaba oculta</h2>
-              <p class="subtitle" style="margin-bottom: 2rem">De entender → a saber qué hacer</p>
-
-              <div class="stack" style="gap: 1rem">
-                <div class="stacked-block" style="padding: 1.2rem 1.5rem">
-                  <h4>La brecha</h4>
-                  <p>
-                    Al analizar el contenido y los patrones de audiencia, empezaron a aparecer señales consistentes: los
-                    padres conectan con la filosofía, pero se bloquean en momentos de tensión real.
-                  </p>
-                </div>
-                <div class="stacked-block" style="padding: 1.2rem 1.5rem">
-                  <h4>Qué está pasando</h4>
-                  <p>
-                    Las preguntas más frecuentes no son "por qué", sino "¿qué hago ahora?". Estas señales muestran una
-                    brecha entre ideas hermosas y ejecución real.
-                  </p>
-                </div>
-                <div class="stacked-block" style="padding: 1.2rem 1.5rem">
-                  <h4>El salto que cambia todo</h4>
-                  <p>
-                    Evolucionar de "Contenido de crianza sin culpa" a "Apoyo en tiempo real... sin culpa". Al resolver
-                    esto, tu plataforma se convierte en parte de su vida diaria.
-                  </p>
-                </div>
-                <div class="stacked-block" style="padding: 1.2rem 1.5rem">
-                  <h4>Cómo lo empezamos a resolver</h4>
-                  <p>
-                    Comenzar con los momentos de mayor fricción: transiciones de pantalla y escalada emocional.
-                    Construir guías simples y rápidas que los padres puedan usar en tiempo real.
-                  </p>
-                </div>
-              </div>
-
-              <div
-                class="highlight-footer"
-                style="
-                  padding: 1.2rem 1.5rem;
-                  margin-top: 1rem;
-                  border-color: var(--coral);
-                  background: rgba(255, 159, 137, 0.05);
-                "
-              >
-                <p style="font-size: 0.95rem">
-                  <strong style="color: var(--coral)">Ejemplo: Niño no quiere soltar la pantalla →</strong>
-                  Opción A (suave): "5 minutos más, luego tú eliges qué hacemos" | Opción B (firme + calmado): "Veo que
-                  estás molesto. Es hora de parar. Estoy aquí contigo."
-                </p>
-              </div>
-            </div>
-          </section>
-
-          <!-- 12. Camino a Córdoba -->
-          <section
-            class="slide"
-            data-notes="Trazar el camino hacia el evento principal. Da un horizonte temporal realista."
-          >
-            <div class="slide-content left">
-              <h2>Camino a Córdoba</h2>
-              <p class="subtitle">Construyendo metodología, credibilidad y un sistema propio</p>
-
-              <div class="card" style="margin-top: 3rem; margin-bottom: 3rem">
-                <div class="timeline-item">
-                  <span style="color: var(--teal); font-size: 0.85rem; text-transform: uppercase">Hoy</span>
-                  <h3>Abril 2026</h3>
-                </div>
-                <div class="timeline-item">
-                  <span style="color: var(--teal); font-size: 0.85rem; text-transform: uppercase">Desarrollo</span>
-                  <h3>Mayo-Junio 2026</h3>
-                </div>
-                <div class="timeline-item" style="border-left-color: transparent">
-                  <span style="color: var(--coral); font-size: 0.85rem; text-transform: uppercase">Córdoba</span>
-                  <h3>Septiembre 2026</h3>
-                </div>
-              </div>
-
-              <p
-                style="
-                  font-size: 1.5rem;
-                  text-align: center;
-                  color: var(--text);
-                  font-family: 'Cormorant Garamond', serif;
-                  font-style: italic;
-                "
-              >
-                "Lo que construimos hoy es lo que mostraremos en septiembre."
-              </p>
-            </div>
-          </section>
-
-          <!-- 13. La oportunidad inmediata -->
-          <section class="slide" data-notes="Explicar por qué Córdoba es clave estratégicamente.">
-            <div class="slide-content left">
-              <span class="eyebrow">Criar Sin Culpas · Abril 2026</span>
-              <h2>La oportunidad inmediata</h2>
-
-              <div class="grid-2" style="margin-top: 2rem; margin-bottom: 2rem">
-                <div class="stacked-block">
-                  <h4 style="color: var(--text); font-size: 1.2rem">Primera oportunidad real de expresar tu método</h4>
-                </div>
-                <div class="stacked-block">
-                  <h4 style="color: var(--text); font-size: 1.2rem">Una plataforma más grande</h4>
-                  <p style="color: var(--muted); font-size: 0.95rem">Alcance institucional y audiencia diversificada</p>
-                </div>
-                <div class="stacked-block">
-                  <h4 style="color: var(--text); font-size: 1.2rem">Validación pública del método</h4>
-                  <p style="color: var(--muted); font-size: 0.95rem">Reconocimiento formal de tu enfoque</p>
-                </div>
-                <div class="stacked-block">
-                  <h4 style="color: var(--text); font-size: 1.2rem">Punto de partida para más charlas</h4>
-                  <p style="color: var(--muted); font-size: 0.95rem">Apertura de nuevas oportunidades</p>
-                </div>
-              </div>
-
-              <p style="text-align: center; color: var(--teal); font-size: 1.1rem; margin-top: 2rem">
-                No es solo una charla. Es el inicio de algo más grande.
-              </p>
-            </div>
-          </section>
-
-          <!-- 14. Recomendación estratégica -->
-          <section class="slide" data-notes="Definir el ángulo de la charla principal.">
-            <div class="slide-content left">
-              <span class="eyebrow">Criar Sin Culpas · Abril 2026</span>
-              <h2>Recomendación estratégica</h2>
-              <p class="subtitle" style="margin-bottom: 2rem">Qué tema liderar</p>
-
-              <h3 class="serif" style="font-size: 3.5rem; color: var(--text); margin-bottom: 3rem">
-                El rol del adulto en la crianza digital
-              </h3>
-
-              <div class="grid-3" style="margin-bottom: 2.5rem">
-                <div class="stacked-block" style="border: none; padding: 0; background: transparent">
-                  <h4 style="font-size: 1.1rem; color: var(--teal); margin-bottom: 0.5rem">Posiciona a la familia</h4>
-                  <p style="color: var(--muted); font-size: 0.95rem">
-                    No a las pantallas. Enfoca en el rol del adulto como guía.
-                  </p>
-                </div>
-                <div class="stacked-block" style="border: none; padding: 0; background: transparent">
-                  <h4 style="font-size: 1.1rem; color: var(--coral); margin-bottom: 0.5rem">Incluye grooming</h4>
-                  <p style="color: var(--muted); font-size: 0.95rem">
-                    Violencia digital incluida naturalmente en el marco.
-                  </p>
-                </div>
-                <div class="stacked-block" style="border: none; padding: 0; background: transparent">
-                  <h4 style="font-size: 1.1rem; color: var(--teal); margin-bottom: 0.5rem">Aplica a todos</h4>
-                  <p style="color: var(--muted); font-size: 0.95rem">Padres, educadores e instituciones.</p>
-                </div>
-              </div>
-
-              <div class="highlight-footer">
-                <p>Desde aquí puedes tocar todo lo demás. Este es el punto de partida para expandir tu alcance.</p>
-              </div>
-            </div>
-          </section>
-
-          <!-- 15. Key Insight -->
-          <section class="slide" data-notes="El insight central. Dejar que la frase respire en pantalla.">
-            <div class="slide-content">
-              <h2 class="huge-text" style="color: var(--text)">No son las pantallas</h2>
-              <h2 class="huge-text accent-teal" style="font-size: 4rem">Es el sistema alrededor de ellas</h2>
-              <div style="margin-top: 3rem; color: var(--muted); font-size: 1.2rem">
-                <p style="margin-bottom: 0.5rem">No estás hablando de síntomas. Estás hablando de estructura.</p>
-                <p>La diferencia entre reaccionar y construir.</p>
-              </div>
-            </div>
-          </section>
-
-          <!-- 16. Estructura de la charla -->
-          <section class="slide" data-notes="Un esqueleto básico para que no se sienta abrumada al redactar la charla.">
-            <div class="slide-content left">
-              <span class="eyebrow">Criar Sin Culpas · Abril 2026</span>
-              <h2>Estructura de la charla</h2>
-              <p class="subtitle">Una guía clara sin perderte</p>
-
-              <div class="grid-2" style="margin-top: 3rem">
-                <div class="flow-step" style="padding: 2rem">
-                  <span
-                    class="accent-coral"
-                    style="font-weight: bold; font-size: 1.2rem; margin-bottom: 1rem; display: block"
-                    >01</span
-                  >
-                  <h3 style="font-size: 1.5rem; margin-top: 0.5rem">Qué está pasando</h3>
-                  <p style="margin-top: 0.5rem">El entorno digital actual · contexto</p>
-                </div>
-                <div class="flow-step" style="padding: 2rem">
-                  <span
-                    class="accent-coral"
-                    style="font-weight: bold; font-size: 1.2rem; margin-bottom: 1rem; display: block"
-                    >02</span
-                  >
-                  <h3 style="font-size: 1.5rem; margin-top: 0.5rem">El error común</h3>
-                  <p style="margin-top: 0.5rem">Reacción y control · por qué no funciona</p>
-                </div>
-                <div class="flow-step" style="padding: 2rem">
-                  <span
-                    class="accent-teal"
-                    style="font-weight: bold; font-size: 1.2rem; margin-bottom: 1rem; display: block"
-                    >03</span
-                  >
-                  <h3 style="font-size: 1.5rem; margin-top: 0.5rem">El cambio</h3>
-                  <p style="margin-top: 0.5rem">El rol del adulto · la diferencia real</p>
-                </div>
-                <div class="flow-step" style="padding: 2rem">
-                  <span
-                    class="accent-teal"
-                    style="font-weight: bold; font-size: 1.2rem; margin-bottom: 1rem; display: block"
-                    >04</span
-                  >
-                  <h3 style="font-size: 1.5rem; margin-top: 0.5rem">Qué hacer distinto</h3>
-                  <p style="margin-top: 0.5rem">Herramientas concretas · próximos pasos</p>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          <!-- 17. Puente al mundo real - Plataformas -->
-          <section class="slide" data-notes="Aplicación práctica: educación y currículos.">
-            <div class="slide-content left">
-              <span class="eyebrow">Criar Sin Culpas · Abril 2026</span>
-              <h2>Puente al mundo real · Plataformas educativas</h2>
-              <p style="font-size: 1.2rem; margin-bottom: 2rem; color: var(--muted)">
-                Transforma tu experiencia en un programa educativo modular que las plataformas pueden implementar
-                directamente.
-              </p>
-
-              <div class="grid-3" style="margin-bottom: 2rem">
-                <div class="stacked-block">
-                  <h4 style="color: var(--text)">Módulos por etapa</h4>
-                  <p style="color: var(--muted); font-size: 0.9rem; margin-bottom: 0.5rem">
-                    Aceptar → Estabilizar → Conectar → Guiar
-                  </p>
-                  <p style="font-size: 0.85rem; color: var(--teal)">Cada etapa con objetivos claros</p>
-                </div>
-                <div class="stacked-block">
-                  <h4 style="color: var(--text)">Resultados medibles</h4>
-                  <p style="color: var(--muted); font-size: 0.9rem">
-                    Indicadores de progreso para familias y evaluación de impacto
-                  </p>
-                </div>
-                <div class="stacked-block">
-                  <h4 style="color: var(--text)">Piloto con aliados</h4>
-                  <p style="color: var(--muted); font-size: 0.9rem">
-                    1-2 plataformas educativas para validar el modelo
-                  </p>
-                </div>
-              </div>
-
-              <div class="highlight-footer" style="padding: 1rem 1.5rem">
-                <p style="font-size: 0.95rem">
-                  <strong style="color: var(--teal)">Ejemplo concreto:</strong> Plataforma de educación parental que
-                  incluye tu método como módulo de crianza digital.
-                </p>
-              </div>
-            </div>
-          </section>
-
-          <!-- 18. Puente al mundo real - Bienestar -->
-          <section class="slide" data-notes="Aplicación práctica: bienestar general e instituciones/escuelas.">
-            <div class="slide-content left">
-              <span class="eyebrow">Criar Sin Culpas · Abril 2026</span>
-              <h2>Puente al mundo real · Bienestar digital</h2>
-              <p class="subtitle" style="margin-bottom: 1rem">Protocolos prácticos para familias seguras</p>
-              <p style="font-size: 1.1rem; margin-bottom: 2rem; color: var(--muted)">
-                Herramientas concretas para escuelas, municipios y familias que necesitan proteger a los niños en el
-                entorno digital.
-              </p>
-
-              <div class="grid-3" style="margin-bottom: 2rem">
-                <div class="stacked-block">
-                  <h4 style="color: var(--text)">Protocolos de grooming</h4>
-                  <p style="color: var(--muted); font-size: 0.9rem; margin-bottom: 0.5rem">
-                    Detección de señales de alerta
-                  </p>
-                  <p style="font-size: 0.85rem; color: var(--coral)">Pasos de intervención clara</p>
-                </div>
-                <div class="stacked-block">
-                  <h4 style="color: var(--text)">Kits para familias</h4>
-                  <p style="color: var(--muted); font-size: 0.9rem; margin-bottom: 0.5rem">
-                    Guías prácticas descargables
-                  </p>
-                  <p style="font-size: 0.85rem; color: var(--coral)">Checklist de seguridad</p>
-                </div>
-                <div class="stacked-block">
-                  <h4 style="color: var(--text)">Talleres para escuelas</h4>
-                  <p style="color: var(--muted); font-size: 0.9rem; margin-bottom: 0.5rem">Formación para docentes</p>
-                  <p style="font-size: 0.85rem; color: var(--coral)">Protocolos institucionales</p>
-                </div>
-              </div>
-
-              <div
-                class="highlight-footer"
-                style="
-                  padding: 1rem 1.5rem;
-                  border-color: rgba(255, 159, 137, 0.3);
-                  background: rgba(255, 159, 137, 0.05);
-                "
-              >
-                <p style="font-size: 0.95rem">
-                  <strong style="color: var(--coral)">Ejemplo concreto:</strong> Implementación en 3 colegios con kits
-                  de seguridad digital para 500 familias.
-                </p>
-              </div>
-            </div>
-          </section>
-
-          <!-- 19. Puente al mundo real - Marcas -->
-          <section class="slide" data-notes="Aplicación práctica: colaboraciones corporativas.">
-            <div class="slide-content left">
-              <span class="eyebrow">Criar Sin Culpas · Abril 2026</span>
-              <h2>Puente al mundo real · Marcas familiares</h2>
-              <p class="subtitle" style="margin-bottom: 1rem">Autoridad + alcance + audiencia de confianza</p>
-              <p style="font-size: 1.1rem; margin-bottom: 2rem; color: var(--muted)">
-                Tu metodología aplicada en campañas con marcas que comparten valores de crianza consciente.
-              </p>
-
-              <div class="grid-3" style="margin-bottom: 2rem">
-                <div class="stacked-block">
-                  <h4 style="color: var(--text)">Contenido co-creado</h4>
-                  <p style="color: var(--muted); font-size: 0.9rem">Campañas auténticas basadas en tu experiencia</p>
-                </div>
-                <div class="stacked-block">
-                  <h4 style="color: var(--text)">Campañas con propósito</h4>
-                  <p style="color: var(--muted); font-size: 0.9rem">Mensajes que conectan con valores familiares</p>
-                </div>
-                <div class="stacked-block">
-                  <h4 style="color: var(--text)">Métricas de confianza</h4>
-                  <p style="color: var(--muted); font-size: 0.9rem">Engagement real y conversión medible</p>
-                </div>
-              </div>
-
-              <div class="highlight-footer" style="padding: 1rem 1.5rem">
-                <p style="font-size: 0.95rem">
-                  <strong style="color: var(--teal)">Ejemplo concreto:</strong> Colaboración con marca de productos
-                  infantiles para campaña sobre crianza sin culpa.
-                </p>
-              </div>
-            </div>
-          </section>
-
-          <!-- 20. Referencias de honorarios -->
-          <section class="slide" data-notes="Fijar expectativas comerciales realistas y estructuradas.">
-            <div class="slide-content left">
-              <span class="eyebrow">Criar Sin Culpas · Abril 2026</span>
-              <h2>Referencias de honorarios</h2>
-              <p class="subtitle">Mercado actual</p>
-
-              <div class="grid-3" style="margin-top: 3rem">
-                <div class="pricing-tier">
-                  <span class="label">Base · charla inicial</span>
-                  <div class="price" style="font-size: 2rem">$300 – $500</div>
-                  <div class="detail" style="margin-bottom: 1.5rem">Primeras invitaciones, eventos pequeños</div>
-                  <div class="subdetail" style="font-weight: 600; letter-spacing: 1px; text-transform: uppercase">
-                    Entry
-                  </div>
-                </div>
-                <div class="pricing-tier" style="border-color: var(--teal)">
-                  <span class="label">Estándar · experiencia demostrada</span>
-                  <div class="price" style="font-size: 2rem">$500 – $1,000</div>
-                  <div class="detail" style="margin-bottom: 1.5rem">Posición confiable, referencias establecidas</div>
-                  <div class="subdetail" style="font-weight: 600; letter-spacing: 1px; text-transform: uppercase">
-                    Standard
-                  </div>
-                </div>
-                <div class="pricing-tier" style="border-color: var(--coral)">
-                  <span class="label">Institucional · marca posicionada</span>
-                  <div class="price" style="font-size: 2rem">$1,000+</div>
-                  <div class="detail" style="margin-bottom: 1.5rem">Referencia del mercado, autoridad establecida</div>
-                  <div class="subdetail" style="font-weight: 600; letter-spacing: 1px; text-transform: uppercase">
-                    Premium
-                  </div>
-                </div>
-              </div>
-              <p style="margin-top: 2rem; color: var(--muted); font-size: 0.95rem; text-align: center">
-                <strong style="color: var(--text)">Nota estratégica:</strong> En este caso específico, puede tener
-                sentido evaluar el valor estratégico de la invitación — no solo el honorario.
-              </p>
-            </div>
-          </section>
-
-          <!-- 21. Todo listo para moverte -->
-          <section class="slide" data-notes="Empoderamiento. No falta nada, es momento de ejecutar.">
-            <div class="slide-content left">
-              <span class="eyebrow">Criar Sin Culpas · Abril 2026</span>
-              <h2>Todo listo para moverte</h2>
-
-              <div class="stack" style="margin-top: 3rem; gap: 1.5rem">
-                <div class="stacked-block" style="display: flex; gap: 2rem; align-items: center">
-                  <h4 style="margin: 0; width: 35%; color: var(--text); font-size: 1.2rem">Presentarte con claridad</h4>
-                  <p style="margin: 0; color: var(--muted)">
-                    Ya tienes suficiente claridad para moverte. No dependes de empezar desde cero.
-                  </p>
-                </div>
-                <div class="stacked-block" style="display: flex; gap: 2rem; align-items: center">
-                  <h4 style="margin: 0; width: 35%; color: var(--text); font-size: 1.2rem">
-                    Hablar con marcas si surge una oportunidad
-                  </h4>
-                  <p style="margin: 0; color: var(--muted)">
-                    Tienes el método claro para presentar tu valor de manera profesional.
-                  </p>
-                </div>
-                <div class="stacked-block" style="display: flex; gap: 2rem; align-items: center">
-                  <h4 style="margin: 0; width: 35%; color: var(--text); font-size: 1.2rem">
-                    No improvisar en conversaciones importantes
-                  </h4>
-                  <p style="margin: 0; color: var(--muted)">
-                    Antes improvisabas. Ahora tienes un marco para guiar tus conversaciones.
-                  </p>
-                </div>
-              </div>
-
-              <p style="text-align: center; margin-top: 3rem; font-size: 1.2rem; color: var(--teal)">
-                Hoy ya tienes lo suficiente para moverte. No tienes que hacerlo todo, pero ya puedes hacerlo.
-              </p>
-            </div>
-          </section>
-
-          <!-- 22. Próximos pasos -->
-          <section class="slide" data-notes="Acciones inmediatas para el equipo.">
-            <div class="slide-content left">
-              <span class="eyebrow">Criar Sin Culpas · Abril 2026</span>
-              <h2>Próximos pasos estratégicos</h2>
-              <p class="subtitle">Lo que sigue en nuestro cronograma</p>
-              
-              <div class="grid-2" style="margin-top: 3rem">
-                <div class="stacked-block">
-                  <h4 style="color: var(--teal)">01 · Validación de Metodología</h4>
-                  <p>Revisión final de los 4 pilares y su aplicación en casos reales.</p>
-                </div>
-                <div class="stacked-block">
-                  <h4 style="color: var(--teal)">02 · Desarrollo de Contenidos</h4>
-                  <p>Creación de guías prácticas para los momentos de mayor fricción.</p>
-                </div>
-                <div class="stacked-block">
-                  <h4 style="color: var(--coral)">03 · Preparación para Córdoba</h4>
-                  <p>Diseño de la narrativa principal y materiales de apoyo para el evento.</p>
-                </div>
-                <div class="stacked-block">
-                  <h4 style="color: var(--coral)">04 · Lanzamiento del Workspace</h4>
-                  <p>Apertura formal del entorno privado para el equipo estratégico.</p>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          <!-- 23. Cierre -->
-          <section class="slide" data-notes="Cierre inspirador. Reforzar el valor de la claridad.">
-            <div class="slide-content">
-              <h1 class="serif" style="font-size: 5rem; margin-bottom: 2rem">Claridad es<br><span class="accent-teal">libertad</span></h1>
-              <p class="subtitle" style="font-size: 1.5rem">Gracias por confiar en el proceso.</p>
-              
-              <div style="margin-top: 4rem">
-                <span class="eyebrow" style="color: var(--muted)">Nari Fateha · Criar Sin Culpas</span>
-                <p style="margin-top: 1rem; color: var(--muted); font-size: 0.9rem">
-                  Ecosistema de Estrategia [SiQ] · StrategyIQ<br>
-                  Abril 2026
-                </p>
-              </div>
-            </div>
-          </section>
-        </div>
+    <div id="start-screen">
+      <h1>De talleres a sistema</h1>
+      <p class="subtitle">Cómo lo que ya has construido empieza a tomar forma clara</p>
+      <button class="start-btn" id="start-btn">Iniciar presentación</button>
+      <div class="shortcuts">
+        <span><kbd>→</kbd> <kbd>Espacio</kbd> Siguiente</span>
+        <span><kbd>←</kbd> Anterior</span>
+        <span>👆 Swipe en móvil</span>
       </div>
     </div>
 
-    <script>
-      // Break out of iframe if loaded inside one 
-      try { 
-        if (window.top !== window.self) { 
-          window.top.location = window.self.location; 
-        } 
-      } catch (error) { 
-        window.location = window.self.location; 
-      } 
- 
-      document.addEventListener('DOMContentLoaded', () => { 
-        const slides = Array.from(document.querySelectorAll('.slide')); 
-        const track = document.getElementById('track'); 
-        const startScreen = document.getElementById('start-screen'); 
-        const startBtn = document.getElementById('start-btn'); 
-        const prevBtn = document.getElementById('prev-btn'); 
-        const nextBtn = document.getElementById('next-btn'); 
-        const currentNum = document.getElementById('current-num'); 
-        const totalNum = document.getElementById('total-num'); 
-        const progressBar = document.getElementById('progress'); 
-        const notesToggle = document.getElementById('toggle-notes'); 
-        const notesPanel = document.getElementById('notes-panel'); 
-        const notesText = document.getElementById('notes-text'); 
- 
-        if (!slides.length || !track) return; 
- 
-        let currentIndex = 0; 
-        const total = slides.length; 
- 
-        if (totalNum) totalNum.textContent = total; 
-        track.style.width = `${total * 100}vw`; 
- 
-        function updateUI() { 
-          slides.forEach((slide, index) => { 
-            slide.classList.toggle('active', index === currentIndex); 
-          }); 
- 
-          track.style.transform = `translateX(-${currentIndex * 100}vw)`; 
- 
-          if (currentNum) currentNum.textContent = currentIndex + 1; 
-          if (progressBar) { 
-            progressBar.style.width = `${((currentIndex + 1) / total) * 100}%`; 
-          } 
- 
-          if (notesText) { 
-            const currentNotes = 
-              slides[currentIndex].getAttribute('data-notes') || 'Sin notas adicionales.'; 
-            notesText.textContent = currentNotes; 
-          } 
- 
-          if (prevBtn) prevBtn.style.visibility = currentIndex === 0 ? 'hidden' : 'visible'; 
-          if (nextBtn) nextBtn.style.visibility = currentIndex === total - 1 ? 'hidden' : 'visible'; 
-        } 
- 
-        function goToSlide(index) { 
-          if (index < 0 || index >= total) return; 
-          currentIndex = index; 
-          updateUI(); 
-        } 
- 
-        if (startBtn && startScreen) { 
-          startBtn.addEventListener('click', () => { 
-            startScreen.style.opacity = '0'; 
-            setTimeout(() => { 
-              startScreen.style.display = 'none'; 
-            }, 400); 
-            updateUI(); 
-          }); 
-        } 
- 
-        if (prevBtn) { 
-          prevBtn.addEventListener('click', () => goToSlide(currentIndex - 1)); 
-        } 
- 
-        if (nextBtn) { 
-          nextBtn.addEventListener('click', () => goToSlide(currentIndex + 1)); 
-        } 
- 
-        if (notesToggle && notesPanel) { 
-          notesToggle.addEventListener('click', () => { 
-            notesPanel.classList.toggle('visible'); 
-          }); 
-        } 
- 
-        document.addEventListener('keydown', (e) => { 
-          if (startScreen && startScreen.style.display !== 'none') return; 
- 
-          if (e.key === 'ArrowRight') { 
-            e.preventDefault(); 
-            goToSlide(currentIndex + 1); 
-          } else if (e.key === 'ArrowLeft') { 
-            e.preventDefault(); 
-            goToSlide(currentIndex - 1); 
-          } else if (e.key === ' ' || e.code === 'Space' || e.key === 'Spacebar') { 
-            e.preventDefault(); 
-            goToSlide(currentIndex + 1); 
-          } 
-        }); 
- 
-        let touchStartX = 0; 
-        let touchEndX = 0; 
- 
-        document.addEventListener( 
-          'touchstart', 
-          (e) => { 
-            touchStartX = e.changedTouches[0].screenX; 
-          }, 
-          { passive: true } 
-        ); 
- 
-        document.addEventListener( 
-          'touchend', 
-          (e) => { 
-            if (startScreen && startScreen.style.display !== 'none') return; 
-            touchEndX = e.changedTouches[0].screenX; 
-            const threshold = 50; 
- 
-            if (touchEndX < touchStartX - threshold) { 
-              goToSlide(currentIndex + 1); 
-            } else if (touchEndX > touchStartX + threshold) { 
-              goToSlide(currentIndex - 1); 
-            } 
-          }, 
-          { passive: true } 
-        ); 
- 
-        updateUI(); 
-      }); 
+    <div class="app-container" id="app">
+      <div class="top-bar">
+        <a href="#" class="btn-text">Volver al workspace</a>
+        <button class="btn-text" id="toggle-notes">Notas</button>
+      </div>
+
+      <button class="nav-btn" id="prev-btn" aria-label="Anterior">⟨</button>
+      <button class="nav-btn" id="next-btn" aria-label="Siguiente">⟩</button>
+
+      <div class="bottom-bar">
+        <div class="slide-counter"><span id="current-num">1</span> / 20</div>
+        <div class="progress-container">
+          <div class="progress-bar" id="progress"></div>
+        </div>
+      </div>
+
+      <div id="notes-panel">
+        <h4>Notas del presentador</h4>
+        <p id="notes-text"></p>
+      </div>
+
+      <div class="slides-container" id="track">
+        <!-- 1. Cover -->
+        <section
+          class="slide active"
+          data-notes="Bienvenida. Establecer un tono tranquilo y seguro. Recordar que estamos formalizando su gran trabajo previo."
+        >
+          <div class="slide-content">
+            <h1>De talleres a sistema</h1>
+            <p class="subtitle">Cómo lo que ya has construido empieza a tomar forma clara</p>
+            <div
+              style="
+                margin-top: 3rem;
+                color: var(--muted);
+                font-size: 0.9rem;
+                text-transform: uppercase;
+                letter-spacing: 2px;
+              "
+            >
+              Criar Sin Culpas · Nari Fateha<br /><br />Abril 2026
+            </div>
+          </div>
+        </section>
+
+        <!-- 2. Perspective -->
+        <section class="slide" data-notes="Es clave quitarle presión: no tiene que inventar nada desde cero hoy.">
+          <div class="slide-content">
+            <h2>La perspectiva correcta</h2>
+            <div class="card">
+              <h3 style="font-size: 2rem; font-weight: 400; margin-bottom: 0.5rem">No estamos creando algo nuevo.</h3>
+              <h3 style="font-size: 2rem; font-weight: 400; color: var(--teal)">
+                Estamos organizando lo que ya existe.
+              </h3>
+            </div>
+            <p
+              style="
+                margin-top: 2rem;
+                font-size: 1.2rem;
+                color: var(--muted);
+                text-transform: uppercase;
+                letter-spacing: 2px;
+              "
+            >
+              Estructura · lenguaje · orden
+            </p>
+          </div>
+        </section>
+
+        <!-- 3. Problem -->
+        <section
+          class="slide"
+          data-notes="Validar su dolor pasado. El valor estaba ahí, pero el formato no acompañaba el crecimiento."
+        >
+          <div class="slide-content left">
+            <h2>El punto de partida</h2>
+            <h3 class="serif" style="font-size: 2.5rem; margin-bottom: 0.2rem">El problema no era contenido</h3>
+            <h3 class="serif accent-coral" style="font-size: 2.5rem; margin-bottom: 2rem">Era claridad</h3>
+
+            <ul class="bullet-list">
+              <li>Mucho valor disperso</li>
+              <li>Difícil de explicar</li>
+              <li>Difícil de escalar</li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- 4. Progress -->
+        <section class="slide" data-notes="Mostrar avance. Que vea que hay un proceso metodológico funcionando.">
+          <div class="slide-content">
+            <h2>Estado del proyecto</h2>
+            <p class="subtitle" style="margin-bottom: 2rem">Dónde estamos ahora</p>
+
+            <div
+              style="
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 0.5rem;
+                max-width: 800px;
+                margin: 0 auto;
+              "
+            >
+              <span class="pill">00 Ingesta Estratégica</span>
+              <span class="pill">01 Diagnóstico</span>
+              <span class="pill active">02 Arquitectura (ACTIVO)</span>
+              <span class="pill">03 Mapa del Programa</span>
+              <span class="pill">04 Narrativa</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- 5. Inventory -->
+        <section class="slide" data-notes="Resumir los hallazgos de la auditoría de contenido. Todo esto es oro.">
+          <div class="slide-content left">
+            <h2>Lo que ya está claro</h2>
+            <div class="grid-2">
+              <div>
+                <ul class="bullet-list">
+                  <li>Entendimos tu trabajo y tu audiencia</li>
+                  <li>Identificamos patrones claros</li>
+                  <li>Empezamos a organizar tu método</li>
+                </ul>
+              </div>
+              <div class="card" style="margin-top: 0">
+                <ul class="bullet-list" style="font-size: 1rem">
+                  <li style="color: var(--text)">Señales identificadas</li>
+                  <li style="color: var(--text)">Inventario de talleres (50+)</li>
+                  <li style="color: var(--text)">Grabaciones Vimeo (16)</li>
+                  <li style="color: var(--text)">Señales centrales certificadas</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 6. Method -->
+        <section class="slide" data-notes="Presentar el core frame. Este es el corazón de su sistema.">
+          <div class="slide-content">
+            <h2>Tu método</h2>
+            <div class="grid-4">
+              <div class="flow-step">
+                <span style="color: var(--muted); font-size: 0.8rem; text-transform: uppercase">Fase 1</span>
+                <h3>Aceptar</h3>
+                <p>Confrontar sin culpa</p>
+              </div>
+              <div class="flow-step">
+                <span style="color: var(--muted); font-size: 0.8rem; text-transform: uppercase">Fase 2</span>
+                <h3>Estabilizar</h3>
+                <p>Regulación emocional propia</p>
+              </div>
+              <div class="flow-step">
+                <span style="color: var(--muted); font-size: 0.8rem; text-transform: uppercase">Fase 3</span>
+                <h3>Conectar</h3>
+                <p>Conexión con el hijo</p>
+              </div>
+              <div class="flow-step">
+                <span style="color: var(--muted); font-size: 0.8rem; text-transform: uppercase">Fase 4</span>
+                <h3>Guiar</h3>
+                <p>Guía sin violencia</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 7. Divider -->
+        <section class="slide" data-notes="Pausa para asimilar el impacto de tener un método ordenado.">
+          <div class="slide-content">
+            <h2 class="huge-text accent-coral">Esto cambia todo</h2>
+            <p class="subtitle" style="font-size: 1.8rem">
+              De una idea dispersa a un método claro que se puede enseñar
+            </p>
+          </div>
+        </section>
+
+        <!-- 8. Impact -->
+        <section class="slide" data-notes="Contraste claro entre el pasado y el futuro inmediato.">
+          <div class="slide-content">
+            <h2>Qué cambia con esto</h2>
+            <div class="grid-2">
+              <div class="card" style="border-color: rgba(255, 159, 137, 0.3)">
+                <span style="text-transform: uppercase; font-size: 0.8rem; color: var(--coral)">Antes</span>
+                <p style="font-size: 1.5rem; margin-top: 1rem; font-family: 'Cormorant Garamond', serif">
+                  Solo experiencia difícil de comunicar
+                </p>
+              </div>
+              <div class="card" style="border-color: rgba(45, 212, 191, 0.3)">
+                <span style="text-transform: uppercase; font-size: 0.8rem; color: var(--teal)">Ahora</span>
+                <p style="font-size: 1.5rem; margin-top: 1rem; font-family: 'Cormorant Garamond', serif">
+                  Un método claro que se puede enseñar y escalar
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 9. Timeline Córdoba -->
+        <section
+          class="slide"
+          data-notes="Trazar el camino hacia el evento principal. Da un horizonte temporal realista."
+        >
+          <div class="slide-content left">
+            <h2>Camino a Córdoba</h2>
+            <p class="subtitle">Construyendo metodología, credibilidad y un sistema propio</p>
+
+            <div class="card">
+              <div class="timeline-item">
+                <span style="color: var(--teal); font-size: 0.85rem; text-transform: uppercase">Hoy</span>
+                <h3>Abril 2026</h3>
+              </div>
+              <div class="timeline-item">
+                <span style="color: var(--teal); font-size: 0.85rem; text-transform: uppercase">Desarrollo</span>
+                <h3>Mayo-Junio 2026</h3>
+              </div>
+              <div class="timeline-item" style="border-left-color: transparent">
+                <span style="color: var(--coral); font-size: 0.85rem; text-transform: uppercase">Evento</span>
+                <h3>Córdoba (Septiembre 2026)</h3>
+              </div>
+            </div>
+
+            <p style="margin-top: 2rem; font-size: 1.2rem; text-align: center; color: var(--muted)">
+              "Lo que construimos hoy es lo que mostraremos en septiembre."
+            </p>
+          </div>
+        </section>
+
+        <!-- 10. Opportunity -->
+        <section class="slide" data-notes="Explicar por qué Córdoba es clave estratégicamente.">
+          <div class="slide-content left">
+            <h2>La oportunidad inmediata</h2>
+            <div class="card">
+              <ul class="bullet-list">
+                <li>Primera oportunidad real de expresar tu método</li>
+                <li>Plataforma más grande</li>
+                <li>Validación pública</li>
+                <li>Punto de partida para más charlas</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <!-- 11. Strategic Recommendation -->
+        <section class="slide" data-notes="Definir el ángulo de la charla.">
+          <div class="slide-content left">
+            <p class="subtitle" style="font-size: 1.2rem; text-transform: uppercase; letter-spacing: 1px">
+              Recomendación estratégica · Qué tema liderar
+            </p>
+            <h2 class="serif" style="font-size: 3.5rem; color: var(--text); margin-top: 0.5rem">
+              El rol del adulto en la crianza digital
+            </h2>
+
+            <div class="card">
+              <ul class="bullet-list" style="font-size: 1.1rem">
+                <li>Grooming y violencia digital incluidos naturalmente</li>
+                <li>Posiciona a la familia, no a las pantallas</li>
+                <li>Aplica a padres, educadores e instituciones</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <!-- 12. Key Insight -->
+        <section class="slide" data-notes="El insight central. Dejar que la frase respire en pantalla.">
+          <div class="slide-content">
+            <h2 class="huge-text" style="color: var(--text)">No son las pantallas</h2>
+            <h2 class="huge-text accent-teal" style="font-size: 4rem">Es el sistema alrededor de ellas</h2>
+            <p class="subtitle" style="margin-top: 2rem">
+              No estás hablando de síntomas. Estás hablando de estructura.
+            </p>
+          </div>
+        </section>
+
+        <!-- 13. Talk Structure -->
+        <section class="slide" data-notes="Un esqueleto básico para que no se sienta abrumada al redactar la charla.">
+          <div class="slide-content left">
+            <h2>Estructura de la charla</h2>
+            <p class="subtitle">Una guía clara sin perderte</p>
+
+            <div class="grid-2" style="margin-top: 2.5rem">
+              <div class="flow-step">
+                <span class="accent-coral" style="font-weight: bold; font-size: 1.2rem">01</span>
+                <h3 style="font-size: 1.4rem; margin-top: 0.5rem">Qué está pasando</h3>
+                <p>(contexto)</p>
+              </div>
+              <div class="flow-step">
+                <span class="accent-coral" style="font-weight: bold; font-size: 1.2rem">02</span>
+                <h3 style="font-size: 1.4rem; margin-top: 0.5rem">El error común</h3>
+                <p>(control/reacción)</p>
+              </div>
+              <div class="flow-step">
+                <span class="accent-teal" style="font-weight: bold; font-size: 1.2rem">03</span>
+                <h3 style="font-size: 1.4rem; margin-top: 0.5rem">El cambio</h3>
+                <p>(rol del adulto)</p>
+              </div>
+              <div class="flow-step">
+                <span class="accent-teal" style="font-weight: bold; font-size: 1.2rem">04</span>
+                <h3 style="font-size: 1.4rem; margin-top: 0.5rem">Qué hacer distinto</h3>
+                <p>(herramientas)</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 14. Real World - Education -->
+        <section class="slide" data-notes="Aplicación práctica: educación.">
+          <div class="slide-content left">
+            <p class="subtitle" style="text-transform: uppercase; font-size: 1rem; letter-spacing: 1px">
+              Puente al mundo real
+            </p>
+            <h2>Plataformas educativas</h2>
+            <div class="card">
+              <ul class="bullet-list">
+                <li>Tu método como currículo estructurado</li>
+                <li>Módulos por etapa (Aceptar → Guiar)</li>
+                <li>Resultados medibles</li>
+                <li>Piloto con 1-2 aliados</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <!-- 15. Real World - Wellbeing -->
+        <section class="slide" data-notes="Aplicación práctica: bienestar general e instituciones.">
+          <div class="slide-content left">
+            <p class="subtitle" style="text-transform: uppercase; font-size: 1rem; letter-spacing: 1px">
+              Puente al mundo real
+            </p>
+            <h2>Bienestar digital</h2>
+            <div class="card">
+              <ul class="bullet-list">
+                <li>El rol del adulto como eje</li>
+                <li>Talleres para escuelas y municipios</li>
+                <li>Protocolos ante grooming</li>
+                <li>Kits prácticos para familias</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <!-- 16. Real World - Brands -->
+        <section class="slide" data-notes="Aplicación práctica: colaboraciones corporativas.">
+          <div class="slide-content left">
+            <p class="subtitle" style="text-transform: uppercase; font-size: 1rem; letter-spacing: 1px">
+              Puente al mundo real
+            </p>
+            <h2>Marcas familiares</h2>
+            <div class="card">
+              <ul class="bullet-list">
+                <li>Autoridad + alcance</li>
+                <li>Contenido co-creado</li>
+                <li>Campañas con propósito</li>
+                <li>Métricas de confianza</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <!-- 17. Pricing -->
+        <section class="slide" data-notes="Fijar expectativas comerciales realistas y estructuradas.">
+          <div class="slide-content">
+            <h2>Referencias de honorarios</h2>
+            <p class="subtitle">Mercado actual</p>
+
+            <div class="grid-3">
+              <div class="pricing-tier">
+                <span class="label">Base</span>
+                <div class="price">$300-$500</div>
+                <div class="detail">charla inicial</div>
+              </div>
+              <div class="pricing-tier" style="border-color: var(--teal)">
+                <span class="label">Estándar</span>
+                <div class="price">$500-$1,000</div>
+                <div class="detail">experiencia demostrada</div>
+              </div>
+              <div class="pricing-tier" style="border-color: var(--coral)">
+                <span class="label">Institucional</span>
+                <div class="price">$1,000+</div>
+                <div class="detail">marca posicionada</div>
+              </div>
+            </div>
+            <p style="margin-top: 2rem; color: var(--muted); font-size: 0.95rem">
+              Nota: Evaluar el valor estratégico además del honorario
+            </p>
+          </div>
+        </section>
+
+        <!-- 18. Ready -->
+        <section class="slide" data-notes="Empoderamiento. No falta nada, es momento de ejecutar.">
+          <div class="slide-content left">
+            <h2>Listo para moverte</h2>
+            <div class="grid-2">
+              <div class="card" style="margin-top: 0">
+                <ul class="bullet-list" style="font-size: 1.1rem; margin-bottom: 0">
+                  <li>Presentarte con claridad</li>
+                  <li>Hablar con marcas si surge</li>
+                  <li>No improvisar</li>
+                </ul>
+              </div>
+              <div
+                class="card"
+                style="
+                  margin-top: 0;
+                  background: rgba(45, 212, 191, 0.05);
+                  border-color: rgba(45, 212, 191, 0.2);
+                  display: flex;
+                  flex-direction: column;
+                  justify-content: center;
+                "
+              >
+                <h3 class="serif" style="font-size: 2.2rem; margin-bottom: 0.5rem; color: var(--text)">
+                  Ya tienes suficiente
+                </h3>
+                <p style="color: var(--teal); font-size: 1.2rem">Hoy tienes lo suficiente</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 19. Activation -->
+        <section class="slide" data-notes="Próximos pasos a nivel operativo. Sin apuro, 'cuando tenga sentido'.">
+          <div class="slide-content left">
+            <h2>Activación</h2>
+            <p class="subtitle">Cómo lo activamos (cuando tenga sentido)</p>
+
+            <div class="card">
+              <ul class="bullet-list">
+                <li><strong class="accent-coral">01</strong> Colaboraciones con marcas</li>
+                <li><strong class="accent-coral">02</strong> Precios claros</li>
+                <li><strong class="accent-teal">03</strong> Medición de resultados (KPI)</li>
+                <li><strong class="accent-teal">04</strong> Programa estructurado</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <!-- 20. Collaboration -->
+        <section class="slide" data-notes="Cierre y contacto formal. Presenta a Nari como la autoridad que ya es.">
+          <div class="slide-content left">
+            <h2>Colaboración con Nari Fateha</h2>
+            <div class="card" style="padding: 2.5rem">
+              <div style="margin-bottom: 1.5rem">
+                <span
+                  style="
+                    display: block;
+                    font-size: 0.85rem;
+                    color: var(--coral);
+                    text-transform: uppercase;
+                    margin-bottom: 0.25rem;
+                  "
+                  >Qué hago</span
+                >
+                <p style="font-size: 1.2rem">
+                  Educo a familias y educadores en crianza digital, con el método Aceptar→Guiar
+                </p>
+              </div>
+              <div style="margin-bottom: 1.5rem">
+                <span
+                  style="
+                    display: block;
+                    font-size: 0.85rem;
+                    color: var(--teal);
+                    text-transform: uppercase;
+                    margin-bottom: 0.25rem;
+                  "
+                  >Por qué importa</span
+                >
+                <p style="font-size: 1.1rem">Menos culpa, más conexión y seguridad</p>
+              </div>
+              <div class="grid-2" style="margin-top: 0">
+                <div>
+                  <span
+                    style="
+                      display: block;
+                      font-size: 0.85rem;
+                      color: var(--muted);
+                      text-transform: uppercase;
+                      margin-bottom: 0.25rem;
+                    "
+                    >Cómo colaboro</span
+                  >
+                  <p>Charlas, programas, contenidos y alianzas</p>
+                </div>
+                <div>
+                  <span
+                    style="
+                      display: block;
+                      font-size: 0.85rem;
+                      color: var(--muted);
+                      text-transform: uppercase;
+                      margin-bottom: 0.25rem;
+                    "
+                    >Para quién es</span
+                  >
+                  <p>Familias, escuelas, municipios y marcas con propósito</p>
+                </div>
+              </div>
+              <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--card-border)">
+                <span
+                  style="
+                    display: block;
+                    font-size: 0.85rem;
+                    color: var(--muted);
+                    text-transform: uppercase;
+                    margin-bottom: 0.25rem;
+                  "
+                  >Contacto</span
+                >
+                <p><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="94faf5e6fdd4f7e6fdf5e6e7fdfaf7e1f8e4f5e7baf7fbf9">[email&#160;protected]</a> · IG @criarsinculpas</p>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const slides = document.querySelectorAll('.slide');
+        const track = document.getElementById('track');
+        const startScreen = document.getElementById('start-screen');
+        const startBtn = document.getElementById('start-btn');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const currentNum = document.getElementById('current-num');
+        const progressBar = document.getElementById('progress');
+        const notesToggle = document.getElementById('toggle-notes');
+        const notesPanel = document.getElementById('notes-panel');
+        const notesText = document.getElementById('notes-text');
+
+        let currentIndex = 0;
+        const total = slides.length;
+
+        // Init
+        startBtn.addEventListener('click', () => {
+          startScreen.style.opacity = '0';
+          setTimeout(() => (startScreen.style.display = 'none'), 500);
+          updateUI();
+        });
+
+        // Navigation Logic
+        function goToSlide(index) {
+          if (index < 0 || index >= total) return;
+
+          slides[currentIndex].classList.remove('active');
+          currentIndex = index;
+
+          track.style.transform = `translateX(-${currentIndex * 100}vw)`;
+          slides[currentIndex].classList.add('active');
+
+          updateUI();
+        }
+
+        function updateUI() {
+          currentNum.textContent = currentIndex + 1;
+          progressBar.style.width = `${((currentIndex + 1) / total) * 100}%`;
+
+          // Update Notes
+          const currentNotes = slides[currentIndex].getAttribute('data-notes') || 'Sin notas adicionales.';
+          notesText.textContent = currentNotes;
+
+          // Button visibility
+          prevBtn.style.visibility = currentIndex === 0 ? 'hidden' : 'visible';
+          nextBtn.style.visibility = currentIndex === total - 1 ? 'hidden' : 'visible';
+        }
+
+        // Notes Toggle
+        notesToggle.addEventListener('click', () => {
+          notesPanel.classList.toggle('visible');
+        });
+
+        // Click Events
+        prevBtn.addEventListener('click', () => goToSlide(currentIndex - 1));
+        nextBtn.addEventListener('click', () => goToSlide(currentIndex + 1));
+
+        // Keyboard Events
+        document.addEventListener('keydown', (e) => {
+          if (startScreen.style.display !== 'none') return;
+
+          if (e.key === 'ArrowRight' || e.key === ' ') {
+            goToSlide(currentIndex + 1);
+          } else if (e.key === 'ArrowLeft') {
+            goToSlide(currentIndex - 1);
+          }
+        });
+
+        // Swipe Support
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        document.addEventListener('touchstart', (e) => {
+          touchStartX = e.changedTouches[0].screenX;
+        });
+
+        document.addEventListener('touchend', (e) => {
+          if (startScreen.style.display !== 'none') return;
+          touchEndX = e.changedTouches[0].screenX;
+          handleSwipe();
+        });
+
+        function handleSwipe() {
+          const threshold = 50;
+          if (touchEndX < touchStartX - threshold) {
+            goToSlide(currentIndex + 1); // Swipe left -> next
+          } else if (touchEndX > touchStartX + threshold) {
+            goToSlide(currentIndex - 1); // Swipe right -> prev
+          }
+        }
+      });
     </script>
+  <script defer src="https://static.cloudflareinsights.com/beacon.min.js/v8c78df7c7c0f484497ecbca7046644da1771523124516" integrity="sha512-8DS7rgIrAmghBFwoOTujcf6D9rXvH8xm8JQ1Ja01h9QX8EzXldiszufYa4IFfKdLUKTTrnSFXLDkUEOTrZQ8Qg==" data-cf-beacon='{"version":"2024.11.0","token":"4edd5f8ec12a48cfa682ab8261b80a79","server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
 </body>
 </html>
