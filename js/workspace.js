@@ -196,7 +196,7 @@ const artifactsData = [
     code:    'SIQ_A02_MonetizationReport_CSC',
     type:    { en: 'Market Intelligence · Bilingual', es: 'Inteligencia de mercado · Bilingüe' },
     desc:    { en: 'Competitive landscape analysis, creator benchmarking and monetization model research for Criar Sin Culpas.', es: 'Inteligencia de mercado y arquitectura de ingresos. Proyecciones, mix de monetización, precios de cursos y alianzas de marca.' },
-    urlEn:   'files/SIQ_A02_MonetizationReport_CSC.html?lang=en',
+    urlEn:   'files/SIQ_A02_MonetizationReport_CSC_ES.html',
     urlEs:   'files/SIQ_A02_MonetizationReport_CSC_ES.html',
     status:  'approved', pages: '3',
     langs:   'ES / EN',
