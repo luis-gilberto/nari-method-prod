@@ -1,16 +1,13 @@
-# Vanity Redirects (301 for SEO and SSL Stability)
-/apoyo/screen-time /tools/parent-support/screen-time.html 301
-/apoyo/emotional-escalation /tools/parent-support/emotional-escalation.html 301
-/apoyo/bedtime-resistance /tools/parent-support/bedtime-resistance.html 301
-/apoyo/sibling-conflict /tools/parent-support/sibling-conflict.html 301
-
-# Core Hub Rules
+# Pure Vanity Routes (Internal Rewrites)
 /apoyo /tools/parent-support/index.html 200
-/tools/parent-support /tools/parent-support/index.html 200
-/tools/parent-support/ /tools/parent-support/index.html 200
+/apoyo/screen-time /tools/parent-support/screen-time.html 200
+/apoyo/emotional-escalation /tools/parent-support/emotional-escalation.html 200
+/apoyo/bedtime-resistance /tools/parent-support/bedtime-resistance.html 200
+/apoyo/sibling-conflict /tools/parent-support/sibling-conflict.html 200
 
-# Original paths as fallbacks
-/tools/parent-support/screen-time /tools/parent-support/screen-time.html 200
-/tools/parent-support/emotional-escalation /tools/parent-support/emotional-escalation.html 200
-/tools/parent-support/bedtime-resistance /tools/parent-support/bedtime-resistance.html 200
-/tools/parent-support/sibling-conflict /tools/parent-support/sibling-conflict.html 200
+# Fallbacks for direct access
+/tools/parent-support/index.html /apoyo 301
+/tools/parent-support/screen-time.html /apoyo/screen-time 301
+/tools/parent-support/emotional-escalation.html /apoyo/emotional-escalation 301
+/tools/parent-support/bedtime-resistance.html /apoyo/bedtime-resistance 301
+/tools/parent-support/sibling-conflict.html /apoyo/sibling-conflict 301
