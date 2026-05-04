@@ -47,7 +47,9 @@
     .p-nav { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 18px 20px 0; flex-wrap: wrap; }
     .p-links { display: flex; gap: 18px; align-items: center; }
     .p-link { font-size: .74rem; font-weight: 600; color: rgba(255,255,255,.38); letter-spacing: .03em; min-height: 48px; display: inline-flex; align-items: center; transition: color 200ms; }
-    .p-link:hover { color: #f7f1ec; }
+    .p-link:hover { color: #f7f1ec; } 
+    .nav-external { font-weight: 800; letter-spacing: .04em; color: rgba(255,255,255,.55); } 
+    .nav-external:hover { color: #f7f1ec; } 
     .lang-sw { display: inline-flex; padding: 3px; gap: 2px; border-radius: 999px; border: 1px solid rgba(255,255,255,.1); background: rgba(255,255,255,.04); flex-shrink: 0; }
     .lang-btn { min-height: 38px; min-width: 44px; padding: 6px 12px; border-radius: 999px; color: rgba(255,255,255,.4); font-size: .72rem; font-weight: 800; letter-spacing: .05em; transition: all 240ms cubic-bezier(.2,.8,.2,1); }
     .lang-btn[aria-pressed='true'] { color: #fff; background: rgba(255,255,255,.14); box-shadow: 0 2px 8px rgba(0,0,0,.22); }
@@ -140,16 +142,19 @@
   <div class="grain"></div>
 
   <div class="page">
-    <nav class="p-nav">
-      <div class="p-links">
-        <a href="/" class="p-link" data-i18n="nav_workspace" data-es="Volver al workspace" data-en="Back to workspace">Volver al workspace</a>
-        <a href="/apoyo" class="p-link" data-i18n="nav_hub" data-es="Ver todas las guías" data-en="See all guides">Ver todas las guías</a>
-      </div>
-      <div class="lang-sw" role="group" aria-label="Idioma / Language">
-        <button type="button" class="lang-btn" data-lang="es" aria-pressed="true">ES</button>
-        <button type="button" class="lang-btn" data-lang="en" aria-pressed="false">EN</button>
-      </div>
-    </nav>
+    <nav class="p-nav"> 
+       <div class="p-links"> 
+         <!-- Internal nav: only shown when arriving from the Hub --> 
+         <a href="/" class="p-link nav-internal" id="nav-workspace" data-i18n="nav_workspace" data-es="Volver al workspace" data-en="Back to workspace" style="display:none">Volver al workspace</a> 
+         <!-- External nav: shown to shared-link visitors --> 
+         <a href="https://nari.luis-gilberto.com" class="p-link nav-external" id="nav-brand" data-i18n="nav_brand" data-es="Criar Sin Culpas" data-en="Criar Sin Culpas" style="display:none">Criar Sin Culpas</a> 
+         <a href="/apoyo" class="p-link" data-i18n="nav_hub" data-es="Ver todas las guías" data-en="See all guides">Ver todas las guías</a> 
+       </div> 
+       <div class="lang-sw" role="group" aria-label="Idioma / Language"> 
+         <button type="button" class="lang-btn" data-lang="es" aria-pressed="true">ES</button> 
+         <button type="button" class="lang-btn" data-lang="en" aria-pressed="false">EN</button> 
+       </div> 
+     </nav> 
 
     <div class="eyebrow">
       <span class="ey-arr" aria-hidden="true">←</span>
@@ -244,9 +249,22 @@
     const canonUrl=()=>window.location.href.replace(/https:\/\/.*\.pages\.dev/,'https://nari.luis-gilberto.com').split('?')[0].split('#')[0];
     let lang=safeGet('lg_parent_lang','es');
 
-    /* Entry overlay */
-    const overlay=document.getElementById('entry-overlay');
-    if(overlay)requestAnimationFrame(()=>requestAnimationFrame(()=>overlay.classList.add('gone')));
+    /* Entry overlay */ 
+    const overlay=document.getElementById('entry-overlay'); 
+    if(overlay)requestAnimationFrame(()=>requestAnimationFrame(()=>overlay.classList.add('gone'))); 
+    /* Nav context detection — hide workspace link from external visitors */ 
+    (function(){ 
+      const internalDomains = ['nari.luis-gilberto.com', 'localhost', '127.0.0.1']; 
+      const ref = document.referrer; 
+      const isInternal = ref && internalDomains.some(d => ref.includes(d)); 
+      const navWorkspace = document.getElementById('nav-workspace'); 
+      const navBrand = document.getElementById('nav-brand'); 
+      if(isInternal){ 
+        if(navWorkspace) navWorkspace.style.display = 'inline-flex'; 
+      } else { 
+        if(navBrand) navBrand.style.display = 'inline-flex'; 
+      } 
+    })(); 
 
     function applyLang(l){
       lang=l; document.documentElement.lang=l; safeSet('lg_parent_lang',l);
