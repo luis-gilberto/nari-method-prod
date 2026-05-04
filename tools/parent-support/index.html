@@ -1095,7 +1095,7 @@
     <script defer src="https://static.cloudflareinsights.com/beacon.min.js/v8c78df7c7c0f484497ecbca7046644da1771523124516" integrity="sha512-8DS7rgIrAmghBFwoOTujcf6D9rXvH8xm8JQ1Ja01h9QX8EzXldiszufYa4IFfKdLUKTTrnSFXLDkUEOTrZQ8Qg==" data-cf-beacon='{"version":"2024.11.0","token":"4edd5f8ec12a48cfa682ab8261b80a79","server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
     <script>
       (function() {
-        console.log('Parent Support Hub script initializing...');
+        console.log('Parent Support Hub script v2 initializing...');
 
         // Helpers
         const safeStorageGet = (key, fallback) => {
@@ -1121,17 +1121,20 @@
           document.documentElement.lang = lang;
           safeStorageSet('lg_parent_lang', lang);
 
-          document.querySelectorAll('[data-i18n]').forEach(el => {
+          const els = document.querySelectorAll('[data-i18n]');
+          els.forEach(el => {
             const txt = el.getAttribute(`data-${lang}`);
             if (txt) el.textContent = txt;
           });
 
-          document.querySelectorAll('.lang-btn').forEach(btn => {
-            btn.setAttribute('aria-pressed', btn.getAttribute('data-lang') === lang);
+          const btns = document.querySelectorAll('.lang-btn');
+          btns.forEach(btn => {
+            const isTarget = btn.getAttribute('data-lang') === lang;
+            btn.setAttribute('aria-pressed', isTarget ? 'true' : 'false');
+            btn.classList.toggle('active', isTarget);
           });
         };
 
-        // Sharing Logic
         const getShareData = () => ({
           title: currentLang === 'es' ? 'Apoyo en tiempo real · Criar Sin Culpas' : 'Real-time Support · Criar Sin Culpas',
           text: currentLang === 'es' ? 'Guías rápidas para momentos difíciles de crianza.' : 'Quick guides for difficult parenting moments.',
@@ -1139,14 +1142,16 @@
         });
 
         const init = () => {
-          console.log('Parent Support Hub DOMContentLoaded or immediate init');
+          console.log('Parent Support Hub Init');
           updateLanguage(currentLang);
 
-          document.querySelectorAll('.lang-btn').forEach(btn => {
-            btn.onclick = (e) => {
-              e.preventDefault();
-              updateLanguage(btn.getAttribute('data-lang'));
-            };
+          // Use event delegation for language buttons
+          document.addEventListener('click', (e) => {
+            const btn = e.target.closest('.lang-btn');
+            if (btn) {
+              const lang = btn.getAttribute('data-lang');
+              if (lang) updateLanguage(lang);
+            }
           });
 
           const btnNative = document.getElementById('btn-native');
@@ -1154,7 +1159,7 @@
           const btnWA = document.getElementById('btn-wa');
 
           if (btnNative) {
-            btnNative.onclick = async () => {
+            btnNative.onclick = async (e) => {
               const data = getShareData();
               try {
                 await navigator.share(data);
@@ -1165,7 +1170,7 @@
           }
 
           if (btnCopy) {
-            btnCopy.onclick = () => {
+            btnCopy.onclick = (e) => {
               const data = getShareData();
               navigator.clipboard.writeText(data.url);
               const originalText = btnCopy.innerText;
@@ -1175,7 +1180,7 @@
           }
 
           if (btnWA) {
-            btnWA.onclick = () => {
+            btnWA.onclick = (e) => {
               const data = getShareData();
               const waUrl = `https://wa.me/?text=${encodeURIComponent(data.text + ' ' + data.url)}`;
               window.open(waUrl, '_blank');
