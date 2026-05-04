@@ -2,7 +2,13 @@
 /tools/parent-support /tools/parent-support/index.html 200
 /tools/parent-support/ /tools/parent-support/index.html 200
 
-# Explicit protocol routes to avoid SSL handshake conflicts
+# Clean Vanity Routes for Protocols (Avoids /tools/ SSL conflict)
+/apoyo/screen-time /tools/parent-support/screen-time.html 200
+/apoyo/emotional-escalation /tools/parent-support/emotional-escalation.html 200
+/apoyo/bedtime-resistance /tools/parent-support/bedtime-resistance.html 200
+/apoyo/sibling-conflict /tools/parent-support/sibling-conflict.html 200
+
+# Original paths as fallbacks
 /tools/parent-support/screen-time /tools/parent-support/screen-time.html 200
 /tools/parent-support/emotional-escalation /tools/parent-support/emotional-escalation.html 200
 /tools/parent-support/bedtime-resistance /tools/parent-support/bedtime-resistance.html 200
