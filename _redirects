@@ -1,3 +1,9 @@
 /apoyo /tools/parent-support/index.html 200
 /tools/parent-support /tools/parent-support/index.html 200
 /tools/parent-support/ /tools/parent-support/index.html 200
+
+# Explicit protocol routes to avoid SSL handshake conflicts
+/tools/parent-support/screen-time /tools/parent-support/screen-time.html 200
+/tools/parent-support/emotional-escalation /tools/parent-support/emotional-escalation.html 200
+/tools/parent-support/bedtime-resistance /tools/parent-support/bedtime-resistance.html 200
+/tools/parent-support/sibling-conflict /tools/parent-support/sibling-conflict.html 200
