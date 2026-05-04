@@ -6,6 +6,13 @@
     <title data-i18n="title_tag" data-es="Apoyo en tiempo real · Criar Sin Culpas" data-en="Real-time Support · Criar Sin Culpas">
       Apoyo en tiempo real · Criar Sin Culpas
     </title>
+    <meta name="description" content="Guías rápidas para momentos difíciles de crianza. Elige lo que está pasando y encuentra un siguiente paso sin culpa.">
+    <meta property="og:title" content="Apoyo en tiempo real · Criar Sin Culpas">
+    <meta property="og:description" content="Guías rápidas para momentos difíciles de crianza. Elige lo que está pasando y encuentra un siguiente paso sin culpa.">
+    <meta property="og:url" content="https://nari.luis-gilberto.com/apoyo">
+    <meta property="og:site_name" content="Criar Sin Culpas">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
 
     
     
@@ -1086,4 +1093,101 @@
     </div>
 
     <script defer src="https://static.cloudflareinsights.com/beacon.min.js/v8c78df7c7c0f484497ecbca7046644da1771523124516" integrity="sha512-8DS7rgIrAmghBFwoOTujcf6D9rXvH8xm8JQ1Ja01h9QX8EzXldiszufYa4IFfKdLUKTTrnSFXLDkUEOTrZQ8Qg==" data-cf-beacon='{"version":"2024.11.0","token":"4edd5f8ec12a48cfa682ab8261b80a79","server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+    <script>
+      (function() {
+        console.log('Parent Support Hub script initializing...');
+
+        // Helpers
+        const safeStorageGet = (key, fallback) => {
+          try { return localStorage.getItem(key) || fallback; } catch (e) { return fallback; }
+        };
+        const safeStorageSet = (key, val) => {
+          try { localStorage.setItem(key, val); } catch (e) {}
+        };
+        function getCanonicalUrl(url) {
+          const vanityUrl = 'https://nari.luis-gilberto.com/apoyo';
+          if (window.location.pathname.includes('/parent-support/index.html') || window.location.pathname.endsWith('/parent-support/')) {
+            return vanityUrl;
+          }
+          return url.replace(/https:\/\/.*\.pages\.dev/, 'https://nari.luis-gilberto.com');
+        }
+
+        // State
+        let currentLang = safeStorageGet('lg_parent_lang', 'es');
+
+        const updateLanguage = (lang) => {
+          console.log('Updating language to:', lang);
+          currentLang = lang;
+          document.documentElement.lang = lang;
+          safeStorageSet('lg_parent_lang', lang);
+
+          document.querySelectorAll('[data-i18n]').forEach(el => {
+            const txt = el.getAttribute(`data-${lang}`);
+            if (txt) el.textContent = txt;
+          });
+
+          document.querySelectorAll('.lang-btn').forEach(btn => {
+            btn.setAttribute('aria-pressed', btn.getAttribute('data-lang') === lang);
+          });
+        };
+
+        // Sharing Logic
+        const getShareData = () => ({
+          title: currentLang === 'es' ? 'Apoyo en tiempo real · Criar Sin Culpas' : 'Real-time Support · Criar Sin Culpas',
+          text: currentLang === 'es' ? 'Guías rápidas para momentos difíciles de crianza.' : 'Quick guides for difficult parenting moments.',
+          url: getCanonicalUrl(window.location.href)
+        });
+
+        const init = () => {
+          console.log('Parent Support Hub DOMContentLoaded or immediate init');
+          updateLanguage(currentLang);
+
+          document.querySelectorAll('.lang-btn').forEach(btn => {
+            btn.onclick = (e) => {
+              e.preventDefault();
+              updateLanguage(btn.getAttribute('data-lang'));
+            };
+          });
+
+          const btnNative = document.getElementById('btn-native');
+          const btnCopy = document.getElementById('btn-copy');
+          const btnWA = document.getElementById('btn-wa');
+
+          if (btnNative) {
+            btnNative.onclick = async () => {
+              const data = getShareData();
+              try {
+                await navigator.share(data);
+              } catch (err) {
+                console.log('Share failed', err);
+              }
+            };
+          }
+
+          if (btnCopy) {
+            btnCopy.onclick = () => {
+              const data = getShareData();
+              navigator.clipboard.writeText(data.url);
+              const originalText = btnCopy.innerText;
+              btnCopy.innerText = currentLang === 'es' ? '¡Copiado!' : 'Copied!';
+              setTimeout(() => btnCopy.innerText = originalText, 2000);
+            };
+          }
+
+          if (btnWA) {
+            btnWA.onclick = () => {
+              const data = getShareData();
+              const waUrl = `https://wa.me/?text=${encodeURIComponent(data.text + ' ' + data.url)}`;
+              window.open(waUrl, '_blank');
+            };
+          }
+        };
+
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', init);
+        } else {
+          init();
+        }
+      })();
+    </script>
 </body></html>
