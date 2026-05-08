@@ -183,9 +183,9 @@ const artifactsData = [
     code:    'SIQ_A05_BrandPartnershipKit_CSC',
     type:    { en: 'Revenue Activation · Engine 01', es: 'Activación de Ingresos · Motor 01' },
     desc:    { en: 'Bilingual brand partnership kit — market opportunity, audience data, content pillars, pricing tiers and collaboration formats for brand partners.', es: 'Kit de alianzas bilingüe — oportunidad de mercado, demografía de audiencia, pilares de contenido y precios para colaboraciones comerciales.' },
-    urlEn:   'files/SIQ_A05_BrandPartnershipKit_CSC.html?lang=en',
-    urlEs:   'files/SIQ_A05_BrandPartnershipKit_CSC.html?lang=es',
-    status:  'approved', pages: '—',
+    urlEn:   'files/SIQ_A05_BrandPartnershipKit_CSC.html',
+    urlEs:   'files/SIQ_A05_BrandPartnershipKit_CSC.html',
+    status:  'approved', pages: '2',
     langs:   'ES / EN',
   },
   {
