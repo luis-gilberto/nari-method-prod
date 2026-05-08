@@ -3066,7 +3066,8 @@ button { cursor: pointer; font-family: var(--font-body); border: none; backgroun
   .mega-trigger { display: none !important; }
   .csc-nav-viewport { display: none !important; }
   .mobile-menu-btn { display: flex !important; }
-  .sys-nav { display: flex; } /* keep the nav shell visible for hamburger context */
+  .sys-nav .nav-item { display: none !important; }
+  .sys-nav { display: flex; }
 }
 @media (min-width: 901px) {
   .mobile-menu-btn { display: none !important; }
