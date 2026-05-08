@@ -2755,11 +2755,14 @@ button { cursor: pointer; font-family: var(--font-body); border: none; backgroun
   /* ── General ── */
   .scb-contacts { flex-direction: column; gap: var(--space-sm); }
   .quick-actions-band { grid-template-columns: 1fr; }
-  .hero-zone { display: block; }
-  .hero-portrait-col { float: left; margin: 0 14px 8px 0; }
-  .hero-portrait-wrap, .hero-portrait { width: 80px; height: 80px; }
-  .hero-content-col { display: block; }
+  .hero-zone { display: block !important; }
+  .hero-portrait-col { float: left; margin: 0 14px 10px 0; }
+  .hero-portrait-wrap, .hero-portrait { width: 76px !important; height: 76px !important; }
+  .hero-content-col { display: block; overflow: hidden; }
   .hero-zone::after { content: ''; display: table; clear: both; }
+  .hero-title { font-size: 1.8rem; line-height: 1.1; }
+  .hero-ctas { flex-direction: column; align-items: stretch; gap: 8px; margin-top: 14px; }
+  .hero-ctas .btn-primary, .hero-ctas .btn-ghost { width: 100%; justify-content: center; }
 }
 
 /* ════════════════════════════════════════════════════════
