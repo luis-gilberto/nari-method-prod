@@ -709,6 +709,20 @@
       -webkit-mask-image: linear-gradient(135deg, transparent 0%, rgba(0,0,0,0.4) 20%, rgba(0,0,0,0.85) 60%, rgba(0,0,0,0.85) 100%);
     }
 
+    /* Slide 2 specific background adjustment */
+    #slide-2 .slide-bg-img {
+      width: 84%;
+      height: 150%;
+      top: -25%;
+      right: -15%;
+      opacity: 0.45;
+    }
+    #slide-2 .slide-bg-img img {
+      filter: grayscale(40%) contrast(1.1) brightness(1.1);
+      object-fit: contain;
+      object-position: center;
+    }
+
     /* Slide 6 specific background adjustment */
     #slide-6 .slide-bg-img {
       width: 85%;
@@ -970,7 +984,7 @@
     </section>
 
     <!-- SLIDE 2: WHAT CHANGED -->
-    <section class="slide"
+    <section class="slide" id="slide-2"
       data-notes-es="Reconoce el momentum. Enmarca estos no como tareas completadas, sino como cambios fundamentales en el ecosistema."
       data-notes-en="Acknowledge momentum. Frame these not as tasks completed, but as foundational shifts in the ecosystem.">
 
