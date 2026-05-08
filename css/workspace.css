@@ -593,9 +593,9 @@ button { cursor: pointer; font-family: var(--font-body); border: none; backgroun
 /* HERO ZONE */
 .hero-zone {
   display: grid;
-  grid-template-columns: auto 1fr;
-  gap: var(--space-2xl);
-  align-items: center;
+  grid-template-columns: 180px 1fr;
+  gap: 32px;
+  align-items: start;
   margin-bottom: var(--space-3xl);
   padding-top: var(--space-xl);
 }
@@ -2701,9 +2701,9 @@ button { cursor: pointer; font-family: var(--font-body); border: none; backgroun
   .sys-bar { padding: 0 var(--space-md); }
   .sys-nav { display: none; }
   .mobile-menu-btn { display: flex; }
-  .hero-zone { grid-template-columns: 160px 1fr; gap: 24px; text-align: left; justify-items: start; }
-  .hero-meta-strip { justify-content: center; }
-  .hero-ctas { justify-content: center; }
+  .hero-zone { grid-template-columns: 140px 1fr; gap: 20px; align-items: start; }
+  .hero-meta-strip { justify-content: flex-start; }
+  .hero-ctas { justify-content: flex-start; }
   .phase-strip { grid-template-columns: repeat(2, 1fr); }
   .key-ideas-grid { grid-template-columns: 1fr; }
   .production-zone { grid-template-columns: 1fr; }
