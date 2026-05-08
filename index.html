@@ -62,102 +62,119 @@
         </div>
       </div>
       <nav class="sys-nav" id="sysNav">
-        <!-- PRIMARY NAV: 5 items -->
-        <button class="nav-item" onclick="cscNavGo('home')">
-          <span class="lb-en">Home</span><span class="lb-es active">Inicio</span>
-        </button>
-        <button class="nav-item" onclick="cscNavGo('method')">
-          <span class="lb-en">My system</span><span class="lb-es active">Mi sistema</span>
-        </button>
-        <button class="nav-item" onclick="cscNavGo('artifacts')">
-          <span class="lb-en">Documents</span><span class="lb-es active">Documentos</span>
-        </button>
-        <button class="nav-item" onclick="cscNavGo('activity')">
-          <span class="lb-en">Activity</span><span class="lb-es active">Actividad</span>
-        </button>
-        <button class="nav-item" onclick="cscNavGo('requests')">
-          <span class="lb-en">Requests</span><span class="lb-es active">Solicitudes</span>
-        </button>
+        <!-- PRIMARY NAV: 3 triggers -->
+        <button class="nav-item nav-trigger" data-panel="workspace" onclick="toggleNavPanel('workspace', this)"> 
+          <span class="lb-en">Workspace</span><span class="lb-es active">Proyecto</span> 
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" style="margin-left:4px;opacity:0.5;transition:transform 0.2s;"><polyline points="6 9 12 15 18 9"/></svg> 
+        </button> 
+        <button class="nav-item nav-trigger" data-panel="brand" onclick="toggleNavPanel('brand', this)"> 
+          <span class="lb-en">Brand</span><span class="lb-es active">Marca</span> 
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" style="margin-left:4px;opacity:0.5;transition:transform 0.2s;"><polyline points="6 9 12 15 18 9"/></svg> 
+        </button> 
+        <button class="nav-item nav-trigger" data-panel="colabs" onclick="toggleNavPanel('colabs', this)"> 
+          <span class="lb-en">Strategic Collaborations</span><span class="lb-es active">Colaboraciones Estratégicas</span> 
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" style="margin-left:4px;opacity:0.5;transition:transform 0.2s;"><polyline points="6 9 12 15 18 9"/></svg> 
+        </button> 
 
         <!-- MEGA VIEWPORT PANEL -->
         <div class="csc-nav-viewport" id="cscNavViewport">
-          <div class="csc-nav-viewport-inner">
-
-            <!-- VIEW: Workspace -->
-            <div id="view-workspace" class="csc-view-content">
-              <div class="csc-mega-header">
-                <span class="csc-mega-label">Workspace</span>
-                <p class="csc-mega-tagline"><span class="lb-en">System overview &amp; intelligence timeline</span><span class="lb-es active">Resumen del sistema y registro de actividad</span></p>
-              </div>
-              <div class="csc-grid-3">
-                <button class="csc-mega-link" onclick="cscNavGo('home')">
-                  <div class="csc-mega-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1H4a1 1 0 01-1-1V9.5z"/><path d="M9 21V12h6v9"/></svg></div>
-                  <div class="csc-mega-text"><b><span class="lb-en">Home</span><span class="lb-es active">Inicio</span></b><em><span class="lb-en">Profile, snapshot &amp; quick actions</span><span class="lb-es active">Perfil, resumen y acciones rápidas</span></em></div>
-                </button>
-                <button class="csc-mega-link" onclick="cscNavGo('artifacts')">
-                  <div class="csc-mega-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 20L20 2M2 20h7M2 20v-7"/><path d="M20 2l-5 13-8-5"/></svg></div>
-                  <div class="csc-mega-text"><b><span class="lb-en">Artifacts</span><span class="lb-es active">Arquitectura</span></b><em><span class="lb-en">Strategic deliverables &amp; documents</span><span class="lb-es active">Entregables estratégicos y documentos</span></em></div>
-                </button>
-                <button class="csc-mega-link" onclick="cscNavGo('journey')">
-                  <div class="csc-mega-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div>
-                  <div class="csc-mega-text"><b><span class="lb-en">Project Journey</span><span class="lb-es active">Recorrido del Proyecto</span></b><em><span class="lb-en">From chaos to growth timeline</span><span class="lb-es active">Línea de tiempo de transformación</span></em></div>
-                </button>
-                <button class="csc-mega-link" onclick="cscNavGo('activity')">
-                  <div class="csc-mega-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></div>
-                  <div class="csc-mega-text"><b><span class="lb-en">Activity</span><span class="lb-es active">Actividad</span></b><em><span class="lb-en">Intelligence timeline &amp; session notes</span><span class="lb-es active">Línea de tiempo e insights clave</span></em></div>
-                </button>
-                <button class="csc-mega-link" onclick="cscNavGo('record')">
-                  <div class="csc-mega-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12h6M9 16h4M7 4H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2V8l-5-4H7z"/><path d="M15 4v4h4"/></svg></div>
-                  <div class="csc-mega-text"><b><span class="lb-en">Strategic Record</span><span class="lb-es active">Registro Estratégico</span></b><em><span class="lb-en">Signals, readiness &amp; core insights</span><span class="lb-es active">Señales, disposición e ideas clave</span></em></div>
-                </button>
-              </div>
-            </div>
-
-            <!-- VIEW: Brand -->
-            <div id="view-brand" class="csc-view-content" style="display:none;">
-              <div class="csc-mega-header">
-                <span class="csc-mega-label">Brand</span>
-                <p class="csc-mega-tagline"><span class="lb-en">Presence, growth &amp; identity</span><span class="lb-es active">Presencia, Growth &amp; Monetización e identidad</span></p>
-              </div>
-              <div class="csc-grid-3">
-                <button class="csc-mega-link" onclick="cscNavGo('speaking')">
-                  <div class="csc-mega-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 10a7 7 0 0014 0M12 19v3M8 22h8"/></svg></div>
-                  <div class="csc-mega-text"><b><span class="lb-en">Speaking</span><span class="lb-es active">Conferencias</span></b><em><span class="lb-en">Keynotes, media &amp; speaker kit</span><span class="lb-es active">Conferencias, medios y materiales de prensa</span></em></div>
-                </button>
-                <button class="csc-mega-link" onclick="cscNavGo('growth')">
-                  <div class="csc-mega-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 17 9 11 13 15 21 7"/><polyline points="14 7 21 7 21 14"/></svg></div>
-                  <div class="csc-mega-text"><b><span class="lb-en">Growth</span><span class="lb-es active">Growth &amp; Monetización</span></b><em><span class="lb-en">Revenue model &amp; monetization</span><span class="lb-es active">Modelo de ingresos y monetización</span></em></div>
-                </button>
-                <button class="csc-mega-link" onclick="cscNavGo('vault')">
-                  <div class="csc-mega-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a10 10 0 000 20c1.1 0 2-.9 2-2v-1c0-.55.45-1 1-1h2a3 3 0 000-6h-1c-1.66 0-3-1.34-3-3V5"/></svg></div>
-                  <div class="csc-mega-text"><b><span class="lb-en">Brand Vault · Identidad</span><span class="lb-es active">Bóveda de Marca</span></b><em><span class="lb-en">Colors, type, voice &amp; identity</span><span class="lb-es active">Colores, tipografía, voz e identidad</span></em></div>
-                </button>
-              </div>
-              <div class="csc-mega-divider"></div>
-              <div class="csc-mega-orientation">
-                <a href="method.html" class="csc-orientation-link"><span class="lb-en">El Método Nari →</span><span class="lb-es active">El Método Nari →</span></a>
-              </div>
-            </div>
-
-            <!-- VIEW: Channel -->
-            <div id="view-channel" class="csc-view-content" style="display:none;">
-              <div class="csc-mega-header">
-                <span class="csc-mega-label">Canal</span>
-                <p class="csc-mega-tagline"><span class="lb-en">Intelligence feed &amp; collaboration</span><span class="lb-es active">Feed de señales y colaboración</span></p>
-              </div>
-              <div class="csc-grid-2">
-                <button class="csc-mega-link" onclick="cscNavGo('signal')">
-                  <div class="csc-mega-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5.07 12.37A7 7 0 0112 5a7 7 0 016.93 7.37M1.5 8.5a12.5 12.5 0 0121 0M12 19v2M12 14a2 2 0 100-4 2 2 0 000 4z"/></svg></div>
-                  <div class="csc-mega-text"><b><span class="lb-en">Signal Room</span><span class="lb-es active">Sala de Señales</span></b><em><span class="lb-en">Live feed, decisions &amp; resonance ledger</span><span class="lb-es active">Feed en vivo, decisiones y registro</span></em></div>
-                </button>
-                <button class="csc-mega-link" onclick="cscNavGo('requests')">
-                  <div class="csc-mega-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 7l10 7 10-7"/></svg></div>
-                  <div class="csc-mega-text"><b><span class="lb-en">Requests</span><span class="lb-es active">Solicitudes</span></b><em><span class="lb-en">Send a brief, idea or priority flag</span><span class="lb-es active">Envía un brief, idea o prioridad</span></em></div>
-                </button>
-              </div>
-            </div>
-
-          </div>
+          <div class="csc-nav-viewport-inner"> 
+ 
+   <!-- VIEW: Proyecto / Workspace --> 
+   <div id="view-workspace" class="csc-view-content"> 
+     <div class="csc-mega-header"> 
+       <span class="csc-mega-label"><span class="lb-en">Workspace</span><span class="lb-es active">Proyecto</span></span> 
+       <p class="csc-mega-tagline"><span class="lb-en">System overview, artifacts & intelligence</span><span class="lb-es active">Resumen del sistema, artefactos e inteligencia</span></p> 
+     </div> 
+     <div class="csc-grid-3"> 
+       <button class="csc-mega-link" onclick="cscNavGo('home')"> 
+         <div class="csc-mega-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1H4a1 1 0 01-1-1V9.5z"/><path d="M9 21V12h6v9"/></svg></div> 
+         <div class="csc-mega-text"><b><span class="lb-en">Home</span><span class="lb-es active">Inicio</span></b><em><span class="lb-en">Profile, snapshot & quick actions</span><span class="lb-es active">Perfil, resumen y acciones rápidas</span></em></div> 
+       </button> 
+       <button class="csc-mega-link" onclick="cscNavGo('artifacts')"> 
+         <div class="csc-mega-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div> 
+         <div class="csc-mega-text"><b><span class="lb-en">Documents</span><span class="lb-es active">Documentos</span></b><em><span class="lb-en">Strategic deliverables & artifacts</span><span class="lb-es active">Entregables estratégicos y artefactos</span></em></div> 
+       </button> 
+       <button class="csc-mega-link" onclick="cscNavGo('activity')"> 
+         <div class="csc-mega-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></div> 
+         <div class="csc-mega-text"><b><span class="lb-en">Activity</span><span class="lb-es active">Actividad</span></b><em><span class="lb-en">Timeline & session intelligence</span><span class="lb-es active">Línea de tiempo e inteligencia</span></em></div> 
+       </button> 
+       <button class="csc-mega-link" onclick="cscNavGo('journey')"> 
+         <div class="csc-mega-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div> 
+         <div class="csc-mega-text"><b><span class="lb-en">Project Journey</span><span class="lb-es active">Recorrido del Proyecto</span></b><em><span class="lb-en">Transformation timeline</span><span class="lb-es active">Línea de tiempo de transformación</span></em></div> 
+       </button> 
+       <button class="csc-mega-link" onclick="cscNavGo('signal')"> 
+         <div class="csc-mega-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5.07 12.37A7 7 0 0112 5a7 7 0 016.93 7.37M1.5 8.5a12.5 12.5 0 0121 0M12 19v2M12 14a2 2 0 100-4 2 2 0 000 4z"/></svg></div> 
+         <div class="csc-mega-text"><b><span class="lb-en">Signal Room</span><span class="lb-es active">Sala de Señales</span></b><em><span class="lb-en">Live feed & decisions</span><span class="lb-es active">Feed en vivo y decisiones</span></em></div> 
+       </button> 
+       <button class="csc-mega-link" onclick="cscNavGo('requests')"> 
+         <div class="csc-mega-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 7l10 7 10-7"/></svg></div> 
+         <div class="csc-mega-text"><b><span class="lb-en">Requests</span><span class="lb-es active">Solicitudes</span></b><em><span class="lb-en">Send a brief or priority flag</span><span class="lb-es active">Envía un brief o prioridad</span></em></div> 
+       </button> 
+     </div> 
+   </div> 
+ 
+   <!-- VIEW: Marca / Brand --> 
+   <div id="view-brand" class="csc-view-content" style="display:none;"> 
+     <div class="csc-mega-header"> 
+       <span class="csc-mega-label"><span class="lb-en">Brand</span><span class="lb-es active">Marca</span></span> 
+       <p class="csc-mega-tagline"><span class="lb-en">Visual identity, assets & brand system</span><span class="lb-es active">Identidad visual, activos y sistema de marca</span></p> 
+     </div> 
+     <div class="csc-grid-3"> 
+       <button class="csc-mega-link" onclick="cscNavGo('vault')"> 
+         <div class="csc-mega-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></div> 
+         <div class="csc-mega-text"><b><span class="lb-en">Brand Vault</span><span class="lb-es active">Bóveda de Marca</span></b><em><span class="lb-en">Colors, type, voice & identity</span><span class="lb-es active">Colores, tipografía, voz e identidad</span></em></div> 
+       </button> 
+       <a class="csc-mega-link" href="https://criarsinculpas.com/brand" target="_blank" style="text-decoration:none;"> 
+         <div class="csc-mega-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg></div> 
+         <div class="csc-mega-text"><b><span class="lb-en">Brand Book ↗</span><span class="lb-es active">Brand Book ↗</span></b><em><span class="lb-en">Public visual system at criarsinculpas.com</span><span class="lb-es active">Sistema visual público en criarsinculpas.com</span></em></div> 
+       </a> 
+       <button class="csc-mega-link" onclick="cscNavGo('vault')"> 
+         <div class="csc-mega-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div> 
+         <div class="csc-mega-text"><b><span class="lb-en">Approved Bios</span><span class="lb-es active">Bios Aprobadas</span></b><em><span class="lb-en">Short & long, ES & EN</span><span class="lb-es active">Corta y larga, ES y EN</span></em></div> 
+       </button> 
+     </div> 
+     <div class="csc-mega-divider"></div> 
+     <div class="csc-mega-orientation"> 
+       <a href="https://criarsinculpas.com/brand" target="_blank" class="csc-orientation-link">Brand Book público → criarsinculpas.com/brand ↗</a> 
+     </div> 
+   </div> 
+ 
+   <!-- VIEW: Colaboraciones Estratégicas --> 
+   <div id="view-colabs" class="csc-view-content" style="display:none;"> 
+     <div class="csc-mega-header"> 
+       <span class="csc-mega-label"><span class="lb-en">Strategic Collaborations</span><span class="lb-es active">Colaboraciones Estratégicas</span></span> 
+       <p class="csc-mega-tagline"><span class="lb-en">Everything you need when an opportunity knocks</span><span class="lb-es active">Todo lo que necesitas cuando llega una oportunidad</span></p> 
+     </div> 
+     <div class="csc-grid-3"> 
+       <a class="csc-mega-link" href="files/SIQ_A01_SpeakerMediaKit_CSC.html" target="_blank" style="text-decoration:none;"> 
+         <div class="csc-mega-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 10a7 7 0 0014 0M12 19v3M8 22h8"/></svg></div> 
+         <div class="csc-mega-text"><b><span class="lb-en">Speaker Dossier ↗</span><span class="lb-es active">Dossier de Conferencias ↗</span></b><em><span class="lb-en">For event organizers, congresses & TEDx</span><span class="lb-es active">Para organizadores, congresos y TEDx</span></em></div> 
+       </a> 
+       <a class="csc-mega-link" href="files/SIQ_A05_BrandPartnershipKit_CSC.html" target="_blank" style="text-decoration:none;"> 
+         <div class="csc-mega-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg></div> 
+         <div class="csc-mega-text"><b><span class="lb-en">Brand Partnership Kit ↗</span><span class="lb-es active">Kit de Alianzas con Marcas ↗</span></b><em><span class="lb-en">For brands, sponsors & co-creators</span><span class="lb-es active">Para marcas, sponsors y co-creadores</span></em></div> 
+       </a> 
+       <a class="csc-mega-link" href="https://criarsinculpas.com/brand" target="_blank" style="text-decoration:none;"> 
+         <div class="csc-mega-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg></div> 
+         <div class="csc-mega-text"><b><span class="lb-en">Brand Book ↗</span><span class="lb-es active">Brand Book ↗</span></b><em><span class="lb-en">Visual identity for collaborators & press</span><span class="lb-es active">Identidad visual para colaboradores y prensa</span></em></div> 
+       </a> 
+       <button class="csc-mega-link" onclick="cscNavGo('vault')"> 
+         <div class="csc-mega-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div> 
+         <div class="csc-mega-text"><b><span class="lb-en">Approved Bios</span><span class="lb-es active">Bios Aprobadas</span></b><em><span class="lb-en">For introductions, press & media</span><span class="lb-es active">Para presentaciones, prensa y medios</span></em></div> 
+       </button> 
+       <button class="csc-mega-link" onclick="cscNavGo('speaking')"> 
+         <div class="csc-mega-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></div> 
+         <div class="csc-mega-text"><b><span class="lb-en">Speaking Section</span><span class="lb-es active">Sección de Conferencias</span></b><em><span class="lb-en">Talks, formats & contact</span><span class="lb-es active">Ponencias, formatos y contacto</span></em></div> 
+       </button> 
+       <button class="csc-mega-link" onclick="cscNavGo('requests')"> 
+         <div class="csc-mega-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 7l10 7 10-7"/></svg></div> 
+         <div class="csc-mega-text"><b><span class="lb-en">Submit a Request</span><span class="lb-es active">Enviar Solicitud</span></b><em><span class="lb-en">Brief, idea or collaboration proposal</span><span class="lb-es active">Brief, idea o propuesta de colaboración</span></em></div> 
+       </button> 
+     </div> 
+   </div> 
+ 
+ </div>
         </div>
       </nav>
       <div class="sys-bar-right">
@@ -244,7 +261,6 @@
             <p class="hero-desc"><span class="lb-en">This is where we organize everything we are building together. Your method, your tools, your ideas, and the structure behind Criar Sin Culpas.</span><span class="lb-es active">Aquí es donde organizamos todo lo que estamos construyendo juntos. Tu método, tus herramientas, tus ideas y la estructura detrás de Criar Sin Culpas.</span></p> 
             <p class="hero-reassurance"><span class="lb-en">You don't need to understand everything right away. This space is designed to help you see it with clarity.</span><span class="lb-es active">No necesitas entender todo de inmediato. Este espacio está diseñado para ayudarte a verlo con claridad.</span></p>
             <div class="hero-ctas"> 
-              <button class="btn-primary" onclick="cscNavGo('method')"><span class="lb-en">Understand the system</span><span class="lb-es active">Entender el sistema</span></button> 
               <button class="btn-ghost" onclick="goToSection('artifacts')"><span class="lb-en">View my documents</span><span class="lb-es active">Ver mis documentos</span></button> 
               <button class="btn-ghost" onclick="goToSection('activity')"><span class="lb-en">See what's next</span><span class="lb-es active">Ver qué sigue</span></button> 
             </div> 
@@ -2408,6 +2424,36 @@
     </div>
   </div>
 
+  <script>
+function toggleNavPanel(panel, btn) { 
+   const viewport = document.getElementById('cscNavViewport'); 
+   const views = document.querySelectorAll('.csc-view-content'); 
+   const triggers = document.querySelectorAll('.nav-trigger'); 
+   const targetView = document.getElementById('view-' + panel); 
+   const isOpen = viewport.classList.contains('open') && btn.classList.contains('active'); 
+ 
+   // Close all 
+   viewport.classList.remove('open'); 
+   triggers.forEach(t => t.classList.remove('active')); 
+   views.forEach(v => v.style.display = 'none'); 
+ 
+   if (!isOpen && targetView) { 
+     targetView.style.display = 'block'; 
+     viewport.classList.add('open'); 
+     btn.classList.add('active'); 
+   } 
+ } 
+ 
+ // Close megamenu when clicking outside 
+ document.addEventListener('click', function(e) { 
+   if (!e.target.closest('.sys-nav')) { 
+     const viewport = document.getElementById('cscNavViewport');
+     if (viewport) viewport.classList.remove('open'); 
+     document.querySelectorAll('.nav-trigger').forEach(t => t.classList.remove('active')); 
+     document.querySelectorAll('.csc-view-content').forEach(v => v.style.display = 'none'); 
+   } 
+ }); 
+  </script>
   <script src="js/workspace.js"></script></body>
 </html>
 
