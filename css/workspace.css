@@ -3923,3 +3923,5 @@ button { cursor: pointer; font-family: var(--font-body); border: none; backgroun
 .now-block { margin: 20px 0 4px; padding: 18px 20px; border-radius: 14px; background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.08); } 
 .now-eyebrow { font-size: .62rem; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: var(--coral, #F96F6E); margin-bottom: 8px; } 
 .now-body { font-size: .82rem; color: rgba(255,255,255,.5); line-height: 1.7; }
+.phase-narrative-anchor { margin: 10px 0 16px; padding: 14px 18px; border-left: 2px solid var(--coral, #F96F6E); background: rgba(249,111,110,.06); border-radius: 0 10px 10px 0; } 
+.phase-narrative-text { font-size: .88rem; color: rgba(255,255,255,.65); line-height: 1.65; font-style: italic; }
