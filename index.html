@@ -62,20 +62,21 @@
         </div>
       </div>
       <nav class="sys-nav" id="sysNav">
-        <!-- MEGA TRIGGER 1: Workspace -->
-        <button class="nav-item mega-trigger" data-trigger="workspace">
-          <span class="lb-en">Workspace</span><span class="lb-es active">Proyecto</span>
-          <svg width="10" height="10" viewBox="0 0 10 10" fill="none" style="opacity:0.4;flex-shrink:0;"><path d="M2 4l3 3 3-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <!-- PRIMARY NAV: 5 items -->
+        <button class="nav-item" onclick="cscNavGo('home')">
+          <span class="lb-en">Home</span><span class="lb-es active">Inicio</span>
         </button>
-        <!-- MEGA TRIGGER 2: Brand -->
-        <button class="nav-item mega-trigger" data-trigger="brand">
-          <span class="lb-en">Brand</span><span class="lb-es active">Marca</span>
-          <svg width="10" height="10" viewBox="0 0 10 10" fill="none" style="opacity:0.4;flex-shrink:0;"><path d="M2 4l3 3 3-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <button class="nav-item" onclick="cscNavGo('method')">
+          <span class="lb-en">My system</span><span class="lb-es active">Mi sistema</span>
         </button>
-        <!-- MEGA TRIGGER 3: Channel -->
-        <button class="nav-item mega-trigger" data-trigger="channel">
-          <span class="lb-en">Channel</span><span class="lb-es active">Canal</span>
-          <svg width="10" height="10" viewBox="0 0 10 10" fill="none" style="opacity:0.4;flex-shrink:0;"><path d="M2 4l3 3 3-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <button class="nav-item" onclick="cscNavGo('artifacts')">
+          <span class="lb-en">Documents</span><span class="lb-es active">Documentos</span>
+        </button>
+        <button class="nav-item" onclick="cscNavGo('activity')">
+          <span class="lb-en">Activity</span><span class="lb-es active">Actividad</span>
+        </button>
+        <button class="nav-item" onclick="cscNavGo('requests')">
+          <span class="lb-en">Requests</span><span class="lb-es active">Solicitudes</span>
         </button>
 
         <!-- MEGA VIEWPORT PANEL -->
@@ -193,8 +194,7 @@
         <button class="csc-drawer-link" onclick="cscNavGo('home')"><span><span class="lb-en">Home</span><span class="lb-es active">Inicio</span></span><span class="csc-dnl-arrow">›</span></button>
         <button class="csc-drawer-link" onclick="cscNavGo('artifacts')"><span><span class="lb-en">Artifacts</span><span class="lb-es active">Arquitectura</span></span><span class="csc-dnl-arrow">›</span></button>
         <button class="csc-drawer-link" onclick="cscNavGo('activity')"><span><span class="lb-en">Activity</span><span class="lb-es active">Actividad</span></span><span class="csc-dnl-arrow">›</span></button>
-        <button class="csc-drawer-link" onclick="cscNavGo('journey')"><span><span class="lb-en">Project Journey</span><span class="lb-es active">Trayectoria del Proyecto</span></span><span class="csc-dnl-arrow">›</span></button>
-        <button class="csc-drawer-link" onclick="cscNavGo('record')"><span><span class="lb-en">Strategic Record</span><span class="lb-es active">Registro Estratégico</span></span><span class="csc-dnl-arrow">›</span></button>
+        <button class="csc-drawer-link" onclick="cscNavGo('requests')"><span><span class="lb-en">Requests</span><span class="lb-es active">Solicitudes</span></span><span class="csc-dnl-arrow">›</span></button>
       </div>
 
       <div class="csc-drawer-section">
