@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Strategic Dossier · Phase I · Criar Sin Culpas</title>
+  
+  <!-- Premium Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ── DESIGN TOKENS ────────────────────────────────────────── */
+    :root {
+      --bg: #0b090e;
+      --bg-surface: #141118;
+      --border: #2a2532;
+      --border-subtle: rgba(255,255,255,0.05);
+      
+      --text-main: #faf7f2;
+      --text-muted: #a79b95;
+      --text-dim: #6d625a;
+      
+      --accent-coral: #f96f6e;
+      --accent-teal: #4bada8;
+      --accent-violet: #8d79ff;
+      
+      --font-display: 'Cormorant Garamond', Georgia, serif;
+      --font-body: 'Inter', -apple-system, sans-serif;
+      --font-mono: 'SFMono-Regular', Consolas, monospace;
+      
+      --radius-lg: 24px;
+      --radius-md: 16px;
+      
+      --glow-coral: rgba(249, 111, 110, 0.15);
+      --glow-teal: rgba(75, 173, 168, 0.15);
+      --glow-violet: rgba(141, 121, 255, 0.12);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    body {
+      background-color: var(--bg);
+      color: var(--text-main);
+      font-family: var(--font-body);
+      line-height: 1.6;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── ATMOSPHERIC BACKGROUNDS ──────────────────────────────── */
+    .orbs { position: fixed; inset: 0; pointer-events: none; z-index: 0; }
+    .grain { position: fixed; inset: 0; pointer-events: none; z-index: 1; opacity: 0.03; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+    
+    .watermark { position: fixed; bottom: -10vh; right: -5vw; width: 50vw; min-width: 400px; max-width: 800px; pointer-events: none; z-index: 1; opacity: 0.08; filter: grayscale(100%); mix-blend-mode: screen; }
+
+    /* ── LAYOUT & CONTAINER ───────────────────────────────────── */
+    .dossier-wrapper {
+      position: relative; z-index: 2;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    section {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 80px 0;
+      opacity: 0; transform: translateY(30px);
+      transition: opacity 1s cubic-bezier(0.2,0.8,0.2,1), transform 1s cubic-bezier(0.2,0.8,0.2,1);
+    }
+    section.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── TYPOGRAPHY ───────────────────────────────────────────── */
+    .eyebrow {
+      font-family: var(--font-mono);
+      font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.15em;
+      color: var(--text-dim); margin-bottom: 24px;
+    }
+    .eyebrow span { color: var(--accent-coral); }
+    
+    h1 {
+      font-family: var(--font-display);
+      font-size: clamp(3rem, 8vw, 5rem);
+      font-weight: 400; line-height: 1.05; letter-spacing: -0.02em;
+      margin-bottom: 24px; color: var(--text-main);
+    }
+    h1 i { color: var(--text-muted); font-style: italic; }
+    
+    h2 {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 400; margin-bottom: 40px; color: var(--text-main);
+    }
+    
+    .lede { font-size: 1.25rem; font-weight: 300; color: var(--text-muted); max-width: 600px; margin-bottom: 48px; }
+
+    /* ── GLASS CARDS & GRIDS ──────────────────────────────────── */
+    .grid-2 { display: grid; grid-template-columns: 1fr; gap: 24px; }
+    @media(min-width: 768px) { .grid-2 { grid-template-columns: 1fr 1fr; } }
+
+    .glass-card {
+      background: rgba(20, 17, 24, 0.4);
+      backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 32px;
+      transition: border-color 0.3s ease;
+    }
+    .glass-card:hover { border-color: rgba(255,255,255,0.15); }
+    
+    .card-label { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent-violet); margin-bottom: 12px; }
+    .card-title { font-family: var(--font-display); font-size: 1.8rem; margin-bottom: 12px; color: #fff; }
+    .card-desc { font-size: 0.95rem; color: var(--text-muted); margin: 0; }
+
+    /* ── INFRASTRUCTURE MAP (Page 3 & 4) ──────────────────────── */
+    .flow-diagram { display: flex; flex-direction: column; align-items: center; margin: 40px 0; }
+    .flow-node {
+      background: var(--bg-surface); border: 1px solid var(--border);
+      padding: 16px 32px; border-radius: 999px;
+      font-size: 0.9rem; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase;
+      color: var(--text-main); box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
+    .flow-arrow { width: 2px; height: 32px; background: linear-gradient(180deg, var(--accent-violet), transparent); margin: 8px 0; }
+
+    .eco-grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
+    .eco-row { display: flex; align-items: center; gap: 24px; padding: 24px; border: 1px solid var(--border-subtle); border-radius: var(--radius-md); background: rgba(255,255,255,0.02); }
+    .eco-icon { width: 48px; height: 48px; border-radius: 12px; background: rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: center; color: var(--accent-teal); flex-shrink: 0; }
+    .eco-text h4 { font-family: var(--font-body); font-size: 1.1rem; font-weight: 600; margin-bottom: 4px; color: #fff; }
+    .eco-text p { font-size: 0.9rem; color: var(--text-muted); margin: 0; }
+
+    /* ── STATUS TABLE (Page 5) ────────────────────────────────── */
+    .status-list { display: flex; flex-direction: column; gap: 12px; }
+    .status-row { display: flex; justify-content: space-between; align-items: center; padding: 20px 24px; background: var(--bg-surface); border: 1px solid var(--border); border-radius: var(--radius-md); }
+    .status-name { font-size: 1rem; font-weight: 500; color: #fff; }
+    
+    .badge { padding: 6px 12px; border-radius: 999px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; }
+    .badge.done { background: rgba(75, 173, 168, 0.1); color: var(--accent-teal); border: 1px solid rgba(75, 173, 168, 0.2); }
+    .badge.prog { background: rgba(141, 121, 255, 0.1); color: var(--accent-violet); border: 1px solid rgba(141, 121, 255, 0.2); }
+    .badge.pend { background: rgba(249, 111, 110, 0.1); color: var(--accent-coral); border: 1px solid rgba(249, 111, 110, 0.2); }
+
+    /* ── TRANSITION TO PHASE II (Page 6) ──────────────────────── */
+    .phase-transition { text-align: center; padding: 60px 0; }
+    .phase-box { padding: 40px; border-radius: var(--radius-lg); border: 1px solid var(--border); background: var(--bg-surface); }
+    .phase-label { font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-dim); letter-spacing: 0.1em; margin-bottom: 12px; }
+    .phase-title { font-family: var(--font-display); font-size: 2.2rem; color: #fff; }
+    
+    .transition-arrow { margin: 40px auto; width: 1px; height: 80px; background: linear-gradient(180deg, var(--border), var(--accent-coral)); position: relative; }
+    .transition-arrow::after { content: '↓'; position: absolute; bottom: -20px; left: -5px; color: var(--accent-coral); font-size: 1.2rem; }
+
+    /* ── SCROLL INDICATOR ─────────────────────────────────────── */
+    .scroll-down { position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.2em; color: var(--text-dim); display: flex; flex-direction: column; align-items: center; gap: 8px; animation: bounce 2s infinite; }
+    .scroll-down::after { content: ''; width: 1px; height: 24px; background: var(--text-dim); }
+    @keyframes bounce { 0%, 100% { transform: translate(-50%, 0); } 50% { transform: translate(-50%, 5px); } }
+
+  </style>
+</head>
+<body>
+
+  <!-- Atmospheric Backgrounds -->
+  <div class="orbs" style="background: radial-gradient(circle 600px at 10% 20%, var(--glow-violet), transparent 0), radial-gradient(circle 500px at 90% 80%, var(--glow-teal), transparent 0), radial-gradient(circle 400px at 50% 50%, var(--glow-coral), transparent 0);"></div>
+  <div class="grain"></div>
+  <div class="watermark"><img src="https://res.cloudinary.com/dogtoagya/image/upload/q_auto/f_auto/v1778272963/CSC_Logo_Grayscale_k6uitt.png" alt=""></div>
+
+  <div class="dossier-wrapper">
+
+    <!-- PAGE 1: COVER -->
+    <section class="visible">
+      <div class="eyebrow">Criar Sin Culpas <span>·</span> StrategyIQ</div>
+      <h1>Strategic Dossier</h1>
+      <h1 style="color: var(--text-muted); font-style: italic; font-size: clamp(2rem, 5vw, 3.5rem);">Phase I: Architecture <br>& Foundation</h1>
+      
+      <div style="margin-top: auto; padding-top: 60px; border-top: 1px solid var(--border-subtle); display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.1em;">
+        <span>Prepared by LG Studio</span>
+        <span>Executive Summary</span>
+      </div>
+      
+      <div class="scroll-down">Scroll</div>
+    </section>
+
+    <!-- PAGE 2: ORIGINAL MANDATE -->
+    <section>
+      <div class="eyebrow">01 <span>·</span> The Mandate</div>
+      <h2>The Original Objectives</h2>
+      <p class="lede">This engagement was designed to transform philosophy into a scalable operational framework.</p>
+      
+      <div class="grid-2">
+        <div class="glass-card">
+          <div class="card-label">Methodology</div>
+          <h3 class="card-title">Define the Core System</h3>
+          <p class="card-desc">Synthesize workshops, content, and ideas into a structured, repeatable 4-pillar methodology.</p>
+        </div>
+        <div class="glass-card">
+          <div class="card-label">Digital Ecosystem</div>
+          <h3 class="card-title">Workspace Architecture</h3>
+          <p class="card-desc">Create a centralized, premium digital environment to organize assets, signals, and future products.</p>
+        </div>
+        <div class="glass-card">
+          <div class="card-label">Utility & Support</div>
+          <h3 class="card-title">Protocol Validation</h3>
+          <p class="card-desc">Develop and test real-time intervention guides to prove market utility beyond educational content.</p>
+        </div>
+        <div class="glass-card">
+          <div class="card-label">Data & Insight</div>
+          <h3 class="card-title">Signal Intelligence</h3>
+          <p class="card-desc">Implement tracking and feedback systems to organize audience pain patterns into actionable product decisions.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- PAGE 3: WHAT WAS BUILT -->
+    <section>
+      <div class="eyebrow">02 <span>·</span> Execution</div>
+      <h2>Infrastructure Delivered</h2>
+      <p class="lede">We didn't just build a website. We built a strategic operating system to power the future of the brand.</p>
+
+      <div class="flow-diagram">
+        <div class="flow-node">Audience Signals</div>
+        <div class="flow-arrow"></div>
+        <div class="flow-node">Strategic Synthesis</div>
+        <div class="flow-arrow"></div>
+        <div class="flow-node" style="border-color: var(--accent-teal); color: var(--accent-teal);">Four-Pillar Method</div>
+        <div class="flow-arrow"></div>
+        <div class="flow-node" style="border-color: var(--accent-violet); color: var(--accent-violet);">Protocol Ecosystem</div>
+        <div class="flow-arrow"></div>
+        <div class="flow-node" style="border-color: var(--accent-coral); color: var(--accent-coral);">Analytics & Intelligence Layer</div>
+      </div>
+    </section>
+
+    <!-- PAGE 4: THE ECOSYSTEM -->
+    <section>
+      <div class="eyebrow">03 <span>·</span> Architecture</div>
+      <h2>The Ecosystem Map</h2>
+      
+      <div class="eco-grid">
+        <div class="eco-row">
+          <div class="eco-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          </div>
+          <div class="eco-text">
+            <h4>Public Layer (criarsinculpas.com)</h4>
+            <p>Emotional positioning, brand authority, and seamless entry points.</p>
+          </div>
+        </div>
+        
+        <div class="eco-row" style="margin-left: 24px; border-color: rgba(97, 209, 196, 0.3);">
+          <div class="eco-icon" style="color: var(--accent-teal);">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+          </div>
+          <div class="eco-text">
+            <h4 style="color: var(--accent-teal);">Support Guides / Protocols</h4>
+            <p>Actionable, real-time intervention tools for parents in crisis.</p>
+          </div>
+        </div>
+        
+        <div class="eco-row" style="margin-left: 48px; border-color: rgba(141, 121, 255, 0.3);">
+          <div class="eco-icon" style="color: var(--accent-violet);">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+          </div>
+          <div class="eco-text">
+            <h4 style="color: var(--accent-violet);">Signal Collection Layer</h4>
+            <p>Plausible analytics tracking behavioral intent and language resonance.</p>
+          </div>
+        </div>
+        
+        <div class="eco-row" style="margin-left: 72px; border-color: rgba(249, 111, 110, 0.3);">
+          <div class="eco-icon" style="color: var(--accent-coral);">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="9" y1="3" x2="9" y2="21"/></svg>
+          </div>
+          <div class="eco-text">
+            <h4 style="color: var(--accent-coral);">Private StrategyIQ Workspace</h4>
+            <p>The central hub for intelligence extraction, future roadmaps, and monetization paths.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PAGE 5: STATUS -->
+    <section>
+      <div class="eyebrow">04 <span>·</span> Progress</div>
+      <h2>Current Alignment Status</h2>
+      <p class="lede">To close out Phase I cleanly, we must align our expectations and finalize the pending infrastructure decisions.</p>
+
+      <div class="status-list">
+        <div class="status-row">
+          <span class="status-name">Workspace Architecture</span>
+          <span class="badge done">Complete</span>
+        </div>
+        <div class="status-row">
+          <span class="status-name">Protocol Foundation & Copy</span>
+          <span class="badge done">Complete</span>
+        </div>
+        <div class="status-row">
+          <span class="status-name">Analytics Setup</span>
+          <span class="badge done">Complete</span>
+        </div>
+        <div class="status-row">
+          <span class="status-name">Public Website Direction</span>
+          <span class="badge prog">Pending Review</span>
+        </div>
+        <div class="status-row">
+          <span class="status-name">KPI & Success Metrics Definition</span>
+          <span class="badge pend">Needs Alignment</span>
+        </div>
+        <div class="status-row">
+          <span class="status-name">Launch Sequencing</span>
+          <span class="badge pend">Needs Alignment</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- PAGE 6: TRANSITION -->
+    <section class="phase-transition">
+      <div class="phase-box" style="border-color: rgba(255,255,255,0.1);">
+        <div class="phase-label">CURRENT SCOPE</div>
+        <div class="phase-title">Phase I</div>
+        <p style="color: var(--text-muted); margin-top: 10px;">Architecture, Foundation & Intelligence</p>
+      </div>
+
+      <div class="transition-arrow"></div>
+
+      <div class="phase-box" style="border-color: var(--accent-coral); background: rgba(249, 111, 110, 0.05);">
+        <div class="phase-label" style="color: var(--accent-coral);">UPCOMING SCOPE</div>
+        <div class="phase-title" style="color: var(--accent-coral);">Phase II</div>
+        <p style="color: var(--text-main); margin-top: 10px;">Activation, Optimization & Monetization</p>
+      </div>
+      
+      <p style="margin-top: 40px; color: var(--text-muted); font-size: 1.1rem; max-width: 600px; margin-left: auto; margin-right: auto;">
+        We are approaching the transition boundary. Closing Phase I formally allows us to enter Phase II with a clear, operationally sound roadmap.
+      </p>
+    </section>
+
+    <!-- PAGE 7: NEXT STEPS -->
+    <section>
+      <div class="eyebrow">05 <span>·</span> Action</div>
+      <h2>Immediate Priorities</h2>
+      
+      <div class="grid-2">
+        <div class="glass-card" style="border-top: 3px solid var(--accent-teal);">
+          <h3 class="card-title" style="font-size: 1.4rem;">1. Sync In-Person</h3>
+          <p class="card-desc">Review the ecosystem holistically, hand off hard drive assets, and clarify communication rhythms.</p>
+        </div>
+        <div class="glass-card" style="border-top: 3px solid var(--accent-teal);">
+          <h3 class="card-title" style="font-size: 1.4rem;">2. Finalize Protocols</h3>
+          <p class="card-desc">Review the active test environment and confirm the go-live decision for the initial audience test.</p>
+        </div>
+        <div class="glass-card" style="border-top: 3px solid var(--accent-violet);">
+          <h3 class="card-title" style="font-size: 1.4rem;">3. Establish KPIs</h3>
+          <p class="card-desc">Define exactly what metrics will validate the success of the protocol test launch.</p>
+        </div>
+        <div class="glass-card" style="border-top: 3px solid var(--accent-coral);">
+          <h3 class="card-title" style="font-size: 1.4rem;">4. Scope Phase II</h3>
+          <p class="card-desc">Align on priorities, timelines, and deliverables for the activation and monetization stage.</p>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- Intersection Observer for Fade-Up Animations -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const sections = document.querySelectorAll('section');
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      }, { threshold: 0.15 });
+
+      sections.forEach(sec => observer.observe(sec));
+    });
+  </script>
+</body>
+</html>
