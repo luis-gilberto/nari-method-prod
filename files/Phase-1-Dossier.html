@@ -17,8 +17,9 @@
       --border-subtle: rgba(255,255,255,0.05);
       
       --text-main: #faf7f2;
-      --text-muted: #a79b95;
-      --text-dim: #6d625a;
+      /* INCREASED CONTRAST FOR READABILITY */
+      --text-muted: #c9beb8; 
+      --text-dim: #8a7d76;
       
       --accent-coral: #f96f6e;
       --accent-teal: #4bada8;
@@ -49,7 +50,8 @@
 
     /* ATMOSPHERIC BACKGROUNDS */
     .orbs { position: fixed; inset: 0; pointer-events: none; z-index: 0; }
-    .grain { position: fixed; inset: 0; pointer-events: none; z-index: 1; opacity: 0.03; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+    /* REDUCED GRAIN FOR READABILITY */
+    .grain { position: fixed; inset: 0; pointer-events: none; z-index: 1; opacity: 0.015; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
     .watermark { position: fixed; bottom: -10vh; right: -5vw; width: 50vw; min-width: 400px; max-width: 800px; pointer-events: none; z-index: 1; opacity: 0.08; filter: grayscale(100%); mix-blend-mode: screen; }
 
     /* LAYOUT & CONTAINER */
@@ -68,7 +70,7 @@
     /* ORIGIN PROOF */
     .origin-proof { font-family: var(--font-mono); font-size: 0.75rem; color: var(--accent-teal); border-left: 2px solid var(--accent-teal); padding-left: 12px; margin-bottom: 48px; max-width: 600px; line-height: 1.6; }
 
-    /* GLASS CARDS */
+    /* GLASS CARDS & VALUE STRIP */
     .grid-2 { display: grid; grid-template-columns: 1fr; gap: 24px; }
     @media(min-width: 768px) { .grid-2 { grid-template-columns: 1fr 1fr; } }
     .glass-card { background: rgba(20, 17, 24, 0.4); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 32px; transition: border-color 0.3s ease; }
@@ -76,6 +78,12 @@
     .card-label { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent-violet); margin-bottom: 12px; }
     .card-title { font-family: var(--font-display); font-size: 1.8rem; margin-bottom: 12px; color: #fff; }
     .card-desc { font-size: 0.95rem; color: var(--text-muted); margin: 0; }
+
+    /* VALUE OUTCOMES (New Section) */
+    .value-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin-top: 16px; }
+    .value-item { display: flex; align-items: flex-start; gap: 16px; padding: 20px 24px; background: rgba(255,255,255,0.02); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); }
+    .value-icon { color: var(--accent-teal); flex-shrink: 0; margin-top: 2px; }
+    .value-text { font-size: 1.05rem; color: var(--text-main); font-weight: 500; line-height: 1.4; }
 
     /* VISUAL PROOF UI MOCKUP */
     .visual-proof { margin: 16px 0 48px 0; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); background: rgba(0,0,0,0.4); backdrop-filter: blur(10px); overflow: hidden; box-shadow: 0 20px 40px rgba(0,0,0,0.5); }
@@ -93,7 +101,7 @@
     .vp-stat-val { font-family: var(--font-body); font-size: 1.2rem; font-weight: 600; color: #fff; }
     .vp-graph { height: 60px; border-radius: 8px; background: linear-gradient(180deg, rgba(141, 121, 255, 0.1), transparent); border-top: 2px solid var(--accent-violet); position: relative; }
 
-    /* INFRASTRUCTURE MAP (Page 4) */
+    /* INFRASTRUCTURE MAP */
     .flow-diagram { display: flex; flex-direction: column; align-items: center; margin: 40px 0; }
     .flow-node { background: var(--bg-surface); border: 1px solid var(--border); padding: 16px 32px; border-radius: 999px; font-size: 0.9rem; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; color: var(--text-main); box-shadow: 0 10px 30px rgba(0,0,0,0.2); text-align: center; }
     .flow-arrow { width: 2px; height: 32px; background: linear-gradient(180deg, var(--accent-violet), transparent); margin: 8px 0; }
@@ -102,9 +110,9 @@
     .eco-row { display: flex; align-items: center; gap: 24px; padding: 24px; border: 1px solid var(--border-subtle); border-radius: var(--radius-md); background: rgba(255,255,255,0.02); }
     .eco-icon { width: 48px; height: 48px; border-radius: 12px; background: rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: center; color: var(--accent-teal); flex-shrink: 0; }
     .eco-text h4 { font-family: var(--font-body); font-size: 1.1rem; font-weight: 600; margin-bottom: 4px; color: #fff; }
-    .eco-text p { font-size: 0.9rem; color: var(--text-muted); margin: 0; }
+    .eco-text p { font-size: 0.95rem; color: var(--text-muted); margin: 0; }
 
-    /* STATUS TABLE (Page 5) */
+    /* STATUS TABLE */
     .status-list { display: flex; flex-direction: column; gap: 12px; }
     .status-row { display: flex; justify-content: space-between; align-items: center; padding: 20px 24px; background: var(--bg-surface); border: 1px solid var(--border); border-radius: var(--radius-md); }
     .status-name { font-size: 1rem; font-weight: 500; color: #fff; }
@@ -113,7 +121,7 @@
     .badge.prog { background: rgba(141, 121, 255, 0.1); color: var(--accent-violet); border: 1px solid rgba(141, 121, 255, 0.2); }
     .badge.pend { background: rgba(249, 111, 110, 0.1); color: var(--accent-coral); border: 1px solid rgba(249, 111, 110, 0.2); }
 
-    /* TRANSITION TO PHASE II (Page 6) */
+    /* TRANSITION TO PHASE II */
     .phase-transition { text-align: center; padding: 60px 0; }
     .phase-box { padding: 40px; border-radius: var(--radius-lg); border: 1px solid var(--border); background: var(--bg-surface); }
     .phase-label { font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-dim); letter-spacing: 0.1em; margin-bottom: 12px; }
@@ -147,34 +155,67 @@
 
   <div class="dossier-wrapper">
 
-    <!-- PAGE 1: COVER -->
+    <!-- PAGE 0: COVER -->
     <section class="visible">
       <div class="eyebrow">Criar Sin Culpas <span>·</span> StrategyIQ</div>
-      <h1 data-i18n="p1_title" data-es="Dossier Estratégico" data-en="Strategic Dossier">Dossier Estratégico</h1>
-      <h1 style="color: var(--text-muted); font-style: italic; font-size: clamp(2rem, 5vw, 3.5rem);" data-i18n="p1_subtitle" data-es="Fase I: Arquitectura <br>& Fundación" data-en="Phase I: Architecture <br>& Foundation">Fase I: Arquitectura <br>& Fundación</h1>
+      <h1 data-i18n="p0_title" data-es="Dossier Estratégico" data-en="Strategic Dossier">Dossier Estratégico</h1>
+      <h1 style="color: var(--text-muted); font-style: italic; font-size: clamp(2rem, 5vw, 3.5rem);" data-i18n="p0_subtitle" data-es="Fase I: Arquitectura <br>& Fundación" data-en="Phase I: Architecture <br>& Foundation">Fase I: Arquitectura <br>& Fundación</h1>
       
       <div style="margin-top: auto; padding-top: 60px; border-top: 1px solid var(--border-subtle); display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.1em;">
-        <span data-i18n="p1_footer1" data-es="Preparado por LG Studio" data-en="Prepared by LG Studio">Preparado por LG Studio</span>
-        <span data-i18n="p1_footer2" data-es="Resumen Ejecutivo" data-en="Executive Summary">Resumen Ejecutivo</span>
+        <span data-i18n="p0_footer1" data-es="Preparado por LG Studio" data-en="Prepared by LG Studio">Preparado por LG Studio</span>
+        <span data-i18n="p0_footer2" data-es="Resumen Ejecutivo" data-en="Executive Summary">Resumen Ejecutivo</span>
       </div>
       
       <div class="scroll-down" data-i18n="scroll" data-es="Desplazar" data-en="Scroll">Desplazar</div>
     </section>
 
+    <!-- NEW PAGE 1: VALUE GENERATED -->
+    <section>
+      <div class="eyebrow">01 <span>·</span> <span data-i18n="p1_eyebrow" data-es="Impacto" data-en="Value">Impacto</span></div>
+      <h2 data-i18n="p1_title" data-es="Lo que logró esta fase" data-en="What this phase accomplished">Lo que logró esta fase</h2>
+      
+      <div class="value-grid">
+        <div class="value-item">
+          <svg class="value-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          <span class="value-text" data-i18n="v1" data-es="Estableció la fundación operativa" data-en="Established operational foundation">Estableció la fundación operativa</span>
+        </div>
+        <div class="value-item">
+          <svg class="value-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          <span class="value-text" data-i18n="v2" data-es="Redujo la ambigüedad estratégica" data-en="Reduced strategic ambiguity">Redujo la ambigüedad estratégica</span>
+        </div>
+        <div class="value-item">
+          <svg class="value-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          <span class="value-text" data-i18n="v3" data-es="Creó una arquitectura de contenido escalable" data-en="Created scalable content architecture">Creó una arquitectura de contenido escalable</span>
+        </div>
+        <div class="value-item">
+          <svg class="value-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          <span class="value-text" data-i18n="v4" data-es="Estructuró vías de monetización" data-en="Structured monetization pathways">Estructuró vías de monetización</span>
+        </div>
+        <div class="value-item">
+          <svg class="value-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          <span class="value-text" data-i18n="v5" data-es="Habilitó la captura de señales en tiempo real" data-en="Enabled real-time signal capture">Habilitó la captura de señales en tiempo real</span>
+        </div>
+        <div class="value-item">
+          <svg class="value-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          <span class="value-text" data-i18n="v6" data-es="Preparó el ecosistema para la Fase II" data-en="Prepared ecosystem for Phase II activation">Preparó el ecosistema para la Fase II</span>
+        </div>
+      </div>
+    </section>
+
     <!-- PAGE 2: ORIGINAL MANDATE -->
     <section>
-      <div class="eyebrow">01 <span>·</span> <span data-i18n="p2_eyebrow" data-es="El Mandato" data-en="The Mandate">El Mandato</span></div>
+      <div class="eyebrow">02 <span>·</span> <span data-i18n="p2_eyebrow" data-es="El Mandato" data-en="The Mandate">El Mandato</span></div>
       <h2 data-i18n="p2_title" data-es="Los Objetivos Originales" data-en="The Original Objectives">Los Objetivos Originales</h2>
       <p class="lede" data-i18n="p2_lede" data-es="Este proyecto fue diseñado para transformar una filosofía en un marco operativo escalable." data-en="This engagement was designed to transform philosophy into a scalable operational framework.">Este proyecto fue diseñado para transformar una filosofía en un marco operativo escalable.</p>
       
-      <p class="origin-proof" data-i18n="p2_proof" data-es="Construido a partir de la síntesis de workshops, extracción de señales de audiencia, benchmarking del ecosistema y sesiones de traducción estratégica realizadas durante la Fase I." data-en="Built from workshop synthesis, audience signal extraction, ecosystem benchmarking, and strategic translation sessions conducted throughout Phase I.">
-        Construido a partir de la síntesis de workshops, extracción de señales de audiencia, benchmarking del ecosistema y sesiones de traducción estratégica realizadas durante la Fase I.
+      <p class="origin-proof" data-i18n="p2_proof" data-es="Construido a partir de la síntesis de workshops, extracción de señales, benchmarking y sesiones de traducción estratégica a lo largo de la Fase I." data-en="Built from workshop synthesis, audience signal extraction, ecosystem benchmarking, and strategic translation sessions conducted throughout Phase I.">
+        Construido a partir de la síntesis de workshops, extracción de señales, benchmarking y sesiones de traducción estratégica a lo largo de la Fase I.
       </p>
 
       <div class="grid-2">
         <div class="glass-card">
           <div class="card-label" data-i18n="c1_lbl" data-es="Metodología" data-en="Methodology">Metodología</div>
-          <h3 class="card-title" data-i18n="c1_title" data-es="Definir el Sistema Central" data-en="Define the Core System">Definir el Sistema Central</h3>
+          <h3 class="card-title" data-i18n="c1_title" data-es="Definir el Sistema" data-en="Define the Core System">Definir el Sistema</h3>
           <p class="card-desc" data-i18n="c1_desc" data-es="Sintetizar workshops, contenido e ideas en una metodología estructurada y repetible de 4 pilares." data-en="Synthesize workshops, content, and ideas into a structured, repeatable 4-pillar methodology.">Sintetizar workshops, contenido e ideas en una metodología estructurada y repetible de 4 pilares.</p>
         </div>
         <div class="glass-card">
@@ -197,7 +238,7 @@
 
     <!-- PAGE 3: WHAT WAS BUILT -->
     <section>
-      <div class="eyebrow">02 <span>·</span> <span data-i18n="p3_eyebrow" data-es="Ejecución" data-en="Execution">Ejecución</span></div>
+      <div class="eyebrow">03 <span>·</span> <span data-i18n="p3_eyebrow" data-es="Ejecución" data-en="Execution">Ejecución</span></div>
       <h2 data-i18n="p3_title" data-es="Infraestructura Entregada" data-en="Infrastructure Delivered">Infraestructura Entregada</h2>
       <p class="lede" data-i18n="p3_lede" data-es="No construimos simplemente un sitio web. Construimos un sistema operativo estratégico para impulsar el futuro de la marca." data-en="We didn't just build a website. We built a strategic operating system to power the future of the brand.">No construimos simplemente un sitio web. Construimos un sistema operativo estratégico para impulsar el futuro de la marca.</p>
 
@@ -248,7 +289,7 @@
 
     <!-- PAGE 4: THE ECOSYSTEM -->
     <section>
-      <div class="eyebrow">03 <span>·</span> <span data-i18n="p4_eyebrow" data-es="Arquitectura" data-en="Architecture">Arquitectura</span></div>
+      <div class="eyebrow">04 <span>·</span> <span data-i18n="p4_eyebrow" data-es="Arquitectura" data-en="Architecture">Arquitectura</span></div>
       <h2 data-i18n="p4_title" data-es="El Mapa del Ecosistema" data-en="The Ecosystem Map">El Mapa del Ecosistema</h2>
       
       <div class="eco-grid">
@@ -296,7 +337,7 @@
 
     <!-- PAGE 5: STATUS -->
     <section>
-      <div class="eyebrow">04 <span>·</span> <span data-i18n="p5_eyebrow" data-es="Progreso" data-en="Progress">Progreso</span></div>
+      <div class="eyebrow">05 <span>·</span> <span data-i18n="p5_eyebrow" data-es="Progreso" data-en="Progress">Progreso</span></div>
       <h2 data-i18n="p5_title" data-es="Estado Actual de Alineación" data-en="Current Alignment Status">Estado Actual de Alineación</h2>
       <p class="lede" data-i18n="p5_lede" data-es="Para cerrar la Fase I limpiamente, debemos alinear nuestras expectativas y finalizar las decisiones de infraestructura pendientes." data-en="To close out Phase I cleanly, we must align our expectations and finalize the pending infrastructure decisions.">Para cerrar la Fase I limpiamente, debemos alinear nuestras expectativas y finalizar las decisiones de infraestructura pendientes.</p>
 
@@ -319,11 +360,11 @@
         </div>
         <div class="status-row">
           <span class="status-name" data-i18n="s5" data-es="Definición de KPIs y Métricas de Éxito" data-en="KPI & Success Metrics Definition">Definición de KPIs y Métricas de Éxito</span>
-          <span class="badge pend" data-i18n="b_pend" data-es="Por Finalizar" data-en="To Be Finalized">Por Finalizar</span>
+          <span class="badge pend" data-i18n="b_pend" data-es="Por Finalizar Juntos" data-en="To Be Finalized Together">Por Finalizar Juntos</span>
         </div>
         <div class="status-row">
           <span class="status-name" data-i18n="s6" data-es="Secuenciación de Lanzamiento" data-en="Launch Sequencing">Secuenciación de Lanzamiento</span>
-          <span class="badge pend" data-i18n="b_pend" data-es="Por Finalizar" data-en="To Be Finalized">Por Finalizar</span>
+          <span class="badge pend" data-i18n="b_pend" data-es="Por Finalizar Juntos" data-en="To Be Finalized Together">Por Finalizar Juntos</span>
         </div>
       </div>
     </section>
@@ -351,7 +392,7 @@
 
     <!-- PAGE 7: NEXT STEPS -->
     <section>
-      <div class="eyebrow">05 <span>·</span> <span data-i18n="p7_eyebrow" data-es="Acción" data-en="Action">Acción</span></div>
+      <div class="eyebrow">06 <span>·</span> <span data-i18n="p7_eyebrow" data-es="Acción" data-en="Action">Acción</span></div>
       <h2 data-i18n="p7_title" data-es="Prioridades Inmediatas" data-en="Immediate Priorities">Prioridades Inmediatas</h2>
       <p class="lede" style="color: #fff; margin-bottom: 32px;" data-i18n="p7_lede" data-es="El objetivo ahora es simple: pasar de la arquitectura estratégica a una activación confiable y medible." data-en="The goal now is simple: move from strategic architecture into confident, measurable activation.">El objetivo ahora es simple: pasar de la arquitectura estratégica a una activación confiable y medible.</p>
       
