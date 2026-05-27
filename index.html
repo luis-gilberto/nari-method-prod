@@ -289,27 +289,21 @@
               <div class="now-eyebrow"><span class="lb-en">RIGHT NOW</span><span class="lb-es active">EN ESTE MOMENTO</span></div>
               <p class="now-body">
                 <span class="lb-en">
-                  The first four Criar Sin Culpas support protocols are entering final review before launch.
-                  Over the past iteration cycle, the protocols were rebuilt to better reflect Nari's methodology and the emotional realities parents face during high-stress moments. The updated system places stronger emphasis on helping parents understand the "why" behind a child's behavior before jumping into correction or scripting.
-                  The current protocol set includes: screen time, emotional escalation, bedtime resistance, and sibling conflict — fully structured in both Spanish and English.
-                  We are now completing the final calibration pass with Nari before the first public testing rollout begins.
+                  The first four Criar Sin Culpas support protocols are now live. The platform now connects the method, guides, public experience, and private workspace into one system. We are entering a stage of observation, refinement, and growth readiness: understanding what the audience uses, what resonates, and what should evolve next.
                 </span>
                 <span class="lb-es active">
-                  Los primeros cuatro protocolos de apoyo de Criar Sin Culpas están entrando en la revisión final antes de su lanzamiento.
-                  Durante el último ciclo de iteración, los protocolos fueron reconstruidos para reflejar mejor la metodología de Nari y las realidades emocionales que los padres enfrentan en momentos de alto estrés. El sistema actualizado pone un mayor énfasis en ayudar a los padres a entender el "por qué" detrás del comportamiento de un niño antes de saltar a la corrección o el guion.
-                  El conjunto de protocolos actuales incluye: tiempo de pantalla, escalada emocional, resistencia a la hora de dormir y conflicto entre hermanos — totalmente estructurados tanto en español como en inglés.
-                  Ahora estamos completando el pase de calibración final con Nari antes de que comience el primer despliegue de pruebas públicas.
+                  Los primeros cuatro protocolos de apoyo de Criar Sin Culpas ya están en vivo. La plataforma ahora conecta el método, las guías, la experiencia pública y el workspace privado en un solo sistema. Estamos entrando en una etapa de observación, ajuste y preparación para crecimiento: entender qué usa la audiencia, qué resuena y qué debe evolucionar después.
                 </span>
               </p>
             </div>
             <div class="hero-meta-strip">
               <div class="hero-meta-item">
                 <span class="meta-label"><span class="lb-en">Current focus</span><span class="lb-es active">Enfoque actual</span></span>
-                <span class="meta-value"><span class="lb-en">Commercial activation</span><span class="lb-es active">Activación comercial</span></span>
+                <span class="meta-value"><span class="lb-en">Activation + growth</span><span class="lb-es active">Activación + crecimiento</span></span>
               </div>
               <div class="hero-meta-item">
                 <span class="meta-label"><span class="lb-en">Last artifact</span><span class="lb-es active">Último artefacto</span></span>
-                <span class="meta-value">CSC Viz ID</span>
+                <span class="meta-value">Project Journey</span>
               </div>
               <div class="hero-meta-item">
                 <span class="meta-label">Idiomas</span>
@@ -338,8 +332,11 @@
 
           <div class="snapshot-stats">
             <div class="stat-card">
-              <div class="stat-num coral">30K+ seguidores</div>
-              <div class="stat-label"><span class="lb-en">Instagram followers</span><span class="lb-es active">Seguidores en Instagram</span></div>
+              <div class="stat-num coral"><span class="js-ig-followers-counter" data-start="26900" data-end="40800">26.9K</span><span style="display:block;margin-top:8px;font-size:11px;font-weight:800;letter-spacing:0.08em;text-transform:uppercase;color:rgba(240,236,229,0.55);">+13.9K · +52%</span></div>
+              <div class="stat-label">
+                <span style="display:block;line-height:1.25;"><span class="lb-en">Current followers</span><span class="lb-es active">Seguidores actuales</span></span>
+                <span style="display:block;margin-top:6px;line-height:1.25;color:rgba(240,236,229,0.6);"><span class="lb-en">From 26.9K at project start</span><span class="lb-es active">Desde 26.9K al inicio del proyecto</span></span>
+              </div>
             </div>
             <div class="stat-card">
               <div class="stat-num teal">50%+</div>
@@ -355,6 +352,55 @@
              </div> 
 
           </div>
+          <script>
+            (function () {
+              var el = document.querySelector('.js-ig-followers-counter');
+              if (!el) return;
+              var start = Number(el.getAttribute('data-start') || 0);
+              var end = Number(el.getAttribute('data-end') || 0);
+              var prefersReduced = false;
+              try { prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) {}
+              function formatK(n) {
+                if (!isFinite(n)) return '';
+                if (n >= 1000) return (n / 1000).toFixed(1) + 'K';
+                return String(Math.round(n));
+              }
+              function setVal(n) { el.textContent = formatK(n); }
+              setVal(start);
+              if (prefersReduced) { setVal(end); return; }
+              var ran = false;
+              function animate() {
+                if (ran) return;
+                ran = true;
+                var duration = 1400;
+                var t0 = (window.performance && performance.now) ? performance.now() : Date.now();
+                function easeOutCubic(t) { return 1 - Math.pow(1 - t, 3); }
+                function tick(now) {
+                  var t = (now - t0) / duration;
+                  if (t >= 1) { setVal(end); return; }
+                  var v = start + (end - start) * easeOutCubic(Math.max(0, Math.min(1, t)));
+                  setVal(v);
+                  requestAnimationFrame(tick);
+                }
+                requestAnimationFrame(tick);
+              }
+              if ('IntersectionObserver' in window) {
+                var target = el.closest('.stat-card') || el;
+                var io = new IntersectionObserver(function (entries) {
+                  for (var i = 0; i < entries.length; i++) {
+                    if (entries[i].isIntersecting) {
+                      io.disconnect();
+                      animate();
+                      break;
+                    }
+                  }
+                }, { threshold: 0.35 });
+                io.observe(target);
+              } else {
+                animate();
+              }
+            })();
+          </script>
         </div>
 
         <!-- FEATURED ARTIFACTS (MINI) -->
@@ -369,7 +415,7 @@
                <div class="acard-content"> 
                  <div class="acard-eyebrow">SnglIQ · <span class="lb-en">Signal Intelligence</span><span class="lb-es active">Inteligencia de Señales</span></div> 
                  <div class="acard-title"><span class="lb-en">Protocol Signal Framework ★</span><span class="lb-es active">Protocol Signal Framework ★</span></div> 
-                 <div class="acard-meta">ES / EN · Activo · Mayo 2025</div> 
+                 <div class="acard-meta">ES / EN · Activo · Fase I</div> 
                </div> 
                <div class="acard-arrow">→</div> 
              </div> 
@@ -378,7 +424,7 @@
                <div class="acard-content"> 
                  <div class="acard-eyebrow"><span class="lb-en">Business</span><span class="lb-es active">Negocio</span></div> 
                  <div class="acard-title"><span class="lb-en">Brand Partnership Kit</span><span class="lb-es active">Kit de Alianzas con Marcas</span></div> 
-                 <div class="acard-meta">ES / EN · Aprobado · Mayo 2025</div> 
+                 <div class="acard-meta">ES / EN · Aprobado · Fase I</div> 
                </div> 
                <div class="acard-arrow">→</div> 
              </div> 
@@ -387,7 +433,7 @@
                <div class="acard-content"> 
                  <div class="acard-eyebrow"><span class="lb-en">Strategy</span><span class="lb-es active">Estrategia</span></div> 
                  <div class="acard-title"><span class="lb-en">Monetization Report</span><span class="lb-es active">Reporte de Monetización</span></div> 
-                 <div class="acard-meta">ES / EN · Aprobado · Abr 2025</div> 
+                 <div class="acard-meta">ES / EN · Aprobado · Fase I</div> 
                </div> 
                <div class="acard-arrow">→</div> 
              </div> 
@@ -396,7 +442,7 @@
                <div class="acard-content"> 
                  <div class="acard-eyebrow"><span class="lb-en">Business</span><span class="lb-es active">Negocio</span></div> 
                  <div class="acard-title"><span class="lb-en">Commercial Activation Brief</span><span class="lb-es active">Brief de Activación Comercial</span></div> 
-                 <div class="acard-meta">ES / EN · Aprobado · Abr 2025</div> 
+                 <div class="acard-meta">ES / EN · Aprobado · Fase I</div> 
                </div> 
                <div class="acard-arrow">→</div> 
              </div> 
@@ -408,8 +454,8 @@
          <div class="journey-teaser" onclick="goToSection('journey')"> 
            <div class="jt-left"> 
              <div class="jt-eyebrow"><span class="lb-en">StrategyIQ · Criar Sin Culpas</span><span class="lb-es active">StrategyIQ · Criar Sin Culpas</span></div> 
-             <div class="jt-title"><span class="lb-en">From chaos to <em>growth</em></span><span class="lb-es active">De la <em>claridad</em> al crecimiento</span></div> 
-             <div class="jt-desc"><span class="lb-en">Three phases. One transformation story. See the full arc of work behind Criar Sin Culpas.</span><span class="lb-es active">Tres fases. Una historia de transformación. El recorrido completo detrás de Criar Sin Culpas.</span></div> 
+             <div class="jt-title"><span class="lb-en">De la <em>claridad</em> al crecimiento</span><span class="lb-es active">De la <em>claridad</em> al crecimiento</span></div> 
+             <div class="jt-desc"><span class="lb-en">Three phases. One transformation story. The full journey behind how Criar Sin Culpas moved from strategic clarity to an active system.</span><span class="lb-es active">Tres fases. Una historia de transformación. El recorrido completo detrás de cómo Criar Sin Culpas pasó de claridad estratégica a sistema activo.</span></div> 
            </div> 
            <div class="jt-phases"> 
              <div class="jt-phase jt-done"> 
@@ -422,12 +468,12 @@
                <div class="jt-phase-label" style="color:var(--coral);"><span class="lb-en">Architecture</span><span class="lb-es active">Arquitectura</span></div> 
              </div> 
              <div class="jt-divider"></div> 
-             <div class="jt-phase jt-locked"> 
-               <div class="jt-node jt-node-locked">○</div> 
-               <div class="jt-phase-label jt-muted"><span class="lb-en">Activation</span><span class="lb-es active">Activación</span></div> 
+             <div class="jt-phase jt-active"> 
+               <div class="jt-node jt-node-active">●</div> 
+               <div class="jt-phase-label" style="color:var(--teal);"><span class="lb-en">Activation</span><span class="lb-es active">Activación</span></div> 
              </div> 
            </div> 
-           <div class="jt-cta"><span class="lb-en">Ver trayectoria</span><span class="lb-es active">Ver trayectoria</span> →</div> 
+           <div class="jt-cta"><span class="lb-en">View journey</span><span class="lb-es active">Ver trayectoria</span> →</div> 
          </div> 
  
         <!-- QUICK ACTIONS BAND -->
@@ -801,23 +847,24 @@
 
       <!-- ─── SECTION: PROJECT JOURNEY ─── -->
       <section id="section-journey" class="ws-section">
+        <div id="project-journey-proof"></div>
 
         <!-- SECTION HEADER -->
         <div class="section-header">
           <div class="section-eyebrow"><span class="lb-en">StrategyIQ · Criar Sin Culpas</span><span class="lb-es active">StrategyIQ · Criar Sin Culpas</span></div>
-          <h2 class="section-title"><span class="lb-en">From chaos to <em>growth</em></span><span class="lb-es active">De la <em>claridad</em> al crecimiento</span></h2>
-          <p class="section-desc"><span class="lb-en">This is not a document archive. It is the record of a transformation — from understanding the business, to building the system, to activating it and making it grow.</span><span class="lb-es active">Este no es un archivo de documentos. Es el registro de una transformación — de entender el negocio, a construir el sistema, a activarlo y hacerlo crecer.</span></p>
+          <h2 class="section-title"><span class="lb-en">Project Journey</span><span class="lb-es active">De la claridad al crecimiento</span></h2>
+          <p class="section-desc"><span class="lb-en">Not only what we did. Also why we did it.</span><span class="lb-es active">No solo qué hicimos. También por qué lo hicimos.</span></p>
         </div>
 
         <!-- PROGRESS BAR -->
-        <div class="journey-progress" style="max-width:860px;margin:0 auto 48px;padding-left:80px;">
+        <div class="journey-progress" style="max-width:860px;margin:18px auto 48px;padding-left:80px;">
           <div style="height:3px;background:rgba(255,255,255,0.07);border-radius:999px;overflow:hidden;margin-bottom:10px;">
             <div style="height:100%;width:85%;background:linear-gradient(90deg,#4ecdc4,#f96f6e);border-radius:999px;"></div>
           </div>
           <div style="display:flex;justify-content:space-between;">
             <span style="font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#4ecdc4;"><span class="lb-en">Diagnosis ✓</span><span class="lb-es active">Diagnóstico ✓</span></span>
             <span style="font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#f96f6e;"><span class="lb-en">Architecture ◉</span><span class="lb-es active">Arquitectura ◉</span></span>
-            <span style="font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:rgba(240,236,229,0.35);"><span class="lb-en">Activation</span><span class="lb-es active">Activación</span></span>
+            <span style="font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#f96f6e;"><span class="lb-en">Activation ●</span><span class="lb-es active">Activación ●</span></span>
           </div>
         </div>
 
@@ -835,12 +882,12 @@
                   <div class="pj-title"><span class="lb-en">Understand the business</span><span class="lb-es active">Entender el negocio</span></div>
                   <div class="pj-subtitle"><span class="lb-en">"What is actually happening here?"</span><span class="lb-es active">"¿Qué está pasando realmente aquí?"</span></div>
                 </div>
-                <div class="pj-status pj-status-done"><span class="lb-en">Certified ✓</span><span class="lb-es active">Certificado ✓</span></div>
+                <div class="pj-status pj-status-done"><span class="lb-en">COMPLETED ✓</span><span class="lb-es active">CERTIFICADO ✓</span></div>
               </div>
               <div class="pj-body">
                 <p class="pj-narrative">
-                  <span class="lb-en">This phase converts chaos into clarity. <strong>We analyzed the creator, the audience, and the market</strong> until we could define the opportunity and positioning with precision. The result: a certified strategic diagnosis that serves as the foundation for everything that follows.</span>
-                  <span class="lb-es active">Esta fase convierte el caos en claridad. <strong>Analizamos a la creadora, la audiencia y el mercado</strong> hasta poder definir con precisión la oportunidad y el posicionamiento. El resultado: un diagnóstico estratégico certificado que sirve como base para todo lo que viene después.</span>
+                  <span class="lb-en">We turned scattered signals, early context, and open opportunities into strategic clarity.</span>
+                  <span class="lb-es active">Convertimos señales dispersas, contexto inicial y oportunidades abiertas en claridad estratégica.</span>
                 </p>
 
                 <div class="pj-core-output">
@@ -849,7 +896,7 @@
                     <div class="pj-output-info">
                       <div class="pj-output-tag pj-tag-teal"><span class="lb-en">Certified Diagnosis</span><span class="lb-es active">Diagnóstico Certificado</span></div>
                       <div class="pj-output-name"><span class="lb-en">Strategic Diagnosis · SIQ-01</span><span class="lb-es active">Diagnóstico Estratégico · SIQ-01</span></div>
-                      <div class="pj-output-desc"><span class="lb-en">The moment everything makes sense. We understand the game being played.</span><span class="lb-es active">El momento en que todo toma sentido. Entendemos el juego que se está jugando.</span></div>
+                      <div class="pj-output-desc"><span class="lb-en">Phase I diagnosis certified. Clear positioning and opportunity definition.</span><span class="lb-es active">Diagnóstico de Fase I certificado. Posicionamiento claro y definición de oportunidad.</span></div>
                     </div>
                     <a href="https://www.luis-gilberto.com/TheHub/clients/nari/files/SIQ-01_StrategicDiagnosis_CriarSinCulpas.pdf" target="_blank" class="pj-output-link pj-link-teal">
                       <span class="lb-en">Open ↗</span><span class="lb-es active">Abrir ↗</span>
@@ -906,12 +953,12 @@
                   <div class="pj-title"><span class="lb-en">Build the system</span><span class="lb-es active">Construir el sistema</span></div>
                   <div class="pj-subtitle"><span class="lb-en">"Now we build the machine."</span><span class="lb-es active">"Ahora construimos la máquina."</span></div>
                 </div>
-                <div class="pj-status pj-status-active"><span class="lb-en">◉ In Progress</span><span class="lb-es active">◉ En Progreso</span></div>
+                <div class="pj-status pj-status-active"><span class="lb-en">IN PROGRESS</span><span class="lb-es active">EN PROGRESO</span></div>
               </div>
               <div class="pj-body">
                 <p class="pj-narrative">
-                  <span class="lb-en">This is where strategy becomes system. <strong>We transform insights into a structured methodology</strong>, validate it against real content, and build the financial and execution logic. This is where the business becomes repeatable and scalable.</span>
-                  <span class="lb-es active">Aquí la estrategia se convierte en sistema. <strong>Transformamos los insights en una metodología estructurada</strong>, la validamos contra contenido real y construimos la lógica financiera y de ejecución. Es donde el negocio se vuelve repetible y escalable.</span>
+                  <span class="lb-en">We turned the findings into methodology, commercial structure, brand assets, and an operating workspace.</span>
+                  <span class="lb-es active">Convertimos los hallazgos en método, estructura comercial, activos de marca y un sistema operativo de trabajo.</span>
                 </p>
 
                 <!-- METHOD BLOCK -->
@@ -949,9 +996,21 @@
                     <div class="pj-tile-foot"><span class="pj-tile-lang">ES / EN</span><span class="pj-tile-arrow">↗</span></div>
                   </a>
                   <a href="https://www.luis-gilberto.com/TheHub/clients/nari/files/SIQ_A02_CommercialActivationBrief_CSC.html" target="_blank" class="pj-tile">
-                    <div class="pj-tile-code">A04 · Brief</div>
+                    <div class="pj-tile-code">A02 · Brief</div>
                     <div class="pj-tile-name"><span class="lb-en">Commercial Activation Brief</span><span class="lb-es active">Dossier de Activación Comercial</span></div>
                     <div class="pj-tile-desc"><span class="lb-en">Two revenue engines, three scenarios, first steps to activate the business model.</span><span class="lb-es active">Dos motores de ingreso, tres escenarios, primeros pasos para activar el modelo de negocio.</span></div>
+                    <div class="pj-tile-foot"><span class="pj-tile-lang">ES / EN</span><span class="pj-tile-arrow">↗</span></div>
+                  </a>
+                  <a href="files/SIQ_A05_BrandPartnershipKit_CSC.html" target="_blank" class="pj-tile">
+                    <div class="pj-tile-code">A05 · Brand</div>
+                    <div class="pj-tile-name"><span class="lb-en">Brand Partnership Kit</span><span class="lb-es active">Kit de Alianzas de Marca</span></div>
+                    <div class="pj-tile-desc"><span class="lb-en">Partnership-ready assets: positioning, formats, and collaboration entry points.</span><span class="lb-es active">Activos listos para alianzas: posicionamiento, formatos y puntos de entrada de colaboración.</span></div>
+                    <div class="pj-tile-foot"><span class="pj-tile-lang">ES / EN</span><span class="pj-tile-arrow">↗</span></div>
+                  </a>
+                  <a href="https://criarsinculpas.com/brand" target="_blank" class="pj-tile">
+                    <div class="pj-tile-code"><span class="lb-en">Brand Book</span><span class="lb-es active">Brand Book</span></div>
+                    <div class="pj-tile-name"><span class="lb-en">Brand System</span><span class="lb-es active">Sistema de Marca</span></div>
+                    <div class="pj-tile-desc"><span class="lb-en">The visual identity, usage rules, and brand assets in one place.</span><span class="lb-es active">Identidad visual, reglas de uso y activos de marca en un solo lugar.</span></div>
                     <div class="pj-tile-foot"><span class="pj-tile-lang">ES / EN</span><span class="pj-tile-arrow">↗</span></div>
                   </a>
                 </div>
@@ -974,19 +1033,24 @@
              <div class="pj-card pj-card-active"> 
                <div class="pj-head"> 
                  <div class="pj-head-left"> 
-                   <div class="pj-label pj-label-active"><span class="lb-en">Phase 03 · Activation · In Progress</span><span class="lb-es active">Fase 03 · Activación · En Progreso</span></div> 
+                   <div class="pj-label pj-label-active"><span class="lb-en">Phase 03 · Activation · Live</span><span class="lb-es active">Fase 03 · Activación · Activo</span></div> 
                    <div class="pj-title"><span class="lb-en">Activate and grow</span><span class="lb-es active">Activar y crecer</span></div> 
                    <div class="pj-subtitle"><span class="lb-en">"Now we turn it into revenue."</span><span class="lb-es active">"Ahora lo convertimos en ingresos."</span></div> 
                  </div> 
-                 <div class="pj-status pj-status-active"><span class="lb-en">◉ In Progress</span><span class="lb-es active">◉ En Progreso</span></div> 
+                 <div class="pj-status pj-status-active"><span class="lb-en">LIVE</span><span class="lb-es active">ACTIVO</span></div> 
                </div> 
                <div class="pj-body"> 
                  <p class="pj-narrative"> 
-                   <span class="lb-en">The first four public protocols of Criar Sin Culpas are live. <strong>Real parents can now access the method</strong> on screen time, emotional escalation, bedtime resistance, and sibling conflict — in Spanish and English. This is the first time the method is publicly accessible. We are now measuring how the audience responds in real time.</span> 
-                   <span class="lb-es active">Los primeros cuatro protocolos públicos de Criar Sin Culpas están en vivo. <strong>Los padres ya pueden acceder al método</strong> sobre tiempo de pantalla, escalada emocional, resistencia a dormir y conflictos entre hermanos — en español e inglés. Es la primera vez que el método es accesible al público. Ahora medimos cómo responde la audiencia en tiempo real.</span> 
+                  <span class="lb-en">The protocols are no longer an internal idea. They are live, connected to the site, and ready to surface real usage signals.</span> 
+                  <span class="lb-es active">Los protocolos ya no son una idea interna. Están en vivo, conectados al sitio y listos para observar señales reales de uso.</span> 
                  </p> 
                  <div class="pj-sublabel"><span class="lb-en">Active artifacts</span><span class="lb-es active">Artefactos activos</span></div> 
                  <div class="pj-artifacts"> 
+                   <a href="https://criarsinculpas.com" target="_blank" class="pj-tile"> 
+                     <div class="pj-tile-code"><span class="lb-en">Criar Sin Culpas</span><span class="lb-es active">Criar Sin Culpas</span></div> 
+                     <div class="pj-tile-name"><span class="lb-en">Live Site</span><span class="lb-es active">Sitio en vivo</span></div> 
+                     <div class="pj-tile-foot"><span class="pj-tile-lang">ES / EN</span><span class="pj-tile-arrow">↗</span></div> 
+                   </a> 
                    <a href="https://criarsinculpas.com/apoyo/screen-time" target="_blank" class="pj-tile"> 
                      <div class="pj-tile-code">Protocolo 01</div> 
                      <div class="pj-tile-name"><span class="lb-en">Screen Time</span><span class="lb-es active">Tiempo de Pantalla</span></div> 
@@ -1009,7 +1073,7 @@
                    </a> 
                    <a href="files/SIQ_A03_ProtocolSignalFramework_CSC.html" target="_blank" class="pj-tile" style="border-color:rgba(75,173,168,0.2);background:linear-gradient(135deg,rgba(75,173,168,0.06) 0%,rgba(75,173,168,0.02) 100%);"> 
                      <div class="pj-tile-code" style="color:var(--teal);">SIQ_A03 · SnglIQ</div> 
-                     <div class="pj-tile-name"><span class="lb-en">Protocol Signal Framework</span><span class="lb-es active">Protocol Signal Framework</span></div> 
+                     <div class="pj-tile-name"><span class="lb-en">Protocol Signal Framework</span><span class="lb-es active">Marco de Señales de Protocolos</span></div> 
                      <div class="pj-tile-desc"><span class="lb-en">Live intelligence framework measuring resonance across all four protocols.</span><span class="lb-es active">Marco de inteligencia en vivo midiendo resonancia en los cuatro protocolos.</span></div> 
                      <div class="pj-tile-foot"><span class="pj-tile-lang" style="color:var(--teal);">ES / EN · Activo</span><span class="pj-tile-arrow" style="color:var(--teal);">↗</span></div> 
                    </a> 
@@ -1026,6 +1090,17 @@
            </div>
 
         </div><!-- /pj-journey -->
+
+        <div style="max-width:860px;margin:72px auto 0;padding-left:80px;">
+          <div class="pj-sublabel"><span class="lb-en">Closing thesis</span><span class="lb-es active">Tesis de cierre</span></div>
+          <div class="pj-decision" style="margin:0;">
+            <div class="pj-decision-icon">◆</div>
+            <div>
+              <div class="pj-decision-label"><span class="lb-en">Operating principle</span><span class="lb-es active">Principio operativo</span></div>
+              <div class="pj-decision-text"><span class="lb-en">Operational memory allows Criar Sin Culpas to grow without depending on chaos, memory, or moment-by-moment intuition.</span><span class="lb-es active">La memoria operativa permite que Criar Sin Culpas crezca sin depender del caos, la memoria o la intuición del momento.</span></div>
+            </div>
+          </div>
+        </div>
 
       </section>
       <!-- ─── END SECTION: PROJECT JOURNEY ─── -->
