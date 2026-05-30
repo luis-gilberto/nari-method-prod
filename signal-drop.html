@@ -98,6 +98,38 @@
       background: rgba(249,111,110,0.10);
       color: var(--text-primary);
     }
+    .sd-actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 14px;
+      margin-top: 6px;
+    }
+    .sd-drop {
+      border: 1px solid var(--border);
+      border-radius: var(--r-pill);
+      padding: 12px 16px;
+      font-size: 13px;
+      color: var(--text-primary);
+      background: rgba(255,255,255,0.015);
+      transition: background var(--transition), border-color var(--transition), transform var(--transition);
+    }
+    .sd-drop:hover {
+      border-color: var(--border-strong);
+      background: rgba(255,255,255,0.03);
+      transform: translateY(-1px);
+    }
+    .sd-drop:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+      transform: none;
+    }
+    .sd-hint {
+      font-size: 12px;
+      color: var(--text-dim);
+      letter-spacing: 0.02em;
+      white-space: nowrap;
+    }
     .sd-log {
       margin-top: 10px;
       display: flex;
@@ -105,6 +137,11 @@
       gap: 10px;
       padding-top: 18px;
       border-top: 1px solid var(--border);
+    }
+    .sd-log-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
     }
     .sd-log-item {
       display: flex;
@@ -133,6 +170,13 @@
       .sd-chip {
         padding: 10px 12px;
       }
+      .sd-actions {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .sd-hint {
+        white-space: normal;
+      }
     }
   </style>
 </head>
@@ -154,30 +198,14 @@
         <button type="button" class="sd-chip" aria-pressed="false">Partnership</button>
         <button type="button" class="sd-chip" aria-pressed="false">Emotional Pattern</button>
       </div>
+      <div class="sd-actions">
+        <button type="button" class="sd-drop" id="dropBtn" disabled>Drop Signal</button>
+        <div class="sd-hint">Ctrl/⌘ + Enter to drop</div>
+      </div>
     </section>
 
-    <section class="sd-log" aria-label="Signal log mockup">
-      <div class="sd-log-item">
-        <span class="sd-log-ts">[Timestamp]</span>
-        <span aria-hidden="true">·</span>
-        <span class="sd-log-type">[Type]</span>
-        <span aria-hidden="true">·</span>
-        <span class="sd-log-note">[Short Note placeholder]</span>
-      </div>
-      <div class="sd-log-item">
-        <span class="sd-log-ts">[Timestamp]</span>
-        <span aria-hidden="true">·</span>
-        <span class="sd-log-type">[Type]</span>
-        <span aria-hidden="true">·</span>
-        <span class="sd-log-note">[Short Note placeholder]</span>
-      </div>
-      <div class="sd-log-item">
-        <span class="sd-log-ts">[Timestamp]</span>
-        <span aria-hidden="true">·</span>
-        <span class="sd-log-type">[Type]</span>
-        <span aria-hidden="true">·</span>
-        <span class="sd-log-note">[Short Note placeholder]</span>
-      </div>
+    <section class="sd-log" aria-label="Signal log">
+      <div class="sd-log-list" id="logList"></div>
     </section>
   </main>
 
@@ -196,6 +224,119 @@
         });
       };
       chips.forEach((btn) => btn.addEventListener('click', () => setSelected(btn)));
+
+      const storageKey = 'csc_signal_drop_v1';
+      const textarea = document.getElementById('signalText');
+      const dropBtn = document.getElementById('dropBtn');
+      const logList = document.getElementById('logList');
+
+      const getSelectedType = () => {
+        const selected = document.querySelector('.sd-chip.is-selected');
+        return selected ? selected.textContent.trim() : 'Documentary';
+      };
+
+      const loadEntries = () => {
+        try {
+          const raw = window.localStorage.getItem(storageKey);
+          const parsed = raw ? JSON.parse(raw) : [];
+          return Array.isArray(parsed) ? parsed : [];
+        } catch {
+          return [];
+        }
+      };
+
+      const saveEntries = (entries) => {
+        window.localStorage.setItem(storageKey, JSON.stringify(entries));
+      };
+
+      const formatTimestamp = (iso) => {
+        const d = new Date(iso);
+        if (Number.isNaN(d.getTime())) return iso;
+        return new Intl.DateTimeFormat('en-US', {
+          year: 'numeric',
+          month: '2-digit',
+          day: '2-digit',
+          hour: '2-digit',
+          minute: '2-digit',
+          hour12: false
+        }).format(d);
+      };
+
+      const makePreview = (text) => {
+        const oneLine = text.replace(/\s+/g, ' ').trim();
+        if (!oneLine) return '[Empty]';
+        if (oneLine.length <= 84) return oneLine;
+        return `${oneLine.slice(0, 84).trim()}…`;
+      };
+
+      const renderLog = () => {
+        const entries = loadEntries();
+        logList.innerHTML = '';
+
+        const items = entries.length
+          ? entries
+          : [
+              { ts: '[Timestamp]', type: '[Type]', text: '[Short Note placeholder]' },
+              { ts: '[Timestamp]', type: '[Type]', text: '[Short Note placeholder]' },
+              { ts: '[Timestamp]', type: '[Type]', text: '[Short Note placeholder]' }
+            ];
+
+        items.forEach((entry) => {
+          const row = document.createElement('div');
+          row.className = 'sd-log-item';
+
+          const ts = document.createElement('span');
+          ts.className = 'sd-log-ts';
+          ts.textContent = entry.ts.startsWith('[') ? entry.ts : formatTimestamp(entry.ts);
+
+          const dot1 = document.createElement('span');
+          dot1.setAttribute('aria-hidden', 'true');
+          dot1.textContent = '·';
+
+          const type = document.createElement('span');
+          type.className = 'sd-log-type';
+          type.textContent = entry.type;
+
+          const dot2 = document.createElement('span');
+          dot2.setAttribute('aria-hidden', 'true');
+          dot2.textContent = '·';
+
+          const note = document.createElement('span');
+          note.className = 'sd-log-note';
+          note.textContent = entry.text.startsWith('[') ? entry.text : makePreview(entry.text);
+
+          row.append(ts, dot1, type, dot2, note);
+          logList.appendChild(row);
+        });
+      };
+
+      const updateButtonState = () => {
+        dropBtn.disabled = textarea.value.trim().length === 0;
+      };
+
+      const dropSignal = () => {
+        const text = textarea.value.trim();
+        if (!text) return;
+
+        const entries = loadEntries();
+        entries.unshift({ ts: new Date().toISOString(), type: getSelectedType(), text });
+        saveEntries(entries.slice(0, 200));
+        textarea.value = '';
+        updateButtonState();
+        renderLog();
+        textarea.focus();
+      };
+
+      textarea.addEventListener('input', updateButtonState);
+      textarea.addEventListener('keydown', (e) => {
+        if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+          e.preventDefault();
+          dropSignal();
+        }
+      });
+      dropBtn.addEventListener('click', dropSignal);
+      updateButtonState();
+      renderLog();
 
       const shouldLoadPlausible = (() => {
         const host = window.location.hostname;
