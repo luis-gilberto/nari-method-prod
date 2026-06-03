@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="es" data-lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CSC Protocol Experience -- From Signal to Support</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,600&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --obs:#0B0A09;--obs2:#141210;--obs3:#1C1A17;--obs4:#252220;
+  --coral:#F96F6E;--teal:#4BADA8;--gold:#E8C87A;
+  --rule:rgba(255,255,255,0.07);
+  --tp:#F0EBE3;--ts:rgba(240,235,227,0.55);--tt:rgba(240,235,227,0.28)
+}
+html{background:var(--obs);scroll-behavior:smooth}
+body{background:var(--obs);color:var(--tp);font-family:'Inter',sans-serif;font-size:14px;line-height:1.7;min-height:100vh;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+
+/* LANGUAGE TOGGLE VISIBILITY */
+[data-lang="es"] .en{display:none}
+[data-lang="en"] .es{display:none}
+
+/* COVER */
+.cover{min-height:100vh;display:flex;flex-direction:column;justify-content:space-between;padding:64px 80px;border-bottom:1px solid var(--rule);position:relative;overflow:hidden}
+.cover::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 900px 700px at 85% 5%,rgba(232,200,122,0.07) 0%,transparent 62%),radial-gradient(ellipse 620px 520px at 5% 95%,rgba(75,173,168,0.05) 0%,transparent 58%);pointer-events:none}
+.cover-top{display:flex;justify-content:space-between;align-items:flex-start;position:relative;z-index:1;gap:20px}
+.wm{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;letter-spacing:.18em;color:var(--teal);text-transform:uppercase}
+.cover-top-right{display:flex;align-items:center;gap:14px;flex-wrap:wrap;justify-content:flex-end}
+.badge{display:flex;align-items:center;gap:8px;background:rgba(232,200,122,.08);border:1px solid rgba(232,200,122,.25);border-radius:2px;padding:6px 14px}
+.badge .dot{width:6px;height:6px;border-radius:50%;background:var(--gold);animation:pt 2.4s ease-in-out infinite}
+@keyframes pt{0%,100%{opacity:1}50%{opacity:.3}}
+.badge span{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;letter-spacing:.2em;color:var(--gold);text-transform:uppercase}
+.lang-switch{display:flex;border:1px solid rgba(255,255,255,.14);border-radius:2px;overflow:hidden}
+.lang-opt{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:7px 13px;cursor:pointer;background:var(--obs3);color:var(--tt);border:none;outline:none;transition:all .15s ease}
+.lang-opt:hover{color:var(--tp)}
+.lang-opt.active{background:rgba(232,200,122,.16);color:var(--gold)}
+.cover-body{flex:1;display:flex;flex-direction:column;justify-content:center;padding:72px 0 36px;position:relative;z-index:1}
+.dc{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.16em;color:var(--tt);text-transform:uppercase;margin-bottom:26px}
+.ct{font-family:'Cormorant Garamond',serif;font-size:clamp(48px,7vw,86px);font-weight:300;line-height:1.0;color:var(--tp);margin-bottom:10px}
+.ct em{font-style:italic;color:var(--gold)}
+.cs{font-family:'Cormorant Garamond',serif;font-size:clamp(19px,2.6vw,26px);font-weight:300;font-style:italic;color:var(--ts);margin-bottom:44px;max-width:680px}
+.cdiv{width:80px;height:1px;background:linear-gradient(90deg,var(--gold),transparent);margin-bottom:36px}
+.cmeta{display:flex;justify-content:space-between;align-items:flex-end;padding-top:36px;border-top:1px solid var(--rule);position:relative;z-index:1;flex-wrap:wrap;gap:24px}
+.ml{display:flex;flex-direction:column;gap:5px}
+.mi{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;color:var(--tt);text-transform:uppercase}
+.mi .val{color:var(--ts);margin-left:8px}
+.sm{font-size:30px;opacity:.16}
+
+/* BODY */
+.body{max-width:920px;margin:0 auto;padding:80px 80px 120px}
+.sec{margin-bottom:76px}
+.sh{display:flex;align-items:center;gap:16px;margin-bottom:14px}
+.sn{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;letter-spacing:.16em;color:var(--gold);text-transform:uppercase;flex-shrink:0}
+.st{font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:500;color:var(--tp);line-height:1.1}
+.st em{font-style:italic;color:var(--gold)}
+.si{font-family:'Inter',sans-serif;font-size:14px;font-weight:300;color:var(--ts);line-height:1.8;margin-bottom:30px;max-width:720px}
+.si strong{color:var(--tp);font-weight:500}
+.si .coral{color:var(--coral);font-weight:500}
+.si .tealc{color:var(--teal);font-weight:500}
+.si .goldc{color:var(--gold);font-weight:500}
+
+/* SIGNAL PATH (3-step) */
+.spath{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;align-items:stretch;gap:14px;margin:8px 0 6px}
+.spath-node{background:var(--obs2);border:1px solid var(--rule);border-radius:6px;padding:22px 24px;position:relative;overflow:hidden}
+.spath-node::before{content:'';position:absolute;top:0;left:0;right:0;height:2px}
+.spath-node.reach::before{background:var(--teal)}
+.spath-node.trust::before{background:var(--coral)}
+.spath-node.paid::before{background:var(--gold)}
+.spath-k{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;margin-bottom:9px}
+.spath-node.reach .spath-k{color:var(--teal)}
+.spath-node.trust .spath-k{color:var(--coral)}
+.spath-node.paid .spath-k{color:var(--gold)}
+.spath-t{font-family:'Cormorant Garamond',serif;font-size:21px;font-weight:500;color:var(--tp);line-height:1.15;margin-bottom:8px}
+.spath-d{font-family:'Inter',sans-serif;font-size:12px;font-weight:300;color:var(--ts);line-height:1.6}
+.spath-arrow{display:flex;align-items:center;justify-content:center;color:var(--tt);font-size:18px}
+
+/* OPEN LAYER / PROTECTED CARD */
+.protect{display:grid;grid-template-columns:auto 1fr;gap:22px;align-items:center;background:linear-gradient(135deg,rgba(75,173,168,.06),rgba(255,255,255,.012));border:1px solid rgba(75,173,168,.22);border-left:2px solid var(--teal);border-radius:6px;padding:26px 28px}
+.protect-mark{width:54px;height:54px;border-radius:50%;border:1px solid rgba(75,173,168,.4);display:flex;align-items:center;justify-content:center;color:var(--teal);flex-shrink:0}
+.protect-k{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--teal);margin-bottom:8px}
+.protect-t{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:500;font-style:italic;color:var(--tp);line-height:1.35}
+
+/* LAYER STACK */
+.stack{display:flex;flex-direction:column;gap:8px;margin-top:6px}
+.layer{display:flex;align-items:center;gap:18px;background:var(--obs2);border:1px solid var(--rule);border-radius:5px;padding:16px 22px;position:relative}
+.layer-tier{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;letter-spacing:.1em;color:var(--tt);width:30px;flex-shrink:0}
+.layer-name{font-family:'Cormorant Garamond',serif;font-size:19px;font-weight:500;color:var(--tp);flex:0 0 240px;line-height:1.2}
+.layer-name span.sub{display:block;font-family:'JetBrains Mono',monospace;font-size:8px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--tt);margin-top:3px;font-style:normal}
+.layer-role{font-family:'Inter',sans-serif;font-size:12.5px;font-weight:300;color:var(--ts);line-height:1.55;flex:1}
+.layer.free{border-left:2px solid var(--teal)}
+.layer.magnet{border-left:2px solid var(--teal)}
+.layer.kit{border-left:2px solid var(--gold)}
+.layer.workshop{border-left:2px solid var(--gold)}
+.layer.circle{border-left:2px solid var(--gold)}
+.layer-tag{font-family:'JetBrains Mono',monospace;font-size:8px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:3px 9px;border-radius:999px;flex-shrink:0}
+.layer-tag.free{color:var(--teal);background:rgba(75,173,168,.12)}
+.layer-tag.paid{color:var(--gold);background:rgba(232,200,122,.12)}
+
+/* HIGH-INTENT GOLD CARD + arrow to product */
+.intent-wrap{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:18px;margin:8px 0}
+.intent-card{background:linear-gradient(135deg,rgba(232,200,122,.09),rgba(255,255,255,.012));border:1px solid rgba(232,200,122,.28);border-radius:6px;padding:26px 28px;text-align:center}
+.intent-k{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:14px}
+.intent-stat{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:500;color:var(--tp);line-height:1.3}
+.intent-stat b{color:var(--gold);font-weight:600}
+.intent-arrow{color:var(--gold);font-size:22px;text-align:center}
+.product-card{background:var(--obs2);border:1px solid rgba(232,200,122,.2);border-radius:6px;padding:26px 28px;text-align:center}
+.product-k{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--tt);margin-bottom:10px}
+.product-name{font-family:'Cormorant Garamond',serif;font-size:23px;font-weight:500;font-style:italic;color:var(--gold);line-height:1.2}
+.product-sub{font-family:'Inter',sans-serif;font-size:12px;font-weight:300;color:var(--ts);margin-top:8px;line-height:1.55}
+
+/* CTA VALIDATION */
+.cta-card{background:linear-gradient(135deg,rgba(232,200,122,.07),rgba(255,255,255,.012));border:1px solid rgba(232,200,122,.22);border-radius:6px;padding:28px 30px;margin:6px 0 22px}
+.cta-q{font-family:'Cormorant Garamond',serif;font-size:21px;font-weight:400;font-style:italic;color:var(--tp);line-height:1.4;margin-bottom:18px;max-width:46ch}
+.cta-btn{display:inline-flex;align-items:center;gap:9px;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--obs);background:var(--gold);border-radius:3px;padding:13px 22px}
+.cta-note{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:var(--tt);margin-top:16px}
+/* mini funnel */
+.funnel{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:4px}
+.funnel-step{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ts);background:var(--obs2);border:1px solid var(--rule);border-radius:999px;padding:8px 14px}
+.funnel-step:last-child{color:var(--gold);border-color:rgba(232,200,122,.3)}
+.funnel-sep{color:var(--tt);font-size:11px}
+
+/* ROADMAP PHASES */
+.roadmap{display:flex;flex-direction:column;gap:14px;margin-top:6px}
+.phase{display:grid;grid-template-columns:auto 1fr;gap:22px;background:var(--obs2);border:1px solid var(--rule);border-radius:6px;padding:24px 26px;position:relative;overflow:hidden}
+.phase::before{content:'';position:absolute;top:0;left:0;bottom:0;width:2px;background:linear-gradient(var(--gold),transparent)}
+.phase-num{font-family:'Cormorant Garamond',serif;font-size:46px;font-weight:300;color:var(--obs4);line-height:.8;flex-shrink:0;width:54px}
+.phase-k{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:6px}
+.phase-t{font-family:'Cormorant Garamond',serif;font-size:21px;font-weight:500;color:var(--tp);line-height:1.15;margin-bottom:12px}
+.phase-list{list-style:none;display:grid;gap:6px;margin-bottom:12px}
+.phase-list li{position:relative;padding-left:16px;font-family:'Inter',sans-serif;font-size:12.5px;font-weight:300;color:var(--ts);line-height:1.5}
+.phase-list li::before{content:'';position:absolute;left:0;top:.62em;width:4px;height:4px;border-radius:50%;background:var(--gold);opacity:.6}
+.phase-note{font-family:'Cormorant Garamond',serif;font-size:16px;font-style:italic;font-weight:400;color:var(--ts);line-height:1.5;border-top:1px solid var(--rule);padding-top:12px}
+.phase-price{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-top:10px}
+
+/* OFFER LADDER */
+.ladder{display:flex;flex-direction:column;gap:6px;margin-top:6px}
+.rung{display:grid;grid-template-columns:34px 200px 1fr auto;gap:18px;align-items:center;background:var(--obs2);border:1px solid var(--rule);border-radius:5px;padding:15px 22px}
+.rung-n{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;color:var(--tt)}
+.rung-name{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:500;color:var(--tp)}
+.rung-role{font-family:'Inter',sans-serif;font-size:12px;font-weight:300;color:var(--ts)}
+.rung-q{font-family:'Cormorant Garamond',serif;font-size:15px;font-style:italic;color:var(--tt);text-align:right;line-height:1.3}
+.rung.r1{border-left:2px solid var(--teal)}
+.rung.r2{border-left:2px solid var(--teal)}
+.rung.r3{border-left:2px solid var(--gold)}
+.rung.r4{border-left:2px solid var(--gold)}
+.rung.r5{border-left:2px solid var(--gold)}
+
+/* TWO-COLUMN CONTRAST */
+.contrast{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:6px}
+.cside{border-radius:6px;padding:24px 26px}
+.cside.no{background:linear-gradient(135deg,rgba(249,111,110,.05),rgba(255,255,255,.01));border:1px solid rgba(249,111,110,.2)}
+.cside.yes{background:linear-gradient(135deg,rgba(232,200,122,.06),rgba(255,255,255,.01));border:1px solid rgba(232,200,122,.22)}
+.cside-k{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;margin-bottom:16px}
+.cside.no .cside-k{color:var(--coral)}
+.cside.yes .cside-k{color:var(--gold)}
+.cside ul{list-style:none;display:grid;gap:10px}
+.cside li{position:relative;padding-left:18px;font-family:'Inter',sans-serif;font-size:13px;font-weight:300;color:var(--ts);line-height:1.5}
+.cside.no li::before{content:'\00d7';position:absolute;left:0;top:-1px;color:var(--coral);font-weight:700}
+.cside.yes li::before{content:'+';position:absolute;left:0;top:-1px;color:var(--gold);font-weight:700}
+
+/* CLOSING */
+.closing{border-left:2px solid var(--gold);padding-left:28px;max-width:720px;margin-top:8px}
+.closing-text{font-family:'Cormorant Garamond',serif;font-size:21px;font-weight:400;font-style:italic;line-height:1.55;color:var(--tp)}
+.closing-text strong{font-weight:600;color:var(--gold);font-style:normal}
+.closing-line{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:500;font-style:italic;line-height:1.5;color:var(--tp);margin-top:26px;padding-top:22px;border-top:1px solid var(--rule)}
+.closing-line .a{color:var(--teal)}
+.closing-line .b{color:var(--gold)}
+
+/* NOTE BANNER */
+.note{background:var(--obs2);border:1px solid var(--rule);border-left:2px solid var(--gold);border-radius:4px;padding:22px 26px;margin-bottom:44px;display:grid;grid-template-columns:auto 1fr;gap:18px}
+.note-k{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--gold)}
+.note-t{font-family:'Inter',sans-serif;font-size:13px;font-weight:300;color:var(--ts);line-height:1.7}
+.note-t strong{color:var(--tp);font-weight:500}
+
+/* FOOTER */
+.footer{background:var(--obs2);border-top:1px solid var(--rule);padding:34px 80px;display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap}
+.fl{display:flex;flex-direction:column;gap:5px}
+.fwm{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;letter-spacing:.16em;color:var(--gold);text-transform:uppercase}
+.fcl{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;color:var(--tt);text-transform:uppercase}
+.fr{text-align:right;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;color:var(--tt);text-transform:uppercase;line-height:1.9}
+
+@media (max-width:760px){
+  .cover{padding:40px 24px}
+  .body{padding:48px 24px 80px}
+  .footer{padding:28px 24px}
+  .spath{grid-template-columns:1fr}
+  .spath-arrow{transform:rotate(90deg)}
+  .intent-wrap{grid-template-columns:1fr}
+  .intent-arrow{transform:rotate(90deg)}
+  .protect{grid-template-columns:1fr}
+  .layer{flex-wrap:wrap}
+  .layer-name{flex:1 1 100%}
+  .phase{grid-template-columns:1fr}
+  .phase-num{font-size:34px}
+  .rung{grid-template-columns:1fr;gap:6px}
+  .rung-q{text-align:left}
+  .contrast{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- COVER -->
+<div class="cover">
+  <div class="cover-top">
+    <div class="wm">Criar Sin Culpas &#x2022; <span class="es">Observatorio de Se&#xF1;ales</span><span class="en">Signal Observatory</span></div>
+    <div class="cover-top-right">
+      <div class="lang-switch">
+        <button class="lang-opt active" data-lang="es" onclick="setLang('es')">ES</button>
+        <button class="lang-opt" data-lang="en" onclick="setLang('en')">EN</button>
+      </div>
+      <div class="badge"><div class="dot"></div><span><span class="es">Parte II &#x2022; Estrategia</span><span class="en">Part II &#x2022; Strategy</span></span></div>
+    </div>
+  </div>
+  <div class="cover-body">
+    <div class="dc"><span class="es">Experiencia de Protocolos (Gu&#xED;as) &nbsp;/&nbsp; De la Se&#xF1;al al Apoyo &nbsp;/&nbsp; v1.0</span><span class="en">Protocol Experience (Guides) &nbsp;/&nbsp; From Signal to Support &nbsp;/&nbsp; v1.0</span></div>
+    <h1 class="ct"><span class="es">De la se&#xF1;al<br>al <em>apoyo</em></span><span class="en">From signal<br>to <em>support</em></span></h1>
+    <p class="cs"><span class="es">C&#xF3;mo el comportamiento de los protocolos abre un camino responsable hacia la monetizaci&#xF3;n, sin cerrar la puerta de entrada.</span><span class="en">How the protocol behavior opens a responsible path toward monetization, without closing the front door.</span></p>
+    <div class="cdiv"></div>
+  </div>
+  <div class="cmeta">
+    <div class="ml">
+      <div class="mi"><span class="es">Continuaci&#xF3;n de <span class="val">La experiencia de los protocolos (Parte I)</span></span><span class="en">Continues from <span class="val">The protocol experience (Part I)</span></span></div>
+      <div class="mi"><span class="es">Base <span class="val">Se&#xF1;al de comportamiento &#x2022; evidencia direccional</span></span><span class="en">Basis <span class="val">Behavioral signal &#x2022; directional evidence</span></span></div>
+      <div class="mi"><span class="es">Naturaleza <span class="val">Hip&#xF3;tesis de estrategia, no decisi&#xF3;n final</span></span><span class="en">Nature <span class="val">Strategy hypothesis, not a final decision</span></span></div>
+    </div>
+    <div class="sm">&#9778;</div>
+  </div>
+</div>
+
+<div class="body">
+
+  <!-- NOTE -->
+  <div class="note">
+    <div class="note-k">Nota</div>
+    <div class="note-t"><span class="es">Esta segunda parte traduce la se&#xF1;al de comportamiento en una direcci&#xF3;n estrat&#xF3;gica. No afirma que la monetizaci&#xF3;n est&#xE9; probada. Propone un <strong>camino responsable</strong>, construido sobre lo que los padres ya hacen, y dise&#xF1;ado para validarse paso a paso antes de invertir. La regla que ordena todo lo que sigue es simple: <strong>no se vende la puerta de entrada, se construye el apoyo m&#xE1;s profundo despu&#xE9;s de que esa puerta ya gan&#xF3; confianza.</strong></span><span class="en">This second part translates the behavioral signal into a strategic direction. It does not claim monetization is proven. It proposes a <strong>responsible path</strong>, built on what parents already do, and designed to be validated step by step before investing. The rule that orders everything below is simple: <strong>you do not sell the doorway, you build the deeper support after that doorway has already earned trust.</strong></span></div>
+  </div>
+
+  <!-- 01 STRATEGIC TURN -->
+  <div class="sec">
+    <div class="sh"><div class="sn">&#167; 01</div><h2 class="st"><span class="es">El giro <em>estrat&#xE9;gico</em></span><span class="en">The strategic <em>turn</em></span></h2></div>
+    <p class="si"><span class="es">La primera lectura mostr&#xF3; qu&#xE9; gu&#xED;as atraen, cu&#xE1;les sostienen y d&#xF3;nde empieza a formarse la confianza. Esta segunda lectura toma esa se&#xF1;al y la convierte en una pregunta estrat&#xE9;gica: si los protocolos ya est&#xE1;n ayudando a los padres en momentos reales, &#xBF;cu&#xE1;l es la forma m&#xE1;s responsable de convertir esa confianza en una oferta pagada? La se&#xF1;al apunta a algo que la mayor&#xED;a de las plataformas pasa por alto: <strong>los padres no quieren pagar para salir de una crisis, quieren prepararse para la siguiente.</strong> Los datos no solo midieron el rendimiento. Revelaron la forma de un posible modelo de negocio, en <strong>tres capas</strong>.</span><span class="en">The first read showed which guides attract, which ones hold, and where trust begins to form. This second read turns that signal into a strategic question: if the protocols are already helping parents in real moments, what is the most responsible way to turn that trust into a paid offer? The signal points to something most platforms miss: <strong>parents do not want to buy their way out of a crisis, they want to prepare for the next one.</strong> The data did not only measure performance. It revealed the shape of a possible business model, in <strong>three layers</strong>.</span></p>
+    <div class="spath">
+      <div class="spath-node reach">
+        <div class="spath-k"><span class="es">Alcance</span><span class="en">Reach</span></div>
+        <div class="spath-t"><span class="es">Tiempo de pantalla</span><span class="en">Screen time</span></div>
+        <div class="spath-d"><span class="es">Los padres entran por puntos de dolor familiares y buscables.</span><span class="en">Parents enter through familiar, searchable pain points.</span></div>
+      </div>
+      <div class="spath-arrow">&#8594;</div>
+      <div class="spath-node trust">
+        <div class="spath-k"><span class="es">Confianza</span><span class="en">Trust</span></div>
+        <div class="spath-t"><span class="es">Desborde</span><span class="en">De-escalate</span></div>
+        <div class="spath-d"><span class="es">Se quedan cuando el apoyo responde a una necesidad emocional aguda.</span><span class="en">They stay when the support meets an acute emotional need.</span></div>
+      </div>
+      <div class="spath-arrow">&#8594;</div>
+      <div class="spath-node paid">
+        <div class="spath-k"><span class="es">Apoyo pagado</span><span class="en">Paid support</span></div>
+        <div class="spath-t"><span class="es">La capa de aplicaci&#xF3;n</span><span class="en">The application layer</span></div>
+        <div class="spath-d"><span class="es">Pueden pagar por ayuda m&#xE1;s profunda despu&#xE9;s de que la confianza ya existe.</span><span class="en">They may pay for deeper help after trust is already formed.</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 02 WHAT NOT TO MONETIZE -->
+  <div class="sec">
+    <div class="sh"><div class="sn">&#167; 02</div><h2 class="st"><span class="es">Lo que no se debe <em>monetizar</em></span><span class="en">What we should not <em>monetize</em></span></h2></div>
+    <p class="si"><span class="es">La oportunidad no est&#xE1; en cerrar las gu&#xED;as. Una madre o un padre que llega en un momento de desborde no deber&#xED;a encontrarse con una barrera de pago. Ese momento es demasiado delicado. Las gu&#xED;as deben seguir abiertas, porque ah&#xED; se demuestra el m&#xE9;todo, se gana confianza y se confirma que Criar Sin Culpas sabe acompa&#xF1;ar <strong>sin juzgar</strong>.</span><span class="en">The opportunity is not to lock the guides. A parent arriving in a moment of escalation should not meet a paywall. That moment is too delicate. The guides should stay open, because this is where the method proves itself, earns trust, and confirms that Criar Sin Culpas can support <strong>without judgment</strong>.</span></p>
+    <div class="protect">
+      <div class="protect-mark"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 11V7a5 5 0 0 1 9.9-1"/><rect x="3" y="11" width="18" height="11" rx="2"/></svg></div>
+      <div>
+        <div class="protect-k"><span class="es">Capa abierta de confianza</span><span class="en">Open trust layer</span></div>
+        <div class="protect-t"><span class="es">Los cuatro protocolos permanecen gratuitos. Son la prueba del m&#xE9;todo, no el producto. El padre llega gratis cuando m&#xE1;s lo necesita.</span><span class="en">The four protocols stay free. They are the proof of the method, not the product. The parent arrives for free when they need it most.</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 03 WHAT WE CAN MONETIZE -->
+  <div class="sec">
+    <div class="sh"><div class="sn">&#167; 03</div><h2 class="st"><span class="es">Lo que s&#xED; se puede <em>monetizar</em></span><span class="en">What we can <em>monetize</em></span></h2></div>
+    <p class="si"><span class="es">Lo monetizable no es el acceso inicial al protocolo. Es la <strong>capa de aplicaci&#xF3;n</strong>: las frases descargables, los guiones para situaciones espec&#xED;ficas, los audios de calma, los talleres guiados y los espacios donde Nari puede ayudar a los padres a practicar el m&#xE9;todo con m&#xE1;s profundidad. La arquitectura asciende desde lo gratuito hacia el acompa&#xF1;amiento.</span><span class="en">The monetizable layer is not initial access to the protocol. It is the <strong>application layer</strong>: downloadable phrases, situation-specific scripts, calming audio, guided workshops, and spaces where Nari can help parents practice the method more deeply. The architecture rises from free toward accompaniment.</span></p>
+    <div class="stack">
+      <div class="layer free">
+        <div class="layer-tier">01</div>
+        <div class="layer-name"><span class="es">Gu&#xED;as abiertas</span><span class="en">Open guides</span><span class="sub"><span class="es">Protocolos gratuitos</span><span class="en">Free protocols</span></span></div>
+        <div class="layer-role"><span class="es">La prueba del m&#xE9;todo. Siempre abiertas.</span><span class="en">The proof of the method. Always open.</span></div>
+        <div class="layer-tag free"><span class="es">Gratis</span><span class="en">Free</span></div>
+      </div>
+      <div class="layer magnet">
+        <div class="layer-tier">02</div>
+        <div class="layer-name"><span class="es">Recurso descargable</span><span class="en">Lead magnet</span><span class="sub"><span class="es">Captura de inter&#xE9;s</span><span class="en">Interest capture</span></span></div>
+        <div class="layer-role"><span class="es">Una gu&#xED;a gratuita a cambio de un correo. Valida la intenci&#xF3;n.</span><span class="en">A free guide in exchange for an email. Validates intent.</span></div>
+        <div class="layer-tag free"><span class="es">Gratis</span><span class="en">Free</span></div>
+      </div>
+      <div class="layer kit">
+        <div class="layer-tier">03</div>
+        <div class="layer-name"><span class="es">Kit pagado</span><span class="en">Paid kit</span><span class="sub"><span class="es">Herramientas pr&#xE1;cticas</span><span class="en">Practical tools</span></span></div>
+        <div class="layer-role"><span class="es">Frases, guiones y apoyos para momentos espec&#xED;ficos. Primera compra de bajo costo.</span><span class="en">Phrases, scripts, and supports for specific moments. Low-cost first purchase.</span></div>
+        <div class="layer-tag paid"><span class="es">Pagado</span><span class="en">Paid</span></div>
+      </div>
+      <div class="layer workshop">
+        <div class="layer-tier">04</div>
+        <div class="layer-name"><span class="es">Taller guiado</span><span class="en">Workshop</span><span class="sub"><span class="es">Aprendizaje en vivo</span><span class="en">Guided learning</span></span></div>
+        <div class="layer-role"><span class="es">Nari ense&#xF1;a el m&#xE9;todo en vivo, luego se empaqueta como grabaci&#xF3;n.</span><span class="en">Nari teaches the method live, then it is packaged as a recording.</span></div>
+        <div class="layer-tag paid"><span class="es">Pagado</span><span class="en">Paid</span></div>
+      </div>
+      <div class="layer circle">
+        <div class="layer-tier">05</div>
+        <div class="layer-name"><span class="es">C&#xED;rculo de apoyo</span><span class="en">Support circle</span><span class="sub"><span class="es">Relaci&#xF3;n continua</span><span class="en">Recurring relationship</span></span></div>
+        <div class="layer-role"><span class="es">Acompa&#xF1;amiento recurrente. Solo despu&#xE9;s de probar la demanda.</span><span class="en">Recurring accompaniment. Only after demand is proven.</span></div>
+        <div class="layer-tag paid"><span class="es">Pagado</span><span class="en">Paid</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 04 FIRST HYPOTHESIS -->
+  <div class="sec">
+    <div class="sh"><div class="sn">&#167; 04</div><h2 class="st"><span class="es">La primera hip&#xF3;tesis de <em>monetizaci&#xF3;n</em></span><span class="en">The first monetization <em>hypothesis</em></span></h2></div>
+    <p class="si"><span class="es">La primera hip&#xF3;tesis pagada deber&#xED;a nacer de la se&#xF1;al m&#xE1;s &#xED;ntima del an&#xE1;lisis: los padres copiando frases. Aunque el volumen todav&#xED;a es peque&#xF1;o, el comportamiento es de <strong>alta intenci&#xF3;n</strong>. Copiar una frase significa que alguien encontr&#xF3; palabras que quiere llevarse a casa y usar con su hijo. Por eso el primer recurso pagado deber&#xED;a convertir esa conducta en producto.</span><span class="en">The first paid hypothesis should come from the most intimate signal in the analysis: parents copying phrases. The volume is still small, but the behavior is <strong>high-intent</strong>. Copying a phrase means someone found words they want to take home and use with their child. That is why the first paid resource should turn that behavior into a product.</span></p>
+    <div class="intent-wrap">
+      <div class="intent-card">
+        <div class="intent-k"><span class="es">Se&#xF1;al de mayor intenci&#xF3;n</span><span class="en">Highest-intent signal</span></div>
+        <div class="intent-stat"><span class="es"><b>7</b> frases copiadas &#x2022; <b>4</b> padres &#x2022; <b>1</b> enlace compartido</span><span class="en"><b>7</b> phrases copied &#x2022; <b>4</b> parents &#x2022; <b>1</b> shared link</span></div>
+      </div>
+      <div class="intent-arrow">&#8594;</div>
+      <div class="product-card">
+        <div class="product-k"><span class="es">Primer producto (hip&#xF3;tesis)</span><span class="en">First product (hypothesis)</span></div>
+        <div class="product-name"><span class="es">Kit de Calma para Momentos de Desborde</span><span class="en">Calm Kit for Escalation Moments</span></div>
+        <div class="product-sub"><span class="es">Lenguaje que los padres pueden usar en los momentos m&#xE1;s dif&#xED;ciles.</span><span class="en">Language parents can use in the hardest moments.</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 05 VALIDATION -->
+  <div class="sec">
+    <div class="sh"><div class="sn">&#167; 05</div><h2 class="st"><span class="es">El paso de validaci&#xF3;n <em>antes de vender</em></span><span class="en">The validation step <em>before selling</em></span></h2></div>
+    <p class="si"><span class="es">El siguiente paso no es lanzar una tienda completa. Es validar la intenci&#xF3;n. Antes de construir un producto pagado, podemos agregar una llamada suave dentro de Desborde y medir cu&#xE1;ntos padres piden una gu&#xED;a descargable. Si la gu&#xED;a genera inter&#xE9;s, entonces el kit pagado nace de una <strong>se&#xF1;al real</strong>, no de una suposici&#xF3;n.</span><span class="en">The next step is not launching a full store. It is validating intent. Before building a paid product, we can add a soft call inside De-escalate and measure how many parents request a downloadable guide. If the guide earns interest, the paid kit is born from a <strong>real signal</strong>, not an assumption.</span></p>
+    <div class="cta-card">
+      <div class="cta-q"><span class="es">&#xBF;Quieres recibir una gu&#xED;a descargable con frases para momentos de desborde?</span><span class="en">Want a downloadable guide with phrases for escalation moments?</span></div>
+      <div class="cta-btn"><span class="es">Quiero recibir el Kit de Calma</span><span class="en">Send me the Calm Kit</span> &#8594;</div>
+      <div class="cta-note"><span class="es">Ejemplo de llamada suave &#x2022; dentro del protocolo Desborde</span><span class="en">Soft-call example &#x2022; inside the De-escalate protocol</span></div>
+    </div>
+    <div class="funnel">
+      <span class="funnel-step"><span class="es">Visita a Desborde</span><span class="en">De-escalate visit</span></span>
+      <span class="funnel-sep">&#8594;</span>
+      <span class="funnel-step"><span class="es">Clic en CTA</span><span class="en">CTA click</span></span>
+      <span class="funnel-sep">&#8594;</span>
+      <span class="funnel-step"><span class="es">Captura de email</span><span class="en">Email capture</span></span>
+      <span class="funnel-sep">&#8594;</span>
+      <span class="funnel-step"><span class="es">Solicitud de gu&#xED;a</span><span class="en">Guide request</span></span>
+      <span class="funnel-sep">&#8594;</span>
+      <span class="funnel-step"><span class="es">Prueba del kit pagado</span><span class="en">Paid kit test</span></span>
+    </div>
+  </div>
+
+  <!-- 06 ROADMAP -->
+  <div class="sec">
+    <div class="sh"><div class="sn">&#167; 06</div><h2 class="st"><span class="es">La hoja de <em>ruta</em></span><span class="en">The <em>roadmap</em></span></h2></div>
+    <p class="si"><span class="es">Cuatro fases, cada una atada a evidencia y dise&#xF1;ada para reducir el riesgo antes de invertir m&#xE1;s.</span><span class="en">Four phases, each tied to evidence and designed to reduce risk before investing further.</span></p>
+    <div class="roadmap">
+      <div class="phase">
+        <div class="phase-num">1</div>
+        <div>
+          <div class="phase-k"><span class="es">Fase 1 &#x2022; Medir la confianza</span><span class="en">Phase 1 &#x2022; Measure the trust layer</span></div>
+          <div class="phase-t"><span class="es">Instrumentar la capa de confianza</span><span class="en">Instrument the trust layer</span></div>
+          <ul class="phase-list">
+            <li><span class="es">Rastrear qu&#xE9; frases se copian.</span><span class="en">Track which phrases are copied.</span></li>
+            <li><span class="es">Medir clics de CTA dentro de Desborde.</span><span class="en">Track CTA clicks inside De-escalate.</span></li>
+            <li><span class="es">Seguir el movimiento de tiempo de pantalla hacia Desborde.</span><span class="en">Track movement from screen time into De-escalate.</span></li>
+            <li><span class="es">Registrar solicitudes de gu&#xED;a y comportamiento m&#xF3;vil.</span><span class="en">Track guide requests and mobile behavior.</span></li>
+          </ul>
+          <div class="phase-note"><span class="es">Antes de escalar, necesitamos saber qu&#xE9; lenguaje mueve a los padres. La instrumentaci&#xF3;n convierte la intuici&#xF3;n en inteligencia.</span><span class="en">Before scaling, we need to know what language moves parents. Instrumentation turns intuition into intelligence.</span></div>
+        </div>
+      </div>
+      <div class="phase">
+        <div class="phase-num">2</div>
+        <div>
+          <div class="phase-k"><span class="es">Fase 2 &#x2022; Validar el puente</span><span class="en">Phase 2 &#x2022; Validate the bridge</span></div>
+          <div class="phase-t"><span class="es">Probar el puente entre confianza e inter&#xE9;s</span><span class="en">Validate the bridge between trust and interest</span></div>
+          <ul class="phase-list">
+            <li><span class="es">Agregar una captura de correo suave.</span><span class="en">Add a soft lead capture.</span></li>
+            <li><span class="es">Ofrecer una gu&#xED;a descargable gratuita.</span><span class="en">Offer a free downloadable guide.</span></li>
+            <li><span class="es">Probar dos o tres formas de la CTA.</span><span class="en">Test two or three CTA framings.</span></li>
+            <li><span class="es">Medir la tasa de solicitud y recoger respuestas de las redes de Nari.</span><span class="en">Measure request rate and collect responses from Nari&#x2019;s channels.</span></li>
+          </ul>
+          <div class="phase-note"><span class="es">El puente entre confianza e ingreso se prueba con una acci&#xF3;n peque&#xF1;a: pedir la gu&#xED;a, guardar el recurso, levantar la mano.</span><span class="en">The bridge between trust and revenue is tested with a small action: requesting the guide, saving the resource, raising a hand.</span></div>
+        </div>
+      </div>
+      <div class="phase">
+        <div class="phase-num">3</div>
+        <div>
+          <div class="phase-k"><span class="es">Fase 3 &#x2022; Lanzar el primer recurso pagado</span><span class="en">Phase 3 &#x2022; Launch the first paid resource</span></div>
+          <div class="phase-t"><span class="es">El Kit de Calma</span><span class="en">The Calm Kit</span></div>
+          <ul class="phase-list">
+            <li><span class="es">Construir el Kit de Calma y ponerle un precio accesible.</span><span class="en">Build the Calm Kit and price it accessibly.</span></li>
+            <li><span class="es">Vender primero a la audiencia m&#xE1;s cercana.</span><span class="en">Sell first to the warmest audience.</span></li>
+            <li><span class="es">Usar la retroalimentaci&#xF3;n para refinar la oferta.</span><span class="en">Use feedback to refine the offer.</span></li>
+            <li><span class="es">Mantener el protocolo gratuito siempre abierto.</span><span class="en">Keep the free protocol always open.</span></li>
+          </ul>
+          <div class="phase-note"><span class="es">El primer producto debe ser peque&#xF1;o, &#xFA;til y espec&#xED;fico. No resuelve toda la crianza. Resuelve un momento: qu&#xE9; decir y qu&#xE9; hacer cuando todo escala.</span><span class="en">The first product should be small, useful, and specific. It does not solve all of parenting. It solves one moment: what to say and do when everything escalates.</span></div>
+          <div class="phase-price"><span class="es">Rango posible &#x2022; $19 a $39</span><span class="en">Possible range &#x2022; $19 to $39</span></div>
+        </div>
+      </div>
+      <div class="phase">
+        <div class="phase-num">4</div>
+        <div>
+          <div class="phase-k"><span class="es">Fase 4 &#x2022; Expandir hacia apoyo guiado</span><span class="en">Phase 4 &#x2022; Expand into guided support</span></div>
+          <div class="phase-t"><span class="es">De recurso a acompa&#xF1;amiento</span><span class="en">From resource to accompaniment</span></div>
+          <ul class="phase-list">
+            <li><span class="es">Probar un taller en vivo y empaquetarlo como grabaci&#xF3;n perenne.</span><span class="en">Test a live workshop and package it as an evergreen recording.</span></li>
+            <li><span class="es">Construir kits tem&#xE1;ticos alrededor de otras gu&#xED;as.</span><span class="en">Build themed kits around other guides.</span></li>
+            <li><span class="es">Explorar un c&#xED;rculo de apoyo o membres&#xED;a solo despu&#xE9;s de probar la demanda.</span><span class="en">Explore a support circle or membership only after demand is proven.</span></li>
+          </ul>
+          <div class="phase-note"><span class="es">La membres&#xED;a no debe ser el primer paso. Es una evoluci&#xF3;n posible despu&#xE9;s de confirmar que los padres quieren acompa&#xF1;amiento continuo, no solo un recurso.</span><span class="en">Membership should not be the first step. It is a possible evolution after confirming that parents want ongoing accompaniment, not just a resource.</span></div>
+          <div class="phase-price"><span class="es">Rango posible &#x2022; $49 a $97 por taller &#x2022; membres&#xED;a solo m&#xE1;s adelante</span><span class="en">Possible range &#x2022; $49 to $97 per workshop &#x2022; membership only later</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 07 OFFER LADDER -->
+  <div class="sec">
+    <div class="sh"><div class="sn">&#167; 07</div><h2 class="st"><span class="es">La escalera de <em>apoyo</em></span><span class="en">The offer <em>ladder</em></span></h2></div>
+    <p class="si"><span class="es">La escalera no fuerza una compra. Acompa&#xF1;a una relaci&#xF3;n. Cada nivel responde a una pregunta m&#xE1;s profunda del padre.</span><span class="en">The ladder does not force a purchase. It supports a relationship. Each level answers a deeper parent question.</span></p>
+    <div class="ladder">
+      <div class="rung r1">
+        <div class="rung-n">01</div>
+        <div class="rung-name"><span class="es">Gu&#xED;a abierta</span><span class="en">Open guide</span></div>
+        <div class="rung-role"><span class="es">Protocolo abierto &#x2022; construye confianza</span><span class="en">Open protocol &#x2022; builds trust</span></div>
+        <div class="rung-q"><span class="es">&#xBF;Me entiendes?</span><span class="en">Do you understand me?</span></div>
+      </div>
+      <div class="rung r2">
+        <div class="rung-n">02</div>
+        <div class="rung-name"><span class="es">Descargable gratuito</span><span class="en">Free download</span></div>
+        <div class="rung-role"><span class="es">Captura de inter&#xE9;s &#x2022; valida la intenci&#xF3;n</span><span class="en">Lead capture &#x2022; validates interest</span></div>
+        <div class="rung-q"><span class="es">&#xBF;Me ayudas?</span><span class="en">Can you help me?</span></div>
+      </div>
+      <div class="rung r3">
+        <div class="rung-n">03</div>
+        <div class="rung-name"><span class="es">Kit pagado</span><span class="en">Paid kit</span></div>
+        <div class="rung-role"><span class="es">Herramientas pr&#xE1;cticas &#x2022; primera compra de bajo costo</span><span class="en">Practical tools &#x2022; low-cost first purchase</span></div>
+        <div class="rung-q"><span class="es">&#xBF;Puedo guardar esto?</span><span class="en">Can I save this?</span></div>
+      </div>
+      <div class="rung r4">
+        <div class="rung-n">04</div>
+        <div class="rung-name"><span class="es">Taller guiado</span><span class="en">Workshop</span></div>
+        <div class="rung-role"><span class="es">Aprendizaje guiado &#x2022; apoyo de mayor valor</span><span class="en">Guided learning &#x2022; higher-value support</span></div>
+        <div class="rung-q"><span class="es">&#xBF;Puedo aprenderlo contigo?</span><span class="en">Can I learn it with you?</span></div>
+      </div>
+      <div class="rung r5">
+        <div class="rung-n">05</div>
+        <div class="rung-name"><span class="es">C&#xED;rculo de apoyo</span><span class="en">Support circle</span></div>
+        <div class="rung-role"><span class="es">Relaci&#xF3;n recurrente &#x2022; solo tras probar la demanda</span><span class="en">Recurring relationship &#x2022; only after demand is proven</span></div>
+        <div class="rung-q"><span class="es">&#xBF;Puedo volver cuando lo necesite?</span><span class="en">Can I come back when I need to?</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 08 BRAND PROTECTION -->
+  <div class="sec">
+    <div class="sh"><div class="sn">&#167; 08</div><h2 class="st"><span class="es">Por qu&#xE9; esto <em>protege la marca</em></span><span class="en">Why this <em>protects the brand</em></span></h2></div>
+    <p class="si"><span class="es">Criar Sin Culpas no debe monetizar el p&#xE1;nico. Debe monetizar la preparaci&#xF3;n, no la desesperaci&#xF3;n. Esa diferencia protege la confianza de la marca. El padre llega gratis cuando m&#xE1;s lo necesita, y paga solo cuando quiere m&#xE1;s herramientas para volver a ese momento con <strong>m&#xE1;s calma</strong>.</span><span class="en">Criar Sin Culpas should not monetize panic. It should monetize preparation, not desperation. That distinction protects brand trust. The parent arrives for free when they need help most, and pays only when they want more tools to return to that moment with <strong>more calm</strong>.</span></p>
+    <div class="contrast">
+      <div class="cside no">
+        <div class="cside-k"><span class="es">No monetizar</span><span class="en">Do not monetize</span></div>
+        <ul>
+          <li><span class="es">El momento de crisis</span><span class="en">The crisis moment</span></li>
+          <li><span class="es">El primer acceso</span><span class="en">First access</span></li>
+          <li><span class="es">La ayuda urgente</span><span class="en">Emergency support</span></li>
+          <li><span class="es">La vulnerabilidad emocional</span><span class="en">Emotional vulnerability</span></li>
+        </ul>
+      </div>
+      <div class="cside yes">
+        <div class="cside-k"><span class="es">Monetizar</span><span class="en">Monetize</span></div>
+        <ul>
+          <li><span class="es">La preparaci&#xF3;n</span><span class="en">Preparation</span></li>
+          <li><span class="es">La pr&#xE1;ctica</span><span class="en">Practice</span></li>
+          <li><span class="es">Las herramientas descargables</span><span class="en">Downloadable tools</span></li>
+          <li><span class="es">El aprendizaje guiado</span><span class="en">Guided learning</span></li>
+          <li><span class="es">El acompa&#xF1;amiento continuo</span><span class="en">Ongoing support</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 09 BUSINESS MODEL HYPOTHESIS -->
+  <div class="sec">
+    <div class="sh"><div class="sn">&#167; 09</div><h2 class="st"><span class="es">La hip&#xF3;tesis de <em>negocio</em></span><span class="en">The business model <em>hypothesis</em></span></h2></div>
+    <div class="closing">
+      <div class="closing-text"><span class="es">La hip&#xF3;tesis es simple: si las gu&#xED;as abiertas crean confianza, y si los padres demuestran que quieren llevarse el lenguaje del m&#xE9;todo a casa, entonces Criar Sin Culpas puede convertir esa confianza en ingresos mediante <strong>recursos pr&#xE1;cticos, espec&#xED;ficos y accesibles</strong> que profundicen la aplicaci&#xF3;n del m&#xE9;todo sin cerrar la puerta de entrada.</span><span class="en">The hypothesis is simple: if the open guides create trust, and if parents show they want to take the method&#x2019;s language home, then Criar Sin Culpas can turn that trust into revenue through <strong>practical, specific, accessible resources</strong> that deepen the application of the method without closing the front door.</span></div>
+      <div class="closing-line"><span class="es">El producto gratuito <span class="a">sostiene el momento.</span> El producto pagado <span class="b">ayuda a prepararse para el siguiente.</span></span><span class="en">The free product <span class="a">holds the moment.</span> The paid product <span class="b">helps prepare for the next one.</span></span></div>
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <div class="fl">
+    <div class="fwm">Criar Sin Culpas &#x2022; <span class="es">Observatorio de Se&#xF1;ales</span><span class="en">Signal Observatory</span></div>
+    <div class="fcl"><span class="es">Parte II &#x2022; De la se&#xF1;al al apoyo &#x2022; Hip&#xF3;tesis de monetizaci&#xF3;n responsable</span><span class="en">Part II &#x2022; From signal to support &#x2022; Responsible monetization hypothesis</span></div>
+  </div>
+  <div class="fr">
+    <div><span class="es">Construido sobre la se&#xF1;al de comportamiento de la Parte I</span><span class="en">Built on the behavioral signal from Part I</span></div>
+    <div><span class="es">Evidencia direccional &#x2022; hip&#xF3;tesis, no decisi&#xF3;n final</span><span class="en">Directional evidence &#x2022; hypothesis, not a final decision</span></div>
+    <div><span class="es">Preparado para el proyecto de Criar Sin Culpas</span><span class="en">Prepared for the Criar Sin Culpas engagement</span></div>
+  </div>
+</div>
+
+<script>
+function setLang(l){
+  document.documentElement.setAttribute('data-lang', l);
+  document.documentElement.setAttribute('lang', l);
+  document.querySelectorAll('.lang-opt').forEach(function(b){
+    b.classList.toggle('active', b.getAttribute('data-lang') === l);
+  });
+}
+</script>
+
+</body>
+</html>

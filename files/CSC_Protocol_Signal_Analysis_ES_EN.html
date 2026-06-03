@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="es" data-lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CSC Protocol Experience -- Signal Analysis</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,600&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --obs:#0B0A09;--obs2:#141210;--obs3:#1C1A17;--obs4:#252220;
+  --coral:#F96F6E;--teal:#4BADA8;--gold:#E8C87A;
+  --rule:rgba(255,255,255,0.07);
+  --tp:#F0EBE3;--ts:rgba(240,235,227,0.55);--tt:rgba(240,235,227,0.28)
+}
+html{background:var(--obs);scroll-behavior:smooth}
+body{background:var(--obs);color:var(--tp);font-family:'Inter',sans-serif;font-size:14px;line-height:1.7;min-height:100vh;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+
+/* LANGUAGE TOGGLE VISIBILITY */
+[data-lang="es"] .en{display:none}
+[data-lang="en"] .es{display:none}
+
+/* COVER */
+.cover{min-height:100vh;display:flex;flex-direction:column;justify-content:space-between;padding:64px 80px;border-bottom:1px solid var(--rule);position:relative;overflow:hidden}
+.cover::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 900px 700px at 85% 5%,rgba(75,173,168,0.07) 0%,transparent 62%),radial-gradient(ellipse 620px 520px at 5% 95%,rgba(249,111,110,0.04) 0%,transparent 58%);pointer-events:none}
+.cover-top{display:flex;justify-content:space-between;align-items:flex-start;position:relative;z-index:1;gap:20px}
+.wm{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;letter-spacing:.18em;color:var(--teal);text-transform:uppercase}
+.cover-top-right{display:flex;align-items:center;gap:14px;flex-wrap:wrap;justify-content:flex-end}
+.badge{display:flex;align-items:center;gap:8px;background:rgba(75,173,168,.08);border:1px solid rgba(75,173,168,.25);border-radius:2px;padding:6px 14px}
+.badge .dot{width:6px;height:6px;border-radius:50%;background:var(--teal);animation:pt 2.4s ease-in-out infinite}
+@keyframes pt{0%,100%{opacity:1}50%{opacity:.3}}
+.badge span{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;letter-spacing:.2em;color:var(--teal);text-transform:uppercase}
+/* lang switch */
+.lang-switch{display:flex;border:1px solid rgba(255,255,255,.14);border-radius:2px;overflow:hidden}
+.lang-opt{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:7px 13px;cursor:pointer;background:var(--obs3);color:var(--tt);border:none;outline:none;transition:all .15s ease}
+.lang-opt:hover{color:var(--tp)}
+.lang-opt.active{background:rgba(75,173,168,.16);color:var(--teal)}
+.cover-body{flex:1;display:flex;flex-direction:column;justify-content:center;padding:72px 0 36px;position:relative;z-index:1}
+.dc{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.16em;color:var(--tt);text-transform:uppercase;margin-bottom:26px}
+.ct{font-family:'Cormorant Garamond',serif;font-size:clamp(48px,7vw,86px);font-weight:300;line-height:1.0;color:var(--tp);margin-bottom:10px}
+.ct em{font-style:italic;color:var(--teal)}
+.cs{font-family:'Cormorant Garamond',serif;font-size:clamp(19px,2.6vw,26px);font-weight:300;font-style:italic;color:var(--ts);margin-bottom:44px;max-width:660px}
+.cdiv{width:80px;height:1px;background:linear-gradient(90deg,var(--teal),transparent);margin-bottom:36px}
+.cmeta{display:flex;justify-content:space-between;align-items:flex-end;padding-top:36px;border-top:1px solid var(--rule);position:relative;z-index:1;flex-wrap:wrap;gap:24px}
+.ml{display:flex;flex-direction:column;gap:5px}
+.mi{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.12em;color:var(--tt);text-transform:uppercase}
+.mi .val{color:var(--ts);margin-left:8px}
+.sm{font-size:30px;opacity:.16}
+
+/* BODY */
+.body{max-width:920px;margin:0 auto;padding:80px 80px 120px}
+.sec{margin-bottom:76px}
+.sh{display:flex;align-items:center;gap:16px;margin-bottom:14px}
+.sn{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;letter-spacing:.16em;color:var(--teal);text-transform:uppercase;flex-shrink:0}
+.st{font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:500;color:var(--tp);line-height:1.1}
+.st em{font-style:italic;color:var(--teal)}
+.si{font-family:'Inter',sans-serif;font-size:14px;font-weight:300;color:var(--ts);line-height:1.8;margin-bottom:30px;max-width:720px}
+.si strong{color:var(--tp);font-weight:500}
+.si .coral{color:var(--coral);font-weight:500}
+.si .tealc{color:var(--teal);font-weight:500}
+.si .goldc{color:var(--gold);font-weight:500}
+
+/* READING FRAME */
+.frame{display:flex;gap:18px;background:var(--obs2);border:1px solid var(--rule);border-left:2px solid var(--gold);border-radius:2px;padding:22px 26px;margin-bottom:8px}
+.frame-ico{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;color:var(--gold);letter-spacing:.1em;flex-shrink:0;padding-top:2px}
+.frame-txt{font-family:'Inter',sans-serif;font-size:12.5px;font-weight:300;color:var(--ts);line-height:1.7}
+.frame-txt strong{color:var(--tp);font-weight:500}
+
+/* HERO STAT */
+.hero{display:grid;grid-template-columns:1.05fr 1fr;gap:44px;align-items:center;background:var(--obs3);border:1px solid rgba(249,111,110,.22);border-radius:2px;padding:40px 44px;position:relative;overflow:hidden;margin-bottom:20px}
+.hero::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--coral),transparent)}
+.hero-img{width:100%;border-radius:14px;display:block;box-shadow:0 24px 70px rgba(249,111,110,.16)}
+.hero-num{font-family:'Cormorant Garamond',serif;font-size:clamp(56px,7vw,88px);font-weight:300;color:var(--coral);line-height:.9}
+.hero-unit{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.14em;color:var(--tt);text-transform:uppercase}
+.hero-body .hl{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:500;font-style:italic;color:var(--tp);margin-bottom:10px;line-height:1.2}
+.hero-body .hp{font-family:'Inter',sans-serif;font-size:13px;font-weight:300;color:var(--ts);line-height:1.7}
+.hero-body .hp strong{color:var(--tp);font-weight:500}
+
+/* PROTOCOL CARD ROWS */
+.pcards{display:flex;flex-direction:column;gap:0}
+.pcard-row{display:grid;grid-template-columns:312px 1fr;gap:30px;align-items:center;background:transparent;padding:24px 0;position:relative;border-bottom:1px solid var(--rule)}
+.pcard-row:last-child{border-bottom:none}
+.pcard-imgwrap{position:relative}
+.pcard-img{width:100%;border-radius:14px;display:block}
+.pcard-data{position:relative}
+.card-top{display:flex;align-items:center;justify-content:flex-start;gap:12px;margin-bottom:14px}
+.tier-pill{display:inline-flex;align-items:center;padding:4px 12px;border-radius:999px;font-family:'JetBrains Mono',monospace;font-size:8px;font-weight:700;letter-spacing:.14em;text-transform:uppercase}
+.tier-pill.coral{color:var(--coral);background:rgba(249,111,110,.12);border:1px solid rgba(249,111,110,.22)}
+.tier-pill.teal{color:var(--teal);background:rgba(75,173,168,.12);border:1px solid rgba(75,173,168,.22)}
+.pcard-data .pd-name{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:500;color:var(--tp);line-height:1.05}
+.pcard-data .pd-moment{font-family:'Cormorant Garamond',serif;font-size:21px;font-weight:500;font-style:italic;color:var(--tp);line-height:1.2;display:block;margin-bottom:8px}
+.pd-tagline{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:6px}
+.pcard-data .pd-tag{font-family:'JetBrains Mono',monospace;font-size:8px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--tt)}
+.pd-tag.t-coral b{color:var(--coral)}
+.pd-tag.t-teal b{color:var(--teal)}
+.pcard-data .pd-rank{font-family:'JetBrains Mono',monospace;font-size:8px;font-weight:700;letter-spacing:.12em;text-transform:uppercase}
+.pd-rank.coral{color:var(--coral)}
+.pd-rank.teal{color:var(--teal)}
+.pcard-data .pd-sub{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.05em;color:var(--tt);text-transform:uppercase;display:block;margin-bottom:14px}
+.keyrow{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:30px}
+.keychip{display:flex;align-items:center;gap:10px;background:var(--obs2);border:1px solid var(--rule);border-radius:40px;padding:7px 16px 7px 8px}
+.keychip img{width:26px;height:26px;object-fit:contain}
+.keychip span{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+.keychip.k-coral span{color:var(--coral)}
+.keychip.k-teal span{color:var(--teal)}
+.pbar-line{display:flex;align-items:center;gap:12px;margin-bottom:7px}
+.pbar-tag{font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.08em;color:var(--tt);text-transform:uppercase;width:38px;flex-shrink:0}
+.pbar-fill{height:8px;border-radius:1px}
+.pbar-fill.dwell{background:linear-gradient(90deg,var(--teal),rgba(75,173,168,.3))}
+.pbar-fill.scroll{background:linear-gradient(90deg,var(--gold),rgba(232,200,122,.28))}
+.pbar-val{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;color:var(--ts);min-width:46px}
+.legend{display:flex;gap:24px;margin-top:6px}
+.lg{display:flex;align-items:center;gap:8px;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.08em;color:var(--tt);text-transform:uppercase}
+.lg .sw{width:14px;height:9px;border-radius:1px;flex-shrink:0}
+.lg .sw.dwell{background:var(--teal)}
+.lg .sw.scroll{background:var(--gold)}
+
+/* FUNNEL */
+.funnel{display:grid;grid-template-columns:1fr 44px 1fr;align-items:center;margin:8px 0}
+.fcard{background:var(--obs3);border:1px solid var(--rule);border-radius:2px;padding:26px 28px;position:relative;overflow:hidden}
+.fcard::before{content:'';position:absolute;top:0;left:0;right:0;height:2px}
+.fcard.attract::before{background:linear-gradient(90deg,var(--coral),transparent)}
+.fcard.bond::before{background:linear-gradient(90deg,var(--coral),transparent)}
+.fcard-img{width:100%;border-radius:12px;display:block;margin-bottom:16px}
+.fcard-role{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;margin-bottom:10px}
+.fcard.attract .fcard-role{color:var(--coral)}
+.fcard.bond .fcard-role{color:var(--coral)}
+.fcard-name{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:500;color:var(--tp);margin-bottom:8px}
+.fcard-desc{font-family:'Inter',sans-serif;font-size:12px;font-weight:300;color:var(--ts);line-height:1.6}
+.fcard-stat{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.06em;color:var(--tt);text-transform:uppercase;margin-top:12px;padding-top:10px;border-top:1px solid var(--rule)}
+.farrow{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px}
+.farrow .ar{font-family:'JetBrains Mono',monospace;font-size:18px;color:var(--teal)}
+.farrow .al{font-family:'JetBrains Mono',monospace;font-size:7px;letter-spacing:.08em;color:var(--tt);text-transform:uppercase}
+
+/* STAT STRIP */
+.strip{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:8px 0}
+.scard{background:var(--obs2);border:1px solid var(--rule);border-radius:2px;padding:24px 22px;text-align:center}
+.scard .num{font-family:'Cormorant Garamond',serif;font-size:42px;font-weight:300;color:var(--teal);line-height:1;margin-bottom:6px}
+.scard .lbl{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.1em;color:var(--tt);text-transform:uppercase;line-height:1.5}
+
+/* TRUST */
+.trust{background:rgba(232,200,122,.04);border:1px solid rgba(232,200,122,.2);border-radius:2px;padding:30px 34px;margin:8px 0}
+.trust-eyebrow{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;letter-spacing:.16em;color:var(--gold);text-transform:uppercase;margin-bottom:12px}
+.trust-stat{display:flex;align-items:baseline;gap:14px;margin-bottom:14px;flex-wrap:wrap}
+.trust-stat .big{font-family:'Cormorant Garamond',serif;font-size:40px;font-weight:400;color:var(--gold)}
+.trust-stat .cap{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.08em;color:var(--ts);text-transform:uppercase}
+.trust-txt{font-family:'Inter',sans-serif;font-size:13px;font-weight:300;color:var(--ts);line-height:1.7}
+.trust-txt strong{color:var(--tp);font-weight:500}
+
+/* FRICTION */
+.fric{display:flex;flex-direction:column;gap:12px}
+.fcard2{display:grid;grid-template-columns:auto 1fr;gap:20px;background:var(--obs3);border:1px solid var(--rule);border-left:2px solid var(--coral);border-radius:2px;padding:22px 26px}
+.fcard2-flag{font-family:'Cormorant Garamond',serif;font-size:34px;font-weight:400;color:var(--coral);line-height:1;align-self:center}
+.fcard2-body .fc-name{font-family:'Inter',sans-serif;font-size:13px;font-weight:600;color:var(--tp);margin-bottom:5px}
+.fcard2-body .fc-desc{font-family:'Inter',sans-serif;font-size:12.5px;font-weight:300;color:var(--ts);line-height:1.65}
+.fcard2-body .fc-desc strong{color:var(--tp);font-weight:500}
+.fc-fixed{display:flex;align-items:flex-start;gap:8px;margin-top:12px;padding-top:12px;border-top:1px solid var(--rule)}
+.fc-fixed .fx-dot{flex-shrink:0;margin-top:4px;width:6px;height:6px;border-radius:50%;background:var(--teal);box-shadow:0 0 8px rgba(75,173,168,.7)}
+.fc-fixed .fx-text{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--teal);line-height:1.5}
+.fc-fixed .fx-text span.detail{display:block;margin-top:3px;font-family:'Inter',sans-serif;font-size:11px;font-weight:300;letter-spacing:0;text-transform:none;color:var(--ts)}
+
+/* QUIET */
+.quiet{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.qcard{background:var(--obs2);border:1px solid var(--rule);border-radius:2px;padding:22px 24px}
+.qcard .qt{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;letter-spacing:.1em;color:rgba(240,235,227,.4);text-transform:uppercase;margin-bottom:10px}
+.qcard .qt::before{content:'\25CB  ';color:var(--tt)}
+.qcard .qd{font-family:'Inter',sans-serif;font-size:12px;font-weight:300;color:var(--ts);line-height:1.65}
+.qcard .qd strong{color:var(--tp);font-weight:500}
+
+/* PRIORITIES */
+.prio{display:flex;flex-direction:column;gap:12px}
+.pcard{display:grid;grid-template-columns:54px 1fr;gap:22px;align-items:start;background:var(--obs3);border:1px solid var(--rule);border-radius:2px;padding:26px 28px;position:relative;overflow:hidden}
+.pcard::before{content:'';position:absolute;top:0;left:0;bottom:0;width:2px;background:var(--teal)}
+.pnum{font-family:'Cormorant Garamond',serif;font-size:44px;font-weight:300;color:var(--teal);line-height:.9}
+.pbody .ptitle{font-family:'Cormorant Garamond',serif;font-size:21px;font-weight:500;color:var(--tp);margin-bottom:8px;line-height:1.2}
+.pbody .pdesc{font-family:'Inter',sans-serif;font-size:13px;font-weight:300;color:var(--ts);line-height:1.7}
+.pbody .pdesc strong{color:var(--tp);font-weight:500}
+.pcard-pico{position:absolute;top:18px;right:20px;width:40px;height:40px;object-fit:contain;opacity:.85}
+
+/* NEXT READ TEASE */
+.next-read{margin-top:26px;padding:22px 26px;border-radius:6px;background:linear-gradient(135deg,rgba(75,173,168,.06),rgba(255,255,255,.015));border:1px solid rgba(75,173,168,.18);border-left:2px solid var(--teal)}
+.next-read .nr-label{display:block;font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--teal);margin-bottom:10px}
+.next-read .nr-text{font-family:'Cormorant Garamond',serif;font-size:18px;font-style:italic;font-weight:400;line-height:1.5;color:var(--tp)}
+.next-read .nr-text strong{font-style:normal;font-weight:600;color:var(--teal)}
+
+/* CALM ENTRY SECTION */
+.calm-graphic{width:100%;border-radius:6px;border:1px solid rgba(255,255,255,.06);display:block;margin:8px 0 26px;box-shadow:0 24px 70px rgba(0,0,0,.5)}
+.arrivals{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:22px}
+.arr-card{background:#09080D;border:1px solid var(--rule);border-radius:6px;padding:22px 24px;position:relative;overflow:hidden}
+.arr-card::before{content:'';position:absolute;top:0;left:0;bottom:0;width:3px}
+.arr-card.cold::before{background:var(--coral)}
+.arr-card.guided::before{background:var(--teal)}
+.arr-role{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;margin-bottom:10px}
+.arr-card.cold .arr-role{color:var(--coral)}
+.arr-card.guided .arr-role{color:var(--teal)}
+.arr-desc{font-family:'Inter',sans-serif;font-size:12.5px;font-weight:300;color:var(--ts);line-height:1.65}
+.arr-desc strong{color:var(--tp);font-weight:500}
+.calm-converge{display:flex;align-items:center;gap:14px;background:var(--obs3);border:1px solid rgba(232,200,122,.2);border-left:2px solid var(--gold);border-radius:4px;padding:18px 24px;margin-bottom:8px}
+.calm-converge .cc-mark{font-family:'Cormorant Garamond',serif;font-size:28px;color:var(--gold);line-height:1;flex-shrink:0}
+.calm-converge .cc-text{font-family:'Inter',sans-serif;font-size:13px;font-weight:300;color:var(--ts);line-height:1.6}
+.calm-converge .cc-text strong{color:var(--tp);font-weight:500}
+@media(max-width:760px){.arrivals{grid-template-columns:1fr}}
+
+/* CLOSING */
+.closing{border-left:2px solid var(--teal);padding-left:28px;max-width:720px;margin-top:8px}
+.closing-text{font-family:'Cormorant Garamond',serif;font-size:21px;font-weight:400;font-style:italic;line-height:1.55;color:var(--tp)}
+.closing-text strong{font-weight:600;color:var(--teal);font-style:normal}
+
+/* FOOTER */
+.footer{background:var(--obs2);border-top:1px solid var(--rule);padding:34px 80px;display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap}
+.fl{display:flex;flex-direction:column;gap:5px}
+.fwm{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;letter-spacing:.16em;color:var(--teal);text-transform:uppercase}
+.fcl{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;color:var(--tt);text-transform:uppercase}
+.fr{text-align:right;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.12em;color:var(--tt);text-transform:uppercase;line-height:1.9}
+
+@media(max-width:760px){
+  .cover{padding:44px 26px}
+  .body{padding:52px 26px 90px}
+  .hero{grid-template-columns:1fr;gap:24px;padding:30px 26px;text-align:center}
+  .pcard-row{grid-template-columns:1fr;gap:16px;padding:16px}
+  .funnel{grid-template-columns:1fr;gap:12px}
+  .farrow{flex-direction:row;padding:4px 0}
+  .farrow .ar{transform:rotate(90deg)}
+  .strip{grid-template-columns:1fr}
+  .quiet{grid-template-columns:1fr}
+  .footer{padding:28px 26px;flex-direction:column;align-items:flex-start}
+  .fr{text-align:left}
+}
+</style>
+</head>
+<body>
+
+<!-- COVER -->
+<div class="cover">
+  <div class="cover-top">
+    <div class="wm">Criar Sin Culpas &#x2022; <span class="es">Observatorio de Se&#xF1;ales</span><span class="en">Signal Observatory</span></div>
+    <div class="cover-top-right">
+      <div class="lang-switch">
+        <button class="lang-opt active" data-lang="es" onclick="setLang('es')">ES</button>
+        <button class="lang-opt" data-lang="en" onclick="setLang('en')">EN</button>
+      </div>
+      <div class="badge"><div class="dot"></div><span><span class="es">Fase 2 &#x2022; Lectura de Inteligencia</span><span class="en">Phase 2 &#x2022; Intelligence Read</span></span></div>
+    </div>
+  </div>
+  <div class="cover-body">
+    <div class="dc"><span class="es">Experiencia de Protocolos (Gu&#xED;as) &nbsp;/&nbsp; Se&#xF1;al de Comportamiento &nbsp;/&nbsp; v1.0</span><span class="en">Protocol Experience (Guides) &nbsp;/&nbsp; Behavioral Signal &nbsp;/&nbsp; v1.0</span></div>
+    <h1 class="ct"><span class="es">La experiencia de<br>los <em>protocolos</em> <span style="font-style:normal;font-size:.42em;letter-spacing:.04em;color:var(--teal);vertical-align:middle">(Gu&#xED;as)</span></span><span class="en">The protocol<br><em>experience</em> <span style="font-style:normal;font-size:.42em;letter-spacing:.04em;color:var(--teal);vertical-align:middle">(Guides)</span></span></h1>
+    <p class="cs"><span class="es">Lo que el comportamiento de los padres revela sobre los cuatro protocolos de apoyo activos, le&#xED;do &#xFA;nicamente desde la anal&#xED;tica.</span><span class="en">What the behavior of parents reveals about the four live support protocols, read from analytics alone.</span></p>
+    <div class="cdiv"></div>
+  </div>
+  <div class="cmeta">
+    <div class="ml">
+      <div class="mi"><span class="es">Per&#xED;odo <span class="val">5 may -- 1 jun, 2026 &#x2022; 27 d&#xED;as</span></span><span class="en">Window <span class="val">May 5 -- Jun 1, 2026 &#x2022; 27 days</span></span></div>
+      <div class="mi"><span class="es">Muestra <span class="val">~180 visitantes &#x2022; concentrado en Seattle</span></span><span class="en">Sample <span class="val">~180 visitors &#x2022; Seattle-concentrated</span></span></div>
+      <div class="mi"><span class="es">Fuente <span class="val">Plausible Analytics &#x2022; solo comportamiento</span></span><span class="en">Source <span class="val">Plausible Analytics &#x2022; behavioral only</span></span></div>
+      <div class="mi"><span class="es">Interpretado como <span class="val">Se&#xF1;al direccional, no tendencia comprobada</span></span><span class="en">Read As <span class="val">Directional signal, not proven trend</span></span></div>
+    </div>
+    <div class="sm">&#x25C9;</div>
+  </div>
+</div>
+
+<!-- BODY -->
+<div class="body">
+
+  <!-- READING FRAME -->
+  <div class="sec" style="margin-bottom:64px">
+    <div class="frame">
+      <div class="frame-ico">NOTA</div>
+      <div class="frame-txt">
+        <span class="es">Esta es una muestra peque&#xF1;a, temprana y geogr&#xE1;ficamente concentrada, por lo que cada hallazgo es <strong>direccional, una se&#xF1;al de d&#xF3;nde mirar y actuar</strong>, no una tendencia comprobada estad&#xED;sticamente. A este volumen, un solo visitante comprometido mueve una cifra. La lectura a continuaci&#xF3;n distingue lo que ya es lo suficientemente s&#xF3;lido para actuar de lo que es un patr&#xF3;n m&#xE1;s sutil que conviene observar a medida que crece el volumen. Se construye &#xFA;nicamente a partir de anal&#xED;tica de comportamiento: atenci&#xF3;n en p&#xE1;gina, desplazamiento y algunos eventos de interacci&#xF3;n. No contiene datos de mensajes ni de sentimiento, que viven en una lectura aparte.</span>
+        <span class="en">This is a small, early, geographically concentrated sample, so every finding is <strong>directional, a signal of where to look and act</strong>, not a statistically proven trend. At this volume a single engaged visitor moves a number. The read below distinguishes what is strong enough to act on now from what is a quieter pattern worth watching as volume grows. It is built from behavioral analytics only: page attention, movement, and a few interaction events. It contains no message or sentiment data, which lives in a separate read.</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 01: FLAGSHIP -->
+  <div class="sec">
+    <div class="sh"><div class="sn">&#167; 01</div><h2 class="st"><span class="es">El hallazgo <em>principal</em></span><span class="en">The flagship <em>finding</em></span></h2></div>
+    <p class="si"><span class="es">Un protocolo se comporta de forma distinta a los dem&#xE1;s, y la diferencia no es sutil. Es la se&#xF1;al m&#xE1;s clara de todo el conjunto de datos.</span><span class="en">One protocol behaves unlike the others, and the gap is not subtle. It is the single clearest signal in the entire dataset.</span></p>
+    <div class="hero">
+      <div>
+        <img class="hero-img" src="https://res.cloudinary.com/dogtoagya/image/upload/v1780487723/De-escalate_uknps8.png" alt="De-escalate">
+      </div>
+      <div class="hero-body">
+        <div style="display:flex;align-items:baseline;gap:14px;margin-bottom:12px"><span class="hero-num">240<span style="font-size:.42em;color:var(--tt)">s</span></span><span class="hero-unit"><span class="es">tiempo prom. en p&#xE1;gina<br>89% de desplazamiento</span><span class="en">avg. time on page<br>89% scroll depth</span></span></div>
+        <div class="hl"><span class="es">&#x201C;Est&#xE1; llorando o gritando sin parar&#x201D; es donde se forma la confianza.</span><span class="en">&#x201C;They're crying or screaming non-stop&#x201D; is where the trust forms.</span></div>
+        <div class="hp">
+          <span class="es">Los padres pasan alrededor de <strong>cuatro minutos</strong> en el protocolo de escalada emocional, de tres a seis veces m&#xE1;s que en cualquier otro, y lo recorren casi por completo. Nadie permanece cuatro minutos en una p&#xE1;gina a menos que lo est&#xE9; encontrando dentro de un momento real y dif&#xED;cil. Esta es la firma de comportamiento de <strong>una necesidad aguda atendida</strong>: llegar desregulado, encontrar algo que sostiene y quedarse con ello. De todo lo que hay aqu&#xED;, este hallazgo ya es lo suficientemente s&#xF3;lido para actuar.</span>
+          <span class="en">Parents spend roughly <strong>four minutes</strong> on the emotional escalation protocol, three to six times longer than any other, and scroll almost all the way through. People do not stay with a page for four minutes unless it is meeting them inside a real, hard moment. This is the behavioral signature of <strong>acute need met</strong>: arriving dysregulated, finding something that holds, and staying with it. Of everything here, this finding is strong enough to act on now.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 02: FOUR PROTOCOLS -->
+  <div class="sec">
+    <div class="sh"><div class="sn">&#167; 02</div><h2 class="st"><span class="es">Los cuatro protocolos (gu&#xED;as), <em>ordenados por comportamiento</em></span><span class="en">The four protocols (guides), <em>ranked by behavior</em></span></h2></div>
+    <p class="si">
+      <span class="es">Dos medidas cuentan la historia juntas: cu&#xE1;nto tiempo permanecen los padres <span class="tealc">(atenci&#xF3;n)</span> y hasta d&#xF3;nde leen <span class="goldc">(lectura completada)</span>. Le&#xED;das lado a lado, separan los protocolos que la gente <strong>necesita</strong> de los que solo <strong>hojea</strong>.</span>
+      <span class="en">Two measures tell the story together: how long parents stay <span class="tealc">(attention)</span> and how far they read <span class="goldc">(completion)</span>. Read side by side, they separate the protocols people <strong>need</strong> from the ones they merely <strong>browse</strong>.</span>
+    </p>
+    <div class="keyrow">
+      <div class="keychip k-coral"><img src="https://res.cloudinary.com/dogtoagya/image/upload/v1780456754/escalate-icon_smlce5.png" alt=""><span>Desborde</span></div>
+      <div class="keychip k-coral"><img src="https://res.cloudinary.com/dogtoagya/image/upload/v1780456754/screens-icon_ghui15.png" alt=""><span>Let go</span></div>
+      <div class="keychip k-teal"><img src="https://res.cloudinary.com/dogtoagya/image/upload/v1780456757/sleep-icon_aah3fr.png" alt=""><span>Settle</span></div>
+      <div class="keychip k-teal"><img src="https://res.cloudinary.com/dogtoagya/image/upload/v1780456756/sibblings-icon_vnfz67.png" alt=""><span>Step in</span></div>
+    </div>
+    <div class="pcards">
+
+      <div class="pcard-row r-coral">
+        <div class="pcard-imgwrap"><img class="pcard-img" src="https://res.cloudinary.com/dogtoagya/image/upload/v1780487723/De-escalate_uknps8.png" alt="De-escalate"></div>
+        <div class="pcard-data">
+          <div class="card-top"><span class="tier-pill coral"><span class="es">Emergencia</span><span class="en">Emergency</span></span></div>
+          <div class="pd-moment"><span class="es">&#x201C;Est&#xE1; llorando o gritando sin parar.&#x201D;</span><span class="en">&#x201C;They're crying or screaming non-stop.&#x201D;</span></div>
+          <div class="pd-tagline"><span class="pd-tag t-coral"><span class="es"><b>Desborde</b> &#x2022; Escalada Emocional</span><span class="en"><b>De-escalate</b> &#x2022; Emotional Escalation</span></span><span class="pd-rank coral"><span class="es">Mayor Necesidad</span><span class="en">Deepest Need</span></span></div>
+          <span class="pd-sub"><span class="es">24 visitantes &#x2022; 20% de rebote &#x2022; el v&#xED;nculo</span><span class="en">24 visitors &#x2022; 20% bounce &#x2022; the bond</span></span>
+          <div class="pbar-line"><span class="pbar-tag">Dwell</span><div class="pbar-fill dwell" style="width:100%"></div><span class="pbar-val">240s</span></div>
+          <div class="pbar-line"><span class="pbar-tag">Scroll</span><div class="pbar-fill scroll" style="width:89%"></div><span class="pbar-val">89%</span></div>
+        </div>
+      </div>
+
+      <div class="pcard-row r-teal">
+        <div class="pcard-imgwrap"><img class="pcard-img" src="https://res.cloudinary.com/dogtoagya/image/upload/v1780487720/Settle_itavic.png" alt="Settle"></div>
+        <div class="pcard-data">
+          <div class="card-top"><span class="tier-pill teal"><span class="es">Contenci&#xF3;n</span><span class="en">Restoration</span></span></div>
+          <div class="pd-moment"><span class="es">&#x201C;Se resiste a dormir. Otra vez.&#x201D;</span><span class="en">&#x201C;They're resisting sleep. Again.&#x201D;</span></div>
+          <div class="pd-tagline"><span class="pd-tag t-teal"><span class="es"><b>Settle</b> &#x2022; Resistencia al Sue&#xF1;o</span><span class="en"><b>Settle</b> &#x2022; Bedtime Resistance</span></span><span class="pd-rank teal"><span class="es">Punto Medio S&#xF3;lido</span><span class="en">Healthy Middle</span></span></div>
+          <span class="pd-sub"><span class="es">21 visitantes &#x2022; 36% de rebote &#x2022; confiable</span><span class="en">21 visitors &#x2022; 36% bounce &#x2022; dependable</span></span>
+          <div class="pbar-line"><span class="pbar-tag">Dwell</span><div class="pbar-fill dwell" style="width:44%"></div><span class="pbar-val">105s</span></div>
+          <div class="pbar-line"><span class="pbar-tag">Scroll</span><div class="pbar-fill scroll" style="width:71%"></div><span class="pbar-val">71%</span></div>
+        </div>
+      </div>
+
+      <div class="pcard-row r-teal">
+        <div class="pcard-imgwrap"><img class="pcard-img" src="https://res.cloudinary.com/dogtoagya/image/upload/v1780487718/StepIn_whozu4.png" alt="Step in"></div>
+        <div class="pcard-data">
+          <div class="card-top"><span class="tier-pill teal"><span class="es">Contenci&#xF3;n</span><span class="en">Restoration</span></span></div>
+          <div class="pd-moment"><span class="es">&#x201C;Se est&#xE1;n peleando y no para.&#x201D;</span><span class="en">&#x201C;They're fighting and it won't stop.&#x201D;</span></div>
+          <div class="pd-tagline"><span class="pd-tag t-teal"><span class="es"><b>Step in</b> &#x2022; Conflicto entre Hermanos</span><span class="en"><b>Step in</b> &#x2022; Sibling Conflict</span></span><span class="pd-rank teal"><span class="es">Fuga en Entrada Directa</span><span class="en">Cold-Entry Leak</span></span></div>
+          <span class="pd-sub"><span class="es">19 visitantes &#x2022; 64% de rebote en entrada &#x2022; corregible</span><span class="en">19 visitors &#x2022; 64% entry bounce &#x2022; fixable</span></span>
+          <div class="pbar-line"><span class="pbar-tag">Dwell</span><div class="pbar-fill dwell" style="width:40%"></div><span class="pbar-val">97s</span></div>
+          <div class="pbar-line"><span class="pbar-tag">Scroll</span><div class="pbar-fill scroll" style="width:72%"></div><span class="pbar-val">72%</span></div>
+        </div>
+      </div>
+
+      <div class="pcard-row r-coral">
+        <div class="pcard-imgwrap"><img class="pcard-img" src="https://res.cloudinary.com/dogtoagya/image/upload/v1780487722/LetGo_ba1dyr.png" alt="Let go"></div>
+        <div class="pcard-data">
+          <div class="card-top"><span class="tier-pill coral"><span class="es">Emergencia</span><span class="en">Emergency</span></span></div>
+          <div class="pd-moment"><span class="es">&#x201C;No quiere apagar la pantalla.&#x201D;</span><span class="en">&#x201C;They won't turn off the screen.&#x201D;</span></div>
+          <div class="pd-tagline"><span class="pd-tag t-coral"><span class="es"><b>Let go</b> &#x2022; Tiempo de Pantalla</span><span class="en"><b>Let go</b> &#x2022; Screen Time</span></span><span class="pd-rank coral"><span class="es">El Im&#xE1;n</span><span class="en">The Magnet</span></span></div>
+          <span class="pd-sub"><span class="es">37 visitantes &#x2022; 29% de rebote &#x2022; mayor alcance</span><span class="en">37 visitors &#x2022; 29% bounce &#x2022; broadest reach</span></span>
+          <div class="pbar-line"><span class="pbar-tag">Dwell</span><div class="pbar-fill dwell" style="width:17%"></div><span class="pbar-val">42s</span></div>
+          <div class="pbar-line"><span class="pbar-tag">Scroll</span><div class="pbar-fill scroll" style="width:76%"></div><span class="pbar-val">76%</span></div>
+        </div>
+      </div>
+
+    </div>
+    <div class="legend" style="margin-top:18px">
+      <div class="lg"><span class="sw dwell"></span><span class="es">Atenci&#xF3;n (tiempo en p&#xE1;gina)</span><span class="en">Attention (time on page)</span></div>
+      <div class="lg"><span class="sw scroll"></span><span class="es">Lectura completada (desplazamiento)</span><span class="en">Completion (scroll depth)</span></div>
+    </div>
+    <p class="si" style="margin-top:28px">
+      <span class="es"><strong>El tiempo de pantalla atrae al p&#xFA;blico m&#xE1;s amplio pero con el menor compromiso.</strong> Es el protocolo m&#xE1;s visitado y, aun as&#xED;, los padres lo recorren r&#xE1;pido. Eso no es una debilidad, es un papel: el tiempo de pantalla es el tema de mayor alcance y menor carga emocional. El Desborde es su reflejo opuesto, menos llegadas pero una profundidad enorme. Esta es la diferencia entre curiosidad y necesidad urgente, y los datos trazan la l&#xED;nea con claridad.</span>
+      <span class="en"><strong>Screen time draws the largest crowd but the lightest engagement.</strong> It is the most visited protocol yet parents move through it quickly. That is not a weakness, it is a role: screen time is the topic with the broadest reach and the lowest emotional charge. De-escalate is its mirror image, fewer arrivals but profound depth. This is the difference between curiosity and urgent need, and the data draws the line cleanly.</span>
+    </p>
+  </div>
+
+  <!-- 03: FUNNEL -->
+  <div class="sec">
+    <div class="sh"><div class="sn">&#167; 03</div><h2 class="st"><span class="es">El embudo ya est&#xE1; <em>mostrando su forma</em></span><span class="en">The funnel is already <em>telling you its shape</em></span></h2></div>
+    <p class="si">
+      <span class="es">Los dos extremos no compiten. Son los dos extremos de un mismo recorrido. El comportamiento sugiere una divisi&#xF3;n natural del trabajo que la estrategia de protocolos puede aprovechar de forma deliberada.</span>
+      <span class="en">The two extremes are not competing. They are two ends of one journey. The behavior suggests a natural division of labor that the protocol strategy can lean into deliberately.</span>
+    </p>
+    <div class="funnel">
+      <div class="fcard attract">
+        <img class="fcard-img" src="https://res.cloudinary.com/dogtoagya/image/upload/v1780487722/LetGo_ba1dyr.png" alt="Let go">
+        <div class="fcard-role"><span class="es">El Im&#xE1;n</span><span class="en">The Magnet</span></div>
+        <div class="fcard-name"><span class="es">&#x201C;No quiere apagar la pantalla.&#x201D;</span><span class="en">&#x201C;They won't turn off the screen.&#x201D;</span></div>
+        <div class="fcard-stat" style="margin-top:0;padding-top:0;border-top:none;margin-bottom:8px"><b style="color:var(--coral)">Let go</b> &#x2022; <span class="es">Tiempo de Pantalla</span><span class="en">Screen Time</span></div>
+        <div class="fcard-desc"><span class="es">Mayor alcance, menor carga emocional. El tema que los padres buscan de forma casual. Trae a la gente hasta la puerta.</span><span class="en">Broadest reach, lowest emotional charge. The topic parents search casually. It brings people through the door.</span></div>
+        <div class="fcard-stat"><span class="es">37 visitantes &#x2022; 42s &#x2022; contacto ligero</span><span class="en">37 visitors &#x2022; 42s &#x2022; light touch</span></div>
+      </div>
+      <div class="farrow"><div class="ar">&#8594;</div><div class="al"><span class="es">dirige hacia</span><span class="en">routes toward</span></div></div>
+      <div class="fcard bond">
+        <img class="fcard-img" src="https://res.cloudinary.com/dogtoagya/image/upload/v1780487723/De-escalate_uknps8.png" alt="De-escalate">
+        <div class="fcard-role"><span class="es">El V&#xED;nculo</span><span class="en">The Bond</span></div>
+        <div class="fcard-name"><span class="es">&#x201C;Est&#xE1; llorando o gritando sin parar.&#x201D;</span><span class="en">&#x201C;They're crying or screaming non-stop.&#x201D;</span></div>
+        <div class="fcard-stat" style="margin-top:0;padding-top:0;border-top:none;margin-bottom:8px"><b style="color:var(--coral)"><span class="es">Desborde</span><span class="en">De-escalate</span></b> &#x2022; <span class="es">Escalada Emocional</span><span class="en">Emotional Escalation</span></div>
+        <div class="fcard-desc"><span class="es">Menos llegadas, el mayor compromiso. El momento agudo donde la confianza realmente se forma y la relaci&#xF3;n se profundiza.</span><span class="en">Fewer arrivals, deepest engagement. The acute moment where trust is actually formed and the relationship deepens.</span></div>
+        <div class="fcard-stat"><span class="es">24 visitantes &#x2022; 240s &#x2022; atenci&#xF3;n sostenida</span><span class="en">24 visitors &#x2022; 240s &#x2022; held attention</span></div>
+      </div>
+    </div>
+    <p class="si" style="margin-top:28px">
+      <span class="es">La jugada estrat&#xE9;gica se escribe sola: usar el tiempo de pantalla para <strong>atraer</strong>, dirigir hacia la escalada emocional para <strong>crear v&#xED;nculo</strong>. Cumplen funciones distintas, y tratarlos como un solo embudo en lugar de cuatro p&#xE1;ginas iguales es el enfoque de mayor impacto.</span>
+      <span class="en">The strategic move writes itself: use screen time to <strong>attract</strong>, route toward emotional escalation to <strong>bond</strong>. They do different jobs, and treating them as a single funnel rather than four equal pages is the higher-leverage frame.</span>
+    </p>
+  </div>
+
+  <!-- 04: HUB -->
+  <div class="sec">
+    <div class="sh"><div class="sn">&#167; 04</div><h2 class="st"><span class="es">El centro de apoyo est&#xE1; <em>funcionando</em></span><span class="en">The support hub is <em>working</em></span></h2></div>
+    <p class="si">
+      <span class="es">Antes de los protocolos individuales, los padres pasan por el centro de apoyo, y la forma en que se mueven por &#xE9;l es una victoria estructural silenciosa. No llegan a una sola p&#xE1;gina y se van. Recorren varios protocolos, buscando el momento que coincide con su necesidad.</span>
+      <span class="en">Before the individual protocols, parents pass through the hub, and the way they move through it is a quiet structural win. They are not landing on one page and leaving. They are browsing across protocols, shopping for the moment that matches their need.</span>
+    </p>
+    <div class="strip">
+      <div class="scard"><div class="num">200</div><div class="lbl"><span class="es">Vistas del centro</span><span class="en">Hub pageviews</span></div></div>
+      <div class="scard"><div class="num">94</div><div class="lbl"><span class="es">Visitantes del centro</span><span class="en">Hub visitors</span></div></div>
+      <div class="scard"><div class="num">2.1&#xD7;</div><div class="lbl"><span class="es">Vistas por visitante</span><span class="en">Views per visitor</span></div></div>
+    </div>
+    <p class="si" style="margin-top:28px">
+      <span class="es">M&#xE1;s de dos vistas por visitante, con un rebote bajo del 36%, significa que el centro funciona como una <strong>superficie de triaje</strong>, exactamente lo que una biblioteca de apoyo deber&#xED;a hacer. Los padres llegan, revisan las opciones y se dirigen por s&#xED; mismos al protocolo que encaja con el momento en que est&#xE1;n. Este es un activo estructural que vale la pena proteger a medida que la biblioteca crece.</span>
+      <span class="en">More than two views per visitor, at a low 36% bounce, means the hub is functioning as a <strong>triage surface</strong>, exactly what a support library should do. Parents arrive, scan the options, and self-route to the protocol that fits the moment they are in. This is a structural asset worth protecting as the library expands.</span>
+    </p>
+  </div>
+
+  <!-- 05: TRUST -->
+  <div class="sec">
+    <div class="sh"><div class="sn">&#167; 05</div><h2 class="st"><span class="es">La confianza, convertida en <em>comportamiento</em></span><span class="en">Trust, converting into <em>behavior</em></span></h2></div>
+    <p class="si">
+      <span class="es">La se&#xF1;al m&#xE1;s valiosa del conjunto de datos es tambi&#xE9;n la m&#xE1;s peque&#xF1;a en n&#xFA;mero bruto. Es el momento en que un padre deja de leer y empieza a llevarse las palabras a su propio hogar.</span>
+      <span class="en">The most valuable signal in the dataset is also the smallest in raw number. It is the moment a parent stops reading and starts carrying your words into their own home.</span>
+    </p>
+    <div class="trust">
+      <div class="trust-eyebrow"><span class="es">La Acci&#xF3;n de Mayor Intenci&#xF3;n Registrada</span><span class="en">The Highest-Intent Action Recorded</span></div>
+      <div class="trust-stat"><span class="big">7</span><span class="cap"><span class="es">frases copiadas por 4 padres &#x2022; 1 enlace compartido</span><span class="en">phrases copied by 4 parents &#x2022; 1 link shared</span></span></div>
+      <div class="trust-txt">
+        <span class="es">El volumen es min&#xFA;sculo, pero cualitativamente es lo m&#xE1;s valioso que hay aqu&#xED;. Un padre que copia una frase tiene la intenci&#xF3;n de <strong>usar ese lenguaje en un momento real con su hijo</strong>. Un compartido significa que est&#xE1; respaldando a la marca ante otro padre. Esto es la confianza convirti&#xE9;ndose en acci&#xF3;n: los protocolos est&#xE1;n produciendo palabras que la gente quiere llevarse consigo. Los protocolos que generan las copias son el n&#xFA;cleo de confianza. <strong>Un solo cambio desbloquea un valor enorme:</strong> capturar qu&#xE9; frase se copia, y la acci&#xF3;n de mayor confianza se convierte en la fuente m&#xE1;s rica del lenguaje exacto que resuena.</span>
+        <span class="en">The volume is tiny, but qualitatively this is the richest thing here. A parent copying a phrase intends to <strong>use your language in a real moment with their child</strong>. A share means they are vouching for you to another parent. This is trust turning into action, the protocols are producing words people want to take with them. The protocols that generate the copies are your trust core. <strong>One change unlocks enormous value:</strong> capture which phrase is copied, and your highest-trust action becomes your richest source of the exact language that resonates.</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 06: FRICTION -->
+  <div class="sec">
+    <div class="sh"><div class="sn">&#167; 06</div><h2 class="st"><span class="es">Dos fugas <em>concretas</em></span><span class="en">Two concrete <em>leaks</em></span></h2></div>
+    <p class="si"><span class="es">Las dos aparecieron en el comportamiento, ninguna ten&#xED;a que ver con el contenido en s&#xED;. Eran estructurales, y <strong>las dos ya est&#xE1;n resueltas.</strong> Las dejamos a la vista porque la se&#xF1;al que las revel&#xF3; es parte del registro.</span><span class="en">Both surfaced in the behavior, and neither was about the content itself. They were structural, and <strong>both are now resolved.</strong> We leave them visible because the signal that revealed them is part of the record.</span></p>
+    <div class="fric">
+      <div class="fcard2">
+        <div class="fcard2-flag">&#10094;/&#10095;</div>
+        <div class="fcard2-body">
+          <div class="fc-name"><span class="es">La p&#xE1;gina del m&#xE9;todo est&#xE1; dividida en tres</span><span class="en">The method page is split three ways</span></div>
+          <div class="fc-desc"><span class="es">El tr&#xE1;fico estaba llegando a tres URLs distintas del m&#xE9;todo, y una de ellas rebotaba al 75%. Eso fragmentaba el tr&#xE1;fico, divid&#xED;a la autoridad de b&#xFA;squeda y confund&#xED;a a los visitantes.</span><span class="en">Traffic was landing on three different method URLs, and one of them bounced at 75%. That fragmented traffic, split search authority, and confused visitors.</span></div>
+          <div class="fc-fixed"><span class="fx-dot"></span><span class="fx-text"><span class="es">Resuelto</span><span class="en">Resolved</span><span class="detail"><span class="es">Todas las rutas del m&#xE9;todo se consolidaron en una sola p&#xE1;gina can&#xF3;nica (<b>/metodo/</b>), con redirecciones 301 desde las dem&#xE1;s. El tr&#xE1;fico y la autoridad de b&#xFA;squeda vuelven a contar como uno.</span><span class="en">All method routes were consolidated onto one canonical page (<b>/metodo/</b>), with 301 redirects from the rest. Traffic and search authority now count as one again.</span></span></span></div>
+        </div>
+      </div>
+      <div class="fcard2">
+        <div class="fcard2-flag">&#8600;</div>
+        <div class="fcard2-body">
+          <div class="fc-name"><span class="es">Step in (conflicto entre hermanos) pierde a las llegadas en fr&#xED;o</span><span class="en">Step in (sibling conflict) loses cold arrivals</span></div>
+          <div class="fc-desc"><span class="es">Cuando los padres llegaban directamente al protocolo Step in, el 64% se iba de inmediato, el rebote de entrada m&#xE1;s alto de todos. Sin embargo, al llegar a mitad del recorrido desde el centro, los reten&#xED;a bien. El tema ten&#xED;a fuerza; <strong>la apertura de la p&#xE1;gina no conectaba con quien llegaba en fr&#xED;o.</strong></span><span class="en">When parents landed directly on the Step in protocol, 64% left immediately, the highest entry bounce of any protocol. Yet when they reached it mid-journey from the hub, it held them fine. The topic had pull; <strong>the opening of the page was not landing for someone who arrived cold.</strong></span></div>
+          <div class="fc-fixed"><span class="fx-dot"></span><span class="fx-text"><span class="es">Resuelto</span><span class="en">Resolved</span><span class="detail"><span class="es">La Entrada en Calma ahora recibe a quien llega en fr&#xED;o, antes de la gu&#xED;a profunda. Es exactamente el cambio que se detalla en la siguiente secci&#xF3;n.</span><span class="en">The Calm Entry now receives cold arrivals before the deep guide. It is exactly the change detailed in the next section.</span></span></span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 07: CALM ENTRY (signal to structure) -->
+  <div class="sec">
+    <div class="sh"><div class="sn">&#167; 07</div><h2 class="st"><span class="es">De la se&#xF1;al a la <em>estructura</em></span><span class="en">From signal to <em>structure</em></span></h2></div>
+    <p class="si">
+      <span class="es">Lo anterior no es solo diagn&#xF3;stico. El comportamiento que muestran los datos, el embudo y la fuga en entrada directa, ya impuls&#xF3; un cambio en el producto: una <strong>Entrada en Calma</strong> ahora recibe a cada padre antes de la gu&#xED;a profunda. Y resuelve dos llegadas distintas a la vez.</span>
+      <span class="en">What came before is not only diagnosis. The behavior the data revealed, the funnel and the cold-entry leak, already drove a change in the product: a <strong>Calm Entry</strong> now receives each parent before the deep guide. And it answers two different arrivals at once.</span>
+    </p>
+    <img class="calm-graphic" src="https://res.cloudinary.com/dogtoagya/image/upload/v1780485475/ChatGPT_Image_Jun_3_2026_03_11_41_AM_nntz2w.png" alt="Calm Entry: two arrivals, one entry">
+    <div class="arrivals">
+      <div class="arr-card cold">
+        <div class="arr-role"><span class="es">Llegada en Fr&#xED;o</span><span class="en">Cold Arrival</span></div>
+        <div class="arr-desc"><span class="es">Un enlace reenviado deja al padre a mitad del protocolo, sin contexto, a menudo en plena crisis. Aqu&#xED; estaba la fuga. <strong>La Entrada en Calma lo recibe y lo orienta.</strong></span><span class="en">A forwarded link drops a parent mid-protocol, no context, often mid-crisis. This is where the leak was. <strong>The Calm Entry catches and orients them.</strong></span></div>
+      </div>
+      <div class="arr-card guided">
+        <div class="arr-role"><span class="es">Llegada Guiada</span><span class="en">Guided Arrival</span></div>
+        <div class="arr-desc"><span class="es">Inicio &#x2192; Apoyo &#x2192; protocolo. Este padre ya lleg&#xF3; con contexto, se hizo su propio triaje en el centro. <strong>La Entrada en Calma le confirma que est&#xE1; en el lugar correcto.</strong></span><span class="en">Homepage &#x2192; Apoyo &#x2192; protocol. This parent already has context, self-triaged through the hub. <strong>The Calm Entry affirms they are in the right place.</strong></span></div>
+      </div>
+    </div>
+    <div class="calm-converge">
+      <span class="cc-mark">&#8682;</span>
+      <span class="cc-text"><span class="es">Una sola capa, dos funciones. <strong>Rescata a la llegada en fr&#xED;o y afirma a la guiada.</strong> Es el mismo embudo que mostraron los datos, ahora con una puerta que recibe a quien entra por cualquiera de los dos caminos.</span><span class="en">One layer, two jobs. <strong>It rescues the cold arrival and affirms the guided one.</strong> It is the same funnel the data revealed, now with a door that greets whoever enters by either path.</span></span>
+    </div>
+  </div>
+
+  <!-- 08: DEVICE -->
+  <div class="sec">
+    <div class="sh"><div class="sn">&#167; 08</div><h2 class="st"><span class="es">La mitad de tu audiencia <em>tiene un tel&#xE9;fono en la mano</em></span><span class="en">Half your audience is <em>holding a phone</em></span></h2></div>
+    <p class="si">
+      <span class="es">El uso en m&#xF3;vil y en escritorio est&#xE1; casi parejo. Para una herramienta de apoyo a la crianza, este detalle pesa: es muy probable que una parte significativa de estos protocolos se lean <strong>en el momento</strong>, en el dispositivo que el padre tiene en la mano mientras el momento dif&#xED;cil ocurre. La experiencia m&#xF3;vil no es una vista secundaria. Para la mitad de la audiencia, puede ser el producto en s&#xED;.</span>
+      <span class="en">Mobile and desktop usage are nearly even. For a parenting-support tool, this detail carries weight: a meaningful share of these protocols are very likely being read <strong>in the moment</strong>, on the device in a parent's hand while the hard moment is unfolding. The mobile experience is not a secondary view. For half your audience, it may be the product itself.</span>
+    </p>
+    <div class="strip" style="grid-template-columns:1fr 1fr">
+      <div class="scard"><div class="num">85</div><div class="lbl"><span class="es">Visitantes en m&#xF3;vil</span><span class="en">Mobile visitors</span></div></div>
+      <div class="scard"><div class="num">93</div><div class="lbl"><span class="es">Visitantes en escritorio</span><span class="en">Desktop visitors</span></div></div>
+    </div>
+  </div>
+
+  <!-- 08: QUIET -->
+  <div class="sec">
+    <div class="sh"><div class="sn">&#167; 09</div><h2 class="st"><span class="es">Donde los datos <em>guardan silencio</em></span><span class="en">Where the data goes <em>quiet</em></span></h2></div>
+    <p class="si"><span class="es">Dos de las cosas que esta revisi&#xF3;n solicita no se pueden responder con honestidad solo desde la anal&#xED;tica de comportamiento. Nombrar el l&#xED;mite es parte de la lectura.</span><span class="en">Two things this review asks for cannot honestly be answered from behavioral analytics alone. Naming the limit is part of the read.</span></p>
+    <div class="quiet">
+      <div class="qcard">
+        <div class="qt"><span class="es">Patrones de usuarios recurrentes</span><span class="en">Returning-user patterns</span></div>
+        <div class="qd"><span class="es">El modelo de anal&#xED;tica centrado en la privacidad no rastrea a las personas entre visitas separadas, por lo que el comportamiento real de retorno no es visible aqu&#xED;. El indicador m&#xE1;s cercano es la alta navegaci&#xF3;n dentro de una misma sesi&#xF3;n en el centro, lo que sugiere <strong>exploraci&#xF3;n dentro de una visita</strong>, no un retorno confirmado a lo largo de los d&#xED;as.</span><span class="en">The privacy-first analytics model does not track individuals across separate visits, so true return behavior is not visible here. The closest proxy is the high within-session browsing at the hub, which suggests <strong>exploration inside a visit</strong>, not confirmed return across days.</span></div>
+      </div>
+      <div class="qcard">
+        <div class="qt"><span class="es">Respuesta emocional y mensajes</span><span class="en">Emotional response &amp; messages</span></div>
+        <div class="qd"><span class="es">No hay datos de texto, sentimiento ni mensajes en esta fuente. La <strong>sombra de comportamiento</strong> de la emoci&#xF3;n s&#xED; es visible (el tiempo de permanencia en escalada es el ejemplo m&#xE1;s claro), pero el lenguaje emocional real vive en los datos sociales y de mensajes, que son una lectura aparte que se realiza junto a esta.</span><span class="en">There is no text, sentiment, or message data in this source. The <strong>behavioral shadow</strong> of emotion is visible (the escalation dwell time being the clearest example), but the actual emotional language lives in the social and message data, which is a separate read run alongside this one.</span></div>
+      </div>
+    </div>
+    <div class="next-read">
+      <span class="nr-label"><span class="es">La Siguiente Lectura</span><span class="en">The Next Read</span></span>
+      <p class="nr-text"><span class="es">Esta fue la capa que se pod&#xED;a medir: el comportamiento dentro de un espacio propio. La otra capa, lo que los padres <strong>dicen y comparten</strong> en mensajes y en redes, a&#xFA;n no se posee ni se rastrea aqu&#xED;. El comportamiento muestra qu&#xE9; gu&#xED;a sostiene; la escucha social mostrar&#xE1; <strong>por qu&#xE9;</strong>. Es la continuaci&#xF3;n natural de este an&#xE1;lisis.</span><span class="en">This was the layer that could be measured: behavior inside an owned space. The other layer, what parents <strong>say and share</strong> in messages and on social, is not yet owned or tracked here. Behavior shows which guide holds; social listening will show <strong>why</strong>. It is the natural continuation of this analysis.</span></p>
+    </div>
+  </div>
+  <div class="sec">
+    <div class="sh"><div class="sn">&#167; 10</div><h2 class="st"><span class="es">Las tres prioridades que los <em>datos respaldan</em></span><span class="en">The three priorities the data <em>supports</em></span></h2></div>
+    <p class="si"><span class="es">En orden, seg&#xFA;n la solidez de la evidencia detr&#xE1;s de cada una.</span><span class="en">In order, by the strength of the evidence behind each.</span></p>
+    <div class="prio">
+      <div class="pcard">
+        <div class="pnum">1</div>
+        <img class="pcard-pico" src="https://res.cloudinary.com/dogtoagya/image/upload/v1780456754/escalate-icon_smlce5.png" alt="">
+        <div class="pbody">
+          <div class="ptitle"><span class="es">Construir a partir del Desborde</span><span class="en">Build outward from De-escalate</span></div>
+          <div class="pdesc"><span class="es">Tiene el mandato de comportamiento m&#xE1;s fuerte de todo lo que hay aqu&#xED;. La pr&#xF3;xima expansi&#xF3;n de protocolos, un taller o un primer recurso de pago deber&#xED;a anclarse en el <strong>padre del momento agudo, el que est&#xE1; en la trinchera</strong>, con el tiempo de pantalla como el atractivo gratuito que lo dirige hacia all&#xED;.</span><span class="en">It carries the strongest behavioral mandate of anything here. The next protocol expansion, a workshop, or a first paid resource should anchor on the <strong>acute-moment, in-the-trenches parent</strong>, with screen time as the free draw that routes them toward it.</span></div>
+        </div>
+      </div>
+      <div class="pcard">
+        <div class="pnum">2</div>
+        <img class="pcard-pico" src="https://res.cloudinary.com/dogtoagya/image/upload/v1780456756/sibblings-icon_vnfz67.png" alt="">
+        <div class="pbody">
+          <div class="ptitle"><span class="es">Confirmar el cierre de las dos fugas</span><span class="en">Confirm the two leaks are closed</span></div>
+          <div class="pdesc"><span class="es">Ambas ya se corrigieron: el m&#xE9;todo qued&#xF3; consolidado en una sola URL y la Entrada en Calma ahora recibe a las llegadas en fr&#xED;o. <strong>El siguiente paso es solo observar la se&#xF1;al</strong>, ver si el rebote de entrada en Step in baja y si el m&#xE9;todo recupera su tr&#xE1;fico unificado en las pr&#xF3;ximas semanas.</span><span class="en">Both are already fixed: the method is consolidated onto one URL and the Calm Entry now receives cold arrivals. <strong>The next step is simply to watch the signal</strong>, to see whether Step in's entry bounce drops and whether the method recovers its unified traffic over the coming weeks.</span></div>
+        </div>
+      </div>
+      <div class="pcard">
+        <div class="pnum">3</div>
+        <img class="pcard-pico" src="https://res.cloudinary.com/dogtoagya/image/upload/v1780456754/screens-icon_ghui15.png" alt="">
+        <div class="pbody">
+          <div class="ptitle"><span class="es">Capturar qu&#xE9; frase se copia</span><span class="en">Capture which phrase gets copied</span></div>
+          <div class="pdesc"><span class="es">Un peque&#xF1;o cambio de instrumentaci&#xF3;n que convierte el comportamiento de mayor confianza en la <strong>fuente de lenguaje m&#xE1;s rica</strong>: las palabras exactas que los padres consideran dignas de llevar a sus propios hogares.</span><span class="en">A small instrumentation change that turns your highest-trust behavior into your richest <strong>language source</strong>, the exact words parents find worth carrying into their own homes.</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CLOSING -->
+  <div class="sec" style="margin-bottom:0">
+    <div class="closing">
+      <div class="closing-text">
+        <span class="es">Los n&#xFA;meros son peque&#xF1;os, pero la forma ya es clara. <strong>Los padres llegan con curiosidad y se quedan cuando se les encuentra en el momento dif&#xED;cil.</strong> El protocolo que los retiene cuatro minutos no es el m&#xE1;s visitado, es el m&#xE1;s necesario. Construyan ah&#xED;.</span>
+        <span class="en">The numbers are small, but the shape is already clear. <strong>Parents arrive curious and stay when they are met in the hard moment.</strong> The protocol that holds them for four minutes is not the most visited one, it is the most needed one. Build there.</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <div class="fl">
+    <div class="fwm">Criar Sin Culpas &#x2022; <span class="es">Observatorio de Se&#xF1;ales</span><span class="en">Signal Observatory</span></div>
+    <div class="fcl"><span class="es">Fase 2 &#x2022; Experiencia de Protocolos (Gu&#xED;as) &#x2022; Lectura de Se&#xF1;al de Comportamiento</span><span class="en">Phase 2 &#x2022; Protocol Experience (Guides) &#x2022; Behavioral Signal Read</span></div>
+  </div>
+  <div class="fr">
+    <div>Plausible Analytics &#x2022; <span class="es">5 may a 1 jun, 2026</span><span class="en">May 5 to Jun 1, 2026</span></div>
+    <div><span class="es">Se&#xF1;al direccional &#x2022; muestra peque&#xF1;a y temprana</span><span class="en">Directional signal &#x2022; small early sample</span></div>
+    <div><span class="es">Preparado para el proyecto de Criar Sin Culpas</span><span class="en">Prepared for the Criar Sin Culpas engagement</span></div>
+  </div>
+</div>
+
+<script>
+function setLang(l){
+  document.documentElement.setAttribute('data-lang', l);
+  document.documentElement.setAttribute('lang', l);
+  document.querySelectorAll('.lang-opt').forEach(function(b){
+    b.classList.toggle('active', b.getAttribute('data-lang') === l);
+  });
+}
+</script>
+
+</body>
+</html>
