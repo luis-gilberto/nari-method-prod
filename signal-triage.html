@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Signal Triage · LG Studio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0e0b12; --bg2: #141019; --bg3: #1c1824;
+      --surface: rgba(255,255,255,0.025); --surface2: rgba(255,255,255,0.045);
+      --border: rgba(255,255,255,0.07); --border2: rgba(255,255,255,0.15);
+      --text-1: #f0e6d3; --text-2: #b8a898; --text-3: #7a6a5a; --text-4: #3d3028;
+      --coral: #d4634a; --coral-dim: rgba(212,99,74,0.55); --coral-glow: rgba(212,99,74,0.08);
+      --lav: #8b7ab5; --lav-dim: rgba(139,122,181,0.45); --lav-glow: rgba(139,122,181,0.08);
+      --plum: #3d2b5e; --gold: #c8963c; --gold-dim: rgba(200,150,60,0.45);
+      --green: #4a8c6a; --green-dim: rgba(74,140,106,0.5); --green-glow: rgba(74,140,106,0.08);
+      --serif: 'Cormorant Garamond', Georgia, serif;
+      --sans: 'Inter', system-ui, sans-serif;
+      --mono: ui-monospace, SFMono-Regular, Menlo, monospace;
+      --r: 10px; --r-pill: 100px; --ease: 0.18s ease;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text-1); font-family: var(--sans); font-weight: 300; line-height: 1.7; -webkit-font-smoothing: antialiased; }
+    button { cursor: pointer; font-family: inherit; background: none; border: none; }
+    a { color: inherit; text-decoration: none; }
+
+    /* SHELL */
+    .shell { max-width: 860px; margin: 0 auto; padding: clamp(40px,6vw,80px) clamp(20px,5vw,48px) clamp(60px,8vw,100px); display: flex; flex-direction: column; gap: clamp(28px,4vw,40px); }
+
+    /* HEADER */
+    .header { display: flex; align-items: flex-end; justify-content: space-between; gap: 1.5rem; flex-wrap: wrap; }
+    .header-left {}
+    .eyebrow { display: flex; align-items: center; gap: 10px; margin-bottom: .75rem; }
+    .eyebrow-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--lav); animation: pulse 3s ease-in-out infinite; }
+    @keyframes pulse { 0%,100%{opacity:.4;transform:scale(1)} 50%{opacity:1;transform:scale(1.4)} }
+    .eyebrow-label { font-family: var(--mono); font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: var(--text-3); }
+    .header-title { font-family: var(--serif); font-size: clamp(2rem,5vw,3.2rem); font-weight: 300; line-height: 1.05; letter-spacing: -.02em; color: var(--text-1); }
+    .header-sub { font-family: var(--serif); font-size: .95rem; font-style: italic; color: var(--text-3); margin-top: .35rem; }
+    .header-refresh { display: flex; align-items: center; gap: 6px; font-size: 11px; color: var(--text-3); border: 1px solid var(--border); border-radius: var(--r-pill); padding: 6px 14px; transition: all var(--ease); }
+    .header-refresh:hover { border-color: var(--border2); color: var(--text-2); }
+    .header-refresh.spinning svg { animation: spin .8s linear infinite; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .header-refresh svg { width: 12px; height: 12px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; }
+
+    /* STATS ROW */
+    .stats-row { display: grid; grid-template-columns: repeat(4,1fr); gap: 1px; background: var(--border); border-radius: var(--r); overflow: hidden; }
+    @media(max-width:520px){.stats-row{grid-template-columns:repeat(2,1fr)}}
+    .stat-cell { background: var(--bg2); padding: 1rem; text-align: center; }
+    .stat-num { font-family: var(--serif); font-size: 1.8rem; font-weight: 300; line-height: 1; margin-bottom: .25rem; }
+    .stat-num.coral { color: var(--coral); }
+    .stat-num.lav { color: var(--lav); }
+    .stat-num.gold { color: var(--gold); }
+    .stat-num.dim { color: var(--text-3); }
+    .stat-label { font-size: 10px; color: var(--text-4); letter-spacing: .08em; text-transform: uppercase; }
+
+    /* FILTER TABS */
+    .filter-tabs { display: flex; gap: 4px; border-bottom: 1px solid var(--border); padding-bottom: 0; }
+    .filter-tab { font-size: 12px; font-weight: 400; padding: 8px 16px; border-radius: var(--r) var(--r) 0 0; color: var(--text-3); border: 1px solid transparent; border-bottom: none; transition: all var(--ease); position: relative; top: 1px; display: flex; align-items: center; gap: 6px; }
+    .filter-tab:hover { color: var(--text-2); }
+    .filter-tab.active { color: var(--text-1); background: var(--bg2); border-color: var(--border); }
+    .tab-badge { background: var(--coral); color: #fff; font-size: 9px; font-weight: 500; padding: 1px 5px; border-radius: var(--r-pill); min-width: 16px; text-align: center; }
+
+    /* SIGNAL CARDS */
+    .signal-list { display: flex; flex-direction: column; gap: 10px; }
+    .signal-empty { font-family: var(--serif); font-size: 1rem; font-style: italic; color: var(--text-4); padding: 2rem 0; }
+    .signal-loading { font-size: 12px; color: var(--text-4); padding: 1rem 0; }
+
+    .sig-card { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--r); padding: 16px 18px; transition: border-color var(--ease); }
+    .sig-card:hover { border-color: var(--border2); }
+    .sig-card.status-seen { opacity: .7; }
+    .sig-card.status-archived { opacity: .45; }
+
+    .sig-card-header { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; flex-wrap: wrap; }
+    .sig-ts { font-family: var(--mono); font-size: 10px; color: var(--text-4); font-variant-numeric: tabular-nums; }
+    .sig-sep { font-size: 10px; color: var(--text-4); }
+    .sig-type { font-size: 10px; padding: 2px 9px; border-radius: var(--r-pill); border: 1px solid var(--lav-dim); color: var(--lav-dim); }
+    .sig-status { font-size: 9px; padding: 2px 8px; border-radius: var(--r-pill); font-weight: 500; letter-spacing: .06em; text-transform: uppercase; }
+    .sig-status.new { border: 1px solid var(--coral-dim); color: var(--coral); background: var(--coral-glow); }
+    .sig-status.seen { border: 1px solid var(--border); color: var(--text-3); }
+    .sig-status.archived { border: 1px solid var(--border); color: var(--text-4); }
+    .sig-card-actions { display: flex; gap: 4px; margin-left: auto; flex-wrap: wrap; }
+    .sig-action { font-size: 10px; padding: 3px 10px; border-radius: var(--r-pill); border: 1px solid var(--border); color: var(--text-3); transition: all var(--ease); white-space: nowrap; }
+    .sig-action:hover { border-color: var(--border2); color: var(--text-2); }
+    .sig-action.primary:hover { border-color: var(--green-dim); color: var(--green); background: var(--green-glow); }
+    .sig-action.archive:hover { border-color: var(--gold-dim); color: var(--gold); }
+    .sig-action.danger:hover { border-color: var(--coral-dim); color: var(--coral); background: var(--coral-glow); }
+
+    .sig-text { font-size: 14px; color: var(--text-2); line-height: 1.7; white-space: pre-wrap; word-break: break-word; }
+    .sig-text.editing { display: none; }
+    .sig-edit-area { display: none; flex-direction: column; gap: 8px; }
+    .sig-edit-area.active { display: flex; }
+    .sig-edit-textarea { width: 100%; padding: 10px 12px; border-radius: 6px; border: 1px solid var(--border2); background: var(--bg3); color: var(--text-1); font-family: var(--sans); font-size: 14px; font-weight: 300; line-height: 1.6; resize: vertical; outline: none; min-height: 80px; }
+    .sig-edit-row { display: flex; gap: 8px; }
+    .sig-edit-save { font-size: 11px; padding: 5px 14px; border-radius: var(--r-pill); border: 1px solid var(--coral-dim); color: var(--coral); background: var(--coral-glow); transition: all var(--ease); }
+    .sig-edit-save:hover { background: rgba(212,99,74,.18); }
+    .sig-edit-cancel { font-size: 11px; padding: 5px 14px; border-radius: var(--r-pill); border: 1px solid var(--border); color: var(--text-3); transition: all var(--ease); }
+    .sig-edit-cancel:hover { border-color: var(--border2); color: var(--text-2); }
+
+    .sig-attachments { margin-top: 10px; display: flex; flex-wrap: wrap; gap: 6px; }
+    .sig-attach { display: inline-flex; align-items: center; gap: 5px; font-size: 11px; padding: 3px 10px; border-radius: var(--r-pill); border: 1px solid var(--border); color: var(--text-3); transition: all var(--ease); }
+    .sig-attach:hover { border-color: var(--lav-dim); color: var(--lav-dim); }
+    .sig-edited { font-size: 10px; color: var(--text-4); font-style: italic; margin-top: 6px; }
+
+    /* STATUS MSG */
+    .toast { position: fixed; bottom: 2rem; right: 2rem; font-size: 12px; padding: 10px 18px; border-radius: var(--r-pill); opacity: 0; transform: translateY(8px); transition: all .25s; pointer-events: none; z-index: 100; }
+    .toast.show { opacity: 1; transform: translateY(0); }
+    .toast.success { background: rgba(74,140,106,0.15); border: 1px solid var(--green-dim); color: var(--green); }
+    .toast.error { background: var(--coral-glow); border: 1px solid var(--coral-dim); color: var(--coral); }
+
+    /* AUTO-REFRESH INDICATOR */
+    .refresh-bar { height: 2px; background: var(--border); border-radius: 1px; overflow: hidden; }
+    .refresh-progress { height: 100%; background: var(--lav-dim); border-radius: 1px; width: 0%; transition: width linear; }
+  </style>
+</head>
+<body>
+<main class="shell">
+
+  <header class="header">
+    <div class="header-left">
+      <div class="eyebrow">
+        <div class="eyebrow-dot" aria-hidden="true"></div>
+        <span class="eyebrow-label">Signal Triage · LG Studio</span>
+      </div>
+      <h1 class="header-title">Centro de señales.</h1>
+      <p class="header-sub">Lo que Nari ha enviado al sistema.</p>
+    </div>
+    <button class="header-refresh" id="refreshBtn" aria-label="Refrescar">
+      <svg viewBox="0 0 24 24"><path d="M21 2v6h-6M3 12a9 9 0 0115-6.7L21 8M3 22v-6h6M21 12a9 9 0 01-15 6.7L3 16"/></svg>
+      Refrescar
+    </button>
+  </header>
+
+  <div class="stats-row" id="statsRow">
+    <div class="stat-cell"><div class="stat-num coral" id="statNew">—</div><div class="stat-label">Nuevas</div></div>
+    <div class="stat-cell"><div class="stat-num lav" id="statSeen">—</div><div class="stat-label">Vistas</div></div>
+    <div class="stat-cell"><div class="stat-num gold" id="statTotal">—</div><div class="stat-label">Total</div></div>
+    <div class="stat-cell"><div class="stat-num dim" id="statArchived">—</div><div class="stat-label">Archivadas</div></div>
+  </div>
+
+  <div class="filter-tabs" role="tablist">
+    <button class="filter-tab active" data-filter="all" role="tab" aria-selected="true">Todas <span class="tab-badge" id="badgeNew" style="display:none"></span></button>
+    <button class="filter-tab" data-filter="new" role="tab" aria-selected="false">Nuevas</button>
+    <button class="filter-tab" data-filter="seen" role="tab" aria-selected="false">Vistas</button>
+    <button class="filter-tab" data-filter="archived" role="tab" aria-selected="false">Archivadas</button>
+  </div>
+
+  <div class="signal-list" id="signalList">
+    <div class="signal-loading">Cargando señales...</div>
+  </div>
+
+  <div class="refresh-bar"><div class="refresh-progress" id="refreshProgress"></div></div>
+
+</main>
+
+<div class="toast" id="toast"></div>
+
+<script>
+(() => {
+  const API = '/api/signals';
+  const signalList = document.getElementById('signalList');
+  const refreshBtn = document.getElementById('refreshBtn');
+  const refreshProgress = document.getElementById('refreshProgress');
+
+  let signals = [];
+  let currentFilter = 'all';
+  let refreshTimer = null;
+  let progressTimer = null;
+  const REFRESH_INTERVAL = 60000;
+
+  // ── TOAST ──
+  function toast(msg, type='success') {
+    const el = document.getElementById('toast');
+    el.textContent = msg; el.className = `toast ${type} show`;
+    setTimeout(() => { el.className = 'toast'; }, 3500);
+  }
+
+  // ── FORMAT ──
+  const fmt = iso => new Intl.DateTimeFormat('es-ES',{year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',hour12:false}).format(new Date(iso));
+
+  // ── STATS ──
+  function updateStats() {
+    document.getElementById('statNew').textContent     = signals.filter(s=>s.status==='new').length;
+    document.getElementById('statSeen').textContent    = signals.filter(s=>s.status==='seen').length;
+    document.getElementById('statTotal').textContent   = signals.length;
+    document.getElementById('statArchived').textContent= signals.filter(s=>s.status==='archived').length;
+    const newCount = signals.filter(s=>s.status==='new').length;
+    const badge = document.getElementById('badgeNew');
+    if (newCount > 0) { badge.textContent = newCount; badge.style.display = 'inline-block'; }
+    else { badge.style.display = 'none'; }
+  }
+
+  // ── FILTER TABS ──
+  document.querySelectorAll('.filter-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('.filter-tab').forEach(t => { t.classList.remove('active'); t.setAttribute('aria-selected','false'); });
+      tab.classList.add('active'); tab.setAttribute('aria-selected','true');
+      currentFilter = tab.dataset.filter;
+      renderList();
+    });
+  });
+
+  // ── LOAD ──
+  async function load(silent=false) {
+    if (!silent) { refreshBtn.classList.add('spinning'); }
+    try {
+      const res = await fetch(API);
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      signals = await res.json();
+      updateStats();
+      renderList();
+    } catch(e) {
+      if (!silent) signalList.innerHTML = '<div class="signal-loading">Error al cargar señales.</div>';
+    } finally {
+      refreshBtn.classList.remove('spinning');
+      startProgressBar();
+    }
+  }
+
+  // ── AUTO REFRESH ──
+  function startProgressBar() {
+    clearInterval(progressTimer);
+    clearTimeout(refreshTimer);
+    refreshProgress.style.transition = 'none';
+    refreshProgress.style.width = '0%';
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        refreshProgress.style.transition = `width ${REFRESH_INTERVAL}ms linear`;
+        refreshProgress.style.width = '100%';
+      });
+    });
+    refreshTimer = setTimeout(() => load(true), REFRESH_INTERVAL);
+  }
+
+  refreshBtn.addEventListener('click', () => load(false));
+
+  // ── RENDER LIST ──
+  function renderList() {
+    const filtered = currentFilter === 'all'
+      ? signals
+      : signals.filter(s => s.status === currentFilter);
+
+    signalList.innerHTML = '';
+    if (!filtered.length) {
+      signalList.innerHTML = `<div class="signal-empty">${currentFilter === 'all' ? 'No hay señales aún.' : `No hay señales con estado "${currentFilter}".`}</div>`;
+      return;
+    }
+    filtered.forEach(s => signalList.appendChild(makeCard(s)));
+  }
+
+  // ── MAKE CARD ──
+  function makeCard(s) {
+    const el = document.createElement('div');
+    el.className = `sig-card status-${s.status}`;
+    el.dataset.id = s.id;
+
+    const attachHTML = (s.attachments||[]).length
+      ? `<div class="sig-attachments">${s.attachments.map(a=>`<a href="${a.url}" target="_blank" class="sig-attach">📎 ${a.name}</a>`).join('')}</div>` : '';
+    const editedHTML = s.editedAt ? `<div class="sig-edited">editado ${fmt(s.editedAt)}</div>` : '';
+
+    const seenLabel = s.status === 'new' ? 'Marcar vista' : s.status === 'seen' ? 'Marcar nueva' : '';
+    const seenAction = seenLabel ? `<button class="sig-action primary seen-btn">${seenLabel}</button>` : '';
+    const archiveAction = s.status !== 'archived'
+      ? `<button class="sig-action archive archive-btn">Archivar</button>`
+      : `<button class="sig-action unarchive-btn">Restaurar</button>`;
+
+    el.innerHTML = `
+      <div class="sig-card-header">
+        <span class="sig-ts">${fmt(s.ts)}</span>
+        <span class="sig-sep">·</span>
+        <span class="sig-type">${s.type}</span>
+        <span class="sig-status ${s.status}">${s.status}</span>
+        <div class="sig-card-actions">
+          ${seenAction}
+          ${archiveAction}
+          <button class="sig-action edit-btn">Editar</button>
+          <button class="sig-action danger delete-btn">Eliminar</button>
+        </div>
+      </div>
+      <div class="sig-text">${s.text}</div>
+      <div class="sig-edit-area">
+        <textarea class="sig-edit-textarea">${s.text}</textarea>
+        <div class="sig-edit-row">
+          <button class="sig-edit-save">Guardar</button>
+          <button class="sig-edit-cancel">Cancelar</button>
+        </div>
+      </div>
+      ${attachHTML}
+      ${editedHTML}
+    `;
+
+    // SEEN TOGGLE
+    const seenBtn = el.querySelector('.seen-btn');
+    if (seenBtn) {
+      seenBtn.addEventListener('click', async () => {
+        const newStatus = s.status === 'new' ? 'seen' : 'new';
+        await patch(s.id, { status: newStatus });
+      });
+    }
+
+    // ARCHIVE / RESTORE
+    const archBtn = el.querySelector('.archive-btn');
+    if (archBtn) archBtn.addEventListener('click', () => patch(s.id, { status: 'archived' }));
+    const unarchBtn = el.querySelector('.unarchive-btn');
+    if (unarchBtn) unarchBtn.addEventListener('click', () => patch(s.id, { status: 'seen' }));
+
+    // EDIT
+    el.querySelector('.edit-btn').addEventListener('click', () => {
+      el.querySelector('.sig-text').classList.add('editing');
+      el.querySelector('.sig-edit-area').classList.add('active');
+      el.querySelector('.sig-edit-textarea').focus();
+    });
+    el.querySelector('.sig-edit-cancel').addEventListener('click', () => {
+      el.querySelector('.sig-text').classList.remove('editing');
+      el.querySelector('.sig-edit-area').classList.remove('active');
+    });
+    el.querySelector('.sig-edit-save').addEventListener('click', async () => {
+      const text = el.querySelector('.sig-edit-textarea').value.trim();
+      if (!text) return;
+      await patch(s.id, { text });
+    });
+
+    // DELETE
+    el.querySelector('.delete-btn').addEventListener('click', async () => {
+      if (!confirm('¿Eliminar esta señal permanentemente?')) return;
+      try {
+        const res = await fetch(`${API}/${s.id}`, { method:'DELETE' });
+        if (!res.ok) throw new Error();
+        await load(true);
+        toast('Señal eliminada.');
+      } catch { toast('Error al eliminar.','error'); }
+    });
+
+    return el;
+  }
+
+  // ── PATCH ──
+  async function patch(id, data) {
+    try {
+      const res = await fetch(`${API}/${id}`, { method:'PATCH', headers:{'Content-Type':'application/json'}, body: JSON.stringify(data) });
+      if (!res.ok) throw new Error();
+      await load(true);
+      toast('Señal actualizada.');
+    } catch { toast('Error al actualizar.','error'); }
+  }
+
+  // ── INIT ──
+  load();
+})();
+</script>
+</body>
+</html>
