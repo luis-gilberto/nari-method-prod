@@ -4,11 +4,3 @@ compatibility_date = "2025-09-16"
 
 [env.production.vars] 
 GIT_LFS_SKIP_SMUDGE = "1" 
-
-[[kv_namespaces]]
-binding = "SIGNAL_STORE"
-id = "76908a8ece504ec8a6ea74cd1e887de2"
-
-[[r2_buckets]]
-binding = "SIGNAL_ASSETS"
-bucket_name = "signal-assets"
