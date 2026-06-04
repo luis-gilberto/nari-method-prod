@@ -31,9 +31,9 @@
         <span class="lb-en">Before entering, explore the system behind everything.</span>
       </p>
       <div class="gate-actions">
-        <a href="method.html" class="btn-primary" style="text-decoration:none;">
-          <span class="lb-es active">Conocer El Método Nari</span>
-          <span class="lb-en">Discover The Nari Method</span>
+        <a href="csc-LGStudio-vision.html" class="btn-primary" style="text-decoration:none;">
+          <span class="lb-es active">Lo Que Vemos Juntos</span>
+          <span class="lb-en">What We See Together</span>
         </a>
         <button class="btn-ghost" onclick="enterWorkspace()">
           <span class="lb-es active">Entrar directo al proyecto</span>
@@ -1580,7 +1580,7 @@
       font-size: 14px;
       line-height: 1.75;
       color: rgba(240,236,229,0.65);
-      font-weight: 300;
+      font-weight: 400;
       margin-bottom: 24px;
       padding-bottom: 24px;
       border-bottom: 1px solid rgba(255,255,255,0.04);
@@ -1717,7 +1717,7 @@
      .jt-eyebrow { font-size: 9px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: var(--teal); margin-bottom: 8px; } 
      .jt-title { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 600; color: var(--text); margin-bottom: 6px; line-height: 1.2; } 
      .jt-title em { font-style: italic; color: #e8a598; } 
-     .jt-desc { font-size: 13px; color: var(--text-mid); font-weight: 300; line-height: 1.6; } 
+     .jt-desc { font-size: 13px; color: var(--text-mid); font-weight: 400; line-height: 1.6; } 
      .jt-phases { display: flex; align-items: center; gap: 8px; flex-shrink: 0; } 
      .jt-phase { display: flex; flex-direction: column; align-items: center; gap: 6px; } 
      .jt-node { width: 28px; height: 28px; border-radius: 50%; background: var(--teal); color: #0e0e0f; font-size: 11px; font-weight: 700; display: flex; align-items: center; justify-content: center; } 
@@ -2624,6 +2624,8 @@ function toggleNavPanel(panel, btn) {
      document.querySelectorAll('.csc-view-content').forEach(v => v.style.display = 'none'); 
    } 
  }); 
+
+ window.addEventListener('pageshow', (e) => { if (e.persisted) document.body.style.opacity = '1'; });
   </script>
   <script src="js/workspace.js"></script></body>
 </html>
