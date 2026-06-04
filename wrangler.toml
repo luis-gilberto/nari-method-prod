@@ -11,4 +11,4 @@ id = "76908a8ece504ec8a6ea74cd1e887de2"
 
 [[r2_buckets]] 
 binding = "SIGNAL_ASSETS" 
-bucket_name = "signal-assets" 
+bucket_name = "signalassets" 
