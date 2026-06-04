@@ -71,6 +71,28 @@
     color: #fff;
   }
 
+  .home-link {
+    position: fixed;
+    top: 1.25rem;
+    left: 1.25rem;
+    z-index: 101;
+    display: inline-flex;
+    align-items: center;
+    border: 1px solid rgba(255,255,255,0.22);
+    border-radius: 100px;
+    padding: 6px 14px;
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.82);
+    background: rgba(42,29,66,0.42);
+    backdrop-filter: blur(10px);
+    transition: all 0.25s;
+  }
+  .home-link:hover { background: rgba(42,29,66,0.62); border-color: rgba(255,255,255,0.34); }
+
   /* ── HERO ── */
   .hero {
     min-height: 100vh;
@@ -890,6 +912,8 @@
   <button class="active" onclick="setLang('es')">ES</button>
   <button onclick="setLang('en')">EN</button>
 </div>
+
+<a class="home-link" href="/">Home</a>
 
 <!-- ══════════════════════════════
      HERO

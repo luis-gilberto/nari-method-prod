@@ -390,9 +390,23 @@ function renderSignals() {
 
 /* ── GATE / ENTRY ────────────────────────────────────────── */
 function returnToGate() {
-  document.getElementById("workspace").classList.add("hidden");
-  document.getElementById("gate").style.display = "";
-  document.getElementById("gate").style.opacity = "1";
+  const gate = document.getElementById('gate');
+  const workspace = document.getElementById('workspace');
+  if (!gate || !workspace) return;
+
+  if (state.mobileMenuOpen) toggleMobileMenu();
+  const vp = document.getElementById('cscNavViewport');
+  if (vp) vp.classList.remove('open');
+  document.querySelectorAll('.mega-trigger').forEach(t => t.classList.remove('mega-active'));
+
+  workspace.classList.add('hidden');
+  workspace.style.opacity = '';
+
+  gate.classList.remove('hidden');
+  gate.style.display = '';
+  gate.style.opacity = '1';
+  gate.style.transform = '';
+  gate.style.transition = '';
 }
 
 function enterWorkspace(targetSection = 'home') {
