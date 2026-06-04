@@ -1,0 +1,1400 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lo que vemos juntos — LG Studio × Criar Sin Culpas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --linen:    #faf3ea;
+    --paper:    #f3e9d8;
+    --lilac:    #ede8f5;
+    --plum:     #3d2b5e;
+    --plum2:    #2a1d42;
+    --plum3:    #5c4880;
+    --coral:    #d4634a;
+    --coral2:   #b84e38;
+    --lavender: #8b7ab5;
+    --lav2:     #c2b8dc;
+    --taupe:    #5c4a3a;
+    --taupe2:   #8a7568;
+    --taupe3:   #b8a898;
+    --cream:    #fdf8f2;
+    --serif:    'Cormorant Garamond', Georgia, serif;
+    --sans:     'Inter', sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--linen);
+    color: var(--taupe);
+    font-family: var(--sans);
+    font-weight: 300;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* ── LANG TOGGLE ── */
+  #lang-toggle {
+    position: fixed;
+    top: 1.25rem;
+    right: 1.25rem;
+    z-index: 100;
+    display: flex;
+    border: 1px solid var(--lav2);
+    border-radius: 100px;
+    overflow: hidden;
+    background: rgba(250,243,234,0.92);
+    backdrop-filter: blur(8px);
+    box-shadow: 0 2px 12px rgba(61,43,94,0.1);
+  }
+  #lang-toggle button {
+    background: none;
+    border: none;
+    color: var(--plum3);
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    padding: 6px 14px;
+    cursor: pointer;
+    transition: all 0.25s;
+    text-transform: uppercase;
+  }
+  #lang-toggle button.active {
+    background: var(--plum);
+    color: #fff;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    background: var(--plum2);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 3rem 2rem 4.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 80% 20%, rgba(139,122,181,0.18) 0%, transparent 65%),
+      radial-gradient(ellipse 50% 70% at 10% 90%, rgba(212,99,74,0.12) 0%, transparent 65%);
+    pointer-events: none;
+  }
+
+  .hero-texture {
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.015'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    pointer-events: none;
+  }
+
+  .hero-watermark {
+    position: absolute;
+    top: 2rem;
+    left: 2rem;
+    font-family: var(--sans);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.2);
+  }
+
+  .hero-eyebrow {
+    font-family: var(--sans);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--lav2);
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.3s;
+  }
+
+  .hero-title {
+    font-family: var(--serif);
+    font-size: clamp(3rem, 9vw, 6rem);
+    font-weight: 300;
+    line-height: 1.0;
+    letter-spacing: -0.02em;
+    color: var(--cream);
+    margin-bottom: 0.6rem;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.5s;
+  }
+
+  .hero-title em {
+    font-style: italic;
+    color: var(--coral);
+  }
+
+  .hero-subtitle {
+    font-family: var(--serif);
+    font-size: clamp(1rem, 3vw, 1.4rem);
+    font-weight: 300;
+    font-style: italic;
+    color: rgba(253,248,242,0.6);
+    margin-bottom: 2.5rem;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.7s;
+    max-width: 480px;
+  }
+
+  .hero-rule {
+    width: 36px;
+    height: 1px;
+    background: var(--coral);
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: fadeUp 0.6s ease forwards 0.65s;
+  }
+
+  .hero-meta {
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.9s;
+  }
+
+  .hero-meta-line {
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(253,248,242,0.35);
+    margin-bottom: 0.2rem;
+  }
+
+  /* ── SECTION SHELL ── */
+  .section {
+    padding: 5rem 2rem;
+    max-width: 680px;
+    margin: 0 auto;
+  }
+
+  .section-alt {
+    background: var(--lilac);
+    padding: 5rem 2rem;
+  }
+
+  .section-alt-inner {
+    max-width: 680px;
+    margin: 0 auto;
+  }
+
+  .section-paper {
+    background: var(--paper);
+    padding: 5rem 2rem;
+  }
+
+  .section-paper-inner {
+    max-width: 680px;
+    margin: 0 auto;
+  }
+
+  /* ── TYPOGRAPHY ── */
+  .section-label {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--coral);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .section-label::after {
+    content: '';
+    width: 32px;
+    height: 1px;
+    background: var(--coral);
+    opacity: 0.4;
+  }
+
+  .section-title {
+    font-family: var(--serif);
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 300;
+    line-height: 1.15;
+    color: var(--plum);
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.01em;
+  }
+
+  .section-title em {
+    font-style: italic;
+    color: var(--coral);
+  }
+
+  .section-title .lav {
+    color: var(--lavender);
+  }
+
+  .body-text {
+    font-size: clamp(0.92rem, 2vw, 1rem);
+    color: var(--taupe);
+    line-height: 1.85;
+    margin-bottom: 1.1rem;
+    font-weight: 300;
+  }
+
+  .body-text strong {
+    color: var(--plum);
+    font-weight: 500;
+  }
+
+  /* ── PULL QUOTE ── */
+  .pull-quote {
+    border-left: 2px solid var(--coral);
+    padding: 1.25rem 1.5rem;
+    margin: 2.5rem 0;
+    background: rgba(212,99,74,0.05);
+    border-radius: 0 10px 10px 0;
+  }
+
+  .pull-quote p {
+    font-family: var(--serif);
+    font-size: clamp(1.05rem, 2.8vw, 1.35rem);
+    font-style: italic;
+    font-weight: 300;
+    line-height: 1.55;
+    color: var(--plum);
+  }
+
+  .pull-quote .attr {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--coral);
+    margin-top: 0.75rem;
+    font-style: normal;
+    font-family: var(--sans);
+  }
+
+  /* ── STAT ROW ── */
+  .stat-row {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 1px;
+    background: var(--lav2);
+    border-radius: 12px;
+    overflow: hidden;
+    margin: 2rem 0;
+  }
+
+  @media (max-width: 420px) {
+    .stat-row { grid-template-columns: 1fr; }
+  }
+
+  .stat-cell {
+    background: var(--cream);
+    padding: 1.5rem 1rem;
+    text-align: center;
+  }
+
+  .stat-num {
+    font-family: var(--serif);
+    font-size: 2.4rem;
+    font-weight: 300;
+    color: var(--coral);
+    line-height: 1;
+    margin-bottom: 0.4rem;
+  }
+
+  .stat-label {
+    font-size: 0.78rem;
+    color: var(--taupe2);
+    line-height: 1.45;
+    font-weight: 300;
+  }
+
+  /* ── SIGNAL CARDS ── */
+  .signal-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.875rem;
+    margin: 2rem 0;
+  }
+
+  .signal-card {
+    background: var(--cream);
+    border: 1px solid rgba(61,43,94,0.08);
+    border-radius: 12px;
+    padding: 1.25rem 1.5rem 1.25rem 1.75rem;
+    position: relative;
+  }
+
+  .signal-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px; height: 100%;
+    background: var(--coral);
+    border-radius: 3px 0 0 3px;
+  }
+
+  .signal-card.lav::before { background: var(--lavender); }
+  .signal-card.plum::before { background: var(--plum3); }
+
+  .signal-tag {
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--coral);
+    margin-bottom: 0.4rem;
+  }
+
+  .signal-card.lav .signal-tag { color: var(--lavender); }
+  .signal-card.plum .signal-tag { color: var(--plum3); }
+
+  .signal-title {
+    font-family: var(--serif);
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--plum);
+    margin-bottom: 0.35rem;
+    line-height: 1.3;
+  }
+
+  .signal-body {
+    font-size: 0.875rem;
+    color: var(--taupe);
+    line-height: 1.7;
+    font-weight: 300;
+  }
+
+  /* ── VALUE GRID ── */
+  .value-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.875rem;
+    margin: 2rem 0;
+  }
+
+  @media (max-width: 480px) {
+    .value-grid { grid-template-columns: 1fr; }
+  }
+
+  .value-card {
+    background: var(--cream);
+    border: 1px solid rgba(61,43,94,0.07);
+    border-radius: 12px;
+    padding: 1.25rem;
+  }
+
+  .value-num {
+    font-family: var(--serif);
+    font-size: 1.8rem;
+    font-weight: 300;
+    color: var(--lav2);
+    line-height: 1;
+    margin-bottom: 0.5rem;
+  }
+
+  .value-title {
+    font-family: var(--serif);
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--plum);
+    margin-bottom: 0.35rem;
+    line-height: 1.3;
+  }
+
+  .value-body {
+    font-size: 0.82rem;
+    color: var(--taupe2);
+    line-height: 1.65;
+    font-weight: 300;
+  }
+
+  /* ── BRAND CONVERGENCE STRIP ── */
+  .brand-strip {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    padding: 1.5rem 2rem;
+    background: var(--plum);
+    border-radius: 12px;
+    margin: 2.5rem 0;
+  }
+
+  .brand-name {
+    font-family: var(--serif);
+    font-size: 1rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(253,248,242,0.7);
+  }
+
+  .brand-x {
+    font-family: var(--serif);
+    font-size: 1.3rem;
+    color: var(--coral);
+    opacity: 0.8;
+  }
+
+  .brand-tagline {
+    text-align: center;
+    font-family: var(--serif);
+    font-size: 0.95rem;
+    font-style: italic;
+    color: var(--taupe2);
+    margin-top: -1rem;
+    margin-bottom: 2rem;
+  }
+
+  /* ── PHASE TIMELINE ── */
+  .phase-list {
+    margin: 2rem 0;
+  }
+
+  .phase-item {
+    display: grid;
+    grid-template-columns: 44px 1fr;
+    gap: 1.25rem;
+    position: relative;
+  }
+
+  .phase-item:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    left: 21px;
+    top: 42px;
+    width: 1px;
+    height: calc(100% - 8px);
+    background: var(--lav2);
+    opacity: 0.5;
+  }
+
+  .phase-dot-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 2px;
+  }
+
+  .phase-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--coral);
+    margin-top: 6px;
+    flex-shrink: 0;
+    box-shadow: 0 0 0 3px rgba(212,99,74,0.15);
+  }
+
+  .phase-dot.lav {
+    background: var(--lavender);
+    box-shadow: 0 0 0 3px rgba(139,122,181,0.15);
+  }
+
+  .phase-dot.plum {
+    background: var(--plum);
+    box-shadow: 0 0 0 3px rgba(61,43,94,0.12);
+  }
+
+  .phase-content {
+    padding-bottom: 2.5rem;
+  }
+
+  .phase-label {
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--coral);
+    margin-bottom: 0.2rem;
+  }
+
+  .phase-label.lav { color: var(--lavender); }
+  .phase-label.plum { color: var(--plum3); }
+
+  .phase-title {
+    font-family: var(--serif);
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: var(--plum);
+    margin-bottom: 0.4rem;
+    line-height: 1.3;
+  }
+
+  .phase-body {
+    font-size: 0.875rem;
+    color: var(--taupe);
+    line-height: 1.75;
+    font-weight: 300;
+  }
+
+  .phase-items {
+    margin-top: 0.65rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+
+  .phase-items li {
+    font-size: 0.82rem;
+    color: var(--taupe2);
+    list-style: none;
+    padding-left: 1rem;
+    position: relative;
+    line-height: 1.55;
+    font-weight: 300;
+  }
+
+  .phase-items li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--lav2);
+    font-size: 0.7rem;
+  }
+
+  /* ── CLOSING ── */
+  .closing {
+    background: var(--plum2);
+    padding: 5.5rem 2rem 6rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .closing::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 50% at 50% 100%, rgba(212,99,74,0.1) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 40% at 20% 20%, rgba(139,122,181,0.08) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  .closing-quote {
+    font-family: var(--serif);
+    font-size: clamp(1.4rem, 4vw, 2.1rem);
+    font-weight: 300;
+    font-style: italic;
+    line-height: 1.45;
+    color: var(--cream);
+    max-width: 560px;
+    margin: 0 auto 2rem;
+    position: relative;
+  }
+
+  .closing-quote em {
+    color: var(--coral);
+  }
+
+  .closing-sig {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(253,248,242,0.35);
+    position: relative;
+  }
+
+  .closing-sig strong {
+    color: var(--lav2);
+    font-weight: 500;
+  }
+
+  /* ── DOTS ── */
+  .dots {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin: 2.5rem 0;
+  }
+
+  .dots span {
+    width: 4px; height: 4px;
+    border-radius: 50%;
+    background: var(--lav2);
+    opacity: 0.35;
+  }
+
+  .dots span:nth-child(2) {
+    opacity: 0.6;
+    width: 5px; height: 5px;
+    background: var(--coral);
+  }
+
+  /* ── DIVIDER ── */
+  .sep { border: none; border-top: 1px solid rgba(61,43,94,0.07); }
+
+  /* ── FOOTER ── */
+  .footer {
+    padding: 2rem;
+    text-align: center;
+    background: var(--linen);
+    border-top: 1px solid rgba(61,43,94,0.07);
+  }
+
+  .footer p {
+    font-size: 11px;
+    color: var(--taupe3);
+    letter-spacing: 0.08em;
+  }
+
+  .footer a {
+    color: var(--lavender);
+    text-decoration: none;
+  }
+
+  /* ── REVEAL ── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.65s ease, transform 0.65s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── SIGNAL DROP CARD ── */
+  .signal-drop-card {
+    margin: 2rem 0 0.5rem;
+    border: 1px solid rgba(61,43,94,0.1);
+    border-radius: 14px;
+    overflow: hidden;
+    background: var(--cream);
+  }
+
+  .sdc-examples {
+    padding: 1.25rem 1.5rem 1rem;
+    border-bottom: 1px solid rgba(61,43,94,0.07);
+  }
+
+  .sdc-example-label {
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--taupe3);
+    margin-bottom: 0.75rem;
+  }
+
+  .sdc-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.4rem 1.5rem;
+  }
+
+  @media (max-width: 480px) { .sdc-grid { grid-template-columns: 1fr; } }
+
+  .sdc-item {
+    font-size: 0.82rem;
+    color: var(--taupe2);
+    padding-left: 1rem;
+    position: relative;
+    line-height: 1.5;
+  }
+
+  .sdc-item::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--lav2);
+    font-size: 0.7rem;
+  }
+
+  .sdc-proof {
+    padding: 1.25rem 1.5rem 1rem;
+    background: var(--lilac);
+    border-bottom: 1px solid rgba(61,43,94,0.07);
+  }
+
+  .sdc-proof-label {
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--lavender);
+    margin-bottom: 0.5rem;
+  }
+
+  .sdc-proof-text {
+    font-family: var(--serif);
+    font-size: 0.95rem;
+    font-style: italic;
+    font-weight: 300;
+    color: var(--plum3);
+    line-height: 1.65;
+  }
+
+  .sdc-proof-text em { color: var(--coral); }
+
+  .sdc-cta {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 1rem 1.5rem;
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--coral);
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+
+  .sdc-cta:hover { background: rgba(212,99,74,0.04); }
+
+  .sdc-cta-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--coral);
+    opacity: 0.6;
+    animation: sdc-pulse 2.5s ease-in-out infinite;
+    flex-shrink: 0;
+  }
+
+  @keyframes sdc-pulse {
+    0%, 100% { opacity: 0.4; transform: scale(1); }
+    50% { opacity: 0.9; transform: scale(1.3); }
+  }
+
+  /* ── SIGNAL ORIGIN MODULE ── */
+  .signal-origin {
+    background: #0e0b12;
+    padding: 2.5rem 2rem;
+    border-bottom: 1px solid rgba(61,43,94,0.12);
+  }
+
+  .signal-origin-inner {
+    max-width: 680px;
+    margin: 0 auto;
+  }
+
+  .signal-flow {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 1.1rem;
+  }
+
+  .sf-step {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.2);
+  }
+
+  .sf-step.sf-active {
+    color: rgba(212,99,74,0.75);
+  }
+
+  .sf-arrow {
+    font-size: 10px;
+    color: rgba(255,255,255,0.1);
+  }
+
+  .so-copy {
+    font-family: var(--serif);
+    font-size: clamp(0.95rem, 2.2vw, 1.1rem);
+    font-weight: 300;
+    font-style: italic;
+    color: rgba(255,255,255,0.35);
+    line-height: 1.7;
+    max-width: 56ch;
+    margin-bottom: 1.1rem;
+  }
+
+  .so-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(212,99,74,0.6);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(212,99,74,0.2);
+    padding-bottom: 2px;
+    transition: color 0.2s, border-color 0.2s;
+  }
+
+  .so-cta:hover {
+    color: rgba(212,99,74,0.9);
+    border-color: rgba(212,99,74,0.5);
+  }
+
+  .so-cta-dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: rgba(212,99,74,0.5);
+    flex-shrink: 0;
+    animation: pulse-dot 2.5s ease-in-out infinite;
+  }
+
+  .so-cta-arrow {
+    font-size: 13px;
+    transition: transform 0.2s;
+  }
+
+  .so-cta:hover .so-cta-arrow {
+    transform: translateX(3px);
+  }
+
+  @keyframes pulse-dot {
+    0%, 100% { opacity: 0.5; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.3); }
+  }
+
+  /* ── LANG SWITCHING ── */
+  [data-lang="en"] { display: none; }
+  body.en [data-lang="es"] { display: none; }
+  body.en [data-lang="en"] { display: block; }
+  .inline-en { display: none; }
+  body.en .inline-es { display: none; }
+  body.en .inline-en { display: inline; }
+  .inline-es { display: inline; }
+</style>
+</head>
+<body>
+
+<!-- LANG TOGGLE -->
+<div id="lang-toggle">
+  <button class="active" onclick="setLang('es')">ES</button>
+  <button onclick="setLang('en')">EN</button>
+</div>
+
+<!-- ══════════════════════════════
+     HERO
+══════════════════════════════ -->
+<section class="hero">
+  <div class="hero-texture"></div>
+  <div class="hero-watermark">LG Studio</div>
+
+  <div class="hero-eyebrow">
+    <span class="inline-es">Una propuesta estratégica &nbsp;·&nbsp; Junio 2026</span>
+    <span class="inline-en">A strategic proposal &nbsp;·&nbsp; June 2026</span>
+  </div>
+
+  <h1 class="hero-title">
+    <span class="inline-es">Lo que <em>vemos</em><br>juntos.</span>
+    <span class="inline-en">What we <em>see</em><br>together.</span>
+  </h1>
+
+  <p class="hero-subtitle">
+    <span class="inline-es">Para Nari, de Luis — con toda la claridad que merece este momento.</span>
+    <span class="inline-en">For Nari, from Luis — with all the clarity this moment deserves.</span>
+  </p>
+
+  <div class="hero-rule"></div>
+
+  <div class="hero-meta">
+    <div class="hero-meta-line">Nari Fateha &nbsp;×&nbsp; Luis Gilberto &nbsp;·&nbsp; LG Studio</div>
+    <div class="hero-meta-line">
+      <span class="inline-es">Criar Sin Culpas &nbsp;·&nbsp; What You See (documental)</span>
+      <span class="inline-en">Criar Sin Culpas &nbsp;·&nbsp; What You See (documentary)</span>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════
+     SIGNAL ORIGIN MODULE
+══════════════════════════════ -->
+<div class="signal-origin">
+  <div class="signal-origin-inner">
+    <div class="signal-flow">
+      <span class="sf-step">Señal recibida</span>
+      <span class="sf-arrow" aria-hidden="true">→</span>
+      <span class="sf-step sf-active">Señal traducida</span>
+      <span class="sf-arrow" aria-hidden="true">→</span>
+      <span class="sf-step">Señal activada</span>
+    </div>
+    <div data-lang="es">
+      <p class="so-copy">Esta página comenzó como una señal.<br>
+      El guión del documental fue el primer gran Signal Drop de esta nueva fase: una pieza cruda, íntima y estratégica que necesitaba traducción. Lo que sigue es esa traducción: lo que la historia revela, lo que la marca puede reclamar, y lo que construimos durante las próximas ocho semanas.</p>
+      <a href="/signal-drop" class="so-cta">
+        <span class="so-cta-dot" aria-hidden="true"></span>
+        Enviar la próxima señal
+        <span class="so-cta-arrow" aria-hidden="true">→</span>
+      </a>
+    </div>
+    <div data-lang="en">
+      <p class="so-copy">This page began as a signal.<br>
+      The documentary script became the first major Signal Drop of this new phase: a raw, intimate, strategic input that needed translation. What follows is that translation: what the story reveals, what the brand can now claim, and what we build over the next eight weeks.</p>
+      <a href="/signal-drop" class="so-cta">
+        <span class="so-cta-dot" aria-hidden="true"></span>
+        Drop the next signal
+        <span class="so-cta-arrow" aria-hidden="true">→</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════
+     S1 — TU HISTORIA
+══════════════════════════════ -->
+<section class="section">
+
+  <div data-lang="es">
+    <div class="section-label">Lo que vimos</div>
+    <h2 class="section-title">Tu historia convertida en <em>arquitectura.</em></h2>
+
+    <p class="body-text">
+      Leímos el tratamiento de tu documental. No como texto, sino como señal.
+    </p>
+    <p class="body-text">
+      Lo que Oliver vivió en segundo grado no fue suerte ni milagro. Fue evidencia: el comportamiento de un niño es el resultado directo de su entorno. Cambias el entorno, cambia el niño.
+    </p>
+    <p class="body-text">
+      Eso no es solo una historia hermosa.<br>
+      Es un <strong>argumento de diseño de sistemas.</strong><br>
+      Y es exactamente el mismo argumento que sostiene Criar Sin Culpas.
+    </p>
+
+    <div class="pull-quote reveal">
+      <p>"No es una historia sobre niños difíciles ni escuelas fallidas. Es una historia sobre lo que pasa cuando el apoyo llega después de que el daño ya es visible."</p>
+      <p class="attr">Síntesis de señales — What You See</p>
+    </div>
+
+    <p class="body-text">
+      Esto importa para tu marca porque <strong>tus familias son Oliver</strong>: llegan a ti después del caos. Lo que construiste con CSC no es contenido de crianza. Es infraestructura de seguridad emocional. El documental lo demuestra con seis años de evidencia escolar.
+    </p>
+  </div>
+
+  <div data-lang="en">
+    <div class="section-label">What we saw</div>
+    <h2 class="section-title">Your story read as <em>architecture.</em></h2>
+
+    <p class="body-text">
+      We read your documentary treatment. Not as text — as signal.
+    </p>
+    <p class="body-text">
+      What Oliver experienced in second grade was not luck or a miracle. It was evidence: a child's behavior is the direct output of their environment. Change the environment, change the child.
+    </p>
+    <p class="body-text">
+      That is not just a beautiful story.<br>
+      It is a <strong>systems design argument.</strong><br>
+      And it is exactly the same argument that sustains Criar Sin Culpas.
+    </p>
+
+    <div class="pull-quote reveal">
+      <p>"This is not a story about difficult children or failed schools. It is a story about what happens when support arrives after the damage is already visible."</p>
+      <p class="attr">Signal synthesis — What You See</p>
+    </div>
+
+    <p class="body-text">
+      This matters for your brand because <strong>your families are Oliver</strong>: they arrive to you after the chaos. What you built with CSC is not parenting content. It is emotional safety infrastructure. The documentary proves it with six years of school-system evidence.
+    </p>
+  </div>
+
+</section>
+
+<hr class="sep">
+
+<!-- ══════════════════════════════
+     S2 — LAS SEÑALES
+══════════════════════════════ -->
+<div class="section-alt">
+<div class="section-alt-inner">
+
+  <div data-lang="es">
+    <div class="section-label">Las señales que extrajimos</div>
+    <h2 class="section-title">Lo que tu historia <em>prueba</em> estratégicamente.</h2>
+    <p class="body-text">
+      Corrimos nuestras herramientas de análisis sobre el guión de tu documental. Esto es lo que encontramos — y por qué cambia todo para la próxima fase de CSC.
+    </p>
+  </div>
+
+  <div data-lang="en">
+    <div class="section-label">The signals we extracted</div>
+    <h2 class="section-title">What your story <em>proves</em> strategically.</h2>
+    <p class="body-text">
+      We ran our signal analysis tools on your documentary script. Here is what we found — and why it changes everything for the next phase of CSC.
+    </p>
+  </div>
+
+  <div class="stat-row reveal">
+    <div class="stat-cell">
+      <div class="stat-num">240s</div>
+      <div class="stat-label" data-lang="es">tiempo en protocolos de crisis vs. 42s en contenido casual</div>
+      <div class="stat-label" data-lang="en">dwell time on crisis protocols vs. 42s on casual content</div>
+    </div>
+    <div class="stat-cell">
+      <div class="stat-num">6</div>
+      <div class="stat-label" data-lang="es">años de evidencia escolar documentada que valida tu metodología</div>
+      <div class="stat-label" data-lang="en">years of documented school evidence validating your methodology</div>
+    </div>
+    <div class="stat-cell">
+      <div class="stat-num">1</div>
+      <div class="stat-label" data-lang="es">año que lo cambió todo — por el entorno, no por él</div>
+      <div class="stat-label" data-lang="en">year that changed everything — the environment, not him</div>
+    </div>
+  </div>
+
+  <div class="signal-grid reveal">
+
+    <div class="signal-card">
+      <div class="signal-tag" data-lang="es">Señal estratégica</div>
+      <div class="signal-tag" data-lang="en">Strategic signal</div>
+      <div class="signal-title" data-lang="es">La crisis es el punto de entrada real</div>
+      <div class="signal-title" data-lang="en">Crisis is the real entry point</div>
+      <div class="signal-body" data-lang="es">Las familias no llegan en calma. Llegan en quiebre. El documental confirma que la confianza profunda se forma en la desregulación, no en la estabilidad. Tu arquitectura de contenido debe reflejar esto.</div>
+      <div class="signal-body" data-lang="en">Families don't arrive calm. They arrive at their breaking point. The documentary confirms that deepest trust forms during dysregulation, not stability. Your content architecture must reflect this.</div>
+    </div>
+
+    <div class="signal-card lav">
+      <div class="signal-tag" data-lang="es">Señal de oportunidad</div>
+      <div class="signal-tag" data-lang="en">Opportunity signal</div>
+      <div class="signal-title" data-lang="es">La seguridad emocional es infraestructura, no resultado</div>
+      <div class="signal-title" data-lang="en">Emotional safety as infrastructure, not outcome</div>
+      <div class="signal-body" data-lang="es">Segundo grado no "curó" a Oliver. Le dio un entorno seguro primero. CSC funciona igual: la seguridad no es lo que entregas, es lo que haces posible. El documental es tu prueba de vida.</div>
+      <div class="signal-body" data-lang="en">Second grade didn't cure Oliver. It gave him a safe environment first. CSC works the same way: safety is not what you deliver, it is what you make possible. The documentary is your proof of life.</div>
+    </div>
+
+    <div class="signal-card plum">
+      <div class="signal-tag" data-lang="es">Contradicción crítica a resolver</div>
+      <div class="signal-tag" data-lang="en">Critical contradiction to resolve</div>
+      <div class="signal-title" data-lang="es">El apoyo que llega con vergüenza se convierte en barrera</div>
+      <div class="signal-title" data-lang="en">Support that arrives with shame becomes a barrier</div>
+      <div class="signal-body" data-lang="es">El sistema escolar etiquetó a Oliver para ayudarlo… y la etiqueta empeoró el problema. CSC enfrenta el mismo riesgo: las familias que más necesitan tus protocolos pueden resistirlos porque pedir ayuda confirma su peor miedo. Tu diseño de acceso debe resolver esto.</div>
+      <div class="signal-body" data-lang="en">The school system labeled Oliver to help him… and the label made things worse. CSC faces the same risk: the families who most need your protocols may resist them because asking for help confirms their worst fear. Your access design must solve this.</div>
+    </div>
+
+    <div class="signal-card">
+      <div class="signal-tag" data-lang="es">Señal de arquitectura</div>
+      <div class="signal-tag" data-lang="en">Architecture signal</div>
+      <div class="signal-title" data-lang="es">Adquisición amplia → confianza profunda</div>
+      <div class="signal-title" data-lang="en">Broad acquisition → deep trust</div>
+      <div class="signal-body" data-lang="es">El contenido mainstream atrae volumen. Los protocolos de crisis construyen la relación real. No cumplen la misma función. Tu sistema necesita arquitectura diferenciada, no un solo criterio para todo.</div>
+      <div class="signal-body" data-lang="en">Mainstream content attracts volume. Crisis protocols build the real relationship. They don't serve the same function. Your system needs differentiated architecture, not one optimization metric for everything.</div>
+    </div>
+
+  </div>
+
+</div>
+</div>
+
+<hr class="sep">
+
+<!-- ══════════════════════════════
+     S3 — POR QUÉ YO
+══════════════════════════════ -->
+<section class="section">
+
+  <div data-lang="es">
+    <div class="section-label">Por qué yo. Por qué ahora.</div>
+    <h2 class="section-title">No te vendo un servicio.<br>Te entiendo el <em>sistema.</em></h2>
+
+    <p class="body-text">
+      Vine a Estados Unidos en beca desde Venezuela. Entré a sistemas que no estaban diseñados para mí. Aprendí a traducir — entre culturas, entre idiomas, y entre lo que la gente siente y lo que los sistemas pueden sostener. Esa es la habilidad central detrás de todo lo que hago.
+    </p>
+    <p class="body-text">
+      También estudié magia — no como truco, sino como <strong>arquitectura de percepción.</strong> Eso es exactamente lo que tu documental necesita: alguien que sepa construir el momento en que la audiencia entiende algo que antes no podía articular.
+    </p>
+  </div>
+
+  <div data-lang="en">
+    <div class="section-label">Why me. Why now.</div>
+    <h2 class="section-title">I'm not selling you a service.<br>I understand your <em>system.</em></h2>
+
+    <p class="body-text">
+      I came to the United States on scholarship from Venezuela. I entered systems that were not designed for me. I learned to translate — between cultures, between languages, and between what people feel and what systems can hold. That is the core skill behind everything I do.
+    </p>
+    <p class="body-text">
+      I also studied magic — not as a trick, but as an <strong>architecture of perception.</strong> That is exactly what your documentary needs: someone who knows how to build the moment when an audience understands something they couldn't articulate before.
+    </p>
+  </div>
+
+  <div class="value-grid reveal">
+    <div class="value-card">
+      <div class="value-num">01</div>
+      <div class="value-title" data-lang="es">Ya construí tu mundo</div>
+      <div class="value-title" data-lang="en">I already built your world</div>
+      <div class="value-body" data-lang="es">El sitio, los protocolos, el brand book, el kit de medios, las herramientas de señal. No hay curva de aprendizaje. Hay continuidad.</div>
+      <div class="value-body" data-lang="en">The site, the protocols, the brand book, the media kit, the signal tools. No learning curve. Just continuity.</div>
+    </div>
+    <div class="value-card">
+      <div class="value-num">02</div>
+      <div class="value-title" data-lang="es">Pienso en sistemas, no en piezas</div>
+      <div class="value-title" data-lang="en">I think in systems, not pieces</div>
+      <div class="value-body" data-lang="es">El documental, la marca, la plataforma y el modelo de negocio son una sola arquitectura.</div>
+      <div class="value-body" data-lang="en">The documentary, the brand, the platform, and the business model are one architecture.</div>
+    </div>
+    <div class="value-card">
+      <div class="value-num">03</div>
+      <div class="value-title" data-lang="es">Bilingüe de raíz</div>
+      <div class="value-title" data-lang="en">Bilingual at the root</div>
+      <div class="value-body" data-lang="es">No traduzco. Pienso en español e inglés simultáneamente. Ambas audiencias merecen la misma calidad.</div>
+      <div class="value-body" data-lang="en">I don't translate. I think in Spanish and English simultaneously. Both audiences deserve equal quality.</div>
+    </div>
+    <div class="value-card">
+      <div class="value-num">04</div>
+      <div class="value-title" data-lang="es">Herramientas propias</div>
+      <div class="value-title" data-lang="en">Proprietary tools</div>
+      <div class="value-body" data-lang="es">StrategyIQ y SignalIQ fueron creadas para marcas íntimas, basadas en confianza y listas para escalar sin perder el alma.</div>
+      <div class="value-body" data-lang="en">StrategyIQ and SignalIQ were built for intimate, trust-based brands ready to scale without losing their soul.</div>
+    </div>
+  </div>
+
+  <div class="brand-strip reveal">
+    <div class="brand-name">Criar Sin Culpas</div>
+    <div class="brand-x">×</div>
+    <div class="brand-name">LG Studio</div>
+  </div>
+
+  <p class="brand-tagline" data-lang="es">Dos sistemas diseñados para el mismo problema: cerrar la brecha entre lo que una familia siente y lo que el mundo puede sostenerles.</p>
+  <p class="brand-tagline" data-lang="en">Two systems designed for the same problem: closing the gap between what a family feels and what the world can hold for them.</p>
+
+</section>
+
+<hr class="sep">
+
+<!-- ══════════════════════════════
+     SIGNAL DROP SECTION
+══════════════════════════════ -->
+<div class="section-paper">
+<div class="section-paper-inner">
+
+  <div data-lang="es">
+    <div class="section-label">Una herramienta que ya tienes</div>
+    <h2 class="section-title">Signal Drop: donde la <em>intuición entra</em> al sistema.</h2>
+
+    <p class="body-text">
+      Dentro de tu workspace ya existe una herramienta que no hemos estado usando bien: <strong>Signal Drop.</strong> Es un espacio simple — una página privada, solo entre tú y yo — diseñado para capturar cualquier cosa que sientas que "hay algo aquí" antes de que desaparezca.
+    </p>
+    <p class="body-text">
+      No necesita ser una idea completa. Puede ser una reacción de tu audiencia, una frase de un comentario, un momento del rodaje, una oportunidad de alianza, un patrón que ves repetirse. Tú lo sueltas. Yo lo traduzco.
+    </p>
+  </div>
+
+  <div data-lang="en">
+    <div class="section-label">A tool you already have</div>
+    <h2 class="section-title">Signal Drop: where <em>intuition enters</em> the system.</h2>
+
+    <p class="body-text">
+      Inside your workspace there is already a tool we have not been using well: <strong>Signal Drop.</strong> It is a simple space — a private page, just between you and me — designed to capture anything you feel has "something here" before it disappears.
+    </p>
+    <p class="body-text">
+      It doesn't need to be a complete idea. It can be an audience reaction, a comment phrase, a filming moment, a partnership opportunity, a pattern you keep seeing. You drop it. I translate it.
+    </p>
+  </div>
+
+  <div class="signal-drop-card reveal">
+    <div class="sdc-examples">
+      <div class="sdc-example-label" data-lang="es">Lo que puedes soltar</div>
+      <div class="sdc-example-label" data-lang="en">What you can drop</div>
+      <div class="sdc-grid">
+        <div class="sdc-item" data-lang="es">Una reacción de tu audiencia</div>
+        <div class="sdc-item" data-lang="en">An audience reaction</div>
+        <div class="sdc-item" data-lang="es">Un momento del documental</div>
+        <div class="sdc-item" data-lang="en">A documentary moment</div>
+        <div class="sdc-item" data-lang="es">Un patrón que ves repetirse</div>
+        <div class="sdc-item" data-lang="en">A pattern you keep seeing</div>
+        <div class="sdc-item" data-lang="es">Una idea antes de que se vaya</div>
+        <div class="sdc-item" data-lang="en">An idea before it disappears</div>
+        <div class="sdc-item" data-lang="es">Un link, frase, o comentario</div>
+        <div class="sdc-item" data-lang="en">A link, phrase, or comment</div>
+        <div class="sdc-item" data-lang="es">Una oportunidad de alianza</div>
+        <div class="sdc-item" data-lang="en">A partnership opportunity</div>
+      </div>
+    </div>
+    <div class="sdc-proof">
+      <div class="sdc-proof-label" data-lang="es">La primera señal grande</div>
+      <div class="sdc-proof-label" data-lang="en">The first major signal</div>
+      <p class="sdc-proof-text" data-lang="es">El guión de <em>What You See</em> fue el Signal Drop más importante que has enviado hasta ahora. Esta página es lo que pasa cuando LG Studio recibe una señal y la traduce en estrategia, arquitectura de marca, y un plan de ocho semanas.</p>
+      <p class="sdc-proof-text" data-lang="en">The <em>What You See</em> script was the most important Signal Drop you have sent so far. This page is what happens when LG Studio receives a signal and translates it into strategy, brand architecture, and an eight-week plan.</p>
+    </div>
+    <a href="/signal-drop" class="sdc-cta">
+      <span class="sdc-cta-dot" aria-hidden="true"></span>
+      <span data-lang="es">Ir a Signal Drop →</span>
+      <span data-lang="en">Go to Signal Drop →</span>
+    </a>
+  </div>
+
+</div>
+</div>
+
+<hr class="sep">
+
+<!-- ══════════════════════════════
+     S4 — LO QUE CONSTRUIMOS
+══════════════════════════════ -->
+<div class="section-paper">
+<div class="section-paper-inner">
+
+  <div data-lang="es">
+    <div class="section-label">Lo que construimos juntos</div>
+    <h2 class="section-title">Un ecosistema. <span class="lav">Tres fases.</span></h2>
+    <p class="body-text">
+      El documental no es un proyecto aislado. Es el catalizador que conecta lo que ya existe con lo que viene.
+    </p>
+  </div>
+
+  <div data-lang="en">
+    <div class="section-label">What we build together</div>
+    <h2 class="section-title">One ecosystem. <span class="lav">Three phases.</span></h2>
+    <p class="body-text">
+      The documentary is not an isolated project. It is the catalyst that connects everything that already exists to everything coming next.
+    </p>
+  </div>
+
+  <div class="phase-list reveal">
+
+    <div class="phase-item">
+      <div class="phase-dot-col"><div class="phase-dot"></div></div>
+      <div class="phase-content">
+        <div class="phase-label" data-lang="es">Ahora — Fundación de marca</div>
+        <div class="phase-label" data-lang="en">Now — Brand foundation</div>
+        <div class="phase-title" data-lang="es">El sistema visual evolucionado</div>
+        <div class="phase-title" data-lang="en">The evolved visual system</div>
+        <div class="phase-body" data-lang="es">La marca que construimos ya superó la versión original. Es momento de formalizarla en un sistema completo que sostenga todo lo que viene.</div>
+        <div class="phase-body" data-lang="en">The brand we built has already surpassed the original version. Time to formalize it into a complete system that holds everything coming.</div>
+        <ul class="phase-items">
+          <li data-lang="es">Brand book actualizado con el sistema visual real</li>
+          <li data-lang="en">Updated brand book reflecting the actual visual system</li>
+          <li data-lang="es">Paleta, tipografía y tono formalizados</li>
+          <li data-lang="en">Palette, typography, and voice formalized</li>
+          <li data-lang="es">Guía de aplicación bilingüe</li>
+          <li data-lang="en">Bilingual application guide</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="phase-item">
+      <div class="phase-dot-col"><div class="phase-dot lav"></div></div>
+      <div class="phase-content">
+        <div class="phase-label lav" data-lang="es">Próximo — Documental como activo estratégico</div>
+        <div class="phase-label lav" data-lang="en">Next — Documentary as strategic asset</div>
+        <div class="phase-title" data-lang="es">What You See — Arquitectura de posicionamiento</div>
+        <div class="phase-title" data-lang="en">What You See — Positioning architecture</div>
+        <div class="phase-body" data-lang="es">El documental no solo se estrena. Se despliega como origen oficial de la marca, herramienta de alianzas, argumento de medios, y puente entre audiencias.</div>
+        <div class="phase-body" data-lang="en">The documentary doesn't just premiere. It deploys as the official brand origin, a partnership tool, a media argument, and a bridge between audiences.</div>
+        <ul class="phase-items">
+          <li data-lang="es">Página del documental integrada en criarsinculpas.com</li>
+          <li data-lang="en">Documentary page integrated into criarsinculpas.com</li>
+          <li data-lang="es">Kit de prensa y alianzas (ES + EN)</li>
+          <li data-lang="en">Press and partnership kit (ES + EN)</li>
+          <li data-lang="es">Estrategia de lanzamiento bilingüe</li>
+          <li data-lang="en">Bilingual launch strategy</li>
+          <li data-lang="es">Protocolo de contenido derivado del documental</li>
+          <li data-lang="en">Documentary-derived content protocol</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="phase-item">
+      <div class="phase-dot-col"><div class="phase-dot plum"></div></div>
+      <div class="phase-content">
+        <div class="phase-label plum" data-lang="es">Horizonte — Escala con alma</div>
+        <div class="phase-label plum" data-lang="en">Horizon — Scale with soul</div>
+        <div class="phase-title" data-lang="es">CSC como plataforma de autoridad</div>
+        <div class="phase-title" data-lang="en">CSC as an authority platform</div>
+        <div class="phase-body" data-lang="es">El documental abre puertas institucionales: escuelas, salud mental, comunidad. Construimos el modelo que convierte esa autoridad en impacto escalable sin perder la intimidad que genera confianza.</div>
+        <div class="phase-body" data-lang="en">The documentary opens institutional doors: schools, mental health, community. We build the model that turns that authority into scalable impact without losing the intimacy that generates trust.</div>
+        <ul class="phase-items">
+          <li data-lang="es">Modelo de impacto institucional</li>
+          <li data-lang="en">Institutional impact model</li>
+          <li data-lang="es">Arquitectura de monetización evolucionada</li>
+          <li data-lang="en">Evolved monetization architecture</li>
+          <li data-lang="es">Estrategia de expansión bilingüe</li>
+          <li data-lang="en">Bilingual audience expansion strategy</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+</div>
+
+<!-- ══════════════════════════════
+     CLOSING
+══════════════════════════════ -->
+<section class="closing">
+
+  <div class="dots">
+    <span></span><span></span><span></span>
+  </div>
+
+  <div data-lang="es">
+    <p class="closing-quote">
+      "Lo que tú construiste para Oliver — un espacio donde finalmente podía ser él mismo — es exactamente lo que Criar Sin Culpas hace para las familias que te encuentran. Yo solo quiero asegurarme de que el mundo lo <em>vea.</em>"
+    </p>
+  </div>
+
+  <div data-lang="en">
+    <p class="closing-quote">
+      "What you built for Oliver — a space where he could finally be himself — is exactly what Criar Sin Culpas does for the families who find you. I just want to make sure the world <em>sees it.</em>"
+    </p>
+  </div>
+
+  <div class="dots">
+    <span></span><span></span><span></span>
+  </div>
+
+  <div class="closing-sig">
+    <strong>Luis Gilberto</strong> &nbsp;·&nbsp;
+    <span data-lang="es">LG Studio &nbsp;·&nbsp; Junio 2026</span>
+    <span data-lang="en">LG Studio &nbsp;·&nbsp; June 2026</span>
+  </div>
+
+</section>
+
+<footer class="footer">
+  <p>
+    <a href="https://luis-gilberto.com" target="_blank">luis-gilberto.com</a>
+    &nbsp;·&nbsp;
+    <a href="https://criarsinculpas.com" target="_blank">criarsinculpas.com</a>
+  </p>
+  <p style="margin-top: 0.75rem;">
+    <a href="/signal-drop" style="color: var(--lavender); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; opacity: 0.6;">
+      ← Signal Drop
+    </a>
+  </p>
+</footer>
+
+<script>
+function setLang(lang) {
+  document.body.classList.toggle('en', lang === 'en');
+  document.querySelectorAll('#lang-toggle button').forEach((b,i) => {
+    b.classList.toggle('active', (i===0 && lang==='es') || (i===1 && lang==='en'));
+  });
+}
+
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
