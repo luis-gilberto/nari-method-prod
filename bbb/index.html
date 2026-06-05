@@ -1,0 +1,2499 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Criar Sin Culpas — Brand Book 2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    /* ─── DESIGN TOKENS ─────────────────────────────────────────── */
+    :root {
+      --deep-purple:  #3E2A6B;
+      --lavender:     #B8A5D6;
+      --pale-lilac:   #F3E7F0;
+      --coral:        #F96F6E;
+      --teal:         #4BADA8;
+      --warm-paper:   #FBF7F1;
+      --soft-sand:    #EDE3D7;
+      --charcoal:     #1A1A2E;
+      --text-main:    #2D2D3E;
+      --text-muted:   #6B6B7B;
+
+      --font-display: 'Cormorant Garamond', Georgia, serif;
+      --font-body:    'Inter', system-ui, sans-serif;
+
+      --radius-sm:    8px;
+      --radius-md:    16px;
+      --radius-lg:    32px;
+
+      --shadow-soft:  0 4px 24px rgba(62,42,107,.08);
+      --shadow-card:  0 8px 40px rgba(62,42,107,.12);
+
+      --transition:   0.3s cubic-bezier(0.4,0,0.2,1);
+    }
+
+    /* ─── RESET ─────────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-body);
+      background: var(--warm-paper);
+      color: var(--text-main);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+    img { max-width: 100%; height: auto; display: block; }
+    a { color: inherit; text-decoration: none; }
+
+    /* ─── LANGUAGE SYSTEM ───────────────────────────────────────── */
+    /* Default: Spanish visible, English hidden */
+    .lang-en { display: none !important; }
+    .lang-es { display: block; }
+    span.lang-es { display: inline; }
+    span.lang-en { display: none !important; }
+
+    /* When English is active: flip everything */
+    body.lang-en-active .lang-es { display: none !important; }
+    body.lang-en-active .lang-en { display: block !important; }
+    body.lang-en-active span.lang-es { display: none !important; }
+    body.lang-en-active span.lang-en { display: inline !important; }
+
+    /* ─── PROGRESS BAR ──────────────────────────────────────────── */
+    #progress-bar {
+      position: fixed; top: 0; left: 0; height: 3px; width: 0%;
+      background: linear-gradient(90deg, var(--coral), var(--lavender));
+      z-index: 1000; transition: width 0.1s linear;
+    }
+
+    /* ─── LANGUAGE TOGGLE ───────────────────────────────────────── */
+    #lang-toggle {
+      position: fixed;
+      top: 20px; right: 24px;
+      z-index: 999;
+      display: flex;
+      align-items: center;
+      background: rgba(251,247,241,0.92);
+      backdrop-filter: blur(12px);
+      border: 1.5px solid var(--lavender);
+      border-radius: 24px;
+      padding: 4px;
+      gap: 0;
+      box-shadow: var(--shadow-soft);
+      cursor: pointer;
+      min-height: 44px;
+    }
+    .lang-btn {
+      font-family: var(--font-body);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 8px 16px;
+      border-radius: 20px;
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      color: var(--lavender);
+      transition: all var(--transition);
+      min-width: 52px;
+      text-align: center;
+    }
+    .lang-btn.active {
+      background: var(--deep-purple);
+      color: #fff;
+      box-shadow: 0 2px 8px rgba(62,42,107,.25);
+    }
+    #lang-toggle:focus-within { outline: 2px solid var(--coral); outline-offset: 2px; }
+
+    /* ─── NAV ────────────────────────────────────────────────────── */
+    #site-nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      z-index: 900;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 168px 0 40px;
+      height: 72px;
+      background: rgba(251,247,241,0.95);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(184,165,214,.2);
+      transition: all var(--transition);
+    }
+    #site-nav.scrolled {
+      height: 60px;
+      box-shadow: var(--shadow-soft);
+    }
+    .nav-logo img {
+      height: 32px;
+      width: auto;
+      filter: brightness(0.65) saturate(1.4) hue-rotate(-5deg);
+    }
+    .nav-logo-dark img { filter: none; }
+    .nav-links {
+      display: flex; gap: 32px; list-style: none;
+      font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--text-muted);
+    }
+    .nav-links a:hover { color: var(--deep-purple); }
+    .nav-disclaimer {
+      font-size: 10px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--coral); opacity: 0.8;
+      padding: 4px 10px;
+      border: 1px solid rgba(249,111,110,.3);
+      border-radius: 4px;
+      white-space: nowrap;
+    }
+    #nav-hamburger {
+      display: none;
+      background: none; border: none; cursor: pointer;
+      flex-direction: column; gap: 5px; padding: 4px;
+    }
+    #nav-hamburger span {
+      display: block; width: 22px; height: 1.5px;
+      background: var(--deep-purple); border-radius: 2px;
+      transition: all var(--transition);
+    }
+
+    /* ─── INTERNAL DISCLAIMER BANNER ───────────────────────────── */
+    #disclaimer-banner {
+      position: fixed; bottom: 0; left: 0; right: 0;
+      z-index: 800;
+      text-align: center;
+      background: rgba(249,111,110,.08);
+      border-top: 1px solid rgba(249,111,110,.2);
+      padding: 8px 16px;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      color: var(--coral);
+    }
+
+    /* ─── SECTION BASE ───────────────────────────────────────────── */
+    .section {
+      padding: 120px 40px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .section-full {
+      padding: 0;
+      max-width: 100%;
+    }
+    .section-number {
+      font-family: var(--font-display);
+      font-size: 11px; font-weight: 400;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--lavender); margin-bottom: 12px;
+    }
+    h1,h2,h3,h4,h5 { font-family: var(--font-display); font-weight: 400; line-height: 1.2; }
+    h1 { font-size: clamp(48px, 7vw, 96px); }
+    h2 { font-size: clamp(32px, 5vw, 56px); }
+    h3 { font-size: clamp(22px, 3vw, 36px); }
+    h4 { font-size: clamp(18px, 2.2vw, 26px); }
+    p { font-size: 16px; line-height: 1.8; color: var(--text-muted); }
+    .lead { font-size: 20px; line-height: 1.7; font-weight: 300; color: var(--text-main); }
+
+    /* ─── SCROLL REVEAL ──────────────────────────────────────────── */
+    .reveal {
+      opacity: 0; transform: translateY(32px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+
+    /* ════════════════════════════════════════════════════════════ */
+    /*  01 — COVER                                                  */
+    /* ════════════════════════════════════════════════════════════ */
+    #cover {
+      min-height: 100vh;
+      background: var(--deep-purple);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center;
+      padding: 80px 40px;
+      position: relative;
+      overflow: hidden;
+    }
+    #cover::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse 80% 60% at 50% 40%, rgba(184,165,214,.18) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    #cover::after {
+      content: '';
+      position: absolute; bottom: 0; left: 0; right: 0; height: 200px;
+      background: linear-gradient(to bottom, transparent, rgba(62,42,107,.4));
+      pointer-events: none;
+    }
+    .cover-eyebrow {
+      font-size: 11px; font-weight: 500; letter-spacing: 0.22em;
+      text-transform: uppercase; color: var(--lavender);
+      margin-bottom: 24px; opacity: 0.8;
+    }
+    .cover-logo {
+      height: clamp(28px, 5vw, 48px);
+      width: auto;
+      margin: 0 auto 40px;
+      filter: brightness(1.1) saturate(0.9);
+    }
+    .cover-tagline {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: clamp(20px, 3.5vw, 40px);
+      font-weight: 300;
+      color: rgba(251,247,241,.7);
+      margin-bottom: 48px;
+      letter-spacing: 0.02em;
+    }
+    .cover-description {
+      font-size: 14px; line-height: 1.8;
+      color: rgba(251,247,241,.5);
+      max-width: 480px; margin: 0 auto 60px;
+      letter-spacing: 0.02em;
+    }
+    .cover-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(249,111,110,.15);
+      border: 1px solid rgba(249,111,110,.3);
+      border-radius: 24px;
+      padding: 8px 20px;
+      font-size: 11px; font-weight: 500; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--coral);
+    }
+    .cover-scroll-hint {
+      position: absolute; bottom: 48px; left: 50%; transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: 8px;
+      font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase;
+      color: rgba(184,165,214,.4);
+    }
+    .cover-scroll-hint svg { animation: bounce 2s infinite; }
+    @keyframes bounce {
+      0%,100% { transform: translateY(0); }
+      50% { transform: translateY(6px); }
+    }
+
+    /* ════════════════════════════════════════════════════════════ */
+    /*  02 — HISTORIA / STORY                                       */
+    /* ════════════════════════════════════════════════════════════ */
+    #historia { background: var(--warm-paper); }
+    .historia-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+    .historia-portrait-wrap {
+      position: sticky; top: 100px;
+    }
+    .historia-portrait {
+      width: 100%;
+      max-width: 420px;
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-card);
+      object-fit: cover;
+      aspect-ratio: 3/4;
+    }
+    .historia-portrait-caption {
+      margin-top: 20px;
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: 15px;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+    .stat-pill {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--pale-lilac);
+      border-radius: 24px;
+      padding: 8px 16px;
+      font-size: 12px; font-weight: 500; letter-spacing: 0.06em;
+      color: var(--deep-purple);
+      margin-top: 12px;
+    }
+    .timeline {
+      display: flex; flex-direction: column; gap: 40px;
+      padding-top: 8px;
+    }
+    .timeline-item {
+      display: flex; gap: 24px; align-items: flex-start;
+    }
+    .timeline-glyph {
+      flex-shrink: 0; width: 40px; height: 40px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .timeline-content h4 { margin-bottom: 6px; }
+    .timeline-year {
+      font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--coral); font-weight: 500;
+    }
+
+    /* ════════════════════════════════════════════════════════════ */
+    /*  03 — SOBRE NARI / ABOUT NARI                                */
+    /* ════════════════════════════════════════════════════════════ */
+    #sobre-nari { background: var(--charcoal); color: var(--warm-paper); }
+    #sobre-nari .section-number { color: var(--lavender); }
+    #sobre-nari h2 { color: var(--warm-paper); }
+    #sobre-nari p { color: rgba(251,247,241,.7); }
+    .nari-layout {
+      display: grid;
+      grid-template-columns: 1fr 1.3fr;
+      gap: 80px; align-items: center;
+    }
+    .nari-portrait-wrap { position: relative; }
+    .nari-portrait {
+      width: 100%;
+      border-radius: var(--radius-md);
+      object-fit: cover;
+      aspect-ratio: 3/4;
+      box-shadow: 0 24px 80px rgba(0,0,0,.4);
+    }
+    .nari-badge {
+      position: absolute; bottom: -16px; right: -16px;
+      background: var(--deep-purple);
+      color: var(--lavender);
+      border-radius: var(--radius-md);
+      padding: 16px 20px;
+      font-size: 12px; text-align: center;
+      box-shadow: var(--shadow-card);
+    }
+    .nari-badge strong {
+      display: block;
+      font-family: var(--font-display);
+      font-size: 28px; font-weight: 400;
+      color: var(--warm-paper);
+    }
+    .nari-quote {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: clamp(20px, 2.5vw, 28px);
+      font-weight: 300;
+      color: var(--lavender);
+      margin: 32px 0;
+      padding-left: 24px;
+      border-left: 2px solid var(--coral);
+      line-height: 1.5;
+    }
+    .nari-tags {
+      display: flex; flex-wrap: wrap; gap: 8px;
+      margin-top: 24px;
+    }
+    .nari-tag {
+      font-size: 11px; font-weight: 500; letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 6px 14px;
+      border: 1px solid rgba(184,165,214,.3);
+      border-radius: 24px;
+      color: var(--lavender);
+    }
+    .documentary-card {
+      margin-top: 40px;
+      background: rgba(184,165,214,.1);
+      border: 1px solid rgba(184,165,214,.2);
+      border-radius: var(--radius-md);
+      padding: 24px;
+      display: flex; gap: 16px; align-items: center;
+    }
+    .documentary-card p { font-size: 14px; color: rgba(251,247,241,.6); }
+    .documentary-label {
+      font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--coral); margin-bottom: 4px;
+    }
+    .documentary-title {
+      font-family: var(--font-display);
+      font-size: 18px; color: var(--warm-paper);
+    }
+
+    /* ════════════════════════════════════════════════════════════ */
+    /*  04 — MANIFIESTO / MANIFESTO                                 */
+    /* ════════════════════════════════════════════════════════════ */
+    #manifiesto { background: var(--pale-lilac); }
+    .manifesto-intro {
+      max-width: 720px;
+      margin: 0 auto 80px;
+      text-align: center;
+    }
+    .manifesto-intro h2 { margin-bottom: 24px; }
+    .manifesto-pillars {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px; margin-bottom: 80px;
+    }
+    .manifesto-pillar {
+      background: var(--warm-paper);
+      border-radius: var(--radius-md);
+      padding: 40px 32px;
+      box-shadow: var(--shadow-soft);
+      text-align: center;
+    }
+    .pillar-glyph {
+      width: 48px; height: 48px;
+      margin: 0 auto 24px;
+    }
+    .pillar-title {
+      font-family: var(--font-display);
+      font-size: 22px; font-weight: 400;
+      margin-bottom: 12px; color: var(--deep-purple);
+    }
+    .pillar-sub {
+      font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--lavender); margin-bottom: 12px;
+    }
+    .manifesto-quote {
+      text-align: center;
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: clamp(20px, 3vw, 36px);
+      font-weight: 300;
+      color: var(--deep-purple);
+      max-width: 800px; margin: 0 auto;
+      padding: 48px;
+      background: var(--warm-paper);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-card);
+      line-height: 1.5;
+    }
+    .manifesto-philosophy {
+      text-align: center;
+      margin-top: 16px;
+      font-size: 13px; letter-spacing: 0.06em;
+      color: var(--text-muted);
+    }
+
+    /* ════════════════════════════════════════════════════════════ */
+    /*  05 — ECOSISTEMA / ECOSYSTEM                                 */
+    /* ════════════════════════════════════════════════════════════ */
+    #ecosistema { background: var(--warm-paper); }
+    .ecosistema-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
+    .ecosistema-card {
+      border-radius: var(--radius-md);
+      padding: 40px;
+      position: relative; overflow: hidden;
+      transition: transform var(--transition), box-shadow var(--transition);
+    }
+    .ecosistema-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-card);
+    }
+    .eco-instagram { background: var(--pale-lilac); }
+    .eco-web { background: var(--soft-sand); }
+    .eco-protocols { background: rgba(75,173,168,.1); }
+    .eco-documentary { background: var(--charcoal); }
+    .eco-documentary h4,
+    .eco-documentary p { color: var(--warm-paper); }
+    .eco-documentary p { color: rgba(251,247,241,.6); }
+    .eco-label {
+      font-size: 10px; font-weight: 600; letter-spacing: 0.14em;
+      text-transform: uppercase; margin-bottom: 16px;
+    }
+    .eco-instagram .eco-label { color: var(--lavender); }
+    .eco-web .eco-label { color: var(--teal); }
+    .eco-protocols .eco-label { color: var(--teal); }
+    .eco-documentary .eco-label { color: var(--coral); }
+    .eco-icon { width: 40px; height: 40px; margin-bottom: 16px; }
+    .eco-metric {
+      margin-top: 20px;
+      font-size: 28px;
+      font-family: var(--font-display);
+      color: var(--deep-purple);
+    }
+    .eco-documentary .eco-metric { color: var(--lavender); }
+    .eco-metric-label {
+      font-size: 11px; color: var(--text-muted);
+      letter-spacing: 0.06em; text-transform: uppercase;
+    }
+    .eco-documentary .eco-metric-label { color: rgba(251,247,241,.4); }
+
+    /* ════════════════════════════════════════════════════════════ */
+    /*  06 — IDENTIDAD VISUAL / VISUAL IDENTITY                     */
+    /* ════════════════════════════════════════════════════════════ */
+    #identidad { background: var(--soft-sand); }
+    .identity-intro {
+      max-width: 640px; margin-bottom: 80px;
+    }
+    /* Color palette */
+    .palette-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 12px; margin-bottom: 80px;
+    }
+    .swatch {
+      border-radius: var(--radius-sm);
+      aspect-ratio: 1;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      box-shadow: var(--shadow-soft);
+      transition: transform var(--transition), box-shadow var(--transition);
+    }
+    .swatch:hover { transform: scale(1.06); box-shadow: var(--shadow-card); }
+    .swatch-color { width: 100%; height: 70%; }
+    .swatch-info {
+      padding: 8px;
+      background: var(--warm-paper);
+      height: 30%;
+    }
+    .swatch-name {
+      font-size: 10px; font-weight: 600; letter-spacing: 0.06em;
+      text-transform: uppercase; color: var(--text-main);
+      display: block;
+    }
+    .swatch-hex {
+      font-size: 9px; color: var(--text-muted);
+      letter-spacing: 0.04em;
+      font-family: monospace;
+    }
+    /* Typography */
+    .type-section { margin-bottom: 80px; }
+    .type-specimen {
+      background: var(--warm-paper);
+      border-radius: var(--radius-md);
+      padding: 48px;
+      margin-bottom: 24px;
+      box-shadow: var(--shadow-soft);
+    }
+    .type-label {
+      font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--lavender); margin-bottom: 8px;
+      font-family: var(--font-body);
+    }
+    .type-sample-display {
+      font-family: var(--font-display);
+      font-size: clamp(36px, 5vw, 64px);
+      font-weight: 300;
+      color: var(--deep-purple);
+      line-height: 1.1;
+    }
+    .type-sample-body {
+      font-family: var(--font-body);
+      font-size: 16px; line-height: 1.8;
+      color: var(--text-muted);
+    }
+    /* Logo */
+    .logo-section { margin-bottom: 80px; }
+    .logo-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+    .logo-card {
+      border-radius: var(--radius-md);
+      padding: 48px;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 24px;
+      box-shadow: var(--shadow-soft);
+    }
+    .logo-dark { background: var(--deep-purple); }
+    .logo-light { background: var(--warm-paper); border: 1px solid var(--soft-sand); }
+    .logo-card img { height: clamp(24px, 3vw, 40px); width: auto; }
+    .logo-dark img { filter: none; }
+    .logo-light img { filter: brightness(0.65) saturate(1.4) hue-rotate(-5deg); }
+    .logo-caption {
+      font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
+    }
+    .logo-dark .logo-caption { color: rgba(251,247,241,.4); }
+    .logo-light .logo-caption { color: var(--text-muted); }
+
+    /* Logo usage guidelines */
+    .logo-usage-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px; margin-top: 40px;
+    }
+    .logo-usage-card {
+      background: var(--warm-paper);
+      border-radius: var(--radius-md);
+      padding: 36px;
+      box-shadow: var(--shadow-soft);
+    }
+    .usage-title {
+      font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--text-muted); margin-bottom: 20px;
+      font-family: var(--font-body); font-weight: 500;
+    }
+    .usage-main-title {
+      font-family: var(--font-display);
+      font-size: 28px; font-weight: 400;
+      color: var(--deep-purple);
+      margin-bottom: 24px;
+    }
+    .usage-rule {
+      display: flex; align-items: flex-start; gap: 12px;
+      margin-bottom: 12px;
+    }
+    .usage-check { flex-shrink: 0; }
+    .usage-rule p {
+      font-size: 14px; margin: 0; line-height: 1.5;
+    }
+
+    /* ════════════════════════════════════════════════════════════ */
+    /*  07 — FOTOGRAFÍA / PHOTOGRAPHY                               */
+    /* ════════════════════════════════════════════════════════════ */
+    #fotografia { background: var(--charcoal); }
+    #fotografia h2, #fotografia h3, #fotografia h4 { color: var(--warm-paper); }
+    #fotografia .section-number { color: var(--lavender); }
+    #fotografia p { color: rgba(251,247,241,.6); }
+    #fotografia .lead { color: rgba(251,247,241,.8); }
+    .photo-principles {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 32px; margin-bottom: 80px;
+    }
+    .photo-principle {
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.07);
+      border-radius: var(--radius-md);
+      padding: 36px;
+    }
+    .principle-number {
+      font-family: var(--font-display);
+      font-size: 48px; font-weight: 300;
+      color: var(--lavender); opacity: 0.4;
+      line-height: 1; margin-bottom: 12px;
+    }
+    .principle-title {
+      font-size: 11px; font-weight: 600; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--warm-paper);
+      margin-bottom: 8px;
+    }
+    /* ── photography-direction spread ── */
+    .photo-hero {
+      position: relative; width: 100%;
+      border-radius: var(--radius-md); overflow: hidden;
+      margin-bottom: 64px; cursor: zoom-in; background: #000;
+      box-shadow: 0 24px 80px rgba(0,0,0,.45);
+    }
+    .photo-hero img {
+      width: 100%; aspect-ratio: 16 / 7; object-fit: cover; display: block;
+      transition: transform var(--transition);
+    }
+    .photo-hero:hover img { transform: scale(1.02); }
+    .photo-hero-cap {
+      position: absolute; left: 0; right: 0; bottom: 0; padding: 36px;
+      background: linear-gradient(to top, rgba(26,26,46,.88), transparent);
+    }
+    .photo-hero-cap .ph-label {
+      font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--lavender); margin-bottom: 8px;
+    }
+    .photo-hero-cap .ph-title {
+      font-family: var(--font-display); font-weight: 300;
+      font-size: clamp(20px, 3vw, 32px); color: var(--warm-paper); line-height: 1.2;
+    }
+    /* principle card with image */
+    .photo-principle { padding: 0; overflow: hidden; }
+    .pp-thumb { width: 100%; aspect-ratio: 3 / 2; overflow: hidden; cursor: zoom-in; }
+    .pp-thumb img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+      transition: transform var(--transition);
+    }
+    .photo-principle:hover .pp-thumb img { transform: scale(1.04); }
+    .pp-body { padding: 28px 32px 32px; }
+    .pp-body .principle-number { margin-bottom: 8px; }
+    /* extras gallery */
+    .photo-sub {
+      font-size: 11px; font-weight: 500; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--lavender); margin-bottom: 24px;
+    }
+    .photo-gallery {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 80px;
+    }
+    .photo-gallery figure {
+      position: relative; border-radius: var(--radius-md); overflow: hidden;
+      cursor: zoom-in; box-shadow: 0 12px 48px rgba(0,0,0,.35);
+    }
+    .photo-gallery img {
+      width: 100%; aspect-ratio: 4 / 3; object-fit: cover; display: block;
+      transition: transform var(--transition);
+    }
+    .photo-gallery figure:hover img { transform: scale(1.03); }
+    .photo-gallery figcaption {
+      position: absolute; left: 0; right: 0; bottom: 0; padding: 22px 18px 14px;
+      background: linear-gradient(to top, rgba(26,26,46,.82), transparent);
+      font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;
+      color: rgba(251,247,241,.88); font-weight: 500;
+    }
+    .dos-donts {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 24px;
+    }
+    .dos-col, .donts-col {
+      background: rgba(255,255,255,.04);
+      border-radius: var(--radius-md);
+      padding: 32px;
+    }
+    .dos-col { border-top: 3px solid var(--teal); }
+    .donts-col { border-top: 3px solid var(--coral); }
+    .dos-title, .donts-title {
+      font-size: 11px; font-weight: 600; letter-spacing: 0.12em;
+      text-transform: uppercase; margin-bottom: 20px;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .dos-title { color: var(--teal); }
+    .donts-title { color: var(--coral); }
+    .rule-item {
+      display: flex; align-items: flex-start; gap: 12px;
+      margin-bottom: 12px;
+    }
+    .rule-item p { font-size: 14px; margin: 0; }
+
+    /* ════════════════════════════════════════════════════════════ */
+    /*  08 — VOZ Y TONO / VOICE & TONE                              */
+    /* ════════════════════════════════════════════════════════════ */
+    #voz-tono { background: var(--warm-paper); }
+    /* Compact voice header — small avatar, preserves low-res image */
+    .voz-header {
+      display: flex; align-items: center; gap: 24px;
+      background: var(--pale-lilac);
+      border-radius: var(--radius-md);
+      padding: 28px 32px;
+      margin-bottom: 56px;
+      box-shadow: var(--shadow-soft);
+    }
+    .voz-avatar {
+      width: 72px; height: 72px;
+      border-radius: 50%;
+      object-fit: cover; object-position: center top;
+      border: 3px solid var(--lavender);
+      flex-shrink: 0;
+    }
+    .voz-header-text { flex: 1; }
+    .voz-header-text .section-number { margin-bottom: 4px; }
+    .voz-header-text h2 { font-size: clamp(22px, 3vw, 36px); color: var(--deep-purple); margin-bottom: 0; line-height:1.2; }
+    .voz-header-quote {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: 14px; line-height: 1.6;
+      color: var(--text-muted);
+      padding-left: 16px;
+      border-left: 2px solid var(--coral);
+      margin-top: 10px;
+    }
+    .voice-attributes {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 24px;
+    }
+    .voice-card {
+      background: var(--warm-paper);
+      border: 1px solid rgba(184,165,214,.3);
+      border-radius: var(--radius-md);
+      padding: 32px;
+      box-shadow: var(--shadow-soft);
+    }
+    .voice-label {
+      font-size: 10px; font-weight: 600; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--lavender); margin-bottom: 8px;
+    }
+    .voice-title {
+      font-family: var(--font-display);
+      font-size: 22px; font-weight: 400;
+      color: var(--deep-purple); margin-bottom: 12px;
+    }
+    .voice-example {
+      margin-top: 20px;
+      padding: 16px;
+      background: var(--pale-lilac);
+      border-radius: var(--radius-sm);
+    }
+    .voice-example-label {
+      font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--lavender); margin-bottom: 6px;
+    }
+    .voice-example p {
+      font-size: 13px; margin: 0;
+      font-family: var(--font-display);
+      font-style: italic;
+      color: var(--deep-purple);
+    }
+
+    /* ════════════════════════════════════════════════════════════ */
+    /*  09 — APLICACIONES / BRAND APPLICATIONS                      */
+    /* ════════════════════════════════════════════════════════════ */
+    #aplicaciones { background: var(--soft-sand); }
+    .aplicaciones-intro { max-width: 640px; margin-bottom: 80px; }
+
+    /* Web mockups */
+    .mockups-section { margin-bottom: 80px; }
+    .mockups-sub {
+      font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--lavender); margin-bottom: 32px;
+    }
+    .mockups-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      grid-template-rows: auto auto;
+      gap: 20px;
+    }
+    .mockup-card {
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      box-shadow: var(--shadow-card);
+      cursor: zoom-in;
+      position: relative;
+      background: var(--charcoal);
+      transition: transform var(--transition);
+    }
+    .mockup-card:hover { transform: scale(1.02); }
+    .mockup-card img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .mockup-card-hero { grid-row: 1 / 3; }
+    .mockup-caption {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      background: linear-gradient(to top, rgba(0,0,0,.6), transparent);
+      padding: 20px 16px 12px;
+      font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;
+      color: rgba(255,255,255,.8); font-weight: 500;
+    }
+    .mobile-mockups {
+      display: grid; grid-template-columns: repeat(2, 1fr);
+      gap: 20px; margin-top: 20px;
+    }
+
+    /* Instagram templates */
+    .ig-section { margin-bottom: 80px; }
+    .ig-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px; margin-bottom: 32px;
+    }
+    .ig-card {
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      box-shadow: var(--shadow-soft);
+      cursor: zoom-in;
+      position: relative;
+      background: var(--charcoal);
+      transition: transform var(--transition);
+    }
+    .ig-card:hover { transform: scale(1.03); }
+    .ig-post { aspect-ratio: 1; }
+    .ig-story { aspect-ratio: 9/16; }
+    .ig-card img { width: 100%; height: 100%; object-fit: cover; }
+    .ig-card-label {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      background: linear-gradient(to top, rgba(0,0,0,.7), transparent);
+      padding: 16px 12px 10px;
+      font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase;
+      color: rgba(255,255,255,.7); font-weight: 500;
+    }
+    .ig-specs {
+      background: var(--warm-paper);
+      border-radius: var(--radius-md);
+      padding: 32px;
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      box-shadow: var(--shadow-soft);
+    }
+    .ig-spec-item h4 {
+      font-family: var(--font-body);
+      font-size: 11px; font-weight: 600; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--text-muted); margin-bottom: 6px;
+    }
+    .ig-spec-item p { font-size: 14px; color: var(--text-main); margin: 0; }
+
+    /* Brand evolution */
+    .evolution-strip {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;
+      margin-bottom: 80px;
+    }
+    .evolution-card {
+      border-radius: var(--radius-md); overflow: hidden;
+      box-shadow: var(--shadow-soft);
+      background: var(--warm-paper);
+      cursor: zoom-in;
+      transition: transform var(--transition);
+    }
+    .evolution-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-card); }
+    .evolution-card img { width: 100%; aspect-ratio: 16/9; object-fit: cover; }
+    .evolution-card-info { padding: 16px; }
+    .evolution-phase {
+      font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--lavender); margin-bottom: 4px;
+    }
+    .evolution-card-info h4 { font-size: 16px; }
+
+    /* ════════════════════════════════════════════════════════════ */
+    /*  10 — PRINCIPIOS / DESIGN PRINCIPLES                         */
+    /* ════════════════════════════════════════════════════════════ */
+    #principios { background: var(--pale-lilac); }
+    .principles-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+      margin-bottom: 80px;
+    }
+    .principle-card {
+      background: var(--warm-paper);
+      border-radius: var(--radius-md);
+      padding: 36px;
+      box-shadow: var(--shadow-soft);
+    }
+    .principle-card h4 { margin-bottom: 12px; color: var(--deep-purple); }
+    .principle-number-label {
+      font-family: var(--font-display);
+      font-size: 48px; font-weight: 300;
+      color: var(--lavender); opacity: 0.5;
+      line-height: 1; margin-bottom: 8px;
+    }
+    .ai-prompt-box {
+      background: var(--deep-purple);
+      border-radius: var(--radius-md);
+      padding: 48px;
+      color: var(--warm-paper);
+    }
+    .ai-prompt-box h3 { color: var(--lavender); margin-bottom: 24px; }
+    .prompt-code {
+      font-family: 'Courier New', monospace;
+      font-size: 13px; line-height: 1.8;
+      color: rgba(251,247,241,.8);
+      background: rgba(255,255,255,.05);
+      border-radius: var(--radius-sm);
+      padding: 24px;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+
+    /* ════════════════════════════════════════════════════════════ */
+    /*  11 — ASSETS INDEX                                           */
+    /* ════════════════════════════════════════════════════════════ */
+    #assets { background: var(--warm-paper); }
+    .assets-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+    }
+    .asset-category {
+      background: var(--warm-paper);
+      border: 1px solid rgba(184,165,214,.3);
+      border-radius: var(--radius-md);
+      padding: 32px;
+      box-shadow: var(--shadow-soft);
+    }
+    .asset-cat-icon { margin-bottom: 16px; }
+    .asset-cat-label {
+      font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--lavender); margin-bottom: 8px;
+    }
+    .asset-cat-title {
+      font-family: var(--font-display);
+      font-size: 20px; font-weight: 400; color: var(--deep-purple);
+      margin-bottom: 16px;
+    }
+    .asset-list {
+      list-style: none;
+      display: flex; flex-direction: column; gap: 8px;
+    }
+    .asset-list li {
+      font-size: 13px; color: var(--text-muted);
+      display: flex; align-items: center; gap: 8px;
+    }
+    .asset-placeholder {
+      text-align: center;
+      padding: 80px;
+      background: var(--pale-lilac);
+      border-radius: var(--radius-lg);
+      margin-top: 60px;
+    }
+    .asset-placeholder h3 { color: var(--deep-purple); margin-bottom: 12px; }
+    .asset-placeholder p { max-width: 480px; margin: 0 auto; }
+
+    /* ─── FOOTER ─────────────────────────────────────────────────── */
+    #site-footer {
+      background: var(--deep-purple);
+      color: var(--warm-paper);
+      text-align: center;
+      padding: 60px 40px 100px;
+    }
+    .footer-logo { height: 32px; margin: 0 auto 24px; }
+    .footer-tagline {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: 20px; font-weight: 300;
+      color: var(--lavender);
+      margin-bottom: 16px;
+    }
+    .footer-meta {
+      font-size: 11px; letter-spacing: 0.08em;
+      color: rgba(251,247,241,.3);
+    }
+    .footer-disclaimer {
+      margin-top: 24px;
+      display: inline-block;
+      font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--coral); opacity: 0.7;
+      border: 1px solid rgba(249,111,110,.25);
+      border-radius: 4px;
+      padding: 6px 14px;
+    }
+
+    /* ─── LIGHTBOX ───────────────────────────────────────────────── */
+    #lightbox {
+      display: none; position: fixed; inset: 0; z-index: 2000;
+      background: rgba(0,0,0,.9);
+      align-items: center; justify-content: center;
+      cursor: zoom-out;
+    }
+    #lightbox.open { display: flex; }
+    #lightbox img {
+      max-width: 90vw; max-height: 90vh;
+      border-radius: var(--radius-md);
+      box-shadow: 0 40px 100px rgba(0,0,0,.8);
+    }
+    #lightbox-close {
+      position: absolute; top: 24px; right: 28px;
+      background: none; border: none; cursor: pointer;
+      color: rgba(255,255,255,.6); font-size: 28px;
+    }
+    #lightbox-close:hover { color: #fff; }
+
+    /* ─── TOAST ──────────────────────────────────────────────────── */
+    #toast {
+      position: fixed; bottom: 60px; left: 50%; transform: translateX(-50%);
+      background: var(--deep-purple); color: var(--warm-paper);
+      padding: 10px 24px; border-radius: 24px;
+      font-size: 13px; pointer-events: none;
+      opacity: 0; transition: opacity 0.3s;
+      z-index: 1500;
+    }
+    #toast.show { opacity: 1; }
+
+    /* ─── MOBILE ─────────────────────────────────────────────────── */
+    @media (max-width: 768px) {
+      .section { padding: 80px 24px; }
+      .historia-layout { grid-template-columns: 1fr; gap: 40px; }
+      .historia-portrait-wrap { position: static; }
+      .nari-layout { grid-template-columns: 1fr; gap: 40px; }
+      .manifesto-pillars { grid-template-columns: 1fr; }
+      .ecosistema-grid { grid-template-columns: 1fr; }
+      .palette-grid { grid-template-columns: repeat(4, 1fr); }
+      .logo-grid { grid-template-columns: 1fr; }
+      .logo-usage-grid { grid-template-columns: 1fr; }
+      .photo-principles { grid-template-columns: 1fr; }
+      .photo-gallery { grid-template-columns: 1fr; }
+      .photo-hero img { aspect-ratio: 4 / 3; }
+      .photo-hero-cap { padding: 22px; }
+      .dos-donts { grid-template-columns: 1fr; }
+      .voz-layout { grid-template-columns: 1fr; }
+      .voz-portrait-wrap { position: static; }
+      .voice-attributes { grid-template-columns: 1fr; }
+      .mockups-grid { grid-template-columns: 1fr; }
+      .mockup-card-hero { grid-row: auto; }
+      .ig-grid { grid-template-columns: 1fr 1fr; }
+      .evolution-strip { grid-template-columns: 1fr 1fr; }
+      .principles-grid { grid-template-columns: 1fr; }
+      .assets-grid { grid-template-columns: 1fr; }
+      .ig-specs { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+      .nav-links.open { display: flex; flex-direction: column; position: fixed; top: 60px; left: 0; right: 0; background: var(--warm-paper); padding: 24px; box-shadow: var(--shadow-card); }
+      #nav-hamburger { display: flex; }
+      #site-nav { padding: 0 140px 0 24px; }
+      .nav-disclaimer { display: none; }
+      #lang-toggle { top: 16px; right: 16px; }
+      .nari-badge { position: static; margin-top: 20px; display: inline-flex; gap: 12px; align-items: center; }
+    }
+
+    /* ─── SEPARATOR ──────────────────────────────────────────────── */
+    .divider {
+      width: 48px; height: 1.5px;
+      background: linear-gradient(90deg, var(--coral), var(--lavender));
+      margin: 24px 0;
+      border: none;
+    }
+
+    /* image placeholder for missing assets */
+    .img-placeholder {
+      background: linear-gradient(135deg, var(--deep-purple) 0%, var(--lavender) 100%);
+      display: flex; align-items: center; justify-content: center;
+      color: rgba(255,255,255,.4);
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: 14px;
+      text-align: center;
+      padding: 20px;
+    }
+    .mobile-mockups .mockup-card { aspect-ratio: 9/19; }
+    .mockup-card:not(.mobile-mockups .mockup-card):not(.mockup-card-hero) { aspect-ratio: 16/9; }
+    .mockup-card-hero { aspect-ratio: 4/3; }
+  </style>
+</head>
+<body>
+
+<!-- ─── PROGRESS BAR ─── -->
+<div id="progress-bar"></div>
+
+<!-- ─── LANGUAGE TOGGLE ─── -->
+<div id="lang-toggle" role="group" aria-label="Language / Idioma">
+  <button class="lang-btn active" id="btn-es" onclick="setLang('es')" aria-pressed="true">ES</button>
+  <button class="lang-btn"        id="btn-en" onclick="setLang('en')" aria-pressed="false">EN</button>
+</div>
+
+<!-- ─── NAVIGATION ─── -->
+<nav id="site-nav" role="navigation">
+  <a class="nav-logo nav-logo-dark" href="#cover" aria-label="Criar Sin Culpas">
+    <img src="https://res.cloudinary.com/dogtoagya/image/upload/v1779932690/csc-logo_gbsmxq.svg" alt="Criar Sin Culpas" />
+  </a>
+  <ul class="nav-links" id="nav-links">
+    <li><a href="#historia"><span class="lang-es">Historia</span><span class="lang-en">Story</span></a></li>
+    <li><a href="#sobre-nari"><span class="lang-es">Sobre Nari</span><span class="lang-en">About Nari</span></a></li>
+    <li><a href="#manifiesto"><span class="lang-es">Manifiesto</span><span class="lang-en">Manifesto</span></a></li>
+    <li><a href="#identidad"><span class="lang-es">Identidad</span><span class="lang-en">Identity</span></a></li>
+    <li><a href="#aplicaciones"><span class="lang-es">Aplicaciones</span><span class="lang-en">Applications</span></a></li>
+    <li><a href="#assets"><span class="lang-es">Assets</span><span class="lang-en">Assets</span></a></li>
+  </ul>
+  <span class="nav-disclaimer">
+    <span class="lang-es">Solo uso interno</span>
+    <span class="lang-en">Internal use only</span>
+  </span>
+  <button id="nav-hamburger" aria-label="Menu" onclick="document.getElementById('nav-links').classList.toggle('open')">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- ─── INTERNAL DISCLAIMER BANNER ─── -->
+<div id="disclaimer-banner" role="alert">
+  <span class="lang-es">⚠ Documento confidencial — Solo uso interno. No distribuir públicamente.</span>
+  <span class="lang-en">⚠ Confidential document — Internal use only. Do not distribute publicly.</span>
+</div>
+
+<!-- ════ 00 — COVER ════ -->
+<section id="cover">
+  <p class="cover-eyebrow lang-es reveal">Brand Book — 2026</p>
+  <p class="cover-eyebrow lang-en reveal">Brand Book — 2026</p>
+  <img class="cover-logo reveal" src="https://res.cloudinary.com/dogtoagya/image/upload/v1779932690/csc-logo_gbsmxq.svg" alt="Criar Sin Culpas" />
+  <p class="cover-tagline reveal reveal-delay-1">
+    <span class="lang-es">Connection before control</span>
+    <span class="lang-en">Connection before control</span>
+  </p>
+  <p class="cover-description reveal reveal-delay-2">
+    <span class="lang-es">Una guía viva para el ecosistema visual y de voz de Criar Sin Culpas. Para equipos internos y colaboradores de confianza.</span>
+    <span class="lang-en">A living guide to the visual and voice ecosystem of Criar Sin Culpas. For internal teams and trusted collaborators.</span>
+  </p>
+  <div class="cover-badge reveal reveal-delay-3">
+    <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="5" stroke="#F96F6E" stroke-width="1.5"/><circle cx="6" cy="6" r="2" fill="#F96F6E"/></svg>
+    <span class="lang-es">Solo uso interno</span>
+    <span class="lang-en">Internal use only</span>
+  </div>
+  <div class="cover-scroll-hint">
+    <svg width="16" height="24" viewBox="0 0 16 24" fill="none"><rect x="1" y="1" width="14" height="22" rx="7" stroke="rgba(184,165,214,.4)" stroke-width="1.5"/><circle cx="8" cy="7" r="2" fill="rgba(184,165,214,.4)"/></svg>
+  </div>
+</section>
+
+<!-- ════ 01 — HISTORIA ════ -->
+<section id="historia">
+  <div class="section">
+    <div class="historia-layout">
+      <div class="historia-portrait-wrap reveal">
+        <img class="historia-portrait" src="https://res.cloudinary.com/dogtoagya/image/upload/v1780681551/Jun_5_2026_10_45_08_AM_kq7haa.png" alt="Criar Sin Culpas — Historia" />
+        <p class="historia-portrait-caption">
+          <span class="lang-es">"La calma es una práctica, no un destino."</span>
+          <span class="lang-en">"Calm is a practice, not a destination."</span>
+        </p>
+      </div>
+
+      <div class="reveal reveal-delay-1">
+        <p class="section-number">
+          <span class="lang-es">01 — Historia</span>
+          <span class="lang-en">01 — Story</span>
+        </p>
+        <h2 style="color:var(--deep-purple); margin-bottom:24px;">
+          <span class="lang-es">La historia detrás del lenguaje</span>
+          <span class="lang-en">The story behind the language</span>
+        </h2>
+        <hr class="divider" />
+        <p class="lead" style="margin-bottom:48px;">
+          <span class="lang-es">Criar Sin Culpas no nació como una estrategia de contenido. Nació de una experiencia real: una madre tratando de entender lo que le pasaba a su hijo, buscando apoyo, enfrentando sistemas complejos y encontrando palabras para algo que muchas familias viven en silencio. Con el tiempo, esa búsqueda se convirtió en una voz, esa voz en comunidad, y esa comunidad en una plataforma de apoyo.</span>
+          <span class="lang-en">Criar Sin Culpas didn't begin as a content strategy. It began with a real experience: a mother trying to understand what was happening with her son, seeking support, navigating complex systems, and finding words for something many families live through in silence. Over time, that search became a voice, that voice became community, and that community became a platform of support.</span>
+        </p>
+
+        <div class="timeline">
+          <div class="timeline-item reveal reveal-delay-1">
+            <div class="timeline-glyph">
+              <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+                <circle cx="20" cy="20" r="18" stroke="#B8A5D6" stroke-width="1.5"/>
+                <path d="M21 12 L16 20 L21 21 L18 28" stroke="#F96F6E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+              </svg>
+            </div>
+            <div class="timeline-content">
+              <p class="timeline-year">2020</p>
+              <h4 style="color:var(--deep-purple);">
+                <span class="lang-es">El primer quiebre</span>
+                <span class="lang-en">The first crack</span>
+              </h4>
+              <p style="font-size:14px;">
+                <span class="lang-es">Oliver entra a kindergarten durante COVID. Lo que parecía adaptación empieza a revelar ansiedad, rigidez y desbordes que todavía no tenían un lenguaje claro.</span>
+                <span class="lang-en">Oliver starts kindergarten during COVID. What looked like adjustment begins to reveal anxiety, rigidity, and meltdowns that didn't yet have a clear language.</span>
+              </p>
+            </div>
+          </div>
+
+          <div class="timeline-item reveal reveal-delay-2">
+            <div class="timeline-glyph">
+              <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+                <circle cx="20" cy="20" r="18" stroke="#B8A5D6" stroke-width="1.5"/>
+                <rect x="12" y="12" width="10" height="10" rx="1.5" stroke="#3E2A6B" stroke-width="1.5" fill="none"/>
+                <rect x="18" y="18" width="10" height="10" rx="1.5" stroke="#3E2A6B" stroke-width="1.5" fill="none"/>
+              </svg>
+            </div>
+            <div class="timeline-content">
+              <p class="timeline-year">2021</p>
+              <h4 style="color:var(--deep-purple);">
+                <span class="lang-es">El sistema entra en la historia</span>
+                <span class="lang-en">The system enters the story</span>
+              </h4>
+              <p style="font-size:14px;">
+                <span class="lang-es">Llegan las reuniones, los primeros apoyos, el IEP y las acomodaciones. Nari empieza a descubrir que apoyo no siempre significa seguridad emocional.</span>
+                <span class="lang-en">The meetings arrive, along with the first supports, the IEP, and accommodations. Nari begins to discover that support doesn't always mean emotional safety.</span>
+              </p>
+            </div>
+          </div>
+
+          <div class="timeline-item reveal reveal-delay-3">
+            <div class="timeline-glyph">
+              <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+                <circle cx="20" cy="20" r="18" stroke="#B8A5D6" stroke-width="1.5"/>
+                <path d="M20 12 L27 14.5 V20 C27 24 23.5 27.5 20 28.5 C16.5 27.5 13 24 13 20 V14.5 Z" stroke="#4BADA8" stroke-width="1.5" fill="none" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div class="timeline-content">
+              <p class="timeline-year">2022</p>
+              <h4 style="color:var(--deep-purple);">
+                <span class="lang-es">La seguridad cambia la conducta</span>
+                <span class="lang-en">Safety changes behavior</span>
+              </h4>
+              <p style="font-size:14px;">
+                <span class="lang-es">Un nuevo entorno escolar transforma la experiencia de Oliver. Para Nari, se vuelve imposible ignorar una verdad: cuando un niño se siente seguro, su sistema nervioso responde distinto.</span>
+                <span class="lang-en">A new school environment transforms Oliver's experience. For Nari, one truth becomes impossible to ignore: when a child feels safe, their nervous system responds differently.</span>
+              </p>
+            </div>
+          </div>
+
+          <div class="timeline-item reveal reveal-delay-4">
+            <div class="timeline-glyph">
+              <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+                <circle cx="20" cy="20" r="18" stroke="#B8A5D6" stroke-width="1.5"/>
+                <path d="M12 20 C14.5 16 17.5 15 20 15 C22.5 15 25.5 16 28 20 C25.5 24 22.5 25 20 25 C17.5 25 14.5 24 12 20 Z" stroke="#F96F6E" stroke-width="1.5" fill="none" stroke-linejoin="round"/>
+                <circle cx="20" cy="20" r="2.4" fill="#F96F6E"/>
+              </svg>
+            </div>
+            <div class="timeline-content">
+              <p class="timeline-year">2023</p>
+              <h4 style="color:var(--deep-purple);">
+                <span class="lang-es">Lo invisible se vuelve urgente</span>
+                <span class="lang-en">The invisible becomes urgent</span>
+              </h4>
+              <p style="font-size:14px;">
+                <span class="lang-es">La ansiedad, el rechazo, la vergüenza y la reputación pesan más. Nari empieza a mirar más allá de la conducta visible para nombrar el dolor que muchos adultos no alcanzan a ver.</span>
+                <span class="lang-en">Anxiety, rejection, shame, and reputation weigh heavier. Nari begins to look beyond visible behavior to name the pain many adults never manage to see.</span>
+              </p>
+            </div>
+          </div>
+
+          <div class="timeline-item reveal reveal-delay-1">
+            <div class="timeline-glyph">
+              <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+                <circle cx="20" cy="20" r="18" stroke="#B8A5D6" stroke-width="1.5"/>
+                <circle cx="16" cy="20" r="6" stroke="#4BADA8" stroke-width="1.5" fill="none"/>
+                <circle cx="24" cy="20" r="6" stroke="#4BADA8" stroke-width="1.5" fill="none"/>
+              </svg>
+            </div>
+            <div class="timeline-content">
+              <p class="timeline-year">2024–2025</p>
+              <h4 style="color:var(--deep-purple);">
+                <span class="lang-es">La voz encuentra comunidad</span>
+                <span class="lang-en">The voice finds community</span>
+              </h4>
+              <p style="font-size:14px;">
+                <span class="lang-es">Criar Sin Culpas empieza a consolidarse como un espacio de lenguaje, calma y reconocimiento para familias que viven la crianza desde el agotamiento, la culpa y el amor.</span>
+                <span class="lang-en">Criar Sin Culpas begins to take shape as a space of language, calm, and recognition for families who live parenting through exhaustion, guilt, and love.</span>
+              </p>
+            </div>
+          </div>
+
+          <div class="timeline-item reveal reveal-delay-2">
+            <div class="timeline-glyph">
+              <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+                <circle cx="20" cy="20" r="18" stroke="#B8A5D6" stroke-width="1.5"/>
+                <circle cx="20" cy="20" r="2.2" fill="#3E2A6B"/>
+                <circle cx="14" cy="14" r="1.8" stroke="#3E2A6B" stroke-width="1.3" fill="none"/>
+                <circle cx="26" cy="14" r="1.8" stroke="#3E2A6B" stroke-width="1.3" fill="none"/>
+                <circle cx="14" cy="26" r="1.8" stroke="#3E2A6B" stroke-width="1.3" fill="none"/>
+                <circle cx="26" cy="26" r="1.8" stroke="#3E2A6B" stroke-width="1.3" fill="none"/>
+                <path d="M18.4 18.4 L15 15 M21.6 18.4 L25 15 M18.4 21.6 L15 25 M21.6 21.6 L25 25" stroke="#3E2A6B" stroke-width="1.3" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div class="timeline-content">
+              <p class="timeline-year">2026</p>
+              <h4 style="color:var(--deep-purple);">
+                <span class="lang-es">La marca se convierte en ecosistema</span>
+                <span class="lang-en">The brand becomes an ecosystem</span>
+              </h4>
+              <p style="font-size:14px;">
+                <span class="lang-es">El sitio, los Protocolos de Momento y el documental marcan un nuevo capítulo. Criar Sin Culpas pasa de ser una voz necesaria a una plataforma cultural con herramientas, narrativa y propósito.</span>
+                <span class="lang-en">The site, the Moment Protocols, and the documentary mark a new chapter. Criar Sin Culpas moves from a necessary voice to a cultural platform with tools, narrative, and purpose.</span>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ 02 — SOBRE NARI ════ -->
+<section id="sobre-nari">
+  <div class="section">
+    <div class="nari-layout">
+      <div class="nari-portrait-wrap reveal">
+        <img class="nari-portrait" src="https://res.cloudinary.com/dogtoagya/image/upload/v1779216966/Nari_xwahmd.png" alt="Nari" />
+        <div class="nari-badge">
+          <strong>40.8K</strong>
+          <span class="lang-es">comunidad activa</span>
+          <span class="lang-en">active community</span>
+        </div>
+      </div>
+
+      <div class="reveal reveal-delay-1">
+        <p class="section-number">
+          <span class="lang-es">02 — Sobre Nari</span>
+          <span class="lang-en">02 — About Nari</span>
+        </p>
+        <h2 style="margin-bottom:24px;">
+          <span class="lang-es">La voz detrás de la marca</span>
+          <span class="lang-en">The voice behind the brand</span>
+        </h2>
+        <hr class="divider" />
+        <p class="lead" style="margin-bottom:20px;">
+          <span class="lang-es">Nari no es una experta que habla desde el pedestal. Es una madre que encontró un camino más suave — y decidió compartirlo.</span>
+          <span class="lang-en">Nari isn't an expert speaking from a pedestal. She's a mother who found a softer path — and decided to share it.</span>
+        </p>
+        <p style="margin-bottom:20px;">
+          <span class="lang-es">Su enfoque combina inteligencia emocional, crianza consciente y una profunda intimidad cultural con familias latinoamericanas. No habla de lo que debería ser — habla de lo que vivió.</span>
+          <span class="lang-en">Her approach combines emotional intelligence, conscious parenting, and a deep cultural intimacy with Latin American families. She doesn't speak about what should be — she speaks from what she lived.</span>
+        </p>
+        <blockquote class="nari-quote">
+          <span class="lang-es">"Hablo desde lo que viví, no desde lo que debería ser."</span>
+          <span class="lang-en">"I speak from what I lived, not from what should be."</span>
+        </blockquote>
+        <div class="nari-tags">
+          <span class="nari-tag"><span class="lang-es">Crianza Consciente</span><span class="lang-en">Conscious Parenting</span></span>
+          <span class="nari-tag"><span class="lang-es">Inteligencia Emocional</span><span class="lang-en">Emotional Intelligence</span></span>
+          <span class="nari-tag"><span class="lang-es">Cultura Latina</span><span class="lang-en">Latino Culture</span></span>
+          <span class="nari-tag"><span class="lang-es">Crianza Sin Culpa</span><span class="lang-en">Guilt-Free Parenting</span></span>
+        </div>
+        <div class="documentary-card">
+          <svg width="40" height="40" viewBox="0 0 40 40" fill="none" flex-shrink="0" style="flex-shrink:0;">
+            <rect x="8" y="10" width="24" height="20" rx="3" stroke="#F96F6E" stroke-width="1.5" fill="none"/>
+            <path d="M17 16l8 4-8 4V16z" fill="#F96F6E"/>
+          </svg>
+          <div>
+            <p class="documentary-label"><span class="lang-es">Próximamente</span><span class="lang-en">Coming soon</span></p>
+            <p class="documentary-title"><span class="lang-es">El Documental</span><span class="lang-en">The Documentary</span></p>
+            <p>
+              <span class="lang-es">Una mirada íntima a la crianza latinoamericana — su autoridad cultural definitiva.</span>
+              <span class="lang-en">An intimate look at Latin American parenting — her definitive cultural authority moment.</span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ 03 — MANIFIESTO ════ -->
+<section id="manifiesto">
+  <div class="section">
+    <div class="manifesto-intro reveal">
+      <p class="section-number">
+        <span class="lang-es">03 — Manifiesto</span>
+        <span class="lang-en">03 — Manifesto</span>
+      </p>
+      <h2 style="color:var(--deep-purple);">
+        <span class="lang-es">En qué creemos</span>
+        <span class="lang-en">What we believe</span>
+      </h2>
+      <hr class="divider" />
+      <p class="lead">
+        <span class="lang-es">No existe el padre perfecto. Existe el padre presente. Criar Sin Culpas es el espacio para los momentos difíciles — para transformar el estrés en conexión y el caos en claridad.</span>
+        <span class="lang-en">The perfect parent doesn't exist. The present parent does. Criar Sin Culpas is the space for the hard moments — to transform stress into connection and chaos into clarity.</span>
+      </p>
+    </div>
+
+    <div class="manifesto-pillars">
+      <div class="manifesto-pillar reveal reveal-delay-1">
+        <div class="pillar-glyph">
+          <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+            <circle cx="24" cy="24" r="10" stroke="#B8A5D6" stroke-width="1.5" fill="none"/>
+            <circle cx="14" cy="24" r="10" stroke="#F96F6E" stroke-width="1.5" fill="none" opacity=".5"/>
+            <circle cx="34" cy="24" r="10" stroke="#4BADA8" stroke-width="1.5" fill="none" opacity=".5"/>
+          </svg>
+        </div>
+        <p class="pillar-sub"><span class="lang-es">Pilar uno</span><span class="lang-en">Pillar one</span></p>
+        <h3 class="pillar-title"><span class="lang-es">Credibilidad Emocional</span><span class="lang-en">Emotional Credibility</span></h3>
+        <p><span class="lang-es">Hablamos desde la experiencia real. Nunca desde la teoría vacía.</span><span class="lang-en">We speak from real experience. Never from empty theory.</span></p>
+      </div>
+      <div class="manifesto-pillar reveal reveal-delay-2">
+        <div class="pillar-glyph">
+          <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+            <path d="M24 8 L38 36 L10 36 Z" stroke="#3E2A6B" stroke-width="1.5" fill="none" stroke-linejoin="round"/>
+            <line x1="24" y1="18" x2="24" y2="30" stroke="#4BADA8" stroke-width="1.5" stroke-linecap="round"/>
+            <circle cx="24" cy="32" r="2" fill="#4BADA8"/>
+          </svg>
+        </div>
+        <p class="pillar-sub"><span class="lang-es">Pilar dos</span><span class="lang-en">Pillar two</span></p>
+        <h3 class="pillar-title"><span class="lang-es">Guía Práctica</span><span class="lang-en">Practical Guidance</span></h3>
+        <p><span class="lang-es">Cada protocolo es una herramienta que funciona en el momento real — no el ideal.</span><span class="lang-en">Every protocol is a tool that works in the real moment — not the ideal one.</span></p>
+      </div>
+      <div class="manifesto-pillar reveal reveal-delay-3">
+        <div class="pillar-glyph">
+          <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+            <path d="M24 12 C18 12 12 17 12 24 C12 31 18 36 24 36 C30 36 36 31 36 24" stroke="#B8A5D6" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+            <path d="M30 12 C33 15 36 18 36 24" stroke="#F96F6E" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+          </svg>
+        </div>
+        <p class="pillar-sub"><span class="lang-es">Pilar tres</span><span class="lang-en">Pillar three</span></p>
+        <h3 class="pillar-title"><span class="lang-es">Intimidad Cultural</span><span class="lang-en">Cultural Intimacy</span></h3>
+        <p><span class="lang-es">Hablamos el idioma emocional de las familias latinas — sin traducción.</span><span class="lang-en">We speak the emotional language of Latin families — without translation.</span></p>
+      </div>
+    </div>
+
+    <blockquote class="manifesto-quote reveal">
+      <span class="lang-es">"Estás haciendo lo mejor que puedes — y eso es suficiente."</span>
+      <span class="lang-en">"You are doing the best you can — and that is enough."</span>
+    </blockquote>
+    <p class="manifesto-philosophy reveal">
+      <span class="lang-es">Filosofía de marca • Criar Sin Culpas</span>
+      <span class="lang-en">Brand philosophy • Criar Sin Culpas</span>
+    </p>
+  </div>
+</section>
+
+<!-- ════ 04 — ECOSISTEMA ════ -->
+<section id="ecosistema">
+  <div class="section">
+    <p class="section-number reveal">
+      <span class="lang-es">04 — Ecosistema</span>
+      <span class="lang-en">04 — Ecosystem</span>
+    </p>
+    <h2 style="color:var(--deep-purple); margin-bottom:16px;" class="reveal">
+      <span class="lang-es">Un sistema vivo</span>
+      <span class="lang-en">A living system</span>
+    </h2>
+    <hr class="divider" />
+    <p class="lead reveal" style="max-width:600px; margin-bottom:64px;">
+      <span class="lang-es">Cada pieza del ecosistema cumple un rol. Instagram siembra. El sitio web construye confianza. Los protocolos generan valor. El documental crea autoridad.</span>
+      <span class="lang-en">Each piece of the ecosystem serves a role. Instagram plants seeds. The website builds trust. Protocols create value. The documentary establishes authority.</span>
+    </p>
+
+    <div class="ecosistema-grid">
+      <div class="ecosistema-card eco-instagram reveal reveal-delay-1">
+        <div class="eco-icon">
+          <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+            <rect x="8" y="8" width="24" height="24" rx="7" stroke="#3E2A6B" stroke-width="1.5" fill="none"/>
+            <circle cx="20" cy="20" r="6" stroke="#3E2A6B" stroke-width="1.5" fill="none"/>
+            <circle cx="29" cy="11" r="2" fill="#3E2A6B"/>
+          </svg>
+        </div>
+        <p class="eco-label">Instagram</p>
+        <h4 style="color:var(--deep-purple);">
+          <span class="lang-es">Señal Emocional</span>
+          <span class="lang-en">Emotional Signal</span>
+        </h4>
+        <p>
+          <span class="lang-es">El primer punto de contacto. Donde la comunidad siente antes de leer.</span>
+          <span class="lang-en">The first point of contact. Where the community feels before reading.</span>
+        </p>
+        <div class="eco-metric">40.8K</div>
+        <p class="eco-metric-label"><span class="lang-es">seguidores activos</span><span class="lang-en">active followers</span></p>
+      </div>
+
+      <div class="ecosistema-card eco-web reveal reveal-delay-2">
+        <div class="eco-icon">
+          <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+            <rect x="6" y="10" width="28" height="20" rx="3" stroke="#4BADA8" stroke-width="1.5" fill="none"/>
+            <line x1="6" y1="16" x2="34" y2="16" stroke="#4BADA8" stroke-width="1.5"/>
+            <circle cx="10" cy="13" r="1.5" fill="#4BADA8"/>
+            <circle cx="15" cy="13" r="1.5" fill="#4BADA8"/>
+          </svg>
+        </div>
+        <p class="eco-label"><span class="lang-es">Sitio Web</span><span class="lang-en">Website</span></p>
+        <h4 style="color:var(--deep-purple);">
+          <span class="lang-es">Plataforma de Confianza</span>
+          <span class="lang-en">Trust Platform</span>
+        </h4>
+        <p>
+          <span class="lang-es">El hogar digital. Donde la autoridad se construye con profundidad y edición.</span>
+          <span class="lang-en">The digital home. Where authority is built with depth and curation.</span>
+        </p>
+      </div>
+
+      <div class="ecosistema-card eco-protocols reveal reveal-delay-3">
+        <div class="eco-icon">
+          <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+            <path d="M10 12h20M10 18h14M10 24h17M10 30h10" stroke="#4BADA8" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <p class="eco-label">Protocolos</p>
+        <h4 style="color:var(--deep-purple);">
+          <span class="lang-es">Capa de Producto</span>
+          <span class="lang-en">Product Layer</span>
+        </h4>
+        <p>
+          <span class="lang-es">Pantallas · Berrinches · Sueño · Hermanos. Herramientas que funcionan en el momento difícil.</span>
+          <span class="lang-en">Screens · Meltdowns · Sleep · Siblings. Tools that work in the hard moment.</span>
+        </p>
+        <div class="eco-metric">4</div>
+        <p class="eco-metric-label"><span class="lang-es">protocolos activos</span><span class="lang-en">active protocols</span></p>
+      </div>
+
+      <div class="ecosistema-card eco-documentary reveal reveal-delay-4">
+        <div class="eco-icon">
+          <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+            <rect x="6" y="10" width="22" height="20" rx="3" stroke="#F96F6E" stroke-width="1.5" fill="none"/>
+            <path d="M28 16l6-4v16l-6-4V16z" stroke="#F96F6E" stroke-width="1.5" stroke-linejoin="round" fill="none"/>
+          </svg>
+        </div>
+        <p class="eco-label"><span class="lang-es">Documental</span><span class="lang-en">Documentary</span></p>
+        <h4>
+          <span class="lang-es">Momento de Autoridad</span>
+          <span class="lang-en">Authority Moment</span>
+        </h4>
+        <p>
+          <span class="lang-es">El arco narrativo más ambicioso. Donde la marca trasciende el contenido y se convierte en cultura.</span>
+          <span class="lang-en">The most ambitious narrative arc. Where the brand transcends content and becomes culture.</span>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ 05 — IDENTIDAD VISUAL ════ -->
+<section id="identidad">
+  <div class="section">
+    <div class="identity-intro reveal">
+      <p class="section-number">
+        <span class="lang-es">05 — Identidad Visual</span>
+        <span class="lang-en">05 — Visual Identity</span>
+      </p>
+      <h2 style="color:var(--deep-purple);">
+        <span class="lang-es">El lenguaje visual</span>
+        <span class="lang-en">The visual language</span>
+      </h2>
+      <hr class="divider" />
+      <p class="lead">
+        <span class="lang-es">Una identidad que no grita — invita. Construida sobre la calma editorial, la calidez humana y la claridad latina.</span>
+        <span class="lang-en">An identity that doesn't shout — it invites. Built on editorial calm, human warmth, and Latin clarity.</span>
+      </p>
+    </div>
+
+    <!-- COLOR PALETTE -->
+    <h3 style="color:var(--deep-purple); margin-bottom:32px;" class="reveal">
+      <span class="lang-es">Paleta de Color</span><span class="lang-en">Color Palette</span>
+    </h3>
+    <div class="palette-grid reveal">
+      <div class="swatch" onclick="copyColor('#3E2A6B', this)" title="Click to copy">
+        <div class="swatch-color" style="background:#3E2A6B;"></div>
+        <div class="swatch-info">
+          <span class="swatch-name"><span class="lang-es">Púrpura Profundo</span><span class="lang-en">Deep Purple</span></span>
+          <span class="swatch-hex">#3E2A6B</span>
+        </div>
+      </div>
+      <div class="swatch" onclick="copyColor('#B8A5D6', this)" title="Click to copy">
+        <div class="swatch-color" style="background:#B8A5D6;"></div>
+        <div class="swatch-info">
+          <span class="swatch-name">Lavender</span>
+          <span class="swatch-hex">#B8A5D6</span>
+        </div>
+      </div>
+      <div class="swatch" onclick="copyColor('#F3E7F0', this)" title="Click to copy">
+        <div class="swatch-color" style="background:#F3E7F0;"></div>
+        <div class="swatch-info">
+          <span class="swatch-name"><span class="lang-es">Lila Suave</span><span class="lang-en">Pale Lilac</span></span>
+          <span class="swatch-hex">#F3E7F0</span>
+        </div>
+      </div>
+      <div class="swatch" onclick="copyColor('#F96F6E', this)" title="Click to copy">
+        <div class="swatch-color" style="background:#F96F6E;"></div>
+        <div class="swatch-info">
+          <span class="swatch-name">Coral</span>
+          <span class="swatch-hex">#F96F6E</span>
+        </div>
+      </div>
+      <div class="swatch" onclick="copyColor('#4BADA8', this)" title="Click to copy">
+        <div class="swatch-color" style="background:#4BADA8;"></div>
+        <div class="swatch-info">
+          <span class="swatch-name">Teal</span>
+          <span class="swatch-hex">#4BADA8</span>
+        </div>
+      </div>
+      <div class="swatch" onclick="copyColor('#FBF7F1', this)" title="Click to copy">
+        <div class="swatch-color" style="background:#FBF7F1; border:1px solid #EDE3D7;"></div>
+        <div class="swatch-info">
+          <span class="swatch-name"><span class="lang-es">Papel Cálido</span><span class="lang-en">Warm Paper</span></span>
+          <span class="swatch-hex">#FBF7F1</span>
+        </div>
+      </div>
+      <div class="swatch" onclick="copyColor('#EDE3D7', this)" title="Click to copy">
+        <div class="swatch-color" style="background:#EDE3D7;"></div>
+        <div class="swatch-info">
+          <span class="swatch-name"><span class="lang-es">Arena Suave</span><span class="lang-en">Soft Sand</span></span>
+          <span class="swatch-hex">#EDE3D7</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- TYPOGRAPHY -->
+    <div class="type-section">
+      <h3 style="color:var(--deep-purple); margin-bottom:32px;" class="reveal">
+        <span class="lang-es">Tipografía</span><span class="lang-en">Typography</span>
+      </h3>
+      <div class="type-specimen reveal">
+        <p class="type-label">
+          <span class="lang-es">Display / Titulares — Cormorant Garamond</span>
+          <span class="lang-en">Display / Headlines — Cormorant Garamond</span>
+        </p>
+        <p class="type-sample-display">
+          <span class="lang-es">La calma es una elección.</span>
+          <span class="lang-en">Calm is a choice.</span>
+        </p>
+        <p class="type-label" style="margin-top:16px;">
+          <span class="lang-es">Pesos: Light 300 · Regular 400 · Medium 500. Uso: portadas, secciones principales, citas.</span>
+          <span class="lang-en">Weights: Light 300 · Regular 400 · Medium 500. Use: covers, main sections, quotes.</span>
+        </p>
+      </div>
+      <div class="type-specimen reveal reveal-delay-1">
+        <p class="type-label">
+          <span class="lang-es">Cuerpo / UI — Inter</span>
+          <span class="lang-en">Body / UI — Inter</span>
+        </p>
+        <p class="type-sample-body">
+          <span class="lang-es">Criar Sin Culpas ayuda a los padres hispanohablantes a navegar los retos cotidianos con calma, conciencia emocional y apoyo práctico, transformando el estrés en conexión y crecimiento.</span>
+          <span class="lang-en">Criar Sin Culpas helps Spanish-speaking parents navigate everyday challenges with calm, emotional awareness, and practical support, transforming stress into connection and growth.</span>
+        </p>
+        <p class="type-label" style="margin-top:16px;">
+          <span class="lang-es">Pesos: Light 300 · Regular 400 · Medium 500 · Semibold 600. Uso: párrafos, etiquetas, UI, navegación.</span>
+          <span class="lang-en">Weights: Light 300 · Regular 400 · Medium 500 · Semibold 600. Use: paragraphs, labels, UI, navigation.</span>
+        </p>
+      </div>
+    </div>
+
+    <!-- LOGO SYSTEM -->
+    <div class="logo-section">
+      <h3 style="color:var(--deep-purple); margin-bottom:32px;" class="reveal">
+        <span class="lang-es">Sistema de Logo</span><span class="lang-en">Logo System</span>
+      </h3>
+      <div class="logo-grid reveal">
+        <div class="logo-card logo-dark">
+          <img src="https://res.cloudinary.com/dogtoagya/image/upload/v1779932690/csc-logo_gbsmxq.svg" alt="Criar Sin Culpas — dark background" />
+          <p class="logo-caption">
+            <span class="lang-es">Fondo oscuro — gradiente original</span>
+            <span class="lang-en">Dark background — original gradient</span>
+          </p>
+        </div>
+        <div class="logo-card logo-light">
+          <img src="https://res.cloudinary.com/dogtoagya/image/upload/v1779932690/csc-logo_gbsmxq.svg" alt="Criar Sin Culpas — light background" />
+          <p class="logo-caption">
+            <span class="lang-es">Fondo claro — gradiente adaptado</span>
+            <span class="lang-en">Light background — adapted gradient</span>
+          </p>
+        </div>
+      </div>
+
+      <div class="logo-usage-grid">
+        <div class="logo-usage-card reveal">
+          <p class="usage-title">
+            <span class="lang-es">Espacio libre (clear space)</span>
+            <span class="lang-en">Clear space</span>
+          </p>
+          <p style="font-size:14px; margin-bottom:16px;">
+            <span class="lang-es">Mantén un espacio libre equivalente a la altura de la letra "A" del wordmark en todos los lados. Nunca comprimas o invadas ese espacio.</span>
+            <span class="lang-en">Maintain clear space equal to the height of the letter "A" in the wordmark on all sides. Never compress or invade that space.</span>
+          </p>
+          <div style="border: 1.5px dashed var(--lavender); border-radius: 8px; padding: 32px; text-align: center; background: var(--pale-lilac);">
+            <img src="https://res.cloudinary.com/dogtoagya/image/upload/v1779932690/csc-logo_gbsmxq.svg" alt="Logo clear space" style="height:32px; filter: brightness(0.65) saturate(1.4) hue-rotate(-5deg);" />
+          </div>
+        </div>
+
+        <div class="logo-usage-card reveal reveal-delay-1">
+          <p class="usage-title">
+            <span class="lang-es">Tamaño mínimo</span>
+            <span class="lang-en">Minimum size</span>
+          </p>
+          <div style="display:flex; flex-direction:column; gap:16px; margin-bottom:16px;">
+            <div style="display:flex; align-items:center; gap:16px;">
+              <img src="https://res.cloudinary.com/dogtoagya/image/upload/v1779932690/csc-logo_gbsmxq.svg" style="height:20px; filter: brightness(0.65) saturate(1.4) hue-rotate(-5deg);" alt="logo min web"/>
+              <span style="font-size:11px; color:var(--text-muted); letter-spacing:0.06em;">120 px web · 20 mm <span class="lang-es">impresión</span><span class="lang-en">print</span></span>
+            </div>
+            <div style="display:flex; align-items:center; gap:16px;">
+              <img src="https://res.cloudinary.com/dogtoagya/image/upload/v1779932690/csc-logo_gbsmxq.svg" style="height:28px; filter: brightness(0.65) saturate(1.4) hue-rotate(-5deg);" alt="logo min print"/>
+              <span style="font-size:11px; color:var(--text-muted); letter-spacing:0.06em;">150 px web · 25 mm <span class="lang-es">impresión</span><span class="lang-en">print</span></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="logo-usage-card reveal">
+          <p class="usage-title" style="color:var(--teal);">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style="display:inline; vertical-align:middle; margin-right:6px;"><path d="M2 7l3.5 3.5L12 3" stroke="#4BADA8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span class="lang-es">Correcto</span><span class="lang-en">Correct</span>
+          </p>
+          <div class="usage-rule">
+            <svg class="usage-check" width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="#4BADA8" stroke-width="1.5"/><path d="M5 8l2 2 4-4" stroke="#4BADA8" stroke-width="1.5" stroke-linecap="round"/></svg>
+            <p><span class="lang-es">Usar sobre fondos sólidos y limpios</span><span class="lang-en">Use on solid, clean backgrounds</span></p>
+          </div>
+          <div class="usage-rule">
+            <svg class="usage-check" width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="#4BADA8" stroke-width="1.5"/><path d="M5 8l2 2 4-4" stroke="#4BADA8" stroke-width="1.5" stroke-linecap="round"/></svg>
+            <p><span class="lang-es">Mantener proporciones originales</span><span class="lang-en">Maintain original proportions</span></p>
+          </div>
+          <div class="usage-rule">
+            <svg class="usage-check" width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="#4BADA8" stroke-width="1.5"/><path d="M5 8l2 2 4-4" stroke="#4BADA8" stroke-width="1.5" stroke-linecap="round"/></svg>
+            <p><span class="lang-es">Usar la versión correcta según el fondo</span><span class="lang-en">Use the correct version for the background</span></p>
+          </div>
+        </div>
+
+        <div class="logo-usage-card reveal reveal-delay-1">
+          <p class="usage-title" style="color:var(--coral);">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style="display:inline; vertical-align:middle; margin-right:6px;"><line x1="3" y1="3" x2="11" y2="11" stroke="#F96F6E" stroke-width="1.8" stroke-linecap="round"/><line x1="11" y1="3" x2="3" y2="11" stroke="#F96F6E" stroke-width="1.8" stroke-linecap="round"/></svg>
+            <span class="lang-es">Incorrecto</span><span class="lang-en">Incorrect</span>
+          </p>
+          <div class="usage-rule">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="#F96F6E" stroke-width="1.5"/><line x1="5" y1="5" x2="11" y2="11" stroke="#F96F6E" stroke-width="1.5" stroke-linecap="round"/><line x1="11" y1="5" x2="5" y2="11" stroke="#F96F6E" stroke-width="1.5" stroke-linecap="round"/></svg>
+            <p><span class="lang-es">No usar sobre fondos con textura o patrón</span><span class="lang-en">Never on textured or patterned backgrounds</span></p>
+          </div>
+          <div class="usage-rule">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="#F96F6E" stroke-width="1.5"/><line x1="5" y1="5" x2="11" y2="11" stroke="#F96F6E" stroke-width="1.5" stroke-linecap="round"/><line x1="11" y1="5" x2="5" y2="11" stroke="#F96F6E" stroke-width="1.5" stroke-linecap="round"/></svg>
+            <p><span class="lang-es">No deformar ni estirar el wordmark</span><span class="lang-en">Never distort or stretch the wordmark</span></p>
+          </div>
+          <div class="usage-rule">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="#F96F6E" stroke-width="1.5"/><line x1="5" y1="5" x2="11" y2="11" stroke="#F96F6E" stroke-width="1.5" stroke-linecap="round"/><line x1="11" y1="5" x2="5" y2="11" stroke="#F96F6E" stroke-width="1.5" stroke-linecap="round"/></svg>
+            <p><span class="lang-es">No omitir ninguna de las tres palabras</span><span class="lang-en">Never omit any of the three words</span></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ 06 — FOTOGRAFÍA ════ -->
+<section id="fotografia">
+  <div class="section">
+    <p class="section-number reveal">
+      <span class="lang-es">06 — Fotografía</span>
+      <span class="lang-en">06 — Photography</span>
+    </p>
+    <h2 class="reveal" style="margin-bottom:16px;">
+      <span class="lang-es">La imagen que nos define</span>
+      <span class="lang-en">The image that defines us</span>
+    </h2>
+    <hr class="divider" />
+    <p class="lead reveal" style="max-width:640px; margin-bottom:64px;">
+      <span class="lang-es">No posamos. No perfeccionamos. Capturamos la vida tal como es — imperfecta, real, y llena de amor.</span>
+      <span class="lang-en">We don't pose. We don't perfect. We capture life as it is — imperfect, real, and full of love.</span>
+    </p>
+
+    <div class="photo-hero reveal" onclick="openLightbox(this)">
+      <img src="https://res.cloudinary.com/dogtoagya/image/upload/v1780672267/ChatGPT_Image_Jun_5_2026_08_02_32_AM_mlkeq1.png" alt="Photography Direction — Full Spread" />
+      <div class="photo-hero-cap">
+        <p class="ph-label"><span class="lang-es">Dirección Fotográfica</span><span class="lang-en">Photography Direction</span></p>
+        <p class="ph-title"><span class="lang-es">El lenguaje visual en un solo cuadro</span><span class="lang-en">The visual language in a single frame</span></p>
+      </div>
+    </div>
+
+    <div class="photo-principles">
+      <div class="photo-principle reveal">
+        <div class="pp-thumb" onclick="openLightbox(this)">
+          <img src="https://res.cloudinary.com/dogtoagya/image/upload/v1780672266/ChatGPT_Image_Jun_5_2026_08_09_05_AM_1_ya7xa8.png" alt="Natural Light — Baking Together" />
+        </div>
+        <div class="pp-body">
+          <div class="principle-number">01</div>
+          <p class="principle-title"><span class="lang-es">Luz Natural</span><span class="lang-en">Natural Light</span></p>
+          <p><span class="lang-es">Siempre luz disponible — sin flash, sin artificio. La calidez viene de la hora dorada y la luz de ventana.</span><span class="lang-en">Always available light — no flash, no artifice. Warmth comes from golden hour and window light.</span></p>
+        </div>
+      </div>
+      <div class="photo-principle reveal reveal-delay-1">
+        <div class="pp-thumb" onclick="openLightbox(this)">
+          <img src="https://res.cloudinary.com/dogtoagya/image/upload/v1780672268/ChatGPT_Image_Jun_5_2026_08_09_05_AM_2_qqbglo.png" alt="Unscripted — Floor Conversation" />
+        </div>
+        <div class="pp-body">
+          <div class="principle-number">02</div>
+          <p class="principle-title"><span class="lang-es">Momentos No Dirigidos</span><span class="lang-en">Unscripted Moments</span></p>
+          <p><span class="lang-es">Capturamos lo que sucede — no lo que queremos que suceda. La autenticidad es el estilo.</span><span class="lang-en">We capture what happens — not what we want to happen. Authenticity is the style.</span></p>
+        </div>
+      </div>
+      <div class="photo-principle reveal reveal-delay-2">
+        <div class="pp-thumb" onclick="openLightbox(this)">
+          <img src="https://res.cloudinary.com/dogtoagya/image/upload/v1780672266/ChatGPT_Image_Jun_5_2026_08_09_06_AM_3_g1aojl.png" alt="Warm Palette — Drawing" />
+        </div>
+        <div class="pp-body">
+          <div class="principle-number">03</div>
+          <p class="principle-title"><span class="lang-es">Paleta Cálida</span><span class="lang-en">Warm Palette</span></p>
+          <p><span class="lang-es">Edición suave con tonos cálidos, sombras suaves. Sin filtros fuertes. Sin sobreexposición.</span><span class="lang-en">Soft editing with warm tones, gentle shadows. No strong filters. No overexposure.</span></p>
+        </div>
+      </div>
+      <div class="photo-principle reveal reveal-delay-3">
+        <div class="pp-thumb" onclick="openLightbox(this)">
+          <img src="https://res.cloudinary.com/dogtoagya/image/upload/v1780672267/ChatGPT_Image_Jun_5_2026_08_09_06_AM_4_bfc7tu.png" alt="Negative Space — Reading" />
+        </div>
+        <div class="pp-body">
+          <div class="principle-number">04</div>
+          <p class="principle-title"><span class="lang-es">Espacio Negativo</span><span class="lang-en">Negative Space</span></p>
+          <p><span class="lang-es">Dejamos que la imagen respire. El espacio en blanco es parte de la historia — no ausencia de contenido.</span><span class="lang-en">We let the image breathe. White space is part of the story — not an absence of content.</span></p>
+        </div>
+      </div>
+    </div>
+
+    <p class="photo-sub reveal">
+      <span class="lang-es">En la práctica</span>
+      <span class="lang-en">In practice</span>
+    </p>
+    <div class="photo-gallery reveal">
+      <figure onclick="openLightbox(this)">
+        <img src="https://res.cloudinary.com/dogtoagya/image/upload/v1780672267/ChatGPT_Image_Jun_5_2026_08_09_07_AM_5_rnrlor.png" alt="Everyday Life — Doorway" />
+        <figcaption><span class="lang-es">Vida Cotidiana — Umbral</span><span class="lang-en">Everyday Life — Doorway</span></figcaption>
+      </figure>
+      <figure onclick="openLightbox(this)">
+        <img src="https://res.cloudinary.com/dogtoagya/image/upload/v1780672266/ChatGPT_Image_Jun_5_2026_08_09_08_AM_6_pamnvj.png" alt="Real Connection — Golden Hour" />
+        <figcaption><span class="lang-es">Conexión Real — Hora Dorada</span><span class="lang-en">Real Connection — Golden Hour</span></figcaption>
+      </figure>
+    </div>
+
+    <div class="dos-donts reveal">
+      <div class="dos-col">
+        <p class="dos-title">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="#4BADA8" stroke-width="1.5"/><path d="M5 8l2 2 4-4" stroke="#4BADA8" stroke-width="1.5" stroke-linecap="round"/></svg>
+          <span class="lang-es">Sí</span><span class="lang-en">Do</span>
+        </p>
+        <div class="rule-item"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7l3 3 7-7" stroke="#4BADA8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><p><span class="lang-es">Momentos espontáneos entre padres e hijos</span><span class="lang-en">Spontaneous moments between parents and children</span></p></div>
+        <div class="rule-item"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7l3 3 7-7" stroke="#4BADA8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><p><span class="lang-es">Luz lateral suave de ventana</span><span class="lang-en">Soft lateral window light</span></p></div>
+        <div class="rule-item"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7l3 3 7-7" stroke="#4BADA8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><p><span class="lang-es">Familias latinoamericanas diversas y reales</span><span class="lang-en">Diverse and real Latin American families</span></p></div>
+        <div class="rule-item"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7l3 3 7-7" stroke="#4BADA8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><p><span class="lang-es">Emociones complejas: llanto, risa, cansancio, ternura</span><span class="lang-en">Complex emotions: tears, laughter, exhaustion, tenderness</span></p></div>
+      </div>
+      <div class="donts-col">
+        <p class="donts-title">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="#F96F6E" stroke-width="1.5"/><line x1="5" y1="5" x2="11" y2="11" stroke="#F96F6E" stroke-width="1.5" stroke-linecap="round"/><line x1="11" y1="5" x2="5" y2="11" stroke="#F96F6E" stroke-width="1.5" stroke-linecap="round"/></svg>
+          <span class="lang-es">No</span><span class="lang-en">Don't</span>
+        </p>
+        <div class="rule-item"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><line x1="3" y1="3" x2="11" y2="11" stroke="#F96F6E" stroke-width="1.5" stroke-linecap="round"/><line x1="11" y1="3" x2="3" y2="11" stroke="#F96F6E" stroke-width="1.5" stroke-linecap="round"/></svg><p><span class="lang-es">Fotos de stock con familias perfectas y artificiales</span><span class="lang-en">Stock photos with perfect, artificial families</span></p></div>
+        <div class="rule-item"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><line x1="3" y1="3" x2="11" y2="11" stroke="#F96F6E" stroke-width="1.5" stroke-linecap="round"/><line x1="11" y1="3" x2="3" y2="11" stroke="#F96F6E" stroke-width="1.5" stroke-linecap="round"/></svg><p><span class="lang-es">Fondos blancos de estudio sin contexto</span><span class="lang-en">Studio white backdrops without context</span></p></div>
+        <div class="rule-item"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><line x1="3" y1="3" x2="11" y2="11" stroke="#F96F6E" stroke-width="1.5" stroke-linecap="round"/><line x1="11" y1="3" x2="3" y2="11" stroke="#F96F6E" stroke-width="1.5" stroke-linecap="round"/></svg><p><span class="lang-es">Filtros fuertes o edición excesiva</span><span class="lang-en">Heavy filters or excessive editing</span></p></div>
+        <div class="rule-item"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><line x1="3" y1="3" x2="11" y2="11" stroke="#F96F6E" stroke-width="1.5" stroke-linecap="round"/><line x1="11" y1="3" x2="3" y2="11" stroke="#F96F6E" stroke-width="1.5" stroke-linecap="round"/></svg><p><span class="lang-es">Imágenes aspiracionales que generan culpa</span><span class="lang-en">Aspirational images that generate guilt</span></p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ 07 — VOZ Y TONO ════ -->
+<section id="voz-tono">
+  <div class="section">
+
+    <!-- Compact header: 72px avatar beside title + quote. Low-res image, no large display -->
+    <div class="voz-header reveal">
+      <img class="voz-avatar" src="https://res.cloudinary.com/dogtoagya/image/upload/v1780614830/Nari_Portrait_eqgwct.png" alt="Nari" />
+      <div class="voz-header-text">
+        <p class="section-number">
+          <span class="lang-es">07 — Voz y Tono</span>
+          <span class="lang-en">07 — Voice &amp; Tone</span>
+        </p>
+        <h2>
+          <span class="lang-es">Cómo hablamos</span>
+          <span class="lang-en">How we speak</span>
+        </h2>
+        <p class="voz-header-quote">
+          <span class="lang-es">"Hablo desde lo que viví, no desde lo que debería ser."</span>
+          <span class="lang-en">"I speak from what I lived, not from what should be."</span>
+        </p>
+      </div>
+    </div>
+
+    <div class="reveal">
+        <p class="lead" style="margin-bottom:48px;">
+          <span class="lang-es">La voz de Criar Sin Culpas no es perfecta — es presente. Habla de tú a tú, desde la experiencia compartida, sin juzgar.</span>
+          <span class="lang-en">The voice of Criar Sin Culpas isn't perfect — it's present. It speaks peer to peer, from shared experience, without judgment.</span>
+        </p>
+
+        <div class="voice-attributes">
+          <div class="voice-card reveal">
+            <p class="voice-label"><span class="lang-es">Atributo 01</span><span class="lang-en">Attribute 01</span></p>
+            <h3 class="voice-title"><span class="lang-es">Calmada</span><span class="lang-en">Calm</span></h3>
+            <p><span class="lang-es">No alarmista, no reactiva. Como un abrazo antes de la solución.</span><span class="lang-en">Not alarmist, not reactive. Like a hug before the solution.</span></p>
+            <div class="voice-example">
+              <p class="voice-example-label">
+                <span class="lang-es">Ejemplo</span><span class="lang-en">Example</span>
+              </p>
+              <p><span class="lang-es">"Esto es difícil. Y eso está bien."</span><span class="lang-en">"This is hard. And that's okay."</span></p>
+            </div>
+          </div>
+
+          <div class="voice-card reveal reveal-delay-1">
+            <p class="voice-label"><span class="lang-es">Atributo 02</span><span class="lang-en">Attribute 02</span></p>
+            <h3 class="voice-title"><span class="lang-es">Empática</span><span class="lang-en">Empathetic</span></h3>
+            <p><span class="lang-es">Primero valida, luego orienta. El reconocimiento abre la puerta al cambio.</span><span class="lang-en">First validates, then guides. Recognition opens the door to change.</span></p>
+            <div class="voice-example">
+              <p class="voice-example-label"><span class="lang-es">Ejemplo</span><span class="lang-en">Example</span></p>
+              <p><span class="lang-es">"Yo también lo sentí. Y hay una salida más suave."</span><span class="lang-en">"I felt it too. And there's a softer way through."</span></p>
+            </div>
+          </div>
+
+          <div class="voice-card reveal reveal-delay-2">
+            <p class="voice-label"><span class="lang-es">Atributo 03</span><span class="lang-en">Attribute 03</span></p>
+            <h3 class="voice-title"><span class="lang-es">Práctica</span><span class="lang-en">Practical</span></h3>
+            <p><span class="lang-es">Cada pieza de contenido termina con algo accionable — no solo inspiración flotante.</span><span class="lang-en">Every piece of content ends with something actionable — not just floating inspiration.</span></p>
+            <div class="voice-example">
+              <p class="voice-example-label"><span class="lang-es">Ejemplo</span><span class="lang-en">Example</span></p>
+              <p><span class="lang-es">"Prueba esto: antes de responder, un respiro."</span><span class="lang-en">"Try this: before responding, one breath."</span></p>
+            </div>
+          </div>
+
+          <div class="voice-card reveal reveal-delay-3">
+            <p class="voice-label"><span class="lang-es">Atributo 04</span><span class="lang-en">Attribute 04</span></p>
+            <h3 class="voice-title"><span class="lang-es">Sin Juicio</span><span class="lang-en">Non-Judgmental</span></h3>
+            <p><span class="lang-es">Nunca "deberías". Siempre "podrías". La culpa ya existe — nosotros no la sumamos.</span><span class="lang-en">Never "you should". Always "you could". The guilt already exists — we don't add to it.</span></p>
+            <div class="voice-example">
+              <p class="voice-example-label"><span class="lang-es">Ejemplo</span><span class="lang-en">Example</span></p>
+              <p><span class="lang-es">"No hay un camino correcto. Hay tu camino."</span><span class="lang-en">"There isn't one right path. There's your path."</span></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ 08 — APLICACIONES ════ -->
+<section id="aplicaciones">
+  <div class="section">
+    <div class="aplicaciones-intro reveal">
+      <p class="section-number">
+        <span class="lang-es">08 — Aplicaciones de Marca</span>
+        <span class="lang-en">08 — Brand Applications</span>
+      </p>
+      <h2 style="color:var(--deep-purple);">
+        <span class="lang-es">La marca en acción</span>
+        <span class="lang-en">The brand in action</span>
+      </h2>
+      <hr class="divider" />
+      <p class="lead">
+        <span class="lang-es">Así es como Criar Sin Culpas se ve, se siente y se experimenta en el mundo digital.</span>
+        <span class="lang-en">This is how Criar Sin Culpas looks, feels, and is experienced in the digital world.</span>
+      </p>
+    </div>
+
+    <!-- Brand evolution strip -->
+    <div class="mockups-section">
+      <p class="mockups-sub reveal">
+        <span class="lang-es">Evolución de la marca</span>
+        <span class="lang-en">Brand evolution</span>
+      </p>
+      <div class="evolution-strip reveal">
+        <div class="evolution-card" onclick="openLightbox(this)">
+          <img src="https://res.cloudinary.com/dogtoagya/image/upload/v1780661107/Brand_Cover_Editorial_Calm_ltxwuz.png" alt="Brand Cover" style="width:100%; aspect-ratio:16/9; object-fit:cover; border-radius:12px 12px 0 0; display:block;" />
+          <div class="evolution-card-info">
+            <p class="evolution-phase"><span class="lang-es">Fase 01</span><span class="lang-en">Phase 01</span></p>
+            <h4 style="font-size:15px;"><span class="lang-es">Portada de Marca</span><span class="lang-en">Brand Cover</span></h4>
+          </div>
+        </div>
+        <div class="evolution-card" onclick="openLightbox(this)">
+          <img src="https://res.cloudinary.com/dogtoagya/image/upload/v1780661112/Logo-System_Light-Dark-versions_jbszoc.png" alt="Visual Identity System" style="width:100%; aspect-ratio:16/9; object-fit:cover; border-radius:12px 12px 0 0; display:block;" />
+          <div class="evolution-card-info">
+            <p class="evolution-phase"><span class="lang-es">Fase 02</span><span class="lang-en">Phase 02</span></p>
+            <h4 style="font-size:15px;"><span class="lang-es">Identidad Visual</span><span class="lang-en">Visual Identity</span></h4>
+          </div>
+        </div>
+        <div class="evolution-card" onclick="openLightbox(this)">
+          <img src="https://res.cloudinary.com/dogtoagya/image/upload/v1780672267/ChatGPT_Image_Jun_5_2026_08_02_32_AM_mlkeq1.png" alt="Photography Direction — Full Spread" style="width:100%; aspect-ratio:16/9; object-fit:cover; border-radius:12px 12px 0 0; display:block;" />
+          <div class="evolution-card-info">
+            <p class="evolution-phase"><span class="lang-es">Fase 03</span><span class="lang-en">Phase 03</span></p>
+            <h4 style="font-size:15px;"><span class="lang-es">Fotografía Editorial</span><span class="lang-en">Editorial Photography</span></h4>
+          </div>
+        </div>
+        <div class="evolution-card" onclick="openLightbox(this)">
+          <img src="https://res.cloudinary.com/dogtoagya/image/upload/v1780661107/BrandApplications_Platform_and_Product_gjaonw.png" alt="Brand Applications" style="width:100%; aspect-ratio:16/9; object-fit:cover; border-radius:12px 12px 0 0; display:block;" />
+          <div class="evolution-card-info">
+            <p class="evolution-phase"><span class="lang-es">Fase 04</span><span class="lang-en">Phase 04</span></p>
+            <h4 style="font-size:15px;"><span class="lang-es">Aplicaciones</span><span class="lang-en">Applications</span></h4>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Web mockups -->
+    <div class="mockups-section">
+      <p class="mockups-sub reveal">
+        <span class="lang-es">Diseño web — Calma Editorial</span>
+        <span class="lang-en">Web design — Editorial Calm</span>
+      </p>
+      <div class="mockups-grid reveal">
+        <div class="mockup-card mockup-card-hero" onclick="openLightbox(this)">
+          <img src="https://res.cloudinary.com/dogtoagya/image/upload/v1780661108/Homepage_Full-layout_WithNavigation_mxzrkz.png" alt="Homepage Hero — Editorial Calm" style="width:100%; height:100%; object-fit:cover; display:block;" />
+          <div class="mockup-caption"><span class="lang-es">Hero Section</span><span class="lang-en">Hero Section</span></div>
+        </div>
+        <div class="mockup-card" onclick="openLightbox(this)">
+          <img src="https://res.cloudinary.com/dogtoagya/image/upload/v1780661107/BrandApplications_Platform_and_Product_gjaonw.png" alt="Full Layout with Navigation" style="width:100%; height:100%; object-fit:cover; display:block;" />
+          <div class="mockup-caption"><span class="lang-es">Layout Completo</span><span class="lang-en">Full Layout</span></div>
+        </div>
+        <div class="mockup-card" onclick="openLightbox(this)">
+          <img src="https://res.cloudinary.com/dogtoagya/image/upload/v1780661108/Homepage_Content_Sections_emdkgx.png" alt="Content Sections" style="width:100%; height:100%; object-fit:cover; display:block;" />
+          <div class="mockup-caption"><span class="lang-es">Secciones de Contenido</span><span class="lang-en">Content Sections</span></div>
+        </div>
+      </div>
+      <div class="mobile-mockups reveal reveal-delay-1">
+        <div class="mockup-card" style="aspect-ratio:9/19;" onclick="openLightbox(this)">
+          <img src="https://res.cloudinary.com/dogtoagya/image/upload/v1780661109/HOmepage_Mobile_ppikjo.png" alt="Mobile Responsive View" style="width:100%; height:100%; object-fit:cover; display:block;" />
+          <div class="mockup-caption"><span class="lang-es">Vista Móvil</span><span class="lang-en">Mobile View</span></div>
+        </div>
+        <div class="mockup-card" style="aspect-ratio:9/19;" onclick="openLightbox(this)">
+          <img src="https://res.cloudinary.com/dogtoagya/image/upload/v1780661108/Hoepage_Mobile_qnejb4.png" alt="Mobile Full Scroll" style="width:100%; height:100%; object-fit:cover; display:block;" />
+          <div class="mockup-caption"><span class="lang-es">Scroll Completo</span><span class="lang-en">Full Scroll</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Instagram templates -->
+    <div class="ig-section">
+      <p class="mockups-sub reveal">
+        <span class="lang-es">Social — Formatos de contenido</span>
+        <span class="lang-en">Social — Content formats</span>
+      </p>
+
+      <!-- Feed: posts, carousels & illustration (1:1) -->
+      <h4 style="color:var(--deep-purple); margin-bottom:20px; font-size:14px; letter-spacing:0.06em; font-family:var(--font-body);" class="reveal">
+        <span class="lang-es">Feed — 1080 × 1080</span><span class="lang-en">Feed — 1080 × 1080</span>
+      </h4>
+      <div class="ig-grid reveal">
+        <div class="ig-card ig-post" onclick="openLightbox(this)">
+          <img src="https://res.cloudinary.com/dogtoagya/image/upload/v1780664506/CarouselCover_vnfvg1.png" alt="Carousel Cover" style="width:100%; height:100%; object-fit:cover; display:block;" onerror="this.style.display='none'; this.parentNode.style.background='linear-gradient(135deg,#F3E7F0,#FBF7F1)';" />
+          <div class="ig-card-label"><span class="lang-es">Carrusel — Portada</span><span class="lang-en">Carousel — Cover</span></div>
+        </div>
+        <div class="ig-card ig-post" onclick="openLightbox(this)">
+          <img src="https://res.cloudinary.com/dogtoagya/image/upload/v1780664504/Educational_Carousel_slide_mcrxtu.png" alt="Educational Carousel Slide" style="width:100%; height:100%; object-fit:cover; display:block;" onerror="this.style.display='none'; this.parentNode.style.background='linear-gradient(135deg,#3E2A6B,#B8A5D6)';" />
+          <div class="ig-card-label"><span class="lang-es">Carrusel — Educativo</span><span class="lang-en">Educational Carousel</span></div>
+        </div>
+        <div class="ig-card ig-post" onclick="openLightbox(this)">
+          <img src="https://res.cloudinary.com/dogtoagya/image/upload/v1780664503/Protocol_Preview_IGPost_x9y9ao.png" alt="Protocol Preview IG Post" style="width:100%; height:100%; object-fit:cover; display:block;" onerror="this.style.display='none'; this.parentNode.style.background='linear-gradient(45deg,#3E2A6B,#F96F6E)';" />
+          <div class="ig-card-label"><span class="lang-es">Vista de Protocolo</span><span class="lang-en">Protocol Preview</span></div>
+        </div>
+        <div class="ig-card ig-post" onclick="openLightbox(this)">
+          <img src="https://res.cloudinary.com/dogtoagya/image/upload/v1780664502/Quick_top-IG-Post_mzvda7.png" alt="Quick Tip IG Post" style="width:100%; height:100%; object-fit:cover; display:block;" onerror="this.style.display='none'; this.parentNode.style.background='linear-gradient(135deg,#4BADA8,#FBF7F1)';" />
+          <div class="ig-card-label"><span class="lang-es">Consejo Rápido</span><span class="lang-en">Quick Tip</span></div>
+        </div>
+        <div class="ig-card ig-post" onclick="openLightbox(this)">
+          <img src="https://res.cloudinary.com/dogtoagya/image/upload/v1780664502/Relatable_moment_Illustration_ikfsub.png" alt="Relatable Moment Illustration" style="width:100%; height:100%; object-fit:cover; display:block;" onerror="this.style.display='none'; this.parentNode.style.background='linear-gradient(135deg,#B8A5D6,#F3E7F0)';" />
+          <div class="ig-card-label"><span class="lang-es">Momento Cercano</span><span class="lang-en">Relatable Moment</span></div>
+        </div>
+      </div>
+
+      <!-- Reel (9:16) -->
+      <h4 style="color:var(--deep-purple); margin:32px 0 20px; font-size:14px; letter-spacing:0.06em; font-family:var(--font-body);" class="reveal">
+        <span class="lang-es">Reel — 1080 × 1920</span><span class="lang-en">Reel — 1080 × 1920</span>
+      </h4>
+      <div class="ig-grid reveal reveal-delay-1">
+        <div class="ig-card ig-story" onclick="openLightbox(this)">
+          <img src="https://res.cloudinary.com/dogtoagya/image/upload/v1780664503/Video_Reel_yi8e1k.png" alt="Video Reel" style="width:100%; height:100%; object-fit:cover; display:block;" onerror="this.style.display='none'; this.parentNode.style.background='linear-gradient(180deg,#3E2A6B,#B8A5D6)';" />
+          <div class="ig-card-label"><span class="lang-es">Reel de Video</span><span class="lang-en">Video Reel</span></div>
+        </div>
+      </div>
+
+      <!-- Specs -->
+      <div class="ig-specs reveal">
+        <div class="ig-spec-item">
+          <h4><span class="lang-es">Tipografía</span><span class="lang-en">Typography</span></h4>
+          <p>Cormorant Garamond + Inter</p>
+        </div>
+        <div class="ig-spec-item">
+          <h4><span class="lang-es">Paleta</span><span class="lang-en">Palette</span></h4>
+          <p>#3E2A6B · #B8A5D6 · #F96F6E · #FBF7F1</p>
+        </div>
+        <div class="ig-spec-item">
+          <h4><span class="lang-es">Formatos</span><span class="lang-en">Formats</span></h4>
+          <p><span class="lang-es">Feed: 1080×1080 · Reel: 1080×1920</span><span class="lang-en">Feed: 1080×1080 · Reel: 1080×1920</span></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ 09 — PRINCIPIOS ════ -->
+<section id="principios">
+  <div class="section">
+    <p class="section-number reveal">
+      <span class="lang-es">09 — Principios de Diseño</span>
+      <span class="lang-en">09 — Design Principles</span>
+    </p>
+    <h2 style="color:var(--deep-purple); margin-bottom:16px;" class="reveal">
+      <span class="lang-es">Las reglas que nos guían</span>
+      <span class="lang-en">The rules that guide us</span>
+    </h2>
+    <hr class="divider" />
+    <p class="lead reveal" style="max-width:640px; margin-bottom:64px;">
+      <span class="lang-es">Cada decisión de diseño es una decisión emocional. Estos principios nos mantienen coherentes.</span>
+      <span class="lang-en">Every design decision is an emotional decision. These principles keep us coherent.</span>
+    </p>
+
+    <div class="principles-grid">
+      <div class="principle-card reveal">
+        <div class="principle-number-label">01</div>
+        <h4><span class="lang-es">Calma sobre ruido</span><span class="lang-en">Calm over noise</span></h4>
+        <p><span class="lang-es">El espacio en blanco no es vacío — es intención. Respiramos entre elementos.</span><span class="lang-en">White space isn't emptiness — it's intention. We breathe between elements.</span></p>
+      </div>
+      <div class="principle-card reveal reveal-delay-1">
+        <div class="principle-number-label">02</div>
+        <h4><span class="lang-es">Editorial, no corporativo</span><span class="lang-en">Editorial, not corporate</span></h4>
+        <p><span class="lang-es">Kinfolk, no LinkedIn. Calidez de revista, autoridad de publicación curada.</span><span class="lang-en">Kinfolk, not LinkedIn. Magazine warmth, curated publication authority.</span></p>
+      </div>
+      <div class="principle-card reveal reveal-delay-2">
+        <div class="principle-number-label">03</div>
+        <h4><span class="lang-es">Tipografía como voz</span><span class="lang-en">Typography as voice</span></h4>
+        <p><span class="lang-es">Cormorant habla con calma. Inter aclara con precisión. El contraste es la conversación.</span><span class="lang-en">Cormorant speaks calmly. Inter clarifies with precision. The contrast is the conversation.</span></p>
+      </div>
+      <div class="principle-card reveal reveal-delay-1">
+        <div class="principle-number-label">04</div>
+        <h4><span class="lang-es">Color con propósito</span><span class="lang-en">Color with purpose</span></h4>
+        <p><span class="lang-es">Cada color tiene un rol: púrpura ancla, coral activa, teal guía, lavanda acoge.</span><span class="lang-en">Each color has a role: purple anchors, coral activates, teal guides, lavender welcomes.</span></p>
+      </div>
+      <div class="principle-card reveal reveal-delay-2">
+        <div class="principle-number-label">05</div>
+        <h4><span class="lang-es">La foto cuenta la historia</span><span class="lang-en">Photography tells the story</span></h4>
+        <p><span class="lang-es">Imágenes primero. La ilustración apoya — nunca compite con la fotografía documental real.</span><span class="lang-en">Images first. Illustration supports — never competes with real documentary photography.</span></p>
+      </div>
+      <div class="principle-card reveal reveal-delay-3">
+        <div class="principle-number-label">06</div>
+        <h4><span class="lang-es">Bilingüe por naturaleza</span><span class="lang-en">Bilingual by nature</span></h4>
+        <p><span class="lang-es">El español es el hogar. El inglés abre puertas. Los dos coexisten con igual dignidad.</span><span class="lang-en">Spanish is home. English opens doors. Both coexist with equal dignity.</span></p>
+      </div>
+    </div>
+
+    <!-- AI Prompt Box -->
+    <div class="ai-prompt-box reveal">
+      <h3><span class="lang-es">Pack de Prompts IA</span><span class="lang-en">AI Prompt Pack</span></h3>
+      <p style="margin-bottom:24px; color:rgba(251,247,241,.6);">
+        <span class="lang-es">Para usar al generar visuales con IA — mantiene la coherencia de marca:</span>
+        <span class="lang-en">Use when generating visuals with AI — maintains brand consistency:</span>
+      </p>
+      <pre class="prompt-code">Visual style: editorial calm, premium conscious parenting platform
+Palette: deep purple #3E2A6B, lavender #B8A5D6, coral #F96F6E, teal #4BADA8, warm paper #FBF7F1
+Typography: Cormorant Garamond (display) + Inter (body)
+Photography: documentary-style, natural light, authentic Latin family moments
+Layout: generous whitespace, asymmetric editorial grids, magazine-quality
+Mood: cinematic intimacy, cultural authority, human warmth
+Avoid: stock photo aesthetics, daycare visuals, heavy outlines, emojis</pre>
+    </div>
+  </div>
+</section>
+
+<!-- ════ 10 — ASSETS ════ -->
+<section id="assets">
+  <div class="section">
+    <p class="section-number reveal">
+      <span class="lang-es">10 — Índice de Assets</span>
+      <span class="lang-en">10 — Assets Index</span>
+    </p>
+    <h2 style="color:var(--deep-purple); margin-bottom:16px;" class="reveal">
+      <span class="lang-es">Biblioteca de recursos</span>
+      <span class="lang-en">Resource library</span>
+    </h2>
+    <hr class="divider" />
+    <p class="lead reveal" style="max-width:640px; margin-bottom:64px;">
+      <span class="lang-es">Todos los archivos de marca organizados y listos para uso interno. Archivos físicos se integrarán próximamente.</span>
+      <span class="lang-en">All brand files organized and ready for internal use. Physical files to be integrated soon.</span>
+    </p>
+
+    <div class="assets-grid">
+      <div class="asset-category reveal">
+        <div class="asset-cat-icon">
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+            <rect x="4" y="4" width="24" height="24" rx="6" stroke="#3E2A6B" stroke-width="1.5" fill="none"/>
+            <path d="M10 16h12M10 11h8M10 21h6" stroke="#3E2A6B" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <p class="asset-cat-label">Logo</p>
+        <h4 class="asset-cat-title"><span class="lang-es">Sistema de Logo</span><span class="lang-en">Logo System</span></h4>
+        <ul class="asset-list">
+          <li>
+            <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="5" cy="5" r="4" stroke="#B8A5D6" stroke-width="1.2"/></svg>
+            <span class="lang-es">Logo fondo oscuro (SVG/PNG)</span><span class="lang-en">Dark background logo (SVG/PNG)</span>
+          </li>
+          <li>
+            <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="5" cy="5" r="4" stroke="#B8A5D6" stroke-width="1.2"/></svg>
+            <span class="lang-es">Logo fondo claro (SVG/PNG)</span><span class="lang-en">Light background logo (SVG/PNG)</span>
+          </li>
+          <li>
+            <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="5" cy="5" r="4" stroke="#B8A5D6" stroke-width="1.2"/></svg>
+            <span class="lang-es">Versión monocromática</span><span class="lang-en">Monochrome version</span>
+          </li>
+          <li>
+            <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="5" cy="5" r="4" stroke="#B8A5D6" stroke-width="1.2"/></svg>
+            <span class="lang-es">Icono solo / avatar</span><span class="lang-en">Icon only / avatar</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="asset-category reveal reveal-delay-1">
+        <div class="asset-cat-icon">
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+            <circle cx="10" cy="16" r="5" stroke="#B8A5D6" stroke-width="1.5" fill="none"/>
+            <circle cx="22" cy="16" r="5" stroke="#F96F6E" stroke-width="1.5" fill="none"/>
+            <circle cx="16" cy="10" r="5" stroke="#4BADA8" stroke-width="1.5" fill="none"/>
+          </svg>
+        </div>
+        <p class="asset-cat-label"><span class="lang-es">Paleta</span><span class="lang-en">Palette</span></p>
+        <h4 class="asset-cat-title"><span class="lang-es">Sistema de Color</span><span class="lang-en">Color System</span></h4>
+        <ul class="asset-list">
+          <li><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="5" cy="5" r="4" stroke="#B8A5D6" stroke-width="1.2"/></svg>
+            <span class="lang-es">Archivo de paleta (ASE/ACO)</span><span class="lang-en">Palette file (ASE/ACO)</span></li>
+          <li><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="5" cy="5" r="4" stroke="#B8A5D6" stroke-width="1.2"/></svg>
+            <span class="lang-es">Tokens CSS</span><span class="lang-en">CSS tokens</span></li>
+          <li><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="5" cy="5" r="4" stroke="#B8A5D6" stroke-width="1.2"/></svg>
+            <span class="lang-es">Swatches para Figma</span><span class="lang-en">Swatches for Figma</span></li>
+        </ul>
+      </div>
+
+      <div class="asset-category reveal reveal-delay-2">
+        <div class="asset-cat-icon">
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+            <path d="M6 8h20M6 14h14M6 20h17M6 26h10" stroke="#4BADA8" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <p class="asset-cat-label"><span class="lang-es">Tipografía</span><span class="lang-en">Typography</span></p>
+        <h4 class="asset-cat-title"><span class="lang-es">Sistema Tipográfico</span><span class="lang-en">Typography System</span></h4>
+        <ul class="asset-list">
+          <li><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="5" cy="5" r="4" stroke="#B8A5D6" stroke-width="1.2"/></svg>
+            Cormorant Garamond (Google Fonts)</li>
+          <li><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="5" cy="5" r="4" stroke="#B8A5D6" stroke-width="1.2"/></svg>
+            Inter (Google Fonts)</li>
+          <li><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="5" cy="5" r="4" stroke="#B8A5D6" stroke-width="1.2"/></svg>
+            <span class="lang-es">Guía de jerarquía tipográfica</span><span class="lang-en">Typographic hierarchy guide</span></li>
+        </ul>
+      </div>
+
+      <div class="asset-category reveal">
+        <div class="asset-cat-icon">
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+            <rect x="4" y="6" width="24" height="20" rx="3" stroke="#F96F6E" stroke-width="1.5" fill="none"/>
+            <path d="M4 12h24" stroke="#F96F6E" stroke-width="1.5"/>
+            <circle cx="9" cy="9" r="1.5" fill="#F96F6E"/>
+            <circle cx="14" cy="9" r="1.5" fill="#F96F6E"/>
+          </svg>
+        </div>
+        <p class="asset-cat-label">Web</p>
+        <h4 class="asset-cat-title"><span class="lang-es">Componentes Web</span><span class="lang-en">Web Components</span></h4>
+        <ul class="asset-list">
+          <li><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="5" cy="5" r="4" stroke="#B8A5D6" stroke-width="1.2"/></svg>
+            <span class="lang-es">Mockups de homepage (5 vistas)</span><span class="lang-en">Homepage mockups (5 views)</span></li>
+          <li><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="5" cy="5" r="4" stroke="#B8A5D6" stroke-width="1.2"/></svg>
+            <span class="lang-es">Componentes Figma</span><span class="lang-en">Figma components</span></li>
+          <li><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="5" cy="5" r="4" stroke="#B8A5D6" stroke-width="1.2"/></svg>
+            <span class="lang-es">CSS tokens y variables</span><span class="lang-en">CSS tokens and variables</span></li>
+        </ul>
+      </div>
+
+      <div class="asset-category reveal reveal-delay-1">
+        <div class="asset-cat-icon">
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+            <rect x="6" y="6" width="20" height="20" rx="5" stroke="#3E2A6B" stroke-width="1.5" fill="none"/>
+            <circle cx="16" cy="16" r="5" stroke="#3E2A6B" stroke-width="1.5" fill="none"/>
+            <circle cx="24" cy="8" r="2.5" fill="#3E2A6B"/>
+          </svg>
+        </div>
+        <p class="asset-cat-label">Instagram</p>
+        <h4 class="asset-cat-title"><span class="lang-es">Templates de Instagram</span><span class="lang-en">Instagram Templates</span></h4>
+        <ul class="asset-list">
+          <li><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="5" cy="5" r="4" stroke="#B8A5D6" stroke-width="1.2"/></svg>
+            <span class="lang-es">3 templates de post (Canva/Figma)</span><span class="lang-en">3 post templates (Canva/Figma)</span></li>
+          <li><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="5" cy="5" r="4" stroke="#B8A5D6" stroke-width="1.2"/></svg>
+            <span class="lang-es">3 templates de story (Canva/Figma)</span><span class="lang-en">3 story templates (Canva/Figma)</span></li>
+          <li><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="5" cy="5" r="4" stroke="#B8A5D6" stroke-width="1.2"/></svg>
+            <span class="lang-es">Highlight covers (8 iconos)</span><span class="lang-en">Highlight covers (8 icons)</span></li>
+        </ul>
+      </div>
+
+      <div class="asset-category reveal reveal-delay-2">
+        <div class="asset-cat-icon">
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+            <path d="M6 26 L16 6 L26 26" stroke="#B8A5D6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            <path d="M10 20h12" stroke="#B8A5D6" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <p class="asset-cat-label"><span class="lang-es">Protocolos</span><span class="lang-en">Protocols</span></p>
+        <h4 class="asset-cat-title"><span class="lang-es">Moment Protocols</span><span class="lang-en">Moment Protocols</span></h4>
+        <ul class="asset-list">
+          <li><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="5" cy="5" r="4" stroke="#B8A5D6" stroke-width="1.2"/></svg>
+            <span class="lang-es">Protocolo: Pantallas</span><span class="lang-en">Protocol: Screen Time</span></li>
+          <li><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="5" cy="5" r="4" stroke="#B8A5D6" stroke-width="1.2"/></svg>
+            <span class="lang-es">Protocolo: Berrinches</span><span class="lang-en">Protocol: Meltdowns</span></li>
+          <li><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="5" cy="5" r="4" stroke="#B8A5D6" stroke-width="1.2"/></svg>
+            <span class="lang-es">Protocolo: Hora de Dormir</span><span class="lang-en">Protocol: Bedtime</span></li>
+          <li><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="5" cy="5" r="4" stroke="#B8A5D6" stroke-width="1.2"/></svg>
+            <span class="lang-es">Protocolo: Conflicto entre Hermanos</span><span class="lang-en">Protocol: Sibling Conflict</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="asset-placeholder reveal">
+      <svg width="48" height="48" viewBox="0 0 48 48" fill="none" style="margin:0 auto 16px; display:block;">
+        <path d="M24 8v32M8 24h32" stroke="#B8A5D6" stroke-width="1.5" stroke-linecap="round"/>
+        <circle cx="24" cy="24" r="20" stroke="#B8A5D6" stroke-width="1.5" fill="none"/>
+      </svg>
+      <h3><span class="lang-es">Archivos próximamente</span><span class="lang-en">Files coming soon</span></h3>
+      <p><span class="lang-es">Los archivos descargables se integrarán aquí. Por el momento, solicita assets directamente al equipo de diseño.</span><span class="lang-en">Downloadable files will be integrated here. For now, request assets directly from the design team.</span></p>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FOOTER ─── -->
+<footer id="site-footer">
+  <img class="footer-logo" src="https://res.cloudinary.com/dogtoagya/image/upload/v1779932690/csc-logo_gbsmxq.svg" alt="Criar Sin Culpas" />
+  <p class="footer-tagline">
+    <span class="lang-es">Conexión antes que control</span>
+    <span class="lang-en">Connection before control</span>
+  </p>
+  <p class="footer-meta">
+    <span class="lang-es">© 2026 Criar Sin Culpas. Todos los derechos reservados.</span>
+    <span class="lang-en">© 2026 Criar Sin Culpas. All rights reserved.</span>
+  </p>
+  <span class="footer-disclaimer">
+    <span class="lang-es">Documento confidencial — Solo uso interno</span>
+    <span class="lang-en">Confidential document — Internal use only</span>
+  </span>
+</footer>
+
+<!-- ─── LIGHTBOX ─── -->
+<div id="lightbox" role="dialog" aria-modal="true" onclick="closeLightbox(event)">
+  <button id="lightbox-close" onclick="closeLightbox()" aria-label="Close">×</button>
+  <img id="lightbox-img" src="" alt="Brand asset preview" />
+</div>
+
+<!-- ─── TOAST ─── -->
+<div id="toast" role="status" aria-live="polite"></div>
+
+<script>
+  /* ─── LANGUAGE TOGGLE ─── */
+  function setLang(lang) {
+    const body = document.body;
+    const btnEs = document.getElementById('btn-es');
+    const btnEn = document.getElementById('btn-en');
+    const htmlEl = document.documentElement;
+
+    if (lang === 'en') {
+      body.classList.add('lang-en-active');
+      btnEs.classList.remove('active');
+      btnEn.classList.add('active');
+      btnEs.setAttribute('aria-pressed', 'false');
+      btnEn.setAttribute('aria-pressed', 'true');
+      htmlEl.setAttribute('lang', 'en');
+      localStorage.setItem('csc-lang', 'en');
+    } else {
+      body.classList.remove('lang-en-active');
+      btnEs.classList.add('active');
+      btnEn.classList.remove('active');
+      btnEs.setAttribute('aria-pressed', 'true');
+      btnEn.setAttribute('aria-pressed', 'false');
+      htmlEl.setAttribute('lang', 'es');
+      localStorage.setItem('csc-lang', 'es');
+    }
+  }
+
+  // Keyboard navigation for toggle
+  document.getElementById('lang-toggle').addEventListener('keydown', function(e) {
+    if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
+      const current = localStorage.getItem('csc-lang') || 'es';
+      setLang(current === 'es' ? 'en' : 'es');
+    }
+  });
+
+  // Restore preference
+  (function() {
+    const saved = localStorage.getItem('csc-lang');
+    if (saved === 'en') setLang('en');
+  })();
+
+  /* ─── PROGRESS BAR ─── */
+  window.addEventListener('scroll', function() {
+    const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+    const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    const progress = (scrollTop / scrollHeight) * 100;
+    document.getElementById('progress-bar').style.width = progress + '%';
+
+    // Nav scroll state
+    const nav = document.getElementById('site-nav');
+    if (scrollTop > 40) {
+      nav.classList.add('scrolled');
+      // Update nav logo for light sections
+      nav.querySelector('.nav-logo').style.opacity = '1';
+    } else {
+      nav.classList.remove('scrolled');
+    }
+  });
+
+  /* ─── SCROLL REVEAL ─── */
+  const revealObserver = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.reveal').forEach(function(el) {
+    revealObserver.observe(el);
+  });
+
+  /* ─── COLOR COPY ─── */
+  function copyColor(hex, el) {
+    navigator.clipboard.writeText(hex).then(function() {
+      showToast(hex + ' copiado / copied');
+    }).catch(function() {
+      showToast(hex);
+    });
+  }
+
+  /* ─── LIGHTBOX ─── */
+  function openLightbox(card) {
+    const img = card.querySelector('img');
+    if (!img) return;
+    document.getElementById('lightbox-img').src = img.src;
+    document.getElementById('lightbox-img').alt = img.alt || 'Brand asset';
+    document.getElementById('lightbox').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLightbox(event) {
+    if (event && event.target !== document.getElementById('lightbox') && event.target !== document.getElementById('lightbox-close')) return;
+    document.getElementById('lightbox').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeLightbox({target: document.getElementById('lightbox')});
+  });
+
+  /* ─── TOAST ─── */
+  function showToast(message) {
+    const toast = document.getElementById('toast');
+    toast.textContent = message;
+    toast.classList.add('show');
+    setTimeout(function() { toast.classList.remove('show'); }, 2200);
+  }
+
+  /* ─── NAV ACTIVE LINK ─── */
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+
+  const sectionObserver = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        navLinks.forEach(function(link) {
+          link.style.color = '';
+          if (link.getAttribute('href') === '#' + entry.target.id) {
+            link.style.color = 'var(--deep-purple)';
+          }
+        });
+      }
+    });
+  }, { threshold: 0.4 });
+
+  sections.forEach(function(s) { sectionObserver.observe(s); });
+</script>
+</body>
+</html>
