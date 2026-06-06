@@ -171,10 +171,6 @@
          <div class="csc-mega-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></div> 
          <div class="csc-mega-text"><b><span class="lb-en">Speaking Section</span><span class="lb-es active">Sección de Conferencias</span></b><em><span class="lb-en">Talks, formats & contact</span><span class="lb-es active">Ponencias, formatos y contacto</span></em></div> 
        </button> 
-       <button class="csc-mega-link" onclick="cscNavGo('requests')"> 
-         <div class="csc-mega-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 7l10 7 10-7"/></svg></div> 
-         <div class="csc-mega-text"><b><span class="lb-en">Submit a Request</span><span class="lb-es active">Enviar Solicitud</span></b><em><span class="lb-en">Brief, idea or collaboration proposal</span><span class="lb-es active">Brief, idea o propuesta de colaboración</span></em></div> 
-       </button> 
      </div> 
    </div> 
  
@@ -213,9 +209,8 @@
       <div class="csc-drawer-section">
         <div class="csc-drawer-label"><span class="lb-en">Workspace</span><span class="lb-es active">Proyecto</span></div>
         <button class="csc-drawer-link" onclick="cscNavGo('home')"><span><span class="lb-en">Home</span><span class="lb-es active">Inicio</span></span><span class="csc-dnl-arrow">›</span></button>
-        <button class="csc-drawer-link" onclick="cscNavGo('artifacts')"><span><span class="lb-en">Artifacts</span><span class="lb-es active">Arquitectura</span></span><span class="csc-dnl-arrow">›</span></button>
+        <button class="csc-drawer-link" onclick="cscNavGo('artifacts')"><span><span class="lb-en">Documents</span><span class="lb-es active">Documentos</span></span><span class="csc-dnl-arrow">›</span></button>
         <button class="csc-drawer-link" onclick="cscNavGo('activity')"><span><span class="lb-en">Activity</span><span class="lb-es active">Actividad</span></span><span class="csc-dnl-arrow">›</span></button>
-        <button class="csc-drawer-link" onclick="cscNavGo('requests')"><span><span class="lb-en">Requests</span><span class="lb-es active">Solicitudes</span></span><span class="csc-dnl-arrow">›</span></button>
       </div>
 
       <div class="csc-drawer-section">
@@ -254,7 +249,7 @@
         <div class="hero-zone">
           <div class="hero-portrait-col">
             <div class="hero-portrait-wrap">
-              <img src="assets/images/nari-portrait.jpg" alt="Nari Fateha" class="hero-portrait" />
+              <img src="https://res.cloudinary.com/dogtoagya/image/upload/q_auto/f_auto/v1780614830/Nari_Portrait_eqgwct.png" alt="Nari Fateha" class="hero-portrait" />
               <div class="hero-portrait-ring"></div>
             </div>
           </div>
@@ -334,77 +329,6 @@
              <p class="snapshot-desc"><span class="lb-en">Parenting educator, founder of Criar Sin Culpas, and speaker for schools, congresses and purpose-driven brands. A trusted voice on digital parenting, emotional regulation and family trust-building — with a real methodology, a high-affinity community, and a track record that speaks for itself.</span><span class="lb-es active">Educadora en crianza, fundadora de Criar Sin Culpas y ponente para escuelas, congresos y marcas con propósito. Una voz de confianza en crianza digital, regulación emocional y construcción de vínculos familiares — con una metodología real, una comunidad de alta afinidad y un recorrido que habla por sí solo.</span></p> 
            </div> 
 
-          <div class="snapshot-stats">
-            <div class="stat-card">
-              <div class="stat-num coral"><span class="js-ig-followers-counter" data-start="26900" data-end="40800">26.9K</span><span style="display:block;margin-top:8px;font-size:11px;font-weight:800;letter-spacing:0.08em;text-transform:uppercase;color:rgba(240,236,229,0.55);">+13.9K · +52%</span></div>
-              <div class="stat-label">
-                <span style="display:block;line-height:1.25;"><span class="lb-en">Current followers</span><span class="lb-es active">Seguidores actuales</span></span>
-                <span style="display:block;margin-top:6px;line-height:1.25;color:rgba(240,236,229,0.6);"><span class="lb-en">From 26.9K at project start</span><span class="lb-es active">Desde 26.9K al inicio del proyecto</span></span>
-              </div>
-            </div>
-            <div class="stat-card">
-              <div class="stat-num teal">50%+</div>
-              <div class="stat-label">Engagement</div>
-            </div>
-            <div class="stat-card"> 
-               <div class="stat-num coral">$72K</div> 
-               <div class="stat-label"><span class="lb-en">Year 1 projection</span><span class="lb-es active">Proyección Año 1</span></div> 
-             </div> 
-             <div class="stat-card"> 
-               <div class="stat-num teal">8</div> 
-               <div class="stat-label"><span class="lb-en">Active artifacts</span><span class="lb-es active">Artefactos activos</span></div> 
-             </div> 
-
-          </div>
-          <script>
-            (function () {
-              var el = document.querySelector('.js-ig-followers-counter');
-              if (!el) return;
-              var start = Number(el.getAttribute('data-start') || 0);
-              var end = Number(el.getAttribute('data-end') || 0);
-              var prefersReduced = false;
-              try { prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) {}
-              function formatK(n) {
-                if (!isFinite(n)) return '';
-                if (n >= 1000) return (n / 1000).toFixed(1) + 'K';
-                return String(Math.round(n));
-              }
-              function setVal(n) { el.textContent = formatK(n); }
-              setVal(start);
-              if (prefersReduced) { setVal(end); return; }
-              var ran = false;
-              function animate() {
-                if (ran) return;
-                ran = true;
-                var duration = 1400;
-                var t0 = (window.performance && performance.now) ? performance.now() : Date.now();
-                function easeOutCubic(t) { return 1 - Math.pow(1 - t, 3); }
-                function tick(now) {
-                  var t = (now - t0) / duration;
-                  if (t >= 1) { setVal(end); return; }
-                  var v = start + (end - start) * easeOutCubic(Math.max(0, Math.min(1, t)));
-                  setVal(v);
-                  requestAnimationFrame(tick);
-                }
-                requestAnimationFrame(tick);
-              }
-              if ('IntersectionObserver' in window) {
-                var target = el.closest('.stat-card') || el;
-                var io = new IntersectionObserver(function (entries) {
-                  for (var i = 0; i < entries.length; i++) {
-                    if (entries[i].isIntersecting) {
-                      io.disconnect();
-                      animate();
-                      break;
-                    }
-                  }
-                }, { threshold: 0.35 });
-                io.observe(target);
-              } else {
-                animate();
-              }
-            })();
-          </script>
         </div>
 
         <!-- FEATURED ARTIFACTS (MINI) -->
@@ -496,8 +420,8 @@
             <div class="qa-label"><span class="lb-en">Activity</span><span class="lb-es active">Actividad</span></div>
             <div class="qa-sub"><span class="lb-en">Timeline & sessions</span><span class="lb-es active">Línea de tiempo</span></div>
           </div>
-          <div class="qa-item" onclick="goToSection('growth')">
-            <div class="qa-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg></div>
+          <div class="qa-item" onclick="goToSection('requests')">
+            <div class="qa-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></div>
             <div class="qa-label"><span class="lb-en">Requests</span><span class="lb-es active">Solicitudes</span></div>
             <div class="qa-sub"><span class="lb-en">Send a request</span><span class="lb-es active">Envía una solicitud</span></div>
           </div>
@@ -514,7 +438,7 @@
       <section id="section-artifacts" class="ws-section">
         <div class="section-header">
           <div class="section-eyebrow"><span class="lb-en">Artifact Registry</span><span class="lb-es active">Registro de Artefactos</span></div>
-          <h2 class="section-title"><span class="lb-en">Workspace Artifacts</span><span class="lb-es active">Artefactos del Proyecto</span></h2>
+          <h2 class="section-title"><span class="lb-en">Documents</span><span class="lb-es active">Documentos</span></h2>
           <p class="section-desc"><span class="lb-en">All premium deliverables produced for Criar Sin Culpas. Structured inside the LG Ecosystem.</span><span class="lb-es active">Todos los entregables premium producidos para Criar Sin Culpas. Estructurados en el LG Ecosystem.</span></p>
         </div>
 
@@ -1118,69 +1042,6 @@
       </section>
       <!-- ─── END SECTION: PROJECT JOURNEY ─── -->
 
-      <!-- ─── SECTION: STRATEGIC RECORD ─── -->
-      <section id="section-record" class="ws-section">
-        <div class="section-header">
-          <div class="section-eyebrow"><span class="lb-en">Strategic Record</span><span class="lb-es active">Registro Estratégico</span></div>
-          <h2 class="section-title"><span class="lb-en">Readiness & what's in place</span><span class="lb-es active">Lo que ya está listo</span></h2>
-          <p class="section-desc"><span class="lb-en">Everything we've received, reviewed and organized inside the system. The full inventory of what powers Criar Sin Culpas.</span><span class="lb-es active">Todo lo que hemos recibido, revisado y organizado dentro del sistema. El inventario completo de lo que impulsa Criar Sin Culpas.</span></p>
-        </div>
-
-        <div class="readiness-panel" style="margin-bottom:var(--space-2xl);">
-          <div class="eyebrow eyebrow-teal readiness-eyebrow"><span class="lb-en">What's already in place</span><span class="lb-es active">Lo que ya está listo</span></div>
-          <div class="readiness-title"><span class="lb-en">We've received everything needed. Now we're organizing it inside the system.</span><span class="lb-es active">Ya recibimos todo lo necesario. Ahora lo estamos organizando dentro del sistema.</span></div>
-          <div class="readiness-item">
-            <span class="readiness-label"><span class="lb-en">Common parent difficulties</span><span class="lb-es active">Dificultades más comunes de los padres</span></span>
-            <span class="readiness-state"><span class="lb-en">Identified</span><span class="lb-es active">Mapa de Problemas Validado</span> &nbsp;<button class="js-open-ledger" onclick="openSignalsLedger()" style="background:none;border:none;color:var(--text-muted);font-size:9px;letter-spacing:0.06em;cursor:pointer;padding:0;transition:color 0.2s;" onmouseover="this.style.color='var(--teal)'" onmouseout="this.style.color='var(--text-muted)'">[ <span class="lb-en">View Source ↗</span><span class="lb-es active">Ver Origen ↗</span> ]</button></span>
-          </div>
-          <div class="readiness-item">
-            <span class="readiness-label"><span class="lb-en">50+ Workshop Inventory</span><span class="lb-es active">Inventario de 50+ Talleres</span></span>
-            <span class="readiness-state"><span class="lb-en">Collected</span><span class="lb-es active">Biblioteca Central Consolidada</span></span>
-          </div>
-          <div class="readiness-item">
-            <span class="readiness-label"><span class="lb-en">16 Vimeo Recordings</span><span class="lb-es active">16 Grabaciones Vimeo</span></span>
-            <span class="readiness-state"><span class="lb-en">Reviewed</span><span class="lb-es active">Contenido Estratégico Ingerido</span></span>
-          </div>
-          <div class="readiness-item">
-            <span class="readiness-label"><span class="lb-en">Core Methodology Signals</span><span class="lb-es active">Señales de Metodología</span></span>
-            <span class="readiness-state"><span class="lb-en">Identified</span><span class="lb-es active">Núcleo del Método Identificado</span></span>
-          </div>
-        </div>
-
-        <!-- Strategic decisions -->
-        <h3 class="talks-grid-title" style="margin-bottom:var(--space-lg);"><span class="lb-en">Key strategic decisions</span><span class="lb-es active">Decisiones estratégicas clave</span></h3>
-        <div class="artifacts-grid">
-          <div class="artifact-card">
-            <div class="ac-status-row">
-              <span class="ac-type strategy">SR-001</span>
-              <span class="ac-status approved"><svg width="6" height="6" viewBox="0 0 6 6" style="display:inline-block;vertical-align:middle;margin-right:4px;"><circle cx="3" cy="3" r="3" fill="#2ED3C6"/></svg><span class="lb-en">Active</span><span class="lb-es active">Activo</span></span>
-            </div>
-            <h3 class="ac-title"><span class="lb-en">Core Constraint Identified</span><span class="lb-es active">Restricción Central Identificada</span></h3>
-            <p class="ac-desc"><span class="lb-en">Strategy will focus on translating existing parenting frameworks into a structured learning architecture — not on increasing content output or audience size.</span><span class="lb-es active">La estrategia se enfocará en traducir los marcos de crianza existentes en una arquitectura de aprendizaje estructurada — no en aumentar la producción de contenido ni el tamaño de la audiencia.</span></p>
-            <div class="ac-lg-note"><span class="lb-en">Structured inside the LG Ecosystem</span><span class="lb-es active">Estructurado en el LG Ecosystem</span></div>
-          </div>
-          <div class="artifact-card">
-            <div class="ac-status-row">
-              <span class="ac-type strategy">SR-002</span>
-              <span class="ac-status approved"><svg width="6" height="6" viewBox="0 0 6 6" style="display:inline-block;vertical-align:middle;margin-right:4px;"><circle cx="3" cy="3" r="3" fill="#2ED3C6"/></svg><span class="lb-en">Active</span><span class="lb-es active">Activo</span></span>
-            </div>
-            <h3 class="ac-title"><span class="lb-en">Strategic Framing · Translation, Not Expansion</span><span class="lb-es active">Marco Estratégico · Traducción, No Expansión</span></h3>
-            <p class="ac-desc"><span class="lb-en">The platform's strategic direction is architectural translation. The 50+ existing workshops are the raw material. Structure is the product.</span><span class="lb-es active">La dirección estratégica de la plataforma es la traducción arquitectónica. Los más de 50 talleres existentes son la materia prima. La estructura es el producto.</span></p>
-            <div class="ac-lg-note"><span class="lb-en">Structured inside the LG Ecosystem</span><span class="lb-es active">Estructurado en el LG Ecosystem</span></div>
-          </div>
-          <div class="artifact-card">
-            <div class="ac-status-row">
-              <span class="ac-type strategy">SR-003</span>
-              <span class="ac-status" style="color:var(--coral);"><span class="lb-en">In Progress</span><span class="lb-es active">En Progreso</span></span>
-            </div>
-            <h3 class="ac-title"><span class="lb-en">Three Audience Segments Defined</span><span class="lb-es active">Tres Segmentos de Audiencia Definidos</span></h3>
-            <p class="ac-desc"><span class="lb-en">Segment A: Ashamed & Overwhelmed (highest volume) · Segment B: Suspecting Neurodivergence (growing fast) · Segment C: Under-Equipped & Aware (highest intent, most likely to pay).</span><span class="lb-es active">Segmento A: Avergonzados y abrumados (mayor volumen) · Segmento B: Sospechan Neurodivergencia (Growth &amp; Monetización rápido) · Segmento C: Conscientes pero sin herramientas (mayor intención de compra).</span></p>
-            <div class="ac-lg-note"><span class="lb-en">Structured inside the LG Ecosystem</span><span class="lb-es active">Estructurado en el LG Ecosystem</span></div>
-          </div>
-        </div>
-
-      </section>
-
       <!-- ─── SECTION: SPEAKING ─── -->
       <section id="section-speaking" class="ws-section">
         <div class="section-header">
@@ -1276,7 +1137,7 @@
             </div>
             <div class="media-asset-item">
               <div class="mai-thumb-wrap" style="min-height:80px;border-radius:var(--r-md);overflow:hidden;">
-                <img src="assets/images/nari-portrait.jpg" alt="Retrato editorial Nari" class="mai-thumb" style="width:100%;height:100%;object-fit:cover;object-position:center top;" />
+                <img src="https://res.cloudinary.com/dogtoagya/image/upload/q_auto/f_auto/v1780614830/Nari_Portrait_eqgwct.png" alt="Retrato editorial Nari" class="mai-thumb" style="width:100%;height:100%;object-fit:cover;object-position:center top;" />
               </div>
               <div class="mai-label" style="padding:8px 12px 2px;"><span class="lb-es active">Retrato editorial</span><span class="lb-en">Editorial portrait</span></div>
               <div class="mai-sub" style="padding:0 12px 10px;">PNG · Nari_Portrait.png</div>
@@ -1949,39 +1810,6 @@
           </div>
         </div>
 
-      </section>
-
-      <!-- ─── SECTION: SIGNAL ROOM ─── -->
-      <section id="section-review" class="ws-section">
-        <div class="section-header">
-          <div class="section-eyebrow">
-            <span class="lb-en">Strategic Air Traffic Control Tower</span>
-            <span class="lb-es active">Torre de Control Estratégico</span>
-          </div>
-          <h2 class="section-title">
-            <span class="lb-en">Intelligence Review Queue</span>
-            <span class="lb-es active">Cola de Revisión de Inteligencia</span>
-          </h2>
-          <p class="section-desc">
-            <span class="lb-en">The decision layer between observation, synthesis and action. Review staged intelligence before publishing to the workspace.</span>
-            <span class="lb-es active">La capa de decisión entre la observación, la síntesis y la acción. Revisa la inteligencia preparada antes de publicarla en el workspace.</span>
-          </p>
-        </div>
-
-        <div id="review-queue-container">
-          <!-- Dynamically populated by workspace.js -->
-          <div class="empty-state" style="text-align:center; padding:80px 20px; border:1px dashed var(--border); border-radius:24px; background:rgba(255,255,255,0.02);">
-            <div style="font-size:32px; margin-bottom:16px; opacity:0.3;">📡</div>
-            <h3 style="font-family:var(--font-display); font-size:24px; font-weight:300; margin-bottom:8px;">
-              <span class="lb-en">Queue Clear</span>
-              <span class="lb-es active">Cola Vacía</span>
-            </h3>
-            <p style="font-size:14px; color:var(--text-muted); max-width:320px; margin:0 auto;">
-              <span class="lb-en">No intelligence packages are currently staged for review. Signals are processed in the Signal Room.</span>
-              <span class="lb-es active">No hay paquetes de inteligencia preparados para revisión. Las señales se procesan en la Sala de Señales.</span>
-            </p>
-          </div>
-        </div>
       </section>
 
       <section id="section-signal" class="ws-section">
