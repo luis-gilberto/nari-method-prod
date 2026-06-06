@@ -9,17 +9,16 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <style>
     /* ─── DESIGN TOKENS ─────────────────────────────────────────── */
-    :root {
-      --deep-purple:  #3E2A6B;
-      --lavender:     #B8A5D6;
-      --pale-lilac:   #F3E7F0;
-      --coral:        #F96F6E;
-      --teal:         #4BADA8;
-      --warm-paper:   #FBF7F1;
-      --soft-sand:    #EDE3D7;
-      --charcoal:     #1A1A2E;
-      --text-main:    #2D2D3E;
-      --text-muted:   #6B6B7B;
+        :root {
+      --navy:         #1F2E46;
+      --slate:        #8599AD;
+      --slate-lt:     #A7B6C6;
+      --peach:        #F4A88A;
+      --blush:        #FCE7DD;
+      --cream:        #FAF6F2;
+      --charcoal:     #1F2E46;
+      --text-main:    #2D3340;
+      --text-muted:   #6F7787;
 
       --font-display: 'Cormorant Garamond', Georgia, serif;
       --font-body:    'Inter', system-ui, sans-serif;
@@ -28,8 +27,8 @@
       --radius-md:    16px;
       --radius-lg:    32px;
 
-      --shadow-soft:  0 4px 24px rgba(62,42,107,.08);
-      --shadow-card:  0 8px 40px rgba(62,42,107,.12);
+      --shadow-soft:  0 4px 24px rgba(31,46,70,.08);
+      --shadow-card:  0 8px 40px rgba(31,46,70,.12);
 
       --transition:   0.3s cubic-bezier(0.4,0,0.2,1);
     }
@@ -39,7 +38,7 @@
     html { scroll-behavior: smooth; }
     body {
       font-family: var(--font-body);
-      background: var(--warm-paper);
+      background: var(--cream);
       color: var(--text-main);
       line-height: 1.7;
       overflow-x: hidden;
@@ -63,7 +62,7 @@
     /* ─── PROGRESS BAR ──────────────────────────────────────────── */
     #progress-bar {
       position: fixed; top: 0; left: 0; height: 3px; width: 0%;
-      background: linear-gradient(90deg, var(--coral), var(--lavender));
+      background: linear-gradient(90deg, var(--peach), var(--slate-lt));
       z-index: 1000; transition: width 0.1s linear;
     }
 
@@ -74,9 +73,9 @@
       z-index: 999;
       display: flex;
       align-items: center;
-      background: rgba(251,247,241,0.92);
+      background: rgba(250,247,241,0.92);
       backdrop-filter: blur(12px);
-      border: 1.5px solid var(--lavender);
+      border: 1.5px solid var(--slate-lt);
       border-radius: 24px;
       padding: 4px;
       gap: 0;
@@ -95,17 +94,17 @@
       border: none;
       background: transparent;
       cursor: pointer;
-      color: var(--lavender);
+      color: var(--slate-lt);
       transition: all var(--transition);
       min-width: 52px;
       text-align: center;
     }
     .lang-btn.active {
-      background: var(--deep-purple);
+      background: var(--navy);
       color: #fff;
-      box-shadow: 0 2px 8px rgba(62,42,107,.25);
+      box-shadow: 0 2px 8px rgba(31,46,70,.25);
     }
-    #lang-toggle:focus-within { outline: 2px solid var(--coral); outline-offset: 2px; }
+    #lang-toggle:focus-within { outline: 2px solid var(--peach); outline-offset: 2px; }
 
     /* ─── NAV ────────────────────────────────────────────────────── */
     #site-nav {
@@ -114,9 +113,9 @@
       display: flex; align-items: center; justify-content: space-between;
       padding: 0 168px 0 40px;
       height: 72px;
-      background: rgba(251,247,241,0.95);
+      background: rgba(250,247,241,0.95);
       backdrop-filter: blur(16px);
-      border-bottom: 1px solid rgba(184,165,214,.2);
+      border-bottom: 1px solid rgba(167,182,198,.2);
       transition: all var(--transition);
     }
     #site-nav.scrolled {
@@ -134,12 +133,12 @@
       font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase;
       color: var(--text-muted);
     }
-    .nav-links a:hover { color: var(--deep-purple); }
+    .nav-links a:hover { color: var(--navy); }
     .nav-disclaimer {
       font-size: 10px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase;
-      color: var(--coral); opacity: 0.8;
+      color: var(--peach); opacity: 0.8;
       padding: 4px 10px;
-      border: 1px solid rgba(249,111,110,.3);
+      border: 1px solid rgba(244,168,138,.3);
       border-radius: 4px;
       white-space: nowrap;
     }
@@ -150,7 +149,7 @@
     }
     #nav-hamburger span {
       display: block; width: 22px; height: 1.5px;
-      background: var(--deep-purple); border-radius: 2px;
+      background: var(--navy); border-radius: 2px;
       transition: all var(--transition);
     }
 
@@ -159,13 +158,13 @@
       position: fixed; bottom: 0; left: 0; right: 0;
       z-index: 800;
       text-align: center;
-      background: rgba(249,111,110,.08);
-      border-top: 1px solid rgba(249,111,110,.2);
+      background: rgba(244,168,138,.08);
+      border-top: 1px solid rgba(244,168,138,.2);
       padding: 8px 16px;
       font-size: 11px;
       font-weight: 500;
       letter-spacing: 0.06em;
-      color: var(--coral);
+      color: var(--peach);
     }
 
     /* ─── SECTION BASE ───────────────────────────────────────────── */
@@ -182,7 +181,7 @@
       font-family: var(--font-display);
       font-size: 11px; font-weight: 400;
       letter-spacing: 0.18em; text-transform: uppercase;
-      color: var(--lavender); margin-bottom: 12px;
+      color: var(--slate-lt); margin-bottom: 12px;
     }
     h1,h2,h3,h4,h5 { font-family: var(--font-display); font-weight: 400; line-height: 1.2; }
     h1 { font-size: clamp(48px, 7vw, 96px); }
@@ -208,7 +207,7 @@
     /* ════════════════════════════════════════════════════════════ */
     #cover {
       min-height: 100vh;
-      background: var(--deep-purple);
+      background: var(--navy);
       display: flex; flex-direction: column;
       align-items: center; justify-content: center;
       text-align: center;
@@ -219,18 +218,18 @@
     #cover::before {
       content: '';
       position: absolute; inset: 0;
-      background: radial-gradient(ellipse 80% 60% at 50% 40%, rgba(184,165,214,.18) 0%, transparent 70%);
+      background: radial-gradient(ellipse 80% 60% at 50% 40%, rgba(167,182,198,.18) 0%, transparent 70%);
       pointer-events: none;
     }
     #cover::after {
       content: '';
       position: absolute; bottom: 0; left: 0; right: 0; height: 200px;
-      background: linear-gradient(to bottom, transparent, rgba(62,42,107,.4));
+      background: linear-gradient(to bottom, transparent, rgba(31,46,70,.4));
       pointer-events: none;
     }
     .cover-eyebrow {
       font-size: 11px; font-weight: 500; letter-spacing: 0.22em;
-      text-transform: uppercase; color: var(--lavender);
+      text-transform: uppercase; color: var(--slate-lt);
       margin-bottom: 24px; opacity: 0.8;
     }
     .cover-logo {
@@ -244,30 +243,30 @@
       font-style: italic;
       font-size: clamp(20px, 3.5vw, 40px);
       font-weight: 300;
-      color: rgba(251,247,241,.7);
+      color: rgba(250,247,241,.7);
       margin-bottom: 48px;
       letter-spacing: 0.02em;
     }
     .cover-description {
       font-size: 14px; line-height: 1.8;
-      color: rgba(251,247,241,.5);
+      color: rgba(250,247,241,.5);
       max-width: 480px; margin: 0 auto 60px;
       letter-spacing: 0.02em;
     }
     .cover-badge {
       display: inline-flex; align-items: center; gap: 8px;
-      background: rgba(249,111,110,.15);
-      border: 1px solid rgba(249,111,110,.3);
+      background: rgba(244,168,138,.15);
+      border: 1px solid rgba(244,168,138,.3);
       border-radius: 24px;
       padding: 8px 20px;
       font-size: 11px; font-weight: 500; letter-spacing: 0.1em;
-      text-transform: uppercase; color: var(--coral);
+      text-transform: uppercase; color: var(--peach);
     }
     .cover-scroll-hint {
       position: absolute; bottom: 48px; left: 50%; transform: translateX(-50%);
       display: flex; flex-direction: column; align-items: center; gap: 8px;
       font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase;
-      color: rgba(184,165,214,.4);
+      color: rgba(167,182,198,.4);
     }
     .cover-scroll-hint svg { animation: bounce 2s infinite; }
     @keyframes bounce {
@@ -278,7 +277,7 @@
     /* ════════════════════════════════════════════════════════════ */
     /*  02 — HISTORIA / STORY                                       */
     /* ════════════════════════════════════════════════════════════ */
-    #historia { background: var(--warm-paper); }
+    #historia { background: var(--cream); }
     .historia-layout {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -306,11 +305,11 @@
     }
     .stat-pill {
       display: inline-flex; align-items: center; gap: 8px;
-      background: var(--pale-lilac);
+      background: var(--blush);
       border-radius: 24px;
       padding: 8px 16px;
       font-size: 12px; font-weight: 500; letter-spacing: 0.06em;
-      color: var(--deep-purple);
+      color: var(--navy);
       margin-top: 12px;
     }
     .timeline {
@@ -327,16 +326,16 @@
     .timeline-content h4 { margin-bottom: 6px; }
     .timeline-year {
       font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
-      color: var(--coral); font-weight: 500;
+      color: var(--peach); font-weight: 500;
     }
 
     /* ════════════════════════════════════════════════════════════ */
     /*  03 — SOBRE NARI / ABOUT NARI                                */
     /* ════════════════════════════════════════════════════════════ */
-    #sobre-nari { background: var(--charcoal); color: var(--warm-paper); }
-    #sobre-nari .section-number { color: var(--lavender); }
-    #sobre-nari h2 { color: var(--warm-paper); }
-    #sobre-nari p { color: rgba(251,247,241,.7); }
+    #sobre-nari { background: var(--charcoal); color: var(--cream); }
+    #sobre-nari .section-number { color: var(--slate-lt); }
+    #sobre-nari h2 { color: var(--cream); }
+    #sobre-nari p { color: rgba(250,247,241,.7); }
     .nari-layout {
       display: grid;
       grid-template-columns: 1fr 1.3fr;
@@ -352,8 +351,8 @@
     }
     .nari-badge {
       position: absolute; bottom: -16px; right: -16px;
-      background: var(--deep-purple);
-      color: var(--lavender);
+      background: var(--navy);
+      color: var(--slate-lt);
       border-radius: var(--radius-md);
       padding: 16px 20px;
       font-size: 12px; text-align: center;
@@ -363,17 +362,17 @@
       display: block;
       font-family: var(--font-display);
       font-size: 28px; font-weight: 400;
-      color: var(--warm-paper);
+      color: var(--cream);
     }
     .nari-quote {
       font-family: var(--font-display);
       font-style: italic;
       font-size: clamp(20px, 2.5vw, 28px);
       font-weight: 300;
-      color: var(--lavender);
+      color: var(--slate-lt);
       margin: 32px 0;
       padding-left: 24px;
-      border-left: 2px solid var(--coral);
+      border-left: 2px solid var(--peach);
       line-height: 1.5;
     }
     .nari-tags {
@@ -384,32 +383,32 @@
       font-size: 11px; font-weight: 500; letter-spacing: 0.08em;
       text-transform: uppercase;
       padding: 6px 14px;
-      border: 1px solid rgba(184,165,214,.3);
+      border: 1px solid rgba(167,182,198,.3);
       border-radius: 24px;
-      color: var(--lavender);
+      color: var(--slate-lt);
     }
     .documentary-card {
       margin-top: 40px;
-      background: rgba(184,165,214,.1);
-      border: 1px solid rgba(184,165,214,.2);
+      background: rgba(167,182,198,.1);
+      border: 1px solid rgba(167,182,198,.2);
       border-radius: var(--radius-md);
       padding: 24px;
       display: flex; gap: 16px; align-items: center;
     }
-    .documentary-card p { font-size: 14px; color: rgba(251,247,241,.6); }
+    .documentary-card p { font-size: 14px; color: rgba(250,247,241,.6); }
     .documentary-label {
       font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase;
-      color: var(--coral); margin-bottom: 4px;
+      color: var(--peach); margin-bottom: 4px;
     }
     .documentary-title {
       font-family: var(--font-display);
-      font-size: 18px; color: var(--warm-paper);
+      font-size: 18px; color: var(--cream);
     }
 
     /* ════════════════════════════════════════════════════════════ */
     /*  04 — MANIFIESTO / MANIFESTO                                 */
     /* ════════════════════════════════════════════════════════════ */
-    #manifiesto { background: var(--pale-lilac); }
+    #manifiesto { background: var(--blush); }
     .manifesto-intro {
       max-width: 720px;
       margin: 0 auto 80px;
@@ -422,7 +421,7 @@
       gap: 32px; margin-bottom: 80px;
     }
     .manifesto-pillar {
-      background: var(--warm-paper);
+      background: var(--cream);
       border-radius: var(--radius-md);
       padding: 40px 32px;
       box-shadow: var(--shadow-soft);
@@ -435,11 +434,11 @@
     .pillar-title {
       font-family: var(--font-display);
       font-size: 22px; font-weight: 400;
-      margin-bottom: 12px; color: var(--deep-purple);
+      margin-bottom: 12px; color: var(--navy);
     }
     .pillar-sub {
       font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
-      color: var(--lavender); margin-bottom: 12px;
+      color: var(--slate-lt); margin-bottom: 12px;
     }
     .manifesto-quote {
       text-align: center;
@@ -447,10 +446,10 @@
       font-style: italic;
       font-size: clamp(20px, 3vw, 36px);
       font-weight: 300;
-      color: var(--deep-purple);
+      color: var(--navy);
       max-width: 800px; margin: 0 auto;
       padding: 48px;
-      background: var(--warm-paper);
+      background: var(--cream);
       border-radius: var(--radius-lg);
       box-shadow: var(--shadow-card);
       line-height: 1.5;
@@ -465,7 +464,7 @@
     /* ════════════════════════════════════════════════════════════ */
     /*  05 — ECOSISTEMA / ECOSYSTEM                                 */
     /* ════════════════════════════════════════════════════════════ */
-    #ecosistema { background: var(--warm-paper); }
+    #ecosistema { background: var(--cream); }
     .ecosistema-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -481,39 +480,39 @@
       transform: translateY(-4px);
       box-shadow: var(--shadow-card);
     }
-    .eco-instagram { background: var(--pale-lilac); }
-    .eco-web { background: var(--soft-sand); }
-    .eco-protocols { background: rgba(75,173,168,.1); }
+    .eco-instagram { background: var(--blush); }
+    .eco-web { background: var(--blush); }
+    .eco-protocols { background: rgba(133,153,173,.1); }
     .eco-documentary { background: var(--charcoal); }
     .eco-documentary h4,
-    .eco-documentary p { color: var(--warm-paper); }
-    .eco-documentary p { color: rgba(251,247,241,.6); }
+    .eco-documentary p { color: var(--cream); }
+    .eco-documentary p { color: rgba(250,247,241,.6); }
     .eco-label {
       font-size: 10px; font-weight: 600; letter-spacing: 0.14em;
       text-transform: uppercase; margin-bottom: 16px;
     }
-    .eco-instagram .eco-label { color: var(--lavender); }
-    .eco-web .eco-label { color: var(--teal); }
-    .eco-protocols .eco-label { color: var(--teal); }
-    .eco-documentary .eco-label { color: var(--coral); }
+    .eco-instagram .eco-label { color: var(--slate-lt); }
+    .eco-web .eco-label { color: var(--slate); }
+    .eco-protocols .eco-label { color: var(--slate); }
+    .eco-documentary .eco-label { color: var(--peach); }
     .eco-icon { width: 40px; height: 40px; margin-bottom: 16px; }
     .eco-metric {
       margin-top: 20px;
       font-size: 28px;
       font-family: var(--font-display);
-      color: var(--deep-purple);
+      color: var(--navy);
     }
-    .eco-documentary .eco-metric { color: var(--lavender); }
+    .eco-documentary .eco-metric { color: var(--slate-lt); }
     .eco-metric-label {
       font-size: 11px; color: var(--text-muted);
       letter-spacing: 0.06em; text-transform: uppercase;
     }
-    .eco-documentary .eco-metric-label { color: rgba(251,247,241,.4); }
+    .eco-documentary .eco-metric-label { color: rgba(250,247,241,.4); }
 
     /* ════════════════════════════════════════════════════════════ */
     /*  06 — IDENTIDAD VISUAL / VISUAL IDENTITY                     */
     /* ════════════════════════════════════════════════════════════ */
-    #identidad { background: var(--soft-sand); }
+    #identidad { background: var(--blush); }
     .identity-intro {
       max-width: 640px; margin-bottom: 80px;
     }
@@ -536,7 +535,7 @@
     .swatch-color { width: 100%; height: 70%; }
     .swatch-info {
       padding: 8px;
-      background: var(--warm-paper);
+      background: var(--cream);
       height: 30%;
     }
     .swatch-name {
@@ -552,7 +551,7 @@
     /* Typography */
     .type-section { margin-bottom: 80px; }
     .type-specimen {
-      background: var(--warm-paper);
+      background: var(--cream);
       border-radius: var(--radius-md);
       padding: 48px;
       margin-bottom: 24px;
@@ -560,14 +559,14 @@
     }
     .type-label {
       font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
-      color: var(--lavender); margin-bottom: 8px;
+      color: var(--slate-lt); margin-bottom: 8px;
       font-family: var(--font-body);
     }
     .type-sample-display {
       font-family: var(--font-display);
       font-size: clamp(36px, 5vw, 64px);
       font-weight: 300;
-      color: var(--deep-purple);
+      color: var(--navy);
       line-height: 1.1;
     }
     .type-sample-body {
@@ -589,15 +588,15 @@
       gap: 24px;
       box-shadow: var(--shadow-soft);
     }
-    .logo-dark { background: var(--deep-purple); }
-    .logo-light { background: var(--warm-paper); border: 1px solid var(--soft-sand); }
+    .logo-dark { background: var(--navy); }
+    .logo-light { background: var(--cream); border: 1px solid var(--blush); }
     .logo-card img { height: clamp(24px, 3vw, 40px); width: auto; }
     .logo-dark img { filter: none; }
     .logo-light img { filter: brightness(0.65) saturate(1.4) hue-rotate(-5deg); }
     .logo-caption {
       font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
     }
-    .logo-dark .logo-caption { color: rgba(251,247,241,.4); }
+    .logo-dark .logo-caption { color: rgba(250,247,241,.4); }
     .logo-light .logo-caption { color: var(--text-muted); }
 
     /* Logo usage guidelines */
@@ -607,7 +606,7 @@
       gap: 24px; margin-top: 40px;
     }
     .logo-usage-card {
-      background: var(--warm-paper);
+      background: var(--cream);
       border-radius: var(--radius-md);
       padding: 36px;
       box-shadow: var(--shadow-soft);
@@ -620,7 +619,7 @@
     .usage-main-title {
       font-family: var(--font-display);
       font-size: 28px; font-weight: 400;
-      color: var(--deep-purple);
+      color: var(--navy);
       margin-bottom: 24px;
     }
     .usage-rule {
@@ -636,10 +635,10 @@
     /*  07 — FOTOGRAFÍA / PHOTOGRAPHY                               */
     /* ════════════════════════════════════════════════════════════ */
     #fotografia { background: var(--charcoal); }
-    #fotografia h2, #fotografia h3, #fotografia h4 { color: var(--warm-paper); }
-    #fotografia .section-number { color: var(--lavender); }
-    #fotografia p { color: rgba(251,247,241,.6); }
-    #fotografia .lead { color: rgba(251,247,241,.8); }
+    #fotografia h2, #fotografia h3, #fotografia h4 { color: var(--cream); }
+    #fotografia .section-number { color: var(--slate-lt); }
+    #fotografia p { color: rgba(250,247,241,.6); }
+    #fotografia .lead { color: rgba(250,247,241,.8); }
     .photo-principles {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -654,12 +653,12 @@
     .principle-number {
       font-family: var(--font-display);
       font-size: 48px; font-weight: 300;
-      color: var(--lavender); opacity: 0.4;
+      color: var(--slate-lt); opacity: 0.4;
       line-height: 1; margin-bottom: 12px;
     }
     .principle-title {
       font-size: 11px; font-weight: 600; letter-spacing: 0.1em;
-      text-transform: uppercase; color: var(--warm-paper);
+      text-transform: uppercase; color: var(--cream);
       margin-bottom: 8px;
     }
     /* ── photography-direction spread ── */
@@ -676,15 +675,15 @@
     .photo-hero:hover img { transform: scale(1.02); }
     .photo-hero-cap {
       position: absolute; left: 0; right: 0; bottom: 0; padding: 36px;
-      background: linear-gradient(to top, rgba(26,26,46,.88), transparent);
+      background: linear-gradient(to top, rgba(31,46,70,.88), transparent);
     }
     .photo-hero-cap .ph-label {
       font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
-      color: var(--lavender); margin-bottom: 8px;
+      color: var(--slate-lt); margin-bottom: 8px;
     }
     .photo-hero-cap .ph-title {
       font-family: var(--font-display); font-weight: 300;
-      font-size: clamp(20px, 3vw, 32px); color: var(--warm-paper); line-height: 1.2;
+      font-size: clamp(20px, 3vw, 32px); color: var(--cream); line-height: 1.2;
     }
     /* principle card with image */
     .photo-principle { padding: 0; overflow: hidden; }
@@ -699,7 +698,7 @@
     /* extras gallery */
     .photo-sub {
       font-size: 11px; font-weight: 500; letter-spacing: 0.1em;
-      text-transform: uppercase; color: var(--lavender); margin-bottom: 24px;
+      text-transform: uppercase; color: var(--slate-lt); margin-bottom: 24px;
     }
     .photo-gallery {
       display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 80px;
@@ -715,9 +714,9 @@
     .photo-gallery figure:hover img { transform: scale(1.03); }
     .photo-gallery figcaption {
       position: absolute; left: 0; right: 0; bottom: 0; padding: 22px 18px 14px;
-      background: linear-gradient(to top, rgba(26,26,46,.82), transparent);
+      background: linear-gradient(to top, rgba(31,46,70,.82), transparent);
       font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;
-      color: rgba(251,247,241,.88); font-weight: 500;
+      color: rgba(250,247,241,.88); font-weight: 500;
     }
     .dos-donts {
       display: grid; grid-template-columns: 1fr 1fr; gap: 24px;
@@ -727,15 +726,15 @@
       border-radius: var(--radius-md);
       padding: 32px;
     }
-    .dos-col { border-top: 3px solid var(--teal); }
-    .donts-col { border-top: 3px solid var(--coral); }
+    .dos-col { border-top: 3px solid var(--slate); }
+    .donts-col { border-top: 3px solid var(--peach); }
     .dos-title, .donts-title {
       font-size: 11px; font-weight: 600; letter-spacing: 0.12em;
       text-transform: uppercase; margin-bottom: 20px;
       display: flex; align-items: center; gap: 8px;
     }
-    .dos-title { color: var(--teal); }
-    .donts-title { color: var(--coral); }
+    .dos-title { color: var(--slate); }
+    .donts-title { color: var(--peach); }
     .rule-item {
       display: flex; align-items: flex-start; gap: 12px;
       margin-bottom: 12px;
@@ -745,11 +744,11 @@
     /* ════════════════════════════════════════════════════════════ */
     /*  08 — VOZ Y TONO / VOICE & TONE                              */
     /* ════════════════════════════════════════════════════════════ */
-    #voz-tono { background: var(--warm-paper); }
+    #voz-tono { background: var(--cream); }
     /* Compact voice header — small avatar, preserves low-res image */
     .voz-header {
       display: flex; align-items: center; gap: 24px;
-      background: var(--pale-lilac);
+      background: var(--blush);
       border-radius: var(--radius-md);
       padding: 28px 32px;
       margin-bottom: 56px;
@@ -759,68 +758,68 @@
       width: 72px; height: 72px;
       border-radius: 50%;
       object-fit: cover; object-position: center top;
-      border: 3px solid var(--lavender);
+      border: 3px solid var(--slate-lt);
       flex-shrink: 0;
     }
     .voz-header-text { flex: 1; }
     .voz-header-text .section-number { margin-bottom: 4px; }
-    .voz-header-text h2 { font-size: clamp(22px, 3vw, 36px); color: var(--deep-purple); margin-bottom: 0; line-height:1.2; }
+    .voz-header-text h2 { font-size: clamp(22px, 3vw, 36px); color: var(--navy); margin-bottom: 0; line-height:1.2; }
     .voz-header-quote {
       font-family: var(--font-display);
       font-style: italic;
       font-size: 14px; line-height: 1.6;
       color: var(--text-muted);
       padding-left: 16px;
-      border-left: 2px solid var(--coral);
+      border-left: 2px solid var(--peach);
       margin-top: 10px;
     }
     .voice-attributes {
       display: grid; grid-template-columns: 1fr 1fr; gap: 24px;
     }
     .voice-card {
-      background: var(--warm-paper);
-      border: 1px solid rgba(184,165,214,.3);
+      background: var(--cream);
+      border: 1px solid rgba(167,182,198,.3);
       border-radius: var(--radius-md);
       padding: 32px;
       box-shadow: var(--shadow-soft);
     }
     .voice-label {
       font-size: 10px; font-weight: 600; letter-spacing: 0.14em;
-      text-transform: uppercase; color: var(--lavender); margin-bottom: 8px;
+      text-transform: uppercase; color: var(--slate-lt); margin-bottom: 8px;
     }
     .voice-title {
       font-family: var(--font-display);
       font-size: 22px; font-weight: 400;
-      color: var(--deep-purple); margin-bottom: 12px;
+      color: var(--navy); margin-bottom: 12px;
     }
     .voice-example {
       margin-top: 20px;
       padding: 16px;
-      background: var(--pale-lilac);
+      background: var(--blush);
       border-radius: var(--radius-sm);
     }
     .voice-example-label {
       font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase;
-      color: var(--lavender); margin-bottom: 6px;
+      color: var(--slate-lt); margin-bottom: 6px;
     }
     .voice-example p {
       font-size: 13px; margin: 0;
       font-family: var(--font-display);
       font-style: italic;
-      color: var(--deep-purple);
+      color: var(--navy);
     }
 
     /* ════════════════════════════════════════════════════════════ */
     /*  09 — APLICACIONES / BRAND APPLICATIONS                      */
     /* ════════════════════════════════════════════════════════════ */
-    #aplicaciones { background: var(--soft-sand); }
+    #aplicaciones { background: var(--blush); }
     .aplicaciones-intro { max-width: 640px; margin-bottom: 80px; }
 
     /* Web mockups */
     .mockups-section { margin-bottom: 80px; }
     .mockups-sub {
       font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase;
-      color: var(--lavender); margin-bottom: 32px;
+      color: var(--slate-lt); margin-bottom: 32px;
     }
     .mockups-grid {
       display: grid;
@@ -884,7 +883,7 @@
       color: rgba(255,255,255,.7); font-weight: 500;
     }
     .ig-specs {
-      background: var(--warm-paper);
+      background: var(--cream);
       border-radius: var(--radius-md);
       padding: 32px;
       display: grid; grid-template-columns: repeat(3, 1fr);
@@ -906,7 +905,7 @@
     .evolution-card {
       border-radius: var(--radius-md); overflow: hidden;
       box-shadow: var(--shadow-soft);
-      background: var(--warm-paper);
+      background: var(--cream);
       cursor: zoom-in;
       transition: transform var(--transition);
     }
@@ -915,42 +914,42 @@
     .evolution-card-info { padding: 16px; }
     .evolution-phase {
       font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase;
-      color: var(--lavender); margin-bottom: 4px;
+      color: var(--slate-lt); margin-bottom: 4px;
     }
     .evolution-card-info h4 { font-size: 16px; }
 
     /* ════════════════════════════════════════════════════════════ */
     /*  10 — PRINCIPIOS / DESIGN PRINCIPLES                         */
     /* ════════════════════════════════════════════════════════════ */
-    #principios { background: var(--pale-lilac); }
+    #principios { background: var(--blush); }
     .principles-grid {
       display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
       margin-bottom: 80px;
     }
     .principle-card {
-      background: var(--warm-paper);
+      background: var(--cream);
       border-radius: var(--radius-md);
       padding: 36px;
       box-shadow: var(--shadow-soft);
     }
-    .principle-card h4 { margin-bottom: 12px; color: var(--deep-purple); }
+    .principle-card h4 { margin-bottom: 12px; color: var(--navy); }
     .principle-number-label {
       font-family: var(--font-display);
       font-size: 48px; font-weight: 300;
-      color: var(--lavender); opacity: 0.5;
+      color: var(--slate-lt); opacity: 0.5;
       line-height: 1; margin-bottom: 8px;
     }
     .ai-prompt-box {
-      background: var(--deep-purple);
+      background: var(--navy);
       border-radius: var(--radius-md);
       padding: 48px;
-      color: var(--warm-paper);
+      color: var(--cream);
     }
-    .ai-prompt-box h3 { color: var(--lavender); margin-bottom: 24px; }
+    .ai-prompt-box h3 { color: var(--slate-lt); margin-bottom: 24px; }
     .prompt-code {
       font-family: 'Courier New', monospace;
       font-size: 13px; line-height: 1.8;
-      color: rgba(251,247,241,.8);
+      color: rgba(250,247,241,.8);
       background: rgba(255,255,255,.05);
       border-radius: var(--radius-sm);
       padding: 24px;
@@ -961,13 +960,13 @@
     /* ════════════════════════════════════════════════════════════ */
     /*  11 — ASSETS INDEX                                           */
     /* ════════════════════════════════════════════════════════════ */
-    #assets { background: var(--warm-paper); }
+    #assets { background: var(--cream); }
     .assets-grid {
       display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
     }
     .asset-category {
-      background: var(--warm-paper);
-      border: 1px solid rgba(184,165,214,.3);
+      background: var(--cream);
+      border: 1px solid rgba(167,182,198,.3);
       border-radius: var(--radius-md);
       padding: 32px;
       box-shadow: var(--shadow-soft);
@@ -975,11 +974,11 @@
     .asset-cat-icon { margin-bottom: 16px; }
     .asset-cat-label {
       font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase;
-      color: var(--lavender); margin-bottom: 8px;
+      color: var(--slate-lt); margin-bottom: 8px;
     }
     .asset-cat-title {
       font-family: var(--font-display);
-      font-size: 20px; font-weight: 400; color: var(--deep-purple);
+      font-size: 20px; font-weight: 400; color: var(--navy);
       margin-bottom: 16px;
     }
     .asset-list {
@@ -993,17 +992,17 @@
     .asset-placeholder {
       text-align: center;
       padding: 80px;
-      background: var(--pale-lilac);
+      background: var(--blush);
       border-radius: var(--radius-lg);
       margin-top: 60px;
     }
-    .asset-placeholder h3 { color: var(--deep-purple); margin-bottom: 12px; }
+    .asset-placeholder h3 { color: var(--navy); margin-bottom: 12px; }
     .asset-placeholder p { max-width: 480px; margin: 0 auto; }
 
     /* ─── FOOTER ─────────────────────────────────────────────────── */
     #site-footer {
-      background: var(--deep-purple);
-      color: var(--warm-paper);
+      background: var(--navy);
+      color: var(--cream);
       text-align: center;
       padding: 60px 40px 100px;
     }
@@ -1012,19 +1011,19 @@
       font-family: var(--font-display);
       font-style: italic;
       font-size: 20px; font-weight: 300;
-      color: var(--lavender);
+      color: var(--slate-lt);
       margin-bottom: 16px;
     }
     .footer-meta {
       font-size: 11px; letter-spacing: 0.08em;
-      color: rgba(251,247,241,.3);
+      color: rgba(250,247,241,.3);
     }
     .footer-disclaimer {
       margin-top: 24px;
       display: inline-block;
       font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;
-      color: var(--coral); opacity: 0.7;
-      border: 1px solid rgba(249,111,110,.25);
+      color: var(--peach); opacity: 0.7;
+      border: 1px solid rgba(244,168,138,.25);
       border-radius: 4px;
       padding: 6px 14px;
     }
@@ -1052,7 +1051,7 @@
     /* ─── TOAST ──────────────────────────────────────────────────── */
     #toast {
       position: fixed; bottom: 60px; left: 50%; transform: translateX(-50%);
-      background: var(--deep-purple); color: var(--warm-paper);
+      background: var(--navy); color: var(--cream);
       padding: 10px 24px; border-radius: 24px;
       font-size: 13px; pointer-events: none;
       opacity: 0; transition: opacity 0.3s;
@@ -1087,7 +1086,7 @@
       .assets-grid { grid-template-columns: 1fr; }
       .ig-specs { grid-template-columns: 1fr; }
       .nav-links { display: none; }
-      .nav-links.open { display: flex; flex-direction: column; position: fixed; top: 60px; left: 0; right: 0; background: var(--warm-paper); padding: 24px; box-shadow: var(--shadow-card); }
+      .nav-links.open { display: flex; flex-direction: column; position: fixed; top: 60px; left: 0; right: 0; background: var(--cream); padding: 24px; box-shadow: var(--shadow-card); }
       #nav-hamburger { display: flex; }
       #site-nav { padding: 0 140px 0 24px; }
       .nav-disclaimer { display: none; }
@@ -1098,14 +1097,14 @@
     /* ─── SEPARATOR ──────────────────────────────────────────────── */
     .divider {
       width: 48px; height: 1.5px;
-      background: linear-gradient(90deg, var(--coral), var(--lavender));
+      background: linear-gradient(90deg, var(--peach), var(--slate-lt));
       margin: 24px 0;
       border: none;
     }
 
     /* image placeholder for missing assets */
     .img-placeholder {
-      background: linear-gradient(135deg, var(--deep-purple) 0%, var(--lavender) 100%);
+      background: linear-gradient(135deg, var(--navy) 0%, var(--slate-lt) 100%);
       display: flex; align-items: center; justify-content: center;
       color: rgba(255,255,255,.4);
       font-family: var(--font-display);
@@ -1132,7 +1131,7 @@
 
 <!-- ─── NAVIGATION ─── -->
 <nav id="site-nav" role="navigation">
-  <a class="nav-logo nav-logo-dark" href="#cover" aria-label="Criar Sin Culpas">
+  <a class="nav-logo" href="#cover" aria-label="Criar Sin Culpas">
     <img src="https://res.cloudinary.com/dogtoagya/image/upload/v1779932690/csc-logo_gbsmxq.svg" alt="Criar Sin Culpas" />
   </a>
   <ul class="nav-links" id="nav-links">
@@ -1172,12 +1171,12 @@
     <span class="lang-en">A living guide to the visual and voice ecosystem of Criar Sin Culpas. For internal teams and trusted collaborators.</span>
   </p>
   <div class="cover-badge reveal reveal-delay-3">
-    <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="5" stroke="#F96F6E" stroke-width="1.5"/><circle cx="6" cy="6" r="2" fill="#F96F6E"/></svg>
+    <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="5" stroke="#F4A88A" stroke-width="1.5"/><circle cx="6" cy="6" r="2" fill="#F4A88A"/></svg>
     <span class="lang-es">Solo uso interno</span>
     <span class="lang-en">Internal use only</span>
   </div>
   <div class="cover-scroll-hint">
-    <svg width="16" height="24" viewBox="0 0 16 24" fill="none"><rect x="1" y="1" width="14" height="22" rx="7" stroke="rgba(184,165,214,.4)" stroke-width="1.5"/><circle cx="8" cy="7" r="2" fill="rgba(184,165,214,.4)"/></svg>
+    <svg width="16" height="24" viewBox="0 0 16 24" fill="none"><rect x="1" y="1" width="14" height="22" rx="7" stroke="rgba(167,182,198,.4)" stroke-width="1.5"/><circle cx="8" cy="7" r="2" fill="rgba(167,182,198,.4)"/></svg>
   </div>
 </section>
 
@@ -1198,7 +1197,7 @@
           <span class="lang-es">01 — Historia</span>
           <span class="lang-en">01 — Story</span>
         </p>
-        <h2 style="color:var(--deep-purple); margin-bottom:24px;">
+        <h2 style="color:var(--navy); margin-bottom:24px;">
           <span class="lang-es">La historia detrás del lenguaje</span>
           <span class="lang-en">The story behind the language</span>
         </h2>
@@ -1212,13 +1211,13 @@
           <div class="timeline-item reveal reveal-delay-1">
             <div class="timeline-glyph">
               <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
-                <circle cx="20" cy="20" r="18" stroke="#B8A5D6" stroke-width="1.5"/>
-                <path d="M21 12 L16 20 L21 21 L18 28" stroke="#F96F6E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                <circle cx="20" cy="20" r="18" stroke="#A7B6C6" stroke-width="1.5"/>
+                <path d="M21 12 L16 20 L21 21 L18 28" stroke="#F4A88A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
               </svg>
             </div>
             <div class="timeline-content">
               <p class="timeline-year">2020</p>
-              <h4 style="color:var(--deep-purple);">
+              <h4 style="color:var(--navy);">
                 <span class="lang-es">El primer quiebre</span>
                 <span class="lang-en">The first crack</span>
               </h4>
@@ -1232,14 +1231,14 @@
           <div class="timeline-item reveal reveal-delay-2">
             <div class="timeline-glyph">
               <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
-                <circle cx="20" cy="20" r="18" stroke="#B8A5D6" stroke-width="1.5"/>
-                <rect x="12" y="12" width="10" height="10" rx="1.5" stroke="#3E2A6B" stroke-width="1.5" fill="none"/>
-                <rect x="18" y="18" width="10" height="10" rx="1.5" stroke="#3E2A6B" stroke-width="1.5" fill="none"/>
+                <circle cx="20" cy="20" r="18" stroke="#A7B6C6" stroke-width="1.5"/>
+                <rect x="12" y="12" width="10" height="10" rx="1.5" stroke="#1F2E46" stroke-width="1.5" fill="none"/>
+                <rect x="18" y="18" width="10" height="10" rx="1.5" stroke="#1F2E46" stroke-width="1.5" fill="none"/>
               </svg>
             </div>
             <div class="timeline-content">
               <p class="timeline-year">2021</p>
-              <h4 style="color:var(--deep-purple);">
+              <h4 style="color:var(--navy);">
                 <span class="lang-es">El sistema entra en la historia</span>
                 <span class="lang-en">The system enters the story</span>
               </h4>
@@ -1253,13 +1252,13 @@
           <div class="timeline-item reveal reveal-delay-3">
             <div class="timeline-glyph">
               <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
-                <circle cx="20" cy="20" r="18" stroke="#B8A5D6" stroke-width="1.5"/>
-                <path d="M20 12 L27 14.5 V20 C27 24 23.5 27.5 20 28.5 C16.5 27.5 13 24 13 20 V14.5 Z" stroke="#4BADA8" stroke-width="1.5" fill="none" stroke-linejoin="round"/>
+                <circle cx="20" cy="20" r="18" stroke="#A7B6C6" stroke-width="1.5"/>
+                <path d="M20 12 L27 14.5 V20 C27 24 23.5 27.5 20 28.5 C16.5 27.5 13 24 13 20 V14.5 Z" stroke="#8599AD" stroke-width="1.5" fill="none" stroke-linejoin="round"/>
               </svg>
             </div>
             <div class="timeline-content">
               <p class="timeline-year">2022</p>
-              <h4 style="color:var(--deep-purple);">
+              <h4 style="color:var(--navy);">
                 <span class="lang-es">La seguridad cambia la conducta</span>
                 <span class="lang-en">Safety changes behavior</span>
               </h4>
@@ -1273,14 +1272,14 @@
           <div class="timeline-item reveal reveal-delay-4">
             <div class="timeline-glyph">
               <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
-                <circle cx="20" cy="20" r="18" stroke="#B8A5D6" stroke-width="1.5"/>
-                <path d="M12 20 C14.5 16 17.5 15 20 15 C22.5 15 25.5 16 28 20 C25.5 24 22.5 25 20 25 C17.5 25 14.5 24 12 20 Z" stroke="#F96F6E" stroke-width="1.5" fill="none" stroke-linejoin="round"/>
-                <circle cx="20" cy="20" r="2.4" fill="#F96F6E"/>
+                <circle cx="20" cy="20" r="18" stroke="#A7B6C6" stroke-width="1.5"/>
+                <path d="M12 20 C14.5 16 17.5 15 20 15 C22.5 15 25.5 16 28 20 C25.5 24 22.5 25 20 25 C17.5 25 14.5 24 12 20 Z" stroke="#F4A88A" stroke-width="1.5" fill="none" stroke-linejoin="round"/>
+                <circle cx="20" cy="20" r="2.4" fill="#F4A88A"/>
               </svg>
             </div>
             <div class="timeline-content">
               <p class="timeline-year">2023</p>
-              <h4 style="color:var(--deep-purple);">
+              <h4 style="color:var(--navy);">
                 <span class="lang-es">Lo invisible se vuelve urgente</span>
                 <span class="lang-en">The invisible becomes urgent</span>
               </h4>
@@ -1294,14 +1293,14 @@
           <div class="timeline-item reveal reveal-delay-1">
             <div class="timeline-glyph">
               <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
-                <circle cx="20" cy="20" r="18" stroke="#B8A5D6" stroke-width="1.5"/>
-                <circle cx="16" cy="20" r="6" stroke="#4BADA8" stroke-width="1.5" fill="none"/>
-                <circle cx="24" cy="20" r="6" stroke="#4BADA8" stroke-width="1.5" fill="none"/>
+                <circle cx="20" cy="20" r="18" stroke="#A7B6C6" stroke-width="1.5"/>
+                <circle cx="16" cy="20" r="6" stroke="#8599AD" stroke-width="1.5" fill="none"/>
+                <circle cx="24" cy="20" r="6" stroke="#8599AD" stroke-width="1.5" fill="none"/>
               </svg>
             </div>
             <div class="timeline-content">
               <p class="timeline-year">2024–2025</p>
-              <h4 style="color:var(--deep-purple);">
+              <h4 style="color:var(--navy);">
                 <span class="lang-es">La voz encuentra comunidad</span>
                 <span class="lang-en">The voice finds community</span>
               </h4>
@@ -1315,18 +1314,18 @@
           <div class="timeline-item reveal reveal-delay-2">
             <div class="timeline-glyph">
               <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
-                <circle cx="20" cy="20" r="18" stroke="#B8A5D6" stroke-width="1.5"/>
-                <circle cx="20" cy="20" r="2.2" fill="#3E2A6B"/>
-                <circle cx="14" cy="14" r="1.8" stroke="#3E2A6B" stroke-width="1.3" fill="none"/>
-                <circle cx="26" cy="14" r="1.8" stroke="#3E2A6B" stroke-width="1.3" fill="none"/>
-                <circle cx="14" cy="26" r="1.8" stroke="#3E2A6B" stroke-width="1.3" fill="none"/>
-                <circle cx="26" cy="26" r="1.8" stroke="#3E2A6B" stroke-width="1.3" fill="none"/>
-                <path d="M18.4 18.4 L15 15 M21.6 18.4 L25 15 M18.4 21.6 L15 25 M21.6 21.6 L25 25" stroke="#3E2A6B" stroke-width="1.3" stroke-linecap="round"/>
+                <circle cx="20" cy="20" r="18" stroke="#A7B6C6" stroke-width="1.5"/>
+                <circle cx="20" cy="20" r="2.2" fill="#1F2E46"/>
+                <circle cx="14" cy="14" r="1.8" stroke="#1F2E46" stroke-width="1.3" fill="none"/>
+                <circle cx="26" cy="14" r="1.8" stroke="#1F2E46" stroke-width="1.3" fill="none"/>
+                <circle cx="14" cy="26" r="1.8" stroke="#1F2E46" stroke-width="1.3" fill="none"/>
+                <circle cx="26" cy="26" r="1.8" stroke="#1F2E46" stroke-width="1.3" fill="none"/>
+                <path d="M18.4 18.4 L15 15 M21.6 18.4 L25 15 M18.4 21.6 L15 25 M21.6 21.6 L25 25" stroke="#1F2E46" stroke-width="1.3" stroke-linecap="round"/>
               </svg>
             </div>
             <div class="timeline-content">
               <p class="timeline-year">2026</p>
-              <h4 style="color:var(--deep-purple);">
+              <h4 style="color:var(--navy);">
                 <span class="lang-es">La marca se convierte en ecosistema</span>
                 <span class="lang-en">The brand becomes an ecosystem</span>
               </h4>
@@ -1385,8 +1384,8 @@
         </div>
         <div class="documentary-card">
           <svg width="40" height="40" viewBox="0 0 40 40" fill="none" flex-shrink="0" style="flex-shrink:0;">
-            <rect x="8" y="10" width="24" height="20" rx="3" stroke="#F96F6E" stroke-width="1.5" fill="none"/>
-            <path d="M17 16l8 4-8 4V16z" fill="#F96F6E"/>
+            <rect x="8" y="10" width="24" height="20" rx="3" stroke="#F4A88A" stroke-width="1.5" fill="none"/>
+            <path d="M17 16l8 4-8 4V16z" fill="#F4A88A"/>
           </svg>
           <div>
             <p class="documentary-label"><span class="lang-es">Próximamente</span><span class="lang-en">Coming soon</span></p>
@@ -1410,7 +1409,7 @@
         <span class="lang-es">03 — Manifiesto</span>
         <span class="lang-en">03 — Manifesto</span>
       </p>
-      <h2 style="color:var(--deep-purple);">
+      <h2 style="color:var(--navy);">
         <span class="lang-es">En qué creemos</span>
         <span class="lang-en">What we believe</span>
       </h2>
@@ -1425,9 +1424,9 @@
       <div class="manifesto-pillar reveal reveal-delay-1">
         <div class="pillar-glyph">
           <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
-            <circle cx="24" cy="24" r="10" stroke="#B8A5D6" stroke-width="1.5" fill="none"/>
-            <circle cx="14" cy="24" r="10" stroke="#F96F6E" stroke-width="1.5" fill="none" opacity=".5"/>
-            <circle cx="34" cy="24" r="10" stroke="#4BADA8" stroke-width="1.5" fill="none" opacity=".5"/>
+            <circle cx="24" cy="24" r="10" stroke="#A7B6C6" stroke-width="1.5" fill="none"/>
+            <circle cx="14" cy="24" r="10" stroke="#F4A88A" stroke-width="1.5" fill="none" opacity=".5"/>
+            <circle cx="34" cy="24" r="10" stroke="#8599AD" stroke-width="1.5" fill="none" opacity=".5"/>
           </svg>
         </div>
         <p class="pillar-sub"><span class="lang-es">Pilar uno</span><span class="lang-en">Pillar one</span></p>
@@ -1437,9 +1436,9 @@
       <div class="manifesto-pillar reveal reveal-delay-2">
         <div class="pillar-glyph">
           <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
-            <path d="M24 8 L38 36 L10 36 Z" stroke="#3E2A6B" stroke-width="1.5" fill="none" stroke-linejoin="round"/>
-            <line x1="24" y1="18" x2="24" y2="30" stroke="#4BADA8" stroke-width="1.5" stroke-linecap="round"/>
-            <circle cx="24" cy="32" r="2" fill="#4BADA8"/>
+            <path d="M24 8 L38 36 L10 36 Z" stroke="#1F2E46" stroke-width="1.5" fill="none" stroke-linejoin="round"/>
+            <line x1="24" y1="18" x2="24" y2="30" stroke="#8599AD" stroke-width="1.5" stroke-linecap="round"/>
+            <circle cx="24" cy="32" r="2" fill="#8599AD"/>
           </svg>
         </div>
         <p class="pillar-sub"><span class="lang-es">Pilar dos</span><span class="lang-en">Pillar two</span></p>
@@ -1449,8 +1448,8 @@
       <div class="manifesto-pillar reveal reveal-delay-3">
         <div class="pillar-glyph">
           <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
-            <path d="M24 12 C18 12 12 17 12 24 C12 31 18 36 24 36 C30 36 36 31 36 24" stroke="#B8A5D6" stroke-width="1.5" stroke-linecap="round" fill="none"/>
-            <path d="M30 12 C33 15 36 18 36 24" stroke="#F96F6E" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+            <path d="M24 12 C18 12 12 17 12 24 C12 31 18 36 24 36 C30 36 36 31 36 24" stroke="#A7B6C6" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+            <path d="M30 12 C33 15 36 18 36 24" stroke="#F4A88A" stroke-width="1.5" stroke-linecap="round" fill="none"/>
           </svg>
         </div>
         <p class="pillar-sub"><span class="lang-es">Pilar tres</span><span class="lang-en">Pillar three</span></p>
@@ -1477,7 +1476,7 @@
       <span class="lang-es">04 — Ecosistema</span>
       <span class="lang-en">04 — Ecosystem</span>
     </p>
-    <h2 style="color:var(--deep-purple); margin-bottom:16px;" class="reveal">
+    <h2 style="color:var(--navy); margin-bottom:16px;" class="reveal">
       <span class="lang-es">Un sistema vivo</span>
       <span class="lang-en">A living system</span>
     </h2>
@@ -1491,13 +1490,13 @@
       <div class="ecosistema-card eco-instagram reveal reveal-delay-1">
         <div class="eco-icon">
           <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
-            <rect x="8" y="8" width="24" height="24" rx="7" stroke="#3E2A6B" stroke-width="1.5" fill="none"/>
-            <circle cx="20" cy="20" r="6" stroke="#3E2A6B" stroke-width="1.5" fill="none"/>
-            <circle cx="29" cy="11" r="2" fill="#3E2A6B"/>
+            <rect x="8" y="8" width="24" height="24" rx="7" stroke="#1F2E46" stroke-width="1.5" fill="none"/>
+            <circle cx="20" cy="20" r="6" stroke="#1F2E46" stroke-width="1.5" fill="none"/>
+            <circle cx="29" cy="11" r="2" fill="#1F2E46"/>
           </svg>
         </div>
         <p class="eco-label">Instagram</p>
-        <h4 style="color:var(--deep-purple);">
+        <h4 style="color:var(--navy);">
           <span class="lang-es">Señal Emocional</span>
           <span class="lang-en">Emotional Signal</span>
         </h4>
@@ -1512,14 +1511,14 @@
       <div class="ecosistema-card eco-web reveal reveal-delay-2">
         <div class="eco-icon">
           <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
-            <rect x="6" y="10" width="28" height="20" rx="3" stroke="#4BADA8" stroke-width="1.5" fill="none"/>
-            <line x1="6" y1="16" x2="34" y2="16" stroke="#4BADA8" stroke-width="1.5"/>
-            <circle cx="10" cy="13" r="1.5" fill="#4BADA8"/>
-            <circle cx="15" cy="13" r="1.5" fill="#4BADA8"/>
+            <rect x="6" y="10" width="28" height="20" rx="3" stroke="#8599AD" stroke-width="1.5" fill="none"/>
+            <line x1="6" y1="16" x2="34" y2="16" stroke="#8599AD" stroke-width="1.5"/>
+            <circle cx="10" cy="13" r="1.5" fill="#8599AD"/>
+            <circle cx="15" cy="13" r="1.5" fill="#8599AD"/>
           </svg>
         </div>
         <p class="eco-label"><span class="lang-es">Sitio Web</span><span class="lang-en">Website</span></p>
-        <h4 style="color:var(--deep-purple);">
+        <h4 style="color:var(--navy);">
           <span class="lang-es">Plataforma de Confianza</span>
           <span class="lang-en">Trust Platform</span>
         </h4>
@@ -1532,11 +1531,11 @@
       <div class="ecosistema-card eco-protocols reveal reveal-delay-3">
         <div class="eco-icon">
           <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
-            <path d="M10 12h20M10 18h14M10 24h17M10 30h10" stroke="#4BADA8" stroke-width="1.5" stroke-linecap="round"/>
+            <path d="M10 12h20M10 18h14M10 24h17M10 30h10" stroke="#8599AD" stroke-width="1.5" stroke-linecap="round"/>
           </svg>
         </div>
         <p class="eco-label">Protocolos</p>
-        <h4 style="color:var(--deep-purple);">
+        <h4 style="color:var(--navy);">
           <span class="lang-es">Capa de Producto</span>
           <span class="lang-en">Product Layer</span>
         </h4>
@@ -1551,8 +1550,8 @@
       <div class="ecosistema-card eco-documentary reveal reveal-delay-4">
         <div class="eco-icon">
           <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
-            <rect x="6" y="10" width="22" height="20" rx="3" stroke="#F96F6E" stroke-width="1.5" fill="none"/>
-            <path d="M28 16l6-4v16l-6-4V16z" stroke="#F96F6E" stroke-width="1.5" stroke-linejoin="round" fill="none"/>
+            <rect x="6" y="10" width="22" height="20" rx="3" stroke="#F4A88A" stroke-width="1.5" fill="none"/>
+            <path d="M28 16l6-4v16l-6-4V16z" stroke="#F4A88A" stroke-width="1.5" stroke-linejoin="round" fill="none"/>
           </svg>
         </div>
         <p class="eco-label"><span class="lang-es">Documental</span><span class="lang-en">Documentary</span></p>
@@ -1577,7 +1576,7 @@
         <span class="lang-es">05 — Identidad Visual</span>
         <span class="lang-en">05 — Visual Identity</span>
       </p>
-      <h2 style="color:var(--deep-purple);">
+      <h2 style="color:var(--navy);">
         <span class="lang-es">El lenguaje visual</span>
         <span class="lang-en">The visual language</span>
       </h2>
@@ -1589,64 +1588,57 @@
     </div>
 
     <!-- COLOR PALETTE -->
-    <h3 style="color:var(--deep-purple); margin-bottom:32px;" class="reveal">
+    <h3 style="color:var(--navy); margin-bottom:32px;" class="reveal">
       <span class="lang-es">Paleta de Color</span><span class="lang-en">Color Palette</span>
     </h3>
     <div class="palette-grid reveal">
-      <div class="swatch" onclick="copyColor('#3E2A6B', this)" title="Click to copy">
-        <div class="swatch-color" style="background:#3E2A6B;"></div>
+      <div class="swatch" onclick="copyColor('#1F2E46', this)" title="Click to copy">
+        <div class="swatch-color" style="background:#1F2E46;"></div>
         <div class="swatch-info">
-          <span class="swatch-name"><span class="lang-es">Púrpura Profundo</span><span class="lang-en">Deep Purple</span></span>
-          <span class="swatch-hex">#3E2A6B</span>
+          <span class="swatch-name"><span class="lang-es">Azul Marino</span><span class="lang-en">Navy</span></span>
+          <span class="swatch-hex">#1F2E46</span>
         </div>
       </div>
-      <div class="swatch" onclick="copyColor('#B8A5D6', this)" title="Click to copy">
-        <div class="swatch-color" style="background:#B8A5D6;"></div>
+      <div class="swatch" onclick="copyColor('#8599AD', this)" title="Click to copy">
+        <div class="swatch-color" style="background:#8599AD;"></div>
         <div class="swatch-info">
-          <span class="swatch-name">Lavender</span>
-          <span class="swatch-hex">#B8A5D6</span>
+          <span class="swatch-name"><span class="lang-es">Azul Sereno</span><span class="lang-en">Slate Blue</span></span>
+          <span class="swatch-hex">#8599AD</span>
         </div>
       </div>
-      <div class="swatch" onclick="copyColor('#F3E7F0', this)" title="Click to copy">
-        <div class="swatch-color" style="background:#F3E7F0;"></div>
+      <div class="swatch" onclick="copyColor('#A7B6C6', this)" title="Click to copy">
+        <div class="swatch-color" style="background:#A7B6C6;"></div>
         <div class="swatch-info">
-          <span class="swatch-name"><span class="lang-es">Lila Suave</span><span class="lang-en">Pale Lilac</span></span>
-          <span class="swatch-hex">#F3E7F0</span>
+          <span class="swatch-name"><span class="lang-es">Azul Claro</span><span class="lang-en">Light Slate</span></span>
+          <span class="swatch-hex">#A7B6C6</span>
         </div>
       </div>
-      <div class="swatch" onclick="copyColor('#F96F6E', this)" title="Click to copy">
-        <div class="swatch-color" style="background:#F96F6E;"></div>
+      <div class="swatch" onclick="copyColor('#F4A88A', this)" title="Click to copy">
+        <div class="swatch-color" style="background:#F4A88A;"></div>
         <div class="swatch-info">
-          <span class="swatch-name">Coral</span>
-          <span class="swatch-hex">#F96F6E</span>
+          <span class="swatch-name"><span class="lang-es">Durazno</span><span class="lang-en">Peach</span></span>
+          <span class="swatch-hex">#F4A88A</span>
         </div>
       </div>
-      <div class="swatch" onclick="copyColor('#4BADA8', this)" title="Click to copy">
-        <div class="swatch-color" style="background:#4BADA8;"></div>
+      <div class="swatch" onclick="copyColor('#FCE7DD', this)" title="Click to copy">
+        <div class="swatch-color" style="background:#FCE7DD;"></div>
         <div class="swatch-info">
-          <span class="swatch-name">Teal</span>
-          <span class="swatch-hex">#4BADA8</span>
+          <span class="swatch-name"><span class="lang-es">Rosa Empolvado</span><span class="lang-en">Blush</span></span>
+          <span class="swatch-hex">#FCE7DD</span>
         </div>
       </div>
-      <div class="swatch" onclick="copyColor('#FBF7F1', this)" title="Click to copy">
-        <div class="swatch-color" style="background:#FBF7F1; border:1px solid #EDE3D7;"></div>
+      <div class="swatch" onclick="copyColor('#FAF6F2', this)" title="Click to copy">
+        <div class="swatch-color" style="background:#FAF6F2; border:1px solid #FCE7DD;"></div>
         <div class="swatch-info">
-          <span class="swatch-name"><span class="lang-es">Papel Cálido</span><span class="lang-en">Warm Paper</span></span>
-          <span class="swatch-hex">#FBF7F1</span>
-        </div>
-      </div>
-      <div class="swatch" onclick="copyColor('#EDE3D7', this)" title="Click to copy">
-        <div class="swatch-color" style="background:#EDE3D7;"></div>
-        <div class="swatch-info">
-          <span class="swatch-name"><span class="lang-es">Arena Suave</span><span class="lang-en">Soft Sand</span></span>
-          <span class="swatch-hex">#EDE3D7</span>
+          <span class="swatch-name"><span class="lang-es">Crema</span><span class="lang-en">Cream</span></span>
+          <span class="swatch-hex">#FAF6F2</span>
         </div>
       </div>
     </div>
 
     <!-- TYPOGRAPHY -->
     <div class="type-section">
-      <h3 style="color:var(--deep-purple); margin-bottom:32px;" class="reveal">
+      <h3 style="color:var(--navy); margin-bottom:32px;" class="reveal">
         <span class="lang-es">Tipografía</span><span class="lang-en">Typography</span>
       </h3>
       <div class="type-specimen reveal">
@@ -1681,7 +1673,7 @@
 
     <!-- LOGO SYSTEM -->
     <div class="logo-section">
-      <h3 style="color:var(--deep-purple); margin-bottom:32px;" class="reveal">
+      <h3 style="color:var(--navy); margin-bottom:32px;" class="reveal">
         <span class="lang-es">Sistema de Logo</span><span class="lang-en">Logo System</span>
       </h3>
       <div class="logo-grid reveal">
@@ -1711,7 +1703,7 @@
             <span class="lang-es">Mantén un espacio libre equivalente a la altura de la letra "A" del wordmark en todos los lados. Nunca comprimas o invadas ese espacio.</span>
             <span class="lang-en">Maintain clear space equal to the height of the letter "A" in the wordmark on all sides. Never compress or invade that space.</span>
           </p>
-          <div style="border: 1.5px dashed var(--lavender); border-radius: 8px; padding: 32px; text-align: center; background: var(--pale-lilac);">
+          <div style="border: 1.5px dashed var(--slate-lt); border-radius: 8px; padding: 32px; text-align: center; background: var(--blush);">
             <img src="https://res.cloudinary.com/dogtoagya/image/upload/v1779932690/csc-logo_gbsmxq.svg" alt="Logo clear space" style="height:32px; filter: brightness(0.65) saturate(1.4) hue-rotate(-5deg);" />
           </div>
         </div>
@@ -1734,39 +1726,39 @@
         </div>
 
         <div class="logo-usage-card reveal">
-          <p class="usage-title" style="color:var(--teal);">
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style="display:inline; vertical-align:middle; margin-right:6px;"><path d="M2 7l3.5 3.5L12 3" stroke="#4BADA8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <p class="usage-title" style="color:var(--slate);">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style="display:inline; vertical-align:middle; margin-right:6px;"><path d="M2 7l3.5 3.5L12 3" stroke="#8599AD" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
             <span class="lang-es">Correcto</span><span class="lang-en">Correct</span>
           </p>
           <div class="usage-rule">
-            <svg class="usage-check" width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="#4BADA8" stroke-width="1.5"/><path d="M5 8l2 2 4-4" stroke="#4BADA8" stroke-width="1.5" stroke-linecap="round"/></svg>
+            <svg class="usage-check" width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="#8599AD" stroke-width="1.5"/><path d="M5 8l2 2 4-4" stroke="#8599AD" stroke-width="1.5" stroke-linecap="round"/></svg>
             <p><span class="lang-es">Usar sobre fondos sólidos y limpios</span><span class="lang-en">Use on solid, clean backgrounds</span></p>
           </div>
           <div class="usage-rule">
-            <svg class="usage-check" width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="#4BADA8" stroke-width="1.5"/><path d="M5 8l2 2 4-4" stroke="#4BADA8" stroke-width="1.5" stroke-linecap="round"/></svg>
+            <svg class="usage-check" width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="#8599AD" stroke-width="1.5"/><path d="M5 8l2 2 4-4" stroke="#8599AD" stroke-width="1.5" stroke-linecap="round"/></svg>
             <p><span class="lang-es">Mantener proporciones originales</span><span class="lang-en">Maintain original proportions</span></p>
           </div>
           <div class="usage-rule">
-            <svg class="usage-check" width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="#4BADA8" stroke-width="1.5"/><path d="M5 8l2 2 4-4" stroke="#4BADA8" stroke-width="1.5" stroke-linecap="round"/></svg>
+            <svg class="usage-check" width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="#8599AD" stroke-width="1.5"/><path d="M5 8l2 2 4-4" stroke="#8599AD" stroke-width="1.5" stroke-linecap="round"/></svg>
             <p><span class="lang-es">Usar la versión correcta según el fondo</span><span class="lang-en">Use the correct version for the background</span></p>
           </div>
         </div>
 
         <div class="logo-usage-card reveal reveal-delay-1">
-          <p class="usage-title" style="color:var(--coral);">
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style="display:inline; vertical-align:middle; margin-right:6px;"><line x1="3" y1="3" x2="11" y2="11" stroke="#F96F6E" stroke-width="1.8" stroke-linecap="round"/><line x1="11" y1="3" x2="3" y2="11" stroke="#F96F6E" stroke-width="1.8" stroke-linecap="round"/></svg>
+          <p class="usage-title" style="color:var(--peach);">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style="display:inline; vertical-align:middle; margin-right:6px;"><line x1="3" y1="3" x2="11" y2="11" stroke="#F4A88A" stroke-width="1.8" stroke-linecap="round"/><line x1="11" y1="3" x2="3" y2="11" stroke="#F4A88A" stroke-width="1.8" stroke-linecap="round"/></svg>
             <span class="lang-es">Incorrecto</span><span class="lang-en">Incorrect</span>
           </p>
           <div class="usage-rule">
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="#F96F6E" stroke-width="1.5"/><line x1="5" y1="5" x2="11" y2="11" stroke="#F96F6E" stroke-width="1.5" stroke-linecap="round"/><line x1="11" y1="5" x2="5" y2="11" stroke="#F96F6E" stroke-width="1.5" stroke-linecap="round"/></svg>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="#F4A88A" stroke-width="1.5"/><line x1="5" y1="5" x2="11" y2="11" stroke="#F4A88A" stroke-width="1.5" stroke-linecap="round"/><line x1="11" y1="5" x2="5" y2="11" stroke="#F4A88A" stroke-width="1.5" stroke-linecap="round"/></svg>
             <p><span class="lang-es">No usar sobre fondos con textura o patrón</span><span class="lang-en">Never on textured or patterned backgrounds</span></p>
           </div>
           <div class="usage-rule">
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="#F96F6E" stroke-width="1.5"/><line x1="5" y1="5" x2="11" y2="11" stroke="#F96F6E" stroke-width="1.5" stroke-linecap="round"/><line x1="11" y1="5" x2="5" y2="11" stroke="#F96F6E" stroke-width="1.5" stroke-linecap="round"/></svg>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="#F4A88A" stroke-width="1.5"/><line x1="5" y1="5" x2="11" y2="11" stroke="#F4A88A" stroke-width="1.5" stroke-linecap="round"/><line x1="11" y1="5" x2="5" y2="11" stroke="#F4A88A" stroke-width="1.5" stroke-linecap="round"/></svg>
             <p><span class="lang-es">No deformar ni estirar el wordmark</span><span class="lang-en">Never distort or stretch the wordmark</span></p>
           </div>
           <div class="usage-rule">
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="#F96F6E" stroke-width="1.5"/><line x1="5" y1="5" x2="11" y2="11" stroke="#F96F6E" stroke-width="1.5" stroke-linecap="round"/><line x1="11" y1="5" x2="5" y2="11" stroke="#F96F6E" stroke-width="1.5" stroke-linecap="round"/></svg>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="#F4A88A" stroke-width="1.5"/><line x1="5" y1="5" x2="11" y2="11" stroke="#F4A88A" stroke-width="1.5" stroke-linecap="round"/><line x1="11" y1="5" x2="5" y2="11" stroke="#F4A88A" stroke-width="1.5" stroke-linecap="round"/></svg>
             <p><span class="lang-es">No omitir ninguna de las tres palabras</span><span class="lang-en">Never omit any of the three words</span></p>
           </div>
         </div>
@@ -1861,23 +1853,23 @@
     <div class="dos-donts reveal">
       <div class="dos-col">
         <p class="dos-title">
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="#4BADA8" stroke-width="1.5"/><path d="M5 8l2 2 4-4" stroke="#4BADA8" stroke-width="1.5" stroke-linecap="round"/></svg>
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="#8599AD" stroke-width="1.5"/><path d="M5 8l2 2 4-4" stroke="#8599AD" stroke-width="1.5" stroke-linecap="round"/></svg>
           <span class="lang-es">Sí</span><span class="lang-en">Do</span>
         </p>
-        <div class="rule-item"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7l3 3 7-7" stroke="#4BADA8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><p><span class="lang-es">Momentos espontáneos entre padres e hijos</span><span class="lang-en">Spontaneous moments between parents and children</span></p></div>
-        <div class="rule-item"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7l3 3 7-7" stroke="#4BADA8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><p><span class="lang-es">Luz lateral suave de ventana</span><span class="lang-en">Soft lateral window light</span></p></div>
-        <div class="rule-item"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7l3 3 7-7" stroke="#4BADA8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><p><span class="lang-es">Familias latinoamericanas diversas y reales</span><span class="lang-en">Diverse and real Latin American families</span></p></div>
-        <div class="rule-item"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7l3 3 7-7" stroke="#4BADA8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><p><span class="lang-es">Emociones complejas: llanto, risa, cansancio, ternura</span><span class="lang-en">Complex emotions: tears, laughter, exhaustion, tenderness</span></p></div>
+        <div class="rule-item"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7l3 3 7-7" stroke="#8599AD" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><p><span class="lang-es">Momentos espontáneos entre padres e hijos</span><span class="lang-en">Spontaneous moments between parents and children</span></p></div>
+        <div class="rule-item"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7l3 3 7-7" stroke="#8599AD" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><p><span class="lang-es">Luz lateral suave de ventana</span><span class="lang-en">Soft lateral window light</span></p></div>
+        <div class="rule-item"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7l3 3 7-7" stroke="#8599AD" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><p><span class="lang-es">Familias latinoamericanas diversas y reales</span><span class="lang-en">Diverse and real Latin American families</span></p></div>
+        <div class="rule-item"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7l3 3 7-7" stroke="#8599AD" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><p><span class="lang-es">Emociones complejas: llanto, risa, cansancio, ternura</span><span class="lang-en">Complex emotions: tears, laughter, exhaustion, tenderness</span></p></div>
       </div>
       <div class="donts-col">
         <p class="donts-title">
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="#F96F6E" stroke-width="1.5"/><line x1="5" y1="5" x2="11" y2="11" stroke="#F96F6E" stroke-width="1.5" stroke-linecap="round"/><line x1="11" y1="5" x2="5" y2="11" stroke="#F96F6E" stroke-width="1.5" stroke-linecap="round"/></svg>
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="#F4A88A" stroke-width="1.5"/><line x1="5" y1="5" x2="11" y2="11" stroke="#F4A88A" stroke-width="1.5" stroke-linecap="round"/><line x1="11" y1="5" x2="5" y2="11" stroke="#F4A88A" stroke-width="1.5" stroke-linecap="round"/></svg>
           <span class="lang-es">No</span><span class="lang-en">Don't</span>
         </p>
-        <div class="rule-item"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><line x1="3" y1="3" x2="11" y2="11" stroke="#F96F6E" stroke-width="1.5" stroke-linecap="round"/><line x1="11" y1="3" x2="3" y2="11" stroke="#F96F6E" stroke-width="1.5" stroke-linecap="round"/></svg><p><span class="lang-es">Fotos de stock con familias perfectas y artificiales</span><span class="lang-en">Stock photos with perfect, artificial families</span></p></div>
-        <div class="rule-item"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><line x1="3" y1="3" x2="11" y2="11" stroke="#F96F6E" stroke-width="1.5" stroke-linecap="round"/><line x1="11" y1="3" x2="3" y2="11" stroke="#F96F6E" stroke-width="1.5" stroke-linecap="round"/></svg><p><span class="lang-es">Fondos blancos de estudio sin contexto</span><span class="lang-en">Studio white backdrops without context</span></p></div>
-        <div class="rule-item"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><line x1="3" y1="3" x2="11" y2="11" stroke="#F96F6E" stroke-width="1.5" stroke-linecap="round"/><line x1="11" y1="3" x2="3" y2="11" stroke="#F96F6E" stroke-width="1.5" stroke-linecap="round"/></svg><p><span class="lang-es">Filtros fuertes o edición excesiva</span><span class="lang-en">Heavy filters or excessive editing</span></p></div>
-        <div class="rule-item"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><line x1="3" y1="3" x2="11" y2="11" stroke="#F96F6E" stroke-width="1.5" stroke-linecap="round"/><line x1="11" y1="3" x2="3" y2="11" stroke="#F96F6E" stroke-width="1.5" stroke-linecap="round"/></svg><p><span class="lang-es">Imágenes aspiracionales que generan culpa</span><span class="lang-en">Aspirational images that generate guilt</span></p></div>
+        <div class="rule-item"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><line x1="3" y1="3" x2="11" y2="11" stroke="#F4A88A" stroke-width="1.5" stroke-linecap="round"/><line x1="11" y1="3" x2="3" y2="11" stroke="#F4A88A" stroke-width="1.5" stroke-linecap="round"/></svg><p><span class="lang-es">Fotos de stock con familias perfectas y artificiales</span><span class="lang-en">Stock photos with perfect, artificial families</span></p></div>
+        <div class="rule-item"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><line x1="3" y1="3" x2="11" y2="11" stroke="#F4A88A" stroke-width="1.5" stroke-linecap="round"/><line x1="11" y1="3" x2="3" y2="11" stroke="#F4A88A" stroke-width="1.5" stroke-linecap="round"/></svg><p><span class="lang-es">Fondos blancos de estudio sin contexto</span><span class="lang-en">Studio white backdrops without context</span></p></div>
+        <div class="rule-item"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><line x1="3" y1="3" x2="11" y2="11" stroke="#F4A88A" stroke-width="1.5" stroke-linecap="round"/><line x1="11" y1="3" x2="3" y2="11" stroke="#F4A88A" stroke-width="1.5" stroke-linecap="round"/></svg><p><span class="lang-es">Filtros fuertes o edición excesiva</span><span class="lang-en">Heavy filters or excessive editing</span></p></div>
+        <div class="rule-item"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><line x1="3" y1="3" x2="11" y2="11" stroke="#F4A88A" stroke-width="1.5" stroke-linecap="round"/><line x1="11" y1="3" x2="3" y2="11" stroke="#F4A88A" stroke-width="1.5" stroke-linecap="round"/></svg><p><span class="lang-es">Imágenes aspiracionales que generan culpa</span><span class="lang-en">Aspirational images that generate guilt</span></p></div>
       </div>
     </div>
   </div>
@@ -1968,7 +1960,7 @@
         <span class="lang-es">08 — Aplicaciones de Marca</span>
         <span class="lang-en">08 — Brand Applications</span>
       </p>
-      <h2 style="color:var(--deep-purple);">
+      <h2 style="color:var(--navy);">
         <span class="lang-es">La marca en acción</span>
         <span class="lang-en">The brand in action</span>
       </h2>
@@ -2057,39 +2049,39 @@
       </p>
 
       <!-- Feed: posts, carousels & illustration (1:1) -->
-      <h4 style="color:var(--deep-purple); margin-bottom:20px; font-size:14px; letter-spacing:0.06em; font-family:var(--font-body);" class="reveal">
+      <h4 style="color:var(--navy); margin-bottom:20px; font-size:14px; letter-spacing:0.06em; font-family:var(--font-body);" class="reveal">
         <span class="lang-es">Feed — 1080 × 1080</span><span class="lang-en">Feed — 1080 × 1080</span>
       </h4>
       <div class="ig-grid reveal">
         <div class="ig-card ig-post" onclick="openLightbox(this)">
-          <img src="https://res.cloudinary.com/dogtoagya/image/upload/v1780664506/CarouselCover_vnfvg1.png" alt="Carousel Cover" style="width:100%; height:100%; object-fit:cover; display:block;" onerror="this.style.display='none'; this.parentNode.style.background='linear-gradient(135deg,#F3E7F0,#FBF7F1)';" />
+          <img src="https://res.cloudinary.com/dogtoagya/image/upload/v1780664506/CarouselCover_vnfvg1.png" alt="Carousel Cover" style="width:100%; height:100%; object-fit:cover; display:block;" onerror="this.style.display='none'; this.parentNode.style.background='linear-gradient(135deg,#FCE7DD,#FAF6F2)';" />
           <div class="ig-card-label"><span class="lang-es">Carrusel — Portada</span><span class="lang-en">Carousel — Cover</span></div>
         </div>
         <div class="ig-card ig-post" onclick="openLightbox(this)">
-          <img src="https://res.cloudinary.com/dogtoagya/image/upload/v1780664504/Educational_Carousel_slide_mcrxtu.png" alt="Educational Carousel Slide" style="width:100%; height:100%; object-fit:cover; display:block;" onerror="this.style.display='none'; this.parentNode.style.background='linear-gradient(135deg,#3E2A6B,#B8A5D6)';" />
+          <img src="https://res.cloudinary.com/dogtoagya/image/upload/v1780664504/Educational_Carousel_slide_mcrxtu.png" alt="Educational Carousel Slide" style="width:100%; height:100%; object-fit:cover; display:block;" onerror="this.style.display='none'; this.parentNode.style.background='linear-gradient(135deg,#1F2E46,#A7B6C6)';" />
           <div class="ig-card-label"><span class="lang-es">Carrusel — Educativo</span><span class="lang-en">Educational Carousel</span></div>
         </div>
         <div class="ig-card ig-post" onclick="openLightbox(this)">
-          <img src="https://res.cloudinary.com/dogtoagya/image/upload/v1780664503/Protocol_Preview_IGPost_x9y9ao.png" alt="Protocol Preview IG Post" style="width:100%; height:100%; object-fit:cover; display:block;" onerror="this.style.display='none'; this.parentNode.style.background='linear-gradient(45deg,#3E2A6B,#F96F6E)';" />
+          <img src="https://res.cloudinary.com/dogtoagya/image/upload/v1780664503/Protocol_Preview_IGPost_x9y9ao.png" alt="Protocol Preview IG Post" style="width:100%; height:100%; object-fit:cover; display:block;" onerror="this.style.display='none'; this.parentNode.style.background='linear-gradient(45deg,#1F2E46,#F4A88A)';" />
           <div class="ig-card-label"><span class="lang-es">Vista de Protocolo</span><span class="lang-en">Protocol Preview</span></div>
         </div>
         <div class="ig-card ig-post" onclick="openLightbox(this)">
-          <img src="https://res.cloudinary.com/dogtoagya/image/upload/v1780664502/Quick_top-IG-Post_mzvda7.png" alt="Quick Tip IG Post" style="width:100%; height:100%; object-fit:cover; display:block;" onerror="this.style.display='none'; this.parentNode.style.background='linear-gradient(135deg,#4BADA8,#FBF7F1)';" />
+          <img src="https://res.cloudinary.com/dogtoagya/image/upload/v1780664502/Quick_top-IG-Post_mzvda7.png" alt="Quick Tip IG Post" style="width:100%; height:100%; object-fit:cover; display:block;" onerror="this.style.display='none'; this.parentNode.style.background='linear-gradient(135deg,#8599AD,#FAF6F2)';" />
           <div class="ig-card-label"><span class="lang-es">Consejo Rápido</span><span class="lang-en">Quick Tip</span></div>
         </div>
         <div class="ig-card ig-post" onclick="openLightbox(this)">
-          <img src="https://res.cloudinary.com/dogtoagya/image/upload/v1780664502/Relatable_moment_Illustration_ikfsub.png" alt="Relatable Moment Illustration" style="width:100%; height:100%; object-fit:cover; display:block;" onerror="this.style.display='none'; this.parentNode.style.background='linear-gradient(135deg,#B8A5D6,#F3E7F0)';" />
+          <img src="https://res.cloudinary.com/dogtoagya/image/upload/v1780664502/Relatable_moment_Illustration_ikfsub.png" alt="Relatable Moment Illustration" style="width:100%; height:100%; object-fit:cover; display:block;" onerror="this.style.display='none'; this.parentNode.style.background='linear-gradient(135deg,#A7B6C6,#FCE7DD)';" />
           <div class="ig-card-label"><span class="lang-es">Momento Cercano</span><span class="lang-en">Relatable Moment</span></div>
         </div>
       </div>
 
       <!-- Reel (9:16) -->
-      <h4 style="color:var(--deep-purple); margin:32px 0 20px; font-size:14px; letter-spacing:0.06em; font-family:var(--font-body);" class="reveal">
+      <h4 style="color:var(--navy); margin:32px 0 20px; font-size:14px; letter-spacing:0.06em; font-family:var(--font-body);" class="reveal">
         <span class="lang-es">Reel — 1080 × 1920</span><span class="lang-en">Reel — 1080 × 1920</span>
       </h4>
       <div class="ig-grid reveal reveal-delay-1">
         <div class="ig-card ig-story" onclick="openLightbox(this)">
-          <img src="https://res.cloudinary.com/dogtoagya/image/upload/v1780664503/Video_Reel_yi8e1k.png" alt="Video Reel" style="width:100%; height:100%; object-fit:cover; display:block;" onerror="this.style.display='none'; this.parentNode.style.background='linear-gradient(180deg,#3E2A6B,#B8A5D6)';" />
+          <img src="https://res.cloudinary.com/dogtoagya/image/upload/v1780664503/Video_Reel_yi8e1k.png" alt="Video Reel" style="width:100%; height:100%; object-fit:cover; display:block;" onerror="this.style.display='none'; this.parentNode.style.background='linear-gradient(180deg,#1F2E46,#A7B6C6)';" />
           <div class="ig-card-label"><span class="lang-es">Reel de Video</span><span class="lang-en">Video Reel</span></div>
         </div>
       </div>
@@ -2102,7 +2094,7 @@
         </div>
         <div class="ig-spec-item">
           <h4><span class="lang-es">Paleta</span><span class="lang-en">Palette</span></h4>
-          <p>#3E2A6B · #B8A5D6 · #F96F6E · #FBF7F1</p>
+          <p>#1F2E46 · #A7B6C6 · #F4A88A · #FAF6F2</p>
         </div>
         <div class="ig-spec-item">
           <h4><span class="lang-es">Formatos</span><span class="lang-en">Formats</span></h4>
@@ -2120,7 +2112,7 @@
       <span class="lang-es">09 — Principios de Diseño</span>
       <span class="lang-en">09 — Design Principles</span>
     </p>
-    <h2 style="color:var(--deep-purple); margin-bottom:16px;" class="reveal">
+    <h2 style="color:var(--navy); margin-bottom:16px;" class="reveal">
       <span class="lang-es">Las reglas que nos guían</span>
       <span class="lang-en">The rules that guide us</span>
     </h2>
@@ -2149,7 +2141,7 @@
       <div class="principle-card reveal reveal-delay-1">
         <div class="principle-number-label">04</div>
         <h4><span class="lang-es">Color con propósito</span><span class="lang-en">Color with purpose</span></h4>
-        <p><span class="lang-es">Cada color tiene un rol: púrpura ancla, coral activa, teal guía, lavanda acoge.</span><span class="lang-en">Each color has a role: purple anchors, coral activates, teal guides, lavender welcomes.</span></p>
+        <p><span class="lang-es">Cada color tiene un rol: el marino ancla, el durazno activa, los azules guían, el crema acoge.</span><span class="lang-en">Each color has a role: navy anchors, peach activates, the blues guide, cream welcomes.</span></p>
       </div>
       <div class="principle-card reveal reveal-delay-2">
         <div class="principle-number-label">05</div>
@@ -2166,12 +2158,12 @@
     <!-- AI Prompt Box -->
     <div class="ai-prompt-box reveal">
       <h3><span class="lang-es">Pack de Prompts IA</span><span class="lang-en">AI Prompt Pack</span></h3>
-      <p style="margin-bottom:24px; color:rgba(251,247,241,.6);">
+      <p style="margin-bottom:24px; color:rgba(250,247,241,.6);">
         <span class="lang-es">Para usar al generar visuales con IA — mantiene la coherencia de marca:</span>
         <span class="lang-en">Use when generating visuals with AI — maintains brand consistency:</span>
       </p>
       <pre class="prompt-code">Visual style: editorial calm, premium conscious parenting platform
-Palette: deep purple #3E2A6B, lavender #B8A5D6, coral #F96F6E, teal #4BADA8, warm paper #FBF7F1
+Palette: navy #1F2E46, slate blue #8599AD, light slate #A7B6C6, peach #F4A88A, blush #FCE7DD, cream #FAF6F2
 Typography: Cormorant Garamond (display) + Inter (body)
 Photography: documentary-style, natural light, authentic Latin family moments
 Layout: generous whitespace, asymmetric editorial grids, magazine-quality
@@ -2188,7 +2180,7 @@ Avoid: stock photo aesthetics, daycare visuals, heavy outlines, emojis</pre>
       <span class="lang-es">10 — Índice de Assets</span>
       <span class="lang-en">10 — Assets Index</span>
     </p>
-    <h2 style="color:var(--deep-purple); margin-bottom:16px;" class="reveal">
+    <h2 style="color:var(--navy); margin-bottom:16px;" class="reveal">
       <span class="lang-es">Biblioteca de recursos</span>
       <span class="lang-en">Resource library</span>
     </h2>
@@ -2202,27 +2194,27 @@ Avoid: stock photo aesthetics, daycare visuals, heavy outlines, emojis</pre>
       <div class="asset-category reveal">
         <div class="asset-cat-icon">
           <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-            <rect x="4" y="4" width="24" height="24" rx="6" stroke="#3E2A6B" stroke-width="1.5" fill="none"/>
-            <path d="M10 16h12M10 11h8M10 21h6" stroke="#3E2A6B" stroke-width="1.5" stroke-linecap="round"/>
+            <rect x="4" y="4" width="24" height="24" rx="6" stroke="#1F2E46" stroke-width="1.5" fill="none"/>
+            <path d="M10 16h12M10 11h8M10 21h6" stroke="#1F2E46" stroke-width="1.5" stroke-linecap="round"/>
           </svg>
         </div>
         <p class="asset-cat-label">Logo</p>
         <h4 class="asset-cat-title"><span class="lang-es">Sistema de Logo</span><span class="lang-en">Logo System</span></h4>
         <ul class="asset-list">
           <li>
-            <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="5" cy="5" r="4" stroke="#B8A5D6" stroke-width="1.2"/></svg>
+            <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="5" cy="5" r="4" stroke="#A7B6C6" stroke-width="1.2"/></svg>
             <span class="lang-es">Logo fondo oscuro (SVG/PNG)</span><span class="lang-en">Dark background logo (SVG/PNG)</span>
           </li>
           <li>
-            <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="5" cy="5" r="4" stroke="#B8A5D6" stroke-width="1.2"/></svg>
+            <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="5" cy="5" r="4" stroke="#A7B6C6" stroke-width="1.2"/></svg>
             <span class="lang-es">Logo fondo claro (SVG/PNG)</span><span class="lang-en">Light background logo (SVG/PNG)</span>
           </li>
           <li>
-            <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="5" cy="5" r="4" stroke="#B8A5D6" stroke-width="1.2"/></svg>
+            <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="5" cy="5" r="4" stroke="#A7B6C6" stroke-width="1.2"/></svg>
             <span class="lang-es">Versión monocromática</span><span class="lang-en">Monochrome version</span>
           </li>
           <li>
-            <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="5" cy="5" r="4" stroke="#B8A5D6" stroke-width="1.2"/></svg>
+            <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="5" cy="5" r="4" stroke="#A7B6C6" stroke-width="1.2"/></svg>
             <span class="lang-es">Icono solo / avatar</span><span class="lang-en">Icon only / avatar</span>
           </li>
         </ul>
@@ -2231,19 +2223,19 @@ Avoid: stock photo aesthetics, daycare visuals, heavy outlines, emojis</pre>
       <div class="asset-category reveal reveal-delay-1">
         <div class="asset-cat-icon">
           <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-            <circle cx="10" cy="16" r="5" stroke="#B8A5D6" stroke-width="1.5" fill="none"/>
-            <circle cx="22" cy="16" r="5" stroke="#F96F6E" stroke-width="1.5" fill="none"/>
-            <circle cx="16" cy="10" r="5" stroke="#4BADA8" stroke-width="1.5" fill="none"/>
+            <circle cx="10" cy="16" r="5" stroke="#A7B6C6" stroke-width="1.5" fill="none"/>
+            <circle cx="22" cy="16" r="5" stroke="#F4A88A" stroke-width="1.5" fill="none"/>
+            <circle cx="16" cy="10" r="5" stroke="#8599AD" stroke-width="1.5" fill="none"/>
           </svg>
         </div>
         <p class="asset-cat-label"><span class="lang-es">Paleta</span><span class="lang-en">Palette</span></p>
         <h4 class="asset-cat-title"><span class="lang-es">Sistema de Color</span><span class="lang-en">Color System</span></h4>
         <ul class="asset-list">
-          <li><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="5" cy="5" r="4" stroke="#B8A5D6" stroke-width="1.2"/></svg>
+          <li><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="5" cy="5" r="4" stroke="#A7B6C6" stroke-width="1.2"/></svg>
             <span class="lang-es">Archivo de paleta (ASE/ACO)</span><span class="lang-en">Palette file (ASE/ACO)</span></li>
-          <li><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="5" cy="5" r="4" stroke="#B8A5D6" stroke-width="1.2"/></svg>
+          <li><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="5" cy="5" r="4" stroke="#A7B6C6" stroke-width="1.2"/></svg>
             <span class="lang-es">Tokens CSS</span><span class="lang-en">CSS tokens</span></li>
-          <li><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="5" cy="5" r="4" stroke="#B8A5D6" stroke-width="1.2"/></svg>
+          <li><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="5" cy="5" r="4" stroke="#A7B6C6" stroke-width="1.2"/></svg>
             <span class="lang-es">Swatches para Figma</span><span class="lang-en">Swatches for Figma</span></li>
         </ul>
       </div>
@@ -2251,17 +2243,17 @@ Avoid: stock photo aesthetics, daycare visuals, heavy outlines, emojis</pre>
       <div class="asset-category reveal reveal-delay-2">
         <div class="asset-cat-icon">
           <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-            <path d="M6 8h20M6 14h14M6 20h17M6 26h10" stroke="#4BADA8" stroke-width="1.5" stroke-linecap="round"/>
+            <path d="M6 8h20M6 14h14M6 20h17M6 26h10" stroke="#8599AD" stroke-width="1.5" stroke-linecap="round"/>
           </svg>
         </div>
         <p class="asset-cat-label"><span class="lang-es">Tipografía</span><span class="lang-en">Typography</span></p>
         <h4 class="asset-cat-title"><span class="lang-es">Sistema Tipográfico</span><span class="lang-en">Typography System</span></h4>
         <ul class="asset-list">
-          <li><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="5" cy="5" r="4" stroke="#B8A5D6" stroke-width="1.2"/></svg>
+          <li><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="5" cy="5" r="4" stroke="#A7B6C6" stroke-width="1.2"/></svg>
             Cormorant Garamond (Google Fonts)</li>
-          <li><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="5" cy="5" r="4" stroke="#B8A5D6" stroke-width="1.2"/></svg>
+          <li><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="5" cy="5" r="4" stroke="#A7B6C6" stroke-width="1.2"/></svg>
             Inter (Google Fonts)</li>
-          <li><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="5" cy="5" r="4" stroke="#B8A5D6" stroke-width="1.2"/></svg>
+          <li><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="5" cy="5" r="4" stroke="#A7B6C6" stroke-width="1.2"/></svg>
             <span class="lang-es">Guía de jerarquía tipográfica</span><span class="lang-en">Typographic hierarchy guide</span></li>
         </ul>
       </div>
@@ -2269,20 +2261,20 @@ Avoid: stock photo aesthetics, daycare visuals, heavy outlines, emojis</pre>
       <div class="asset-category reveal">
         <div class="asset-cat-icon">
           <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-            <rect x="4" y="6" width="24" height="20" rx="3" stroke="#F96F6E" stroke-width="1.5" fill="none"/>
-            <path d="M4 12h24" stroke="#F96F6E" stroke-width="1.5"/>
-            <circle cx="9" cy="9" r="1.5" fill="#F96F6E"/>
-            <circle cx="14" cy="9" r="1.5" fill="#F96F6E"/>
+            <rect x="4" y="6" width="24" height="20" rx="3" stroke="#F4A88A" stroke-width="1.5" fill="none"/>
+            <path d="M4 12h24" stroke="#F4A88A" stroke-width="1.5"/>
+            <circle cx="9" cy="9" r="1.5" fill="#F4A88A"/>
+            <circle cx="14" cy="9" r="1.5" fill="#F4A88A"/>
           </svg>
         </div>
         <p class="asset-cat-label">Web</p>
         <h4 class="asset-cat-title"><span class="lang-es">Componentes Web</span><span class="lang-en">Web Components</span></h4>
         <ul class="asset-list">
-          <li><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="5" cy="5" r="4" stroke="#B8A5D6" stroke-width="1.2"/></svg>
+          <li><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="5" cy="5" r="4" stroke="#A7B6C6" stroke-width="1.2"/></svg>
             <span class="lang-es">Mockups de homepage (5 vistas)</span><span class="lang-en">Homepage mockups (5 views)</span></li>
-          <li><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="5" cy="5" r="4" stroke="#B8A5D6" stroke-width="1.2"/></svg>
+          <li><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="5" cy="5" r="4" stroke="#A7B6C6" stroke-width="1.2"/></svg>
             <span class="lang-es">Componentes Figma</span><span class="lang-en">Figma components</span></li>
-          <li><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="5" cy="5" r="4" stroke="#B8A5D6" stroke-width="1.2"/></svg>
+          <li><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="5" cy="5" r="4" stroke="#A7B6C6" stroke-width="1.2"/></svg>
             <span class="lang-es">CSS tokens y variables</span><span class="lang-en">CSS tokens and variables</span></li>
         </ul>
       </div>
@@ -2290,19 +2282,19 @@ Avoid: stock photo aesthetics, daycare visuals, heavy outlines, emojis</pre>
       <div class="asset-category reveal reveal-delay-1">
         <div class="asset-cat-icon">
           <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-            <rect x="6" y="6" width="20" height="20" rx="5" stroke="#3E2A6B" stroke-width="1.5" fill="none"/>
-            <circle cx="16" cy="16" r="5" stroke="#3E2A6B" stroke-width="1.5" fill="none"/>
-            <circle cx="24" cy="8" r="2.5" fill="#3E2A6B"/>
+            <rect x="6" y="6" width="20" height="20" rx="5" stroke="#1F2E46" stroke-width="1.5" fill="none"/>
+            <circle cx="16" cy="16" r="5" stroke="#1F2E46" stroke-width="1.5" fill="none"/>
+            <circle cx="24" cy="8" r="2.5" fill="#1F2E46"/>
           </svg>
         </div>
         <p class="asset-cat-label">Instagram</p>
         <h4 class="asset-cat-title"><span class="lang-es">Templates de Instagram</span><span class="lang-en">Instagram Templates</span></h4>
         <ul class="asset-list">
-          <li><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="5" cy="5" r="4" stroke="#B8A5D6" stroke-width="1.2"/></svg>
+          <li><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="5" cy="5" r="4" stroke="#A7B6C6" stroke-width="1.2"/></svg>
             <span class="lang-es">3 templates de post (Canva/Figma)</span><span class="lang-en">3 post templates (Canva/Figma)</span></li>
-          <li><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="5" cy="5" r="4" stroke="#B8A5D6" stroke-width="1.2"/></svg>
+          <li><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="5" cy="5" r="4" stroke="#A7B6C6" stroke-width="1.2"/></svg>
             <span class="lang-es">3 templates de story (Canva/Figma)</span><span class="lang-en">3 story templates (Canva/Figma)</span></li>
-          <li><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="5" cy="5" r="4" stroke="#B8A5D6" stroke-width="1.2"/></svg>
+          <li><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="5" cy="5" r="4" stroke="#A7B6C6" stroke-width="1.2"/></svg>
             <span class="lang-es">Highlight covers (8 iconos)</span><span class="lang-en">Highlight covers (8 icons)</span></li>
         </ul>
       </div>
@@ -2310,20 +2302,20 @@ Avoid: stock photo aesthetics, daycare visuals, heavy outlines, emojis</pre>
       <div class="asset-category reveal reveal-delay-2">
         <div class="asset-cat-icon">
           <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-            <path d="M6 26 L16 6 L26 26" stroke="#B8A5D6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-            <path d="M10 20h12" stroke="#B8A5D6" stroke-width="1.5" stroke-linecap="round"/>
+            <path d="M6 26 L16 6 L26 26" stroke="#A7B6C6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            <path d="M10 20h12" stroke="#A7B6C6" stroke-width="1.5" stroke-linecap="round"/>
           </svg>
         </div>
         <p class="asset-cat-label"><span class="lang-es">Protocolos</span><span class="lang-en">Protocols</span></p>
         <h4 class="asset-cat-title"><span class="lang-es">Moment Protocols</span><span class="lang-en">Moment Protocols</span></h4>
         <ul class="asset-list">
-          <li><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="5" cy="5" r="4" stroke="#B8A5D6" stroke-width="1.2"/></svg>
+          <li><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="5" cy="5" r="4" stroke="#A7B6C6" stroke-width="1.2"/></svg>
             <span class="lang-es">Protocolo: Pantallas</span><span class="lang-en">Protocol: Screen Time</span></li>
-          <li><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="5" cy="5" r="4" stroke="#B8A5D6" stroke-width="1.2"/></svg>
+          <li><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="5" cy="5" r="4" stroke="#A7B6C6" stroke-width="1.2"/></svg>
             <span class="lang-es">Protocolo: Berrinches</span><span class="lang-en">Protocol: Meltdowns</span></li>
-          <li><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="5" cy="5" r="4" stroke="#B8A5D6" stroke-width="1.2"/></svg>
+          <li><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="5" cy="5" r="4" stroke="#A7B6C6" stroke-width="1.2"/></svg>
             <span class="lang-es">Protocolo: Hora de Dormir</span><span class="lang-en">Protocol: Bedtime</span></li>
-          <li><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="5" cy="5" r="4" stroke="#B8A5D6" stroke-width="1.2"/></svg>
+          <li><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><circle cx="5" cy="5" r="4" stroke="#A7B6C6" stroke-width="1.2"/></svg>
             <span class="lang-es">Protocolo: Conflicto entre Hermanos</span><span class="lang-en">Protocol: Sibling Conflict</span></li>
         </ul>
       </div>
@@ -2331,8 +2323,8 @@ Avoid: stock photo aesthetics, daycare visuals, heavy outlines, emojis</pre>
 
     <div class="asset-placeholder reveal">
       <svg width="48" height="48" viewBox="0 0 48 48" fill="none" style="margin:0 auto 16px; display:block;">
-        <path d="M24 8v32M8 24h32" stroke="#B8A5D6" stroke-width="1.5" stroke-linecap="round"/>
-        <circle cx="24" cy="24" r="20" stroke="#B8A5D6" stroke-width="1.5" fill="none"/>
+        <path d="M24 8v32M8 24h32" stroke="#A7B6C6" stroke-width="1.5" stroke-linecap="round"/>
+        <circle cx="24" cy="24" r="20" stroke="#A7B6C6" stroke-width="1.5" fill="none"/>
       </svg>
       <h3><span class="lang-es">Archivos próximamente</span><span class="lang-en">Files coming soon</span></h3>
       <p><span class="lang-es">Los archivos descargables se integrarán aquí. Por el momento, solicita assets directamente al equipo de diseño.</span><span class="lang-en">Downloadable files will be integrated here. For now, request assets directly from the design team.</span></p>
@@ -2486,7 +2478,7 @@ Avoid: stock photo aesthetics, daycare visuals, heavy outlines, emojis</pre>
         navLinks.forEach(function(link) {
           link.style.color = '';
           if (link.getAttribute('href') === '#' + entry.target.id) {
-            link.style.color = 'var(--deep-purple)';
+            link.style.color = 'var(--navy)';
           }
         });
       }
